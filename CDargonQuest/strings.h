@@ -13,4 +13,5 @@
 #define STR_ERROR_GAME_MEMORY             "could not allocate memory for dqGame object"
 #define STR_ERROR_RENDERCONFIG_MEMORY     "could not allocate memory for dqRenderConfig object"
 #define STR_ERROR_CLOCK_MEMORY            "could not allocate memory for dqClock object"
+#define STR_ERROR_INPUT_STATE_MEMORY      "could not allocate memory for dqInputState object"
 #define STR_ERROR_CLOCK_RESOLUTION        "could not set Windows timer resolution"
