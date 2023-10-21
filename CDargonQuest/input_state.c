@@ -24,3 +24,54 @@ void dqInputState_Cleanup()
    SAFE_DELETE( dqInputState->keysReleased )
    SAFE_DELETE( dqInputState )
 }
+
+void dqInputState_Reset()
+{
+   static int i;
+
+   for ( i = 0; i < (int)sfKeyCount; i++ )
+   {
+      dqInputState->keysPressed[i] = sfFalse;
+      dqInputState->keysReleased[i] = sfFalse;
+   }
+}
+
+void dqInputState_KeyPressed( sfKeyCode keyCode )
+{
+   dqInputState->keysPressed[(int)keyCode] = sfTrue;
+}
+
+void dqInputState_keyReleased( sfKeyCode keyCode )
+{
+   dqInputState->keysReleased[(int)keyCode] = sfTrue;
+}
+
+sfBool dqInputState_WasKeyPressed( sfKeyCode keyCode )
+{
+   return dqInputState->keysPressed[keyCode];
+}
+
+sfBool dqInputState_WasKeyReleased( sfKeyCode keyCode )
+{
+   return dqInputState->keysReleased[keyCode];
+}
+
+sfBool dqInputState_IsKeyDown( sfKeyCode keyCode )
+{
+   return sfKeyboard_isKeyPressed( keyCode );
+}
+
+sfBool dqInputState_IsAnyKeyDown()
+{
+   static int i = 0;
+
+   for ( i = 0; i < (int)sfKeyCount; i++ )
+   {
+      if ( sfKeyboard_isKeyPressed( i ) )
+      {
+         return sfTrue;
+      }
+   }
+   
+   return sfFalse;
+}
