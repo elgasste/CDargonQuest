@@ -16,3 +16,4 @@ void dqGame_Init();
 void dqGame_Create();
 void dqGame_Cleanup();
 void dqGame_Run();
+void dqGame_Tick();

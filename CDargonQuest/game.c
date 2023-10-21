@@ -45,10 +45,17 @@ void dqGame_Run()
       dqClock_StartFrame();
 
       dqWindow_HandleEvents();
+      // TODO: handle game events
+      dqGame_Tick();
       dqRenderer_Render();
 
       dqClock_EndFrame();
    }
 
    dqGame->state = STATE_CLOSING;
+}
+
+void dqGame_Tick()
+{
+   // TODO: update game objects
 }
