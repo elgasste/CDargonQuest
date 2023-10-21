@@ -1,6 +1,7 @@
 #include "window.h"
 #include "render_config.h"
 #include "game.h"
+#include "input_state.h"
 
 void dqWindow_Init()
 {
@@ -12,16 +13,21 @@ void dqWindow_Init()
    };
 
    dqWindow = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, NULL );
+
+   dqInputState_Init();
 }
 
 void dqWindow_Cleanup()
 {
+   dqInputState_Cleanup();
    sfRenderWindow_destroy( dqWindow );
 }
 
 void dqWindow_HandleEvents()
 {
    static sfEvent e;
+
+   dqInputState_Reset();
 
    while ( sfRenderWindow_pollEvent( dqWindow, &e ) )
    {
@@ -33,12 +39,10 @@ void dqWindow_HandleEvents()
             sfRenderWindow_close( dqWindow );
             break;
          case sfEvtKeyPressed:
-            // TODO: set up an input handler
-            //_inputStateController->KeyPressed( e.key.code );
+            dqInputState_KeyPressed( e.key.code );
             break;
          case sfEvtKeyReleased:
-            // TODO: set up an input handler
-            //_inputStateController->KeyReleased( e.key.code );
+            dqInputState_keyReleased( e.key.code );
             break;
       }
    }
