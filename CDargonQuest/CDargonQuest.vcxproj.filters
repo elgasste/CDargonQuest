@@ -36,6 +36,9 @@
     <ClCompile Include="renderer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="input_state.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="strings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

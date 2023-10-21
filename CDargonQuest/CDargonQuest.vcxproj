@@ -162,6 +162,7 @@
     <ClCompile Include="error.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="clock.c" />
+    <ClCompile Include="input_state.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="renderer.c" />
     <ClCompile Include="render_config.c" />
@@ -172,6 +173,7 @@
     <ClInclude Include="error.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="clock.h" />
+    <ClInclude Include="input_state.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_config.h" />
     <ClInclude Include="state.h" />
