@@ -6,7 +6,7 @@
 typedef struct
 {
    sfBool isRunning;
-   int state;
+   dqGameState_t state;
 }
 dqGame_t;
 

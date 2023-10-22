@@ -8,12 +8,12 @@ void dqGame_Init()
 {
    dqGame_Create();
 
+   dqGame->isRunning = sfFalse;
+   dqGame->state = stateInit;
+
    dqRenderConfig_Init();
    dqWindow_Init();
    dqClock_Init();
-
-   dqGame->isRunning = sfFalse;
-   dqGame->state = STATE_INIT;
 }
 
 void dqGame_Create()
@@ -38,7 +38,7 @@ void dqGame_Cleanup()
 void dqGame_Run()
 {
    dqGame->isRunning = sfTrue;
-   dqGame->state = STATE_PLAYING;
+   dqGame->state = statePlaying;
 
    while ( dqGame->isRunning )
    {
@@ -52,10 +52,10 @@ void dqGame_Run()
       dqClock_EndFrame();
    }
 
-   dqGame->state = STATE_CLOSING;
+   dqGame->state = stateClosing;
 }
 
 void dqGame_Tick()
 {
-   // TODO: update game objects
+   // TODO: update game objects.
 }
