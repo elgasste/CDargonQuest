@@ -16,8 +16,8 @@ void dqClock_Init()
    dqClock->minFrameSeconds = 1 / (float)dqRenderConfig->maxFrameRate;
    dqClock->maxFrameSeconds = 1 / (float)dqRenderConfig->minFrameRate;
 
-   dqClock->minFrameDuration = (unsigned long long)( dqClock->minFrameSeconds * 1000 );
-   dqClock->maxFrameDuration = (unsigned long long)( dqClock->maxFrameSeconds * 1000 );
+   dqClock->minFrameDuration = (unsigned long long)( (double)dqClock->minFrameSeconds * 1000 );
+   dqClock->maxFrameDuration = (unsigned long long)( (double)dqClock->maxFrameSeconds * 1000 );
 
    dqClock->frameCount = 0;
    dqClock->lagFrameCount = 0;
