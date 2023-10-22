@@ -39,10 +39,10 @@ void dqWindow_HandleEvents()
             sfRenderWindow_close( dqWindow );
             break;
          case sfEvtKeyPressed:
-            dqInputState_KeyPressed( e.key.code );
+            dqInputState_SetKeyPressed( e.key.code );
             break;
          case sfEvtKeyReleased:
-            dqInputState_keyReleased( e.key.code );
+            dqInputState_SetKeyReleased( e.key.code );
             break;
       }
    }
