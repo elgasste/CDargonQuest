@@ -26,6 +26,7 @@ void dqGame_Init()
 
    dqRenderConfig_Init();
    dqWindow_Init();
+   dqRenderer_Init();
    dqClock_Init();
    dqEventQueue_Init();
 }
@@ -34,6 +35,7 @@ void dqGame_Cleanup()
 {
    dqEventQueue_Cleanup();
    dqClock_Cleanup();
+   dqRenderer_Cleanup();
    dqWindow_Cleanup();
    dqRenderConfig_Cleanup();
 

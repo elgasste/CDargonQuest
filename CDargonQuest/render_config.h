@@ -12,6 +12,8 @@ typedef struct
    unsigned int windowBPP;
    sfUint32 windowStyle;
    sfColor windowClearColor;
+
+   float menuCaratBlinkRate;
 }
 dqRenderConfig_t;
 

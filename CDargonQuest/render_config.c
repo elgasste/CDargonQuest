@@ -13,6 +13,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->windowBPP = 32;
    dqRenderConfig->windowStyle = sfTitlebar | sfClose;
    dqRenderConfig->windowClearColor = sfBlack;
+
+   dqRenderConfig->menuCaratBlinkRate = 0.5f;
 }
 
 void dqRenderConfig_Cleanup()
