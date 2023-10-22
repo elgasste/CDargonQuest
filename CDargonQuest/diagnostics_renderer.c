@@ -31,7 +31,8 @@ void dqDiagnosticsRenderer_Init()
                                                                sfText_getCharacterSize( dqDiagnosticsRenderer->text ) );
 
    dqDiagnosticsRenderer->currentFrameRateCache = 0;
-   dqDiagnosticsRenderer->currentFrameRateElapsedSeconds = 0;
+   dqDiagnosticsRenderer->averageFrameRateCache = 0;
+   dqDiagnosticsRenderer->refreshElapsedSeconds = 0;
 }
 
 void dqDiagnosticsRenderer_Cleanup()
@@ -44,12 +45,13 @@ void dqDiagnosticsRenderer_Cleanup()
 
 void dqDiagnosticsRenderer_Render()
 {
-   dqDiagnosticsRenderer->currentFrameRateElapsedSeconds += dqClock->lastFrameSeconds;
+   dqDiagnosticsRenderer->refreshElapsedSeconds += dqClock->lastFrameSeconds;
 
-   if ( dqDiagnosticsRenderer->currentFrameRateElapsedSeconds >= dqRenderConfig->diagnosticsCurrentFrameRateRefreshRate )
+   if ( dqDiagnosticsRenderer->refreshElapsedSeconds >= dqRenderConfig->diagnosticsRefreshRate )
    {
       dqDiagnosticsRenderer->currentFrameRateCache = dqClock_CurrentFrameRate();
-      dqDiagnosticsRenderer->currentFrameRateElapsedSeconds = 0;
+      dqDiagnosticsRenderer->averageFrameRateCache = dqClock_AverageFrameRate();
+      dqDiagnosticsRenderer->refreshElapsedSeconds = 0;
    }
 
    sfRenderWindow_drawRectangleShape( dqWindow, dqDiagnosticsRenderer->background, NULL );
@@ -90,7 +92,7 @@ void dqDiagnosticsRenderer_Render()
               dqRenderConfig->diagnosticsLineWidth,
               "%s%d",
               STR_DIAGNOSTICS_AVG_FRAME_RATE,
-              dqClock_AverageFrameRate() );
+              dqDiagnosticsRenderer->averageFrameRateCache );
    sfText_setString( dqDiagnosticsRenderer->text, dqDiagnosticsRenderer->textLine );
    sfRenderWindow_drawText( dqWindow, dqDiagnosticsRenderer->text, NULL );
 
