@@ -2,11 +2,14 @@
 
 #include "common.h"
 #include "state.h"
+#include "menu.h"
 
 typedef struct
 {
    sfBool isRunning;
    dqState_t state;
+
+   dqMenu_t* titleMenu;
 }
 dqGame_t;
 
