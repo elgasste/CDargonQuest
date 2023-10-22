@@ -13,6 +13,8 @@ typedef struct
    sfUint32 windowStyle;
    sfColor windowClearColor;
 
+   sfBool showDiagnostics;
+
    const char* menuFontFilePath;
    unsigned int menuFontSize;
    sfColor menuFontColor;

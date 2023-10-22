@@ -14,6 +14,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->windowStyle = sfTitlebar | sfClose;
    dqRenderConfig->windowClearColor = sfBlack;
 
+   dqRenderConfig->showDiagnostics = sfFalse;
+
    dqRenderConfig->menuFontFilePath = "Resources/Fonts/Consolas.ttf";
    dqRenderConfig->menuFontSize = 50;
    dqRenderConfig->menuFontColor = sfWhite;
