@@ -59,7 +59,7 @@ void dqGame_Run()
 
 void dqGame_HandleEvents()
 {
-   static dqEventType_t e;
+   dqEvent_t* e;
 
    dqWindow_HandleEvents();
 
@@ -67,7 +67,7 @@ void dqGame_HandleEvents()
    {
       e = dqEventQueue_GetNext();
 
-      switch ( e )
+      switch ( e->type )
       {
          case dqEventQuit:
             dqGame_Quit();

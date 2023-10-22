@@ -1,7 +1,13 @@
 #pragma once
 
-typedef enum
+#include "event_type.h"
+#include "event_args.h"
+
+typedef struct
 {
-   dqEventQuit
+   dqEventType_t type;
+   dqEventArgs_t args;
 }
-dqEventType_t;
+dqEvent_t;
+
+int dqEvent_GetArgCount( dqEventType_t type );

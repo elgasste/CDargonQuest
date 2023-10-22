@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdarg.h>
+
 #include "common.h"
 #include "event.h"
 
@@ -7,7 +9,7 @@
 
 typedef struct
 {
-   dqEventType_t queue [MAX_EVENTS];
+   dqEvent_t queue [MAX_EVENTS];
    int front;
    int back;
 }
@@ -19,7 +21,7 @@ void dqEventQueue_Init();
 void dqEventQueue_Create();
 void dqEventQueue_Cleanup();
 sfBool dqEventQueue_IsEmpty();
-void dqEventQueue_Push( dqEventType_t e );
-dqEventType_t dqEventQueue_GetNext();
-dqEventType_t dqEventQueue_PeekNext();
+void dqEventQueue_Push( dqEventType_t type, ... );
+dqEvent_t* dqEventQueue_GetNext();
+dqEvent_t* dqEventQueue_PeekNext();
 void dqEventQueue_Flush();
