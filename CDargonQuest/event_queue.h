@@ -1,11 +1,7 @@
 #pragma once
 
-#include <stdarg.h>
-
 #include "common.h"
 #include "event.h"
-
-#define MAX_EVENTS 100
 
 typedef struct
 {

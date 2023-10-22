@@ -1,11 +1,14 @@
 #pragma once
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
 #include <SFML/Graphics.h>
 
 #include "strings.h"
 #include "error.h"
 
 #define SAFE_DELETE( x ) if ( x != NULL ) { free( x ); x = NULL; }
-#define VERIFY_OR_EXIT( x ) if ( !x ) { dqError_ExitWithMessage( STR_ERROR_MEMORY ); }
+
+#define MAX_EVENTS         100
+#define MAX_EVENT_ARGS     4
