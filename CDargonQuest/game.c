@@ -1,4 +1,5 @@
 #include "game.h"
+#include "menu.h"
 #include "render_config.h"
 #include "window.h"
 #include "clock.h"
@@ -13,17 +14,7 @@ void dqGame_Init()
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
 
-   dqGame->titleMenu = (dqMenu_t*)malloc( sizeof( dqMenu_t ) );
-#pragma warning ( suppress:6011 )
-   dqGame->titleMenu->optionCount = 2;
-   dqGame->titleMenu->selectedOption = 0;
-   dqGame->titleMenu->options = (dqMenuOption_t*)malloc( sizeof( dqMenuOption_t ) * dqGame->titleMenu->optionCount );
-#pragma warning ( suppress:6011 )
-   dqGame->titleMenu->options[0].text = STR_TITLE_MENU_START;
-   dqGame->titleMenu->options[0].eventType = dqEventStart;
-   dqGame->titleMenu->options[1].text = STR_TITLE_MENU_QUIT;
-   dqGame->titleMenu->options[1].eventType = dqEventQuit;
-
+   dqMenu_Init();
    dqRenderConfig_Init();
    dqWindow_Init();
    dqRenderer_Init();
@@ -38,9 +29,8 @@ void dqGame_Cleanup()
    dqRenderer_Cleanup();
    dqWindow_Cleanup();
    dqRenderConfig_Cleanup();
+   dqMenu_Cleanup();
 
-   SAFE_DELETE( dqGame->titleMenu->options );
-   SAFE_DELETE( dqGame->titleMenu );
    SAFE_DELETE( dqGame )
 }
 

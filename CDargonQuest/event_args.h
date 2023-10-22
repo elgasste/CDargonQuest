@@ -1,6 +1,6 @@
 #pragma once
 
-#define MAX_EVENT_ARGS 4
+#include "common.h"
 
 typedef struct
 {

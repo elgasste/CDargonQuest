@@ -1,7 +1,7 @@
 #include "title_renderer.h"
 #include "render_config.h"
 #include "window.h"
-#include "game.h"
+#include "menu.h"
 #include "clock.h"
 
 void dqTitleRenderer_Init()
@@ -29,7 +29,7 @@ void dqTitleRenderer_Init()
 
    dqTitleRenderer->showCarat = sfTrue;
    dqTitleRenderer->caratElapsedSeconds = 0;
-   dqTitleRenderer->selectedOptionCache = dqGame->titleMenu->selectedOption;
+   dqTitleRenderer->selectedOptionCache = dqTitleMenu->selectedOption;
 }
 
 void dqTitleRenderer_Cleanup()
@@ -45,11 +45,11 @@ void dqTitleRenderer_Render()
 {
    unsigned int i;
 
-   if ( dqGame->titleMenu->selectedOption != dqTitleRenderer->selectedOptionCache )
+   if ( dqTitleMenu->selectedOption != dqTitleRenderer->selectedOptionCache )
    {
       dqTitleRenderer->showCarat = sfTrue;
       dqTitleRenderer->caratElapsedSeconds = 0;
-      dqTitleRenderer->selectedOptionCache = dqGame->titleMenu->selectedOption;
+      dqTitleRenderer->selectedOptionCache = dqTitleMenu->selectedOption;
    }
    else
    {
@@ -62,7 +62,7 @@ void dqTitleRenderer_Render()
       }
    }
 
-   for ( i = 0; i < dqGame->titleMenu->optionCount; i++ )
+   for ( i = 0; i < dqTitleMenu->optionCount; i++ )
    {
       if ( dqTitleRenderer->showCarat && dqTitleRenderer->selectedOptionCache == i )
       {
@@ -74,7 +74,7 @@ void dqTitleRenderer_Render()
 
       dqTitleRenderer->menuTextPosition.y = dqRenderConfig->titleMenuOffsetY + ( i * dqTitleRenderer->menuLineSpacing );
       sfText_setPosition( dqTitleRenderer->menuText, dqTitleRenderer->menuTextPosition );
-      sfText_setString( dqTitleRenderer->menuText, dqGame->titleMenu->options[i].text );
+      sfText_setString( dqTitleRenderer->menuText, dqTitleMenu->options[i].text );
 
       sfRenderWindow_drawText( dqWindow, dqTitleRenderer->menuText, NULL );
    }
