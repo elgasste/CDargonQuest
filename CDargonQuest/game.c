@@ -3,17 +3,19 @@
 #include "window.h"
 #include "clock.h"
 #include "renderer.h"
+#include "event_queue.h"
 
 void dqGame_Init()
 {
    dqGame_Create();
 
+   dqGame->isRunning = sfFalse;
+   dqGame->state = dqStateInit;
+
    dqRenderConfig_Init();
    dqWindow_Init();
    dqClock_Init();
-
-   dqGame->isRunning = sfFalse;
-   dqGame->state = STATE_INIT;
+   dqEventQueue_Init();
 }
 
 void dqGame_Create()
@@ -28,6 +30,7 @@ void dqGame_Create()
 
 void dqGame_Cleanup()
 {
+   dqEventQueue_Cleanup();
    dqClock_Cleanup();
    dqWindow_Cleanup();
    dqRenderConfig_Cleanup();
@@ -38,17 +41,48 @@ void dqGame_Cleanup()
 void dqGame_Run()
 {
    dqGame->isRunning = sfTrue;
-   dqGame->state = STATE_PLAYING;
+   dqGame->state = dqStatePlaying;
 
    while ( dqGame->isRunning )
    {
       dqClock_StartFrame();
 
-      dqWindow_HandleEvents();
+      dqGame_HandleEvents();
+      dqGame_Tick();
       dqRenderer_Render();
 
       dqClock_EndFrame();
    }
 
-   dqGame->state = STATE_CLOSING;
+   dqGame->state = dqStateClosing;
+}
+
+void dqGame_HandleEvents()
+{
+   static dqEventType_t e;
+
+   dqWindow_HandleEvents();
+
+   while ( !dqEventQueue_IsEmpty() )
+   {
+      e = dqEventQueue_GetNext();
+
+      switch ( e )
+      {
+         case dqEventQuit:
+            dqGame_Quit();
+            break;
+      }
+   }
+}
+
+void dqGame_Tick()
+{
+   // TODO: update game objects.
+}
+
+void dqGame_Quit()
+{
+   dqEventQueue_Flush();
+   dqGame->isRunning = sfFalse;
 }
