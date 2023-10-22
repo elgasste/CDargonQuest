@@ -2,18 +2,8 @@
 
 void dqEventQueue_Init()
 {
-   dqEventQueue_Create();
-   dqEventQueue_Flush();
-}
-
-void dqEventQueue_Create()
-{
    dqEventQueue = (dqEventQueue_t*)malloc( sizeof( dqEventQueue_t ) );
-
-   if ( !dqEventQueue )
-   {
-      dqError_ExitWithMessage( STR_ERROR_EVENT_QUEUE_MEMORY );
-   }
+   dqEventQueue_Flush();
 }
 
 void dqEventQueue_Cleanup()

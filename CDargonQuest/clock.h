@@ -23,7 +23,6 @@ dqClock_t;
 dqClock_t* dqClock;
 
 void dqClock_Init();
-void dqClock_Create();
 void dqClock_Cleanup();
 void dqClock_StartFrame();
 void dqClock_EndFrame();

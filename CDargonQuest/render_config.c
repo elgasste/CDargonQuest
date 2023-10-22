@@ -2,7 +2,7 @@
 
 void dqRenderConfig_Init()
 {
-   dqRenderConfig_Create();
+   dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
 
    dqRenderConfig->minFrameRate = 20;
    dqRenderConfig->maxFrameRate = 60;
@@ -12,16 +12,6 @@ void dqRenderConfig_Init()
    dqRenderConfig->windowBPP = 32;
    dqRenderConfig->windowStyle = sfTitlebar | sfClose;
    dqRenderConfig->windowClearColor = sfBlack;
-}
-
-void dqRenderConfig_Create()
-{
-   dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
-
-   if ( !dqRenderConfig )
-   {
-      dqError_ExitWithMessage( STR_ERROR_RENDERCONFIG_MEMORY );
-   }
 }
 
 void dqRenderConfig_Cleanup()

@@ -7,12 +7,14 @@
 
 void dqGame_Init()
 {
-   dqGame_Create();
+   dqGame = (dqGame_t*)malloc( sizeof( dqGame_t ) );
 
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
 
+   dqGame->titleMenu = (dqMenu_t*)malloc( sizeof( dqMenu_t ) );
    dqGame->titleMenu->optionCount = 2;
+   dqGame->titleMenu->options = (dqMenuOption_t*)malloc( sizeof( dqMenuOption_t ) * dqGame->titleMenu->optionCount );
    dqGame->titleMenu->options[0].text = STR_TITLE_MENU_START;
    dqGame->titleMenu->options[0].eventType = dqEventStart;
    dqGame->titleMenu->options[1].text = STR_TITLE_MENU_QUIT;
@@ -22,14 +24,6 @@ void dqGame_Init()
    dqWindow_Init();
    dqClock_Init();
    dqEventQueue_Init();
-}
-
-void dqGame_Create()
-{
-   dqGame = (dqGame_t*)malloc( sizeof( dqGame_t ) );
-
-   dqGame->titleMenu = (dqMenu_t*)malloc( sizeof( dqMenu_t ) );
-   dqGame->titleMenu->options = (dqMenuOption_t*)malloc( sizeof( dqMenuOption_t ) * 2 );
 }
 
 void dqGame_Cleanup()

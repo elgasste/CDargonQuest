@@ -18,5 +18,4 @@ dqRenderConfig_t;
 dqRenderConfig_t* dqRenderConfig;
 
 void dqRenderConfig_Init();
-void dqRenderConfig_Create();
 void dqRenderConfig_Cleanup();

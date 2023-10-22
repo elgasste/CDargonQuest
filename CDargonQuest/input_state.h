@@ -12,7 +12,6 @@ dqInputState_t;
 dqInputState_t* dqInputState;
 
 void dqInputState_Init();
-void dqInputState_Create();
 void dqInputState_Cleanup();
 void dqInputState_SetKeyPressed( sfKeyCode keyCode );
 void dqInputState_SetKeyReleased( sfKeyCode keyCode );
