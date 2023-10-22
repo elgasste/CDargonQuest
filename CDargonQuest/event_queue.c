@@ -3,9 +3,7 @@
 void dqEventQueue_Init()
 {
    dqEventQueue_Create();
-
-   dqEventQueue->front = 0;
-   dqEventQueue->back = -1;
+   dqEventQueue_Flush();
 }
 
 void dqEventQueue_Create()
@@ -49,8 +47,7 @@ dqGameEventType_t dqEventQueue_GetNext()
 
    if ( dqEventQueue->front > dqEventQueue->back )
    {
-      dqEventQueue->front = 0;
-      dqEventQueue->back = -1;
+      dqEventQueue_Flush();
    }
 
    return e;
@@ -59,4 +56,10 @@ dqGameEventType_t dqEventQueue_GetNext()
 dqGameEventType_t dqEventQueue_PeekNext()
 {
    return dqEventQueue->queue[dqEventQueue->front];
+}
+
+void dqEventQueue_Flush()
+{
+   dqEventQueue->front = 0;
+   dqEventQueue->back = -1;
 }

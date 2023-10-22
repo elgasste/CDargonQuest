@@ -47,7 +47,6 @@ void dqGame_Run()
    {
       dqClock_StartFrame();
 
-      dqWindow_HandleEvents();
       dqGame_HandleEvents();
       dqGame_Tick();
       dqRenderer_Render();
@@ -61,6 +60,8 @@ void dqGame_Run()
 void dqGame_HandleEvents()
 {
    static dqGameEventType_t e;
+
+   dqWindow_HandleEvents();
 
    while ( !dqEventQueue_IsEmpty() )
    {
@@ -82,5 +83,6 @@ void dqGame_Tick()
 
 void dqGame_Quit()
 {
+   dqEventQueue_Flush();
    dqGame->isRunning = sfFalse;
 }

@@ -22,3 +22,4 @@ sfBool dqEventQueue_IsEmpty();
 void dqEventQueue_Push( dqGameEventType_t e );
 dqGameEventType_t dqEventQueue_GetNext();
 dqGameEventType_t dqEventQueue_PeekNext();
+void dqEventQueue_Flush();
