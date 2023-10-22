@@ -10,13 +10,14 @@ void dqClock_Init()
    TIMECAPS tc;
    MMRESULT res;
 
-   dqClock_Create();
+   dqClock = (dqClock_t*)malloc( sizeof( dqClock_t ) );
 
+#pragma warning ( suppress:6011 )
    dqClock->minFrameSeconds = 1 / (float)dqRenderConfig->maxFrameRate;
    dqClock->maxFrameSeconds = 1 / (float)dqRenderConfig->minFrameRate;
 
-   dqClock->minFrameDuration = (unsigned long long)( dqClock->minFrameSeconds * 1000 );
-   dqClock->maxFrameDuration = (unsigned long long)( dqClock->maxFrameSeconds * 1000 );
+   dqClock->minFrameDuration = (unsigned long long)( (double)dqClock->minFrameSeconds * 1000 );
+   dqClock->maxFrameDuration = (unsigned long long)( (double)dqClock->maxFrameSeconds * 1000 );
 
    dqClock->frameCount = 0;
    dqClock->lagFrameCount = 0;
@@ -31,16 +32,6 @@ void dqClock_Init()
    if ( res != TIMERR_NOERROR )
    {
       dqError_ExitWithMessage( STR_ERROR_CLOCK_RESOLUTION );
-   }
-}
-
-void dqClock_Create()
-{
-   dqClock = (dqClock_t*)malloc( sizeof( dqClock_t ) );
-
-   if ( !dqClock )
-   {
-      dqError_ExitWithMessage( STR_ERROR_CLOCK_MEMORY );
    }
 }
 

@@ -8,3 +8,4 @@
 #include "error.h"
 
 #define SAFE_DELETE( x ) if ( x != NULL ) { free( x ); x = NULL; }
+#define VERIFY_OR_EXIT( x ) if ( !x ) { dqError_ExitWithMessage( STR_ERROR_MEMORY ); }

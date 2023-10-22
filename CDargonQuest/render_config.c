@@ -2,8 +2,9 @@
 
 void dqRenderConfig_Init()
 {
-   dqRenderConfig_Create();
+   dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
 
+#pragma warning ( suppress:6011 )
    dqRenderConfig->minFrameRate = 20;
    dqRenderConfig->maxFrameRate = 60;
 
@@ -12,16 +13,16 @@ void dqRenderConfig_Init()
    dqRenderConfig->windowBPP = 32;
    dqRenderConfig->windowStyle = sfTitlebar | sfClose;
    dqRenderConfig->windowClearColor = sfBlack;
-}
 
-void dqRenderConfig_Create()
-{
-   dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
+   dqRenderConfig->menuFontFilePath = "Resources/Fonts/Consolas.ttf";
+   dqRenderConfig->menuFontSize = 50;
+   dqRenderConfig->menuFontColor = sfWhite;
+   dqRenderConfig->menuCaratText = ">";
+   dqRenderConfig->menuCaratOffsetX = -50;
+   dqRenderConfig->menuCaratBlinkRate = 0.5f;
 
-   if ( !dqRenderConfig )
-   {
-      dqError_ExitWithMessage( STR_ERROR_RENDERCONFIG_MEMORY );
-   }
+   dqRenderConfig->titleMenuOffsetX = 900;
+   dqRenderConfig->titleMenuOffsetY = 600;
 }
 
 void dqRenderConfig_Cleanup()

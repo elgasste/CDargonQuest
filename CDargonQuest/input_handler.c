@@ -1,11 +1,13 @@
 #include "input_handler.h"
-#include "input_state.h"
-#include "event_queue.h"
+#include "title_input_handler.h"
+#include "game.h"
 
 void dqInputHandler_HandleInput()
 {
-   if ( dqInputState_WasKeyPressed( sfKeyEscape ) )
+   switch ( dqGame->state )
    {
-      dqEventQueue_Push( dqEventQuit );
+      case dqStateTitle:
+         dqTitleInputHandler_HandleInput();
+         break;
    }
 }

@@ -2,20 +2,11 @@
 
 void dqInputState_Init()
 {
-   dqInputState_Create();
-
-   dqInputState->keysPressed = (sfBool*)calloc( sizeof( sfBool ), sfKeyCount );
-   dqInputState->keysReleased = (sfBool*)calloc( sizeof( sfBool ), sfKeyCount );
-}
-
-void dqInputState_Create()
-{
    dqInputState = (dqInputState_t*)malloc( sizeof( dqInputState_t ) );
 
-   if ( !dqInputState )
-   {
-      dqError_ExitWithMessage( STR_ERROR_INPUT_STATE_MEMORY );
-   }
+#pragma warning ( suppress:6011 )
+   dqInputState->keysPressed = (sfBool*)calloc( sizeof( sfBool ), sfKeyCount );
+   dqInputState->keysReleased = (sfBool*)calloc( sizeof( sfBool ), sfKeyCount );
 }
 
 void dqInputState_Cleanup()

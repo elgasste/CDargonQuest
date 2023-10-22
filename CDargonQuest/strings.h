@@ -10,11 +10,9 @@
 
 #define STR_WINDOW_TITLE                  "Dargon Quest"
 
-#define STR_ERROR_GAME_MEMORY             "could not allocate memory for dqGame object"
-#define STR_ERROR_RENDERCONFIG_MEMORY     "could not allocate memory for dqRenderConfig object"
-#define STR_ERROR_CLOCK_MEMORY            "could not allocate memory for dqClock object"
-#define STR_ERROR_EVENT_QUEUE_MEMORY      "could not allocate memory for dqEventQueue object"
-#define STR_ERROR_INPUT_STATE_MEMORY      "could not allocate memory for dqInputState object"
+#define STR_TITLE_MENU_START              "Start"
+#define STR_TITLE_MENU_QUIT               "Quit"
+
 #define STR_ERROR_CLOCK_RESOLUTION        "could not set Windows timer resolution"
 #define STR_ERROR_EVENT_OVERFLOW          "game event queue has overflowed"
 #define STR_ERROR_EVENT_ARG_OVERFLOW      "game event has too many arguments"

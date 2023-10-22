@@ -131,7 +131,8 @@
       <AdditionalLibraryDirectories>C:\CSFML-2.5.1\lib\msvc</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y</Command>
+      <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +156,8 @@
       <AdditionalLibraryDirectories>C:\CSFML-2.5.1\lib\msvc</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y</Command>
+      <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -167,8 +169,11 @@
     <ClCompile Include="input_handler.c" />
     <ClCompile Include="input_state.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="menu.c" />
     <ClCompile Include="renderer.c" />
     <ClCompile Include="render_config.c" />
+    <ClCompile Include="title_input_handler.c" />
+    <ClCompile Include="title_renderer.c" />
     <ClCompile Include="window.c" />
   </ItemGroup>
   <ItemGroup>
@@ -182,10 +187,14 @@
     <ClInclude Include="event_type.h" />
     <ClInclude Include="input_handler.h" />
     <ClInclude Include="input_state.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="menu_option.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_config.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="strings.h" />
+    <ClInclude Include="title_input_handler.h" />
+    <ClInclude Include="title_renderer.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
