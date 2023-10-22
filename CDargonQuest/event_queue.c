@@ -28,7 +28,7 @@ sfBool dqEventQueue_IsEmpty()
    return dqEventQueue->back == -1;
 }
 
-void dqEventQueue_Push( dqGameEvent_t e )
+void dqEventQueue_Push( dqGameEventType_t e )
 {
    dqEventQueue->back++;
 
@@ -42,9 +42,9 @@ void dqEventQueue_Push( dqGameEvent_t e )
    }
 }
 
-dqGameEvent_t dqEventQueue_GetNext()
+dqGameEventType_t dqEventQueue_GetNext()
 {
-   dqGameEvent_t e = dqEventQueue->queue[dqEventQueue->front];
+   dqGameEventType_t e = dqEventQueue->queue[dqEventQueue->front];
    dqEventQueue->front++;
 
    if ( dqEventQueue->front > dqEventQueue->back )
@@ -56,7 +56,7 @@ dqGameEvent_t dqEventQueue_GetNext()
    return e;
 }
 
-dqGameEvent_t dqEventQueue_PeekNext()
+dqGameEventType_t dqEventQueue_PeekNext()
 {
    return dqEventQueue->queue[dqEventQueue->front];
 }

@@ -60,7 +60,7 @@ void dqGame_Run()
 
 void dqGame_HandleEvents()
 {
-   static dqGameEvent_t e;
+   static dqGameEventType_t e;
 
    while ( !dqEventQueue_IsEmpty() )
    {

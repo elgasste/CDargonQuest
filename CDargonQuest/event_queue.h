@@ -7,7 +7,7 @@
 
 typedef struct
 {
-   dqGameEvent_t queue [MAX_GAME_EVENTS];
+   dqGameEventType_t queue [MAX_GAME_EVENTS];
    int front;
    int back;
 }
@@ -19,6 +19,6 @@ void dqEventQueue_Init();
 void dqEventQueue_Create();
 void dqEventQueue_Cleanup();
 sfBool dqEventQueue_IsEmpty();
-void dqEventQueue_Push( dqGameEvent_t e );
-dqGameEvent_t dqEventQueue_GetNext();
-dqGameEvent_t dqEventQueue_PeekNext();
+void dqEventQueue_Push( dqGameEventType_t e );
+dqGameEventType_t dqEventQueue_GetNext();
+dqGameEventType_t dqEventQueue_PeekNext();

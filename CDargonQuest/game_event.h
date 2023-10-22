@@ -4,4 +4,4 @@ typedef enum
 {
    eventQuit
 }
-dqGameEvent_t;
+dqGameEventType_t;
