@@ -12,6 +12,7 @@ void dqClock_Init()
 
    dqClock = (dqClock_t*)malloc( sizeof( dqClock_t ) );
 
+#pragma warning ( suppress:6011 )
    dqClock->minFrameSeconds = 1 / (float)dqRenderConfig->maxFrameRate;
    dqClock->maxFrameSeconds = 1 / (float)dqRenderConfig->minFrameRate;
 

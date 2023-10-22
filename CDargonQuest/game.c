@@ -9,13 +9,16 @@ void dqGame_Init()
 {
    dqGame = (dqGame_t*)malloc( sizeof( dqGame_t ) );
 
+#pragma warning ( suppress:6011 )
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
 
    dqGame->titleMenu = (dqMenu_t*)malloc( sizeof( dqMenu_t ) );
+#pragma warning ( suppress:6011 )
    dqGame->titleMenu->optionCount = 2;
    dqGame->titleMenu->selectedOption = 0;
    dqGame->titleMenu->options = (dqMenuOption_t*)malloc( sizeof( dqMenuOption_t ) * dqGame->titleMenu->optionCount );
+#pragma warning ( suppress:6011 )
    dqGame->titleMenu->options[0].text = STR_TITLE_MENU_START;
    dqGame->titleMenu->options[0].eventType = dqEventStart;
    dqGame->titleMenu->options[1].text = STR_TITLE_MENU_QUIT;

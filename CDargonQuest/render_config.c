@@ -4,6 +4,7 @@ void dqRenderConfig_Init()
 {
    dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
 
+#pragma warning ( suppress:6011 )
    dqRenderConfig->minFrameRate = 20;
    dqRenderConfig->maxFrameRate = 60;
 

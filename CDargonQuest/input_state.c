@@ -4,6 +4,7 @@ void dqInputState_Init()
 {
    dqInputState = (dqInputState_t*)malloc( sizeof( dqInputState_t ) );
 
+#pragma warning ( suppress:6011 )
    dqInputState->keysPressed = (sfBool*)calloc( sizeof( sfBool ), sfKeyCount );
    dqInputState->keysReleased = (sfBool*)calloc( sizeof( sfBool ), sfKeyCount );
 }
