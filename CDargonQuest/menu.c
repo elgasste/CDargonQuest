@@ -12,10 +12,12 @@ void dqMenu_ScrollDown( dqMenu_t* menu )
 
 void dqMenu_ScrollUp( dqMenu_t* menu )
 {
-   menu->selectedOption--;
-
-   if ( menu->selectedOption <= 0 )
+   if ( menu->selectedOption == 0 )
    {
       menu->selectedOption = menu->optionCount - 1;
+   }
+   else
+   {
+      menu->selectedOption--;
    }
 }
