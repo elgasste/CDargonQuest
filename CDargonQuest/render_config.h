@@ -14,6 +14,13 @@ typedef struct
    sfColor windowClearColor;
 
    sfBool showDiagnostics;
+   const char* diagnosticsFontFilePath;
+   unsigned int diagnosticsFontSize;
+   sfColor diagnosticsFontColor;
+   sfColor diagnosticsBackgroundColor;
+   float diagnosticsWidth;
+   float diagnosticsHeight;
+   float diagnosticsPadding;
 
    const char* menuFontFilePath;
    unsigned int menuFontSize;
