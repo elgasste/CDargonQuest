@@ -29,6 +29,9 @@ void dqDiagnosticsRenderer_Init()
 
    dqDiagnosticsRenderer->lineSpacing = sfFont_getLineSpacing( dqDiagnosticsRenderer->font,
                                                                sfText_getCharacterSize( dqDiagnosticsRenderer->text ) );
+
+   dqDiagnosticsRenderer->currentFrameRateCache = 0;
+   dqDiagnosticsRenderer->currentFrameRateElapsedSeconds = 0;
 }
 
 void dqDiagnosticsRenderer_Cleanup()
@@ -41,6 +44,14 @@ void dqDiagnosticsRenderer_Cleanup()
 
 void dqDiagnosticsRenderer_Render()
 {
+   dqDiagnosticsRenderer->currentFrameRateElapsedSeconds += dqClock->lastFrameSeconds;
+
+   if ( dqDiagnosticsRenderer->currentFrameRateElapsedSeconds >= dqRenderConfig->diagnosticsCurrentFrameRateRefreshRate )
+   {
+      dqDiagnosticsRenderer->currentFrameRateCache = dqClock_CurrentFrameRate();
+      dqDiagnosticsRenderer->currentFrameRateElapsedSeconds = 0;
+   }
+
    sfRenderWindow_drawRectangleShape( dqWindow, dqDiagnosticsRenderer->background, NULL );
 
    dqDiagnosticsRenderer->textPosition.y = dqRenderConfig->diagnosticsPadding;
@@ -69,7 +80,7 @@ void dqDiagnosticsRenderer_Render()
               dqRenderConfig->diagnosticsLineWidth,
               "%s%d",
               STR_DIAGNOSTICS_CUR_FRAME_RATE,
-              dqClock_CurrentFrameRate() );
+              dqDiagnosticsRenderer->currentFrameRateCache );
    sfText_setString( dqDiagnosticsRenderer->text, dqDiagnosticsRenderer->textLine );
    sfRenderWindow_drawText( dqWindow, dqDiagnosticsRenderer->text, NULL );
 

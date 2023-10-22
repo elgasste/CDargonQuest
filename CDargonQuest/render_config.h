@@ -22,6 +22,7 @@ typedef struct
    float diagnosticsHeight;
    float diagnosticsPadding;
    unsigned int diagnosticsLineWidth;
+   float diagnosticsCurrentFrameRateRefreshRate;
 
    const char* menuFontFilePath;
    unsigned int menuFontSize;

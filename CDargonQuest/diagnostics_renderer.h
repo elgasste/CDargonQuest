@@ -10,6 +10,8 @@ typedef struct
    sfText* text;
    sfVector2f textPosition;
    float lineSpacing;
+   unsigned int currentFrameRateCache;
+   float currentFrameRateElapsedSeconds;
 }
 dqDiagnosticsRenderer_t;
 
