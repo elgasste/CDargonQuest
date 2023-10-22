@@ -3,6 +3,7 @@
 #include "window.h"
 #include "clock.h"
 #include "renderer.h"
+#include "event_queue.h"
 
 void dqGame_Init()
 {
@@ -14,6 +15,7 @@ void dqGame_Init()
    dqRenderConfig_Init();
    dqWindow_Init();
    dqClock_Init();
+   dqEventQueue_Init();
 }
 
 void dqGame_Create()
@@ -28,6 +30,7 @@ void dqGame_Create()
 
 void dqGame_Cleanup()
 {
+   dqEventQueue_Cleanup();
    dqClock_Cleanup();
    dqWindow_Cleanup();
    dqRenderConfig_Cleanup();
@@ -45,7 +48,7 @@ void dqGame_Run()
       dqClock_StartFrame();
 
       dqWindow_HandleEvents();
-      // TODO: handle game events
+      dqGame_HandleEvents();
       dqGame_Tick();
       dqRenderer_Render();
 
@@ -53,6 +56,11 @@ void dqGame_Run()
    }
 
    dqGame->state = stateClosing;
+}
+
+void dqGame_HandleEvents()
+{
+   // TODO
 }
 
 void dqGame_Tick()
