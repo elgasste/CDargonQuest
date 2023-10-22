@@ -176,7 +176,7 @@
     <ClInclude Include="event_queue.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="clock.h" />
-    <ClInclude Include="game_event.h" />
+    <ClInclude Include="event.h" />
     <ClInclude Include="input_handler.h" />
     <ClInclude Include="input_state.h" />
     <ClInclude Include="renderer.h" />

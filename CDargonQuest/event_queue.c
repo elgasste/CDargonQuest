@@ -26,11 +26,11 @@ sfBool dqEventQueue_IsEmpty()
    return dqEventQueue->back == -1;
 }
 
-void dqEventQueue_Push( dqGameEventType_t e )
+void dqEventQueue_Push( dqEventType_t e )
 {
    dqEventQueue->back++;
 
-   if ( dqEventQueue->back >= MAX_GAME_EVENTS )
+   if ( dqEventQueue->back >= MAX_EVENTS )
    {
       dqError_ExitWithMessage( STR_ERROR_EVENT_OVERFLOW );
    }
@@ -40,9 +40,9 @@ void dqEventQueue_Push( dqGameEventType_t e )
    }
 }
 
-dqGameEventType_t dqEventQueue_GetNext()
+dqEventType_t dqEventQueue_GetNext()
 {
-   dqGameEventType_t e = dqEventQueue->queue[dqEventQueue->front];
+   dqEventType_t e = dqEventQueue->queue[dqEventQueue->front];
    dqEventQueue->front++;
 
    if ( dqEventQueue->front > dqEventQueue->back )
@@ -53,7 +53,7 @@ dqGameEventType_t dqEventQueue_GetNext()
    return e;
 }
 
-dqGameEventType_t dqEventQueue_PeekNext()
+dqEventType_t dqEventQueue_PeekNext()
 {
    return dqEventQueue->queue[dqEventQueue->front];
 }

@@ -2,8 +2,8 @@
 
 typedef enum
 {
-   stateInit,
-   statePlaying,
-   stateClosing
+   dqStateInit,
+   dqStatePlaying,
+   dqStateClosing
 }
-dqGameState_t;
+dqState_t;

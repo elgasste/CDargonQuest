@@ -6,6 +6,6 @@ void dqInputHandler_HandleInput()
 {
    if ( dqInputState_WasKeyPressed( sfKeyEscape ) )
    {
-      dqEventQueue_Push( eventQuit );
+      dqEventQueue_Push( dqEventQuit );
    }
 }

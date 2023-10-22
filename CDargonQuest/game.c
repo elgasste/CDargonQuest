@@ -10,7 +10,7 @@ void dqGame_Init()
    dqGame_Create();
 
    dqGame->isRunning = sfFalse;
-   dqGame->state = stateInit;
+   dqGame->state = dqStateInit;
 
    dqRenderConfig_Init();
    dqWindow_Init();
@@ -41,7 +41,7 @@ void dqGame_Cleanup()
 void dqGame_Run()
 {
    dqGame->isRunning = sfTrue;
-   dqGame->state = statePlaying;
+   dqGame->state = dqStatePlaying;
 
    while ( dqGame->isRunning )
    {
@@ -54,12 +54,12 @@ void dqGame_Run()
       dqClock_EndFrame();
    }
 
-   dqGame->state = stateClosing;
+   dqGame->state = dqStateClosing;
 }
 
 void dqGame_HandleEvents()
 {
-   static dqGameEventType_t e;
+   static dqEventType_t e;
 
    dqWindow_HandleEvents();
 
@@ -69,7 +69,7 @@ void dqGame_HandleEvents()
 
       switch ( e )
       {
-         case eventQuit:
+         case dqEventQuit:
             dqGame_Quit();
             break;
       }

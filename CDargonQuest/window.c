@@ -37,7 +37,7 @@ void dqWindow_HandleEvents()
       switch ( e.type )
       {
          case sfEvtClosed:
-            dqEventQueue_Push( eventQuit );
+            dqEventQueue_Push( dqEventQuit );
             break;
          case sfEvtKeyPressed:
             dqInputState_SetKeyPressed( e.key.code );

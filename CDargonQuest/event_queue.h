@@ -1,13 +1,13 @@
 #pragma once
 
 #include "common.h"
-#include "game_event.h"
+#include "event.h"
 
-#define MAX_GAME_EVENTS 100
+#define MAX_EVENTS 100
 
 typedef struct
 {
-   dqGameEventType_t queue [MAX_GAME_EVENTS];
+   dqEventType_t queue [MAX_EVENTS];
    int front;
    int back;
 }
@@ -19,7 +19,7 @@ void dqEventQueue_Init();
 void dqEventQueue_Create();
 void dqEventQueue_Cleanup();
 sfBool dqEventQueue_IsEmpty();
-void dqEventQueue_Push( dqGameEventType_t e );
-dqGameEventType_t dqEventQueue_GetNext();
-dqGameEventType_t dqEventQueue_PeekNext();
+void dqEventQueue_Push( dqEventType_t e );
+dqEventType_t dqEventQueue_GetNext();
+dqEventType_t dqEventQueue_PeekNext();
 void dqEventQueue_Flush();

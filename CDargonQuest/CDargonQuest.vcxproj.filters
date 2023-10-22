@@ -80,7 +80,7 @@
     <ClInclude Include="event_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game_event.h">
+    <ClInclude Include="event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="input_handler.h">
