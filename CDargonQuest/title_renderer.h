@@ -4,6 +4,13 @@
 
 typedef struct
 {
+   sfFont* menuFont;
+   sfText* menuText;
+   sfText* menuCarat;
+   sfVector2f menuTextPosition;
+   sfVector2f menuCaratPosition;
+   float menuLineSpacing;
+
    sfBool showCarat;
    float caratElapsedSeconds;
    unsigned int selectedOptionCache;

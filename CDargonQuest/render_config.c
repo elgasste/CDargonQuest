@@ -14,7 +14,15 @@ void dqRenderConfig_Init()
    dqRenderConfig->windowStyle = sfTitlebar | sfClose;
    dqRenderConfig->windowClearColor = sfBlack;
 
+   dqRenderConfig->menuFontFilePath = "Resources/Fonts/Consolas.ttf";
+   dqRenderConfig->menuFontSize = 50;
+   dqRenderConfig->menuFontColor = sfWhite;
+   dqRenderConfig->menuCaratText = ">";
+   dqRenderConfig->menuCaratOffsetX = -50;
    dqRenderConfig->menuCaratBlinkRate = 0.5f;
+
+   dqRenderConfig->titleMenuOffsetX = 900;
+   dqRenderConfig->titleMenuOffsetY = 600;
 }
 
 void dqRenderConfig_Cleanup()

@@ -13,7 +13,15 @@ typedef struct
    sfUint32 windowStyle;
    sfColor windowClearColor;
 
+   const char* menuFontFilePath;
+   unsigned int menuFontSize;
+   sfColor menuFontColor;
+   const char* menuCaratText;
+   float menuCaratOffsetX;
    float menuCaratBlinkRate;
+
+   float titleMenuOffsetX;
+   float titleMenuOffsetY;
 }
 dqRenderConfig_t;
 
