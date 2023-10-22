@@ -41,7 +41,7 @@ void dqGame_Cleanup()
 void dqGame_Run()
 {
    dqGame->isRunning = sfTrue;
-   dqGame->state = dqStatePlaying;
+   dqGame->state = dqStateTitle;
 
    while ( dqGame->isRunning )
    {

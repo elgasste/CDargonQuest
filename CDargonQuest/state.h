@@ -3,7 +3,7 @@
 typedef enum
 {
    dqStateInit,
-   dqStatePlaying,
+   dqStateTitle,
    dqStateClosing
 }
 dqState_t;
