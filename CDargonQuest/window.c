@@ -16,6 +16,8 @@ void dqWindow_Init()
 
    dqWindow = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, NULL );
 
+   sfRenderWindow_setKeyRepeatEnabled( dqWindow, sfFalse );
+
    dqInputState_Init();
 }
 
