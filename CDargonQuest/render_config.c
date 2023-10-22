@@ -23,7 +23,7 @@ void dqRenderConfig_Init()
    dqRenderConfig->diagnosticsHeight = 208;
    dqRenderConfig->diagnosticsPadding = 18;
    dqRenderConfig->diagnosticsLineWidth = 40;
-   dqRenderConfig->diagnosticsCurrentFrameRateRefreshRate = 0.25f;
+   dqRenderConfig->diagnosticsRefreshRate = 0.25f;
 
    dqRenderConfig->menuFontFilePath = "Resources/Fonts/Consolas.ttf";
    dqRenderConfig->menuFontSize = 50;
