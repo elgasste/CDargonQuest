@@ -55,10 +55,10 @@ void dqTitleRenderer_Render()
    {
       dqTitleRenderer->caratElapsedSeconds += dqClock->lastFrameSeconds;
 
-      if ( dqTitleRenderer->caratElapsedSeconds >= dqRenderConfig->menuCaratBlinkRate )
+      while ( dqTitleRenderer->caratElapsedSeconds >= dqRenderConfig->menuCaratBlinkRate )
       {
          dqTitleRenderer->showCarat = dqTitleRenderer->showCarat ? sfFalse : sfTrue;
-         dqTitleRenderer->caratElapsedSeconds = 0;
+         dqTitleRenderer->caratElapsedSeconds -= dqRenderConfig->menuCaratBlinkRate;
       }
    }
 

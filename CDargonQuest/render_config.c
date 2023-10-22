@@ -19,7 +19,7 @@ void dqRenderConfig_Init()
    dqRenderConfig->menuFontColor = sfWhite;
    dqRenderConfig->menuCaratText = ">";
    dqRenderConfig->menuCaratOffsetX = -50;
-   dqRenderConfig->menuCaratBlinkRate = 0.5f;
+   dqRenderConfig->menuCaratBlinkRate = 0.3f;
 
    dqRenderConfig->titleMenuOffsetX = 900;
    dqRenderConfig->titleMenuOffsetY = 600;
