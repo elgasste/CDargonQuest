@@ -72,6 +72,9 @@
     <ClCompile Include="title_input_handler.c">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
+    <ClCompile Include="menu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">

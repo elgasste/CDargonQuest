@@ -167,6 +167,7 @@
     <ClCompile Include="input_handler.c" />
     <ClCompile Include="input_state.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="menu.c" />
     <ClCompile Include="renderer.c" />
     <ClCompile Include="render_config.c" />
     <ClCompile Include="title_input_handler.c" />

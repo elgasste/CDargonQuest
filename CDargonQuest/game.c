@@ -14,6 +14,7 @@ void dqGame_Init()
 
    dqGame->titleMenu = (dqMenu_t*)malloc( sizeof( dqMenu_t ) );
    dqGame->titleMenu->optionCount = 2;
+   dqGame->titleMenu->selectedOption = 0;
    dqGame->titleMenu->options = (dqMenuOption_t*)malloc( sizeof( dqMenuOption_t ) * dqGame->titleMenu->optionCount );
    dqGame->titleMenu->options[0].text = STR_TITLE_MENU_START;
    dqGame->titleMenu->options[0].eventType = dqEventStart;
