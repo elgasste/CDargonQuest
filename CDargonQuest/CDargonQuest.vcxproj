@@ -131,7 +131,8 @@
       <AdditionalLibraryDirectories>C:\CSFML-2.5.1\lib\msvc</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y</Command>
+      <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +156,8 @@
       <AdditionalLibraryDirectories>C:\CSFML-2.5.1\lib\msvc</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y</Command>
+      <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
