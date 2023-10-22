@@ -10,6 +10,13 @@
 
 #define STR_WINDOW_TITLE                  "Dargon Quest"
 
+#define STR_DIAGNOSTICS_MAX_FRAME_RATE    "Maximum Frame Rate: "
+#define STR_DIAGNOSTICS_MIN_FRAME_RATE    "Minimum Frame Rate: "
+#define STR_DIAGNOSTICS_CUR_FRAME_RATE    "Current Frame Rate: "
+#define STR_DIAGNOSTICS_AVG_FRAME_RATE    "Average Frame Rate: "
+#define STR_DIAGNOSTICS_TOTAL_FRAMES      "Total Frames:       "
+#define STR_DIAGNOSTICS_LAG_FRAMES        "Lag Frames:         "
+
 #define STR_TITLE_MENU_START              "Start"
 #define STR_TITLE_MENU_QUIT               "Quit"
 

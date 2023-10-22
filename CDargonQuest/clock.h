@@ -26,3 +26,5 @@ void dqClock_Init();
 void dqClock_Cleanup();
 void dqClock_StartFrame();
 void dqClock_EndFrame();
+unsigned int dqClock_CurrentFrameRate();
+unsigned int dqClock_AverageFrameRate();
