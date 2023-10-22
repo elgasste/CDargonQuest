@@ -60,10 +60,27 @@ void dqGame_Run()
 
 void dqGame_HandleEvents()
 {
-   // TODO
+   static dqGameEvent_t e;
+
+   while ( !dqEventQueue_IsEmpty() )
+   {
+      e = dqEventQueue_GetNext();
+
+      switch ( e )
+      {
+         case eventQuit:
+            dqGame_Quit();
+            break;
+      }
+   }
 }
 
 void dqGame_Tick()
 {
    // TODO: update game objects.
+}
+
+void dqGame_Quit()
+{
+   dqGame->isRunning = sfFalse;
 }

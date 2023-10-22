@@ -2,6 +2,7 @@
 #include "render_config.h"
 #include "game.h"
 #include "input_state.h"
+#include "event_queue.h"
 
 void dqWindow_Init()
 {
@@ -20,6 +21,7 @@ void dqWindow_Init()
 void dqWindow_Cleanup()
 {
    dqInputState_Cleanup();
+   sfRenderWindow_close( dqWindow );
    sfRenderWindow_destroy( dqWindow );
 }
 
@@ -34,9 +36,7 @@ void dqWindow_HandleEvents()
       switch ( e.type )
       {
          case sfEvtClosed:
-            // TODO: raise some kind of "shutdown" game event instead of doing this
-            dqGame->isRunning = sfFalse;
-            sfRenderWindow_close( dqWindow );
+            dqEventQueue_Push( eventQuit );
             break;
          case sfEvtKeyPressed:
             dqInputState_SetKeyPressed( e.key.code );
