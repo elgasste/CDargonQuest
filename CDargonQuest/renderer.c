@@ -1,9 +1,13 @@
 #include "renderer.h"
-#include "render_config.h"
-#include "window.h"
+#include "title_renderer.h"
+#include "game.h"
 
 void dqRenderer_Render()
 {
-   sfRenderWindow_clear( dqWindow, dqRenderConfig->windowClearColor );
-   sfRenderWindow_display( dqWindow );
+   switch ( dqGame->state )
+   {
+      case dqStateTitle:
+         dqTitleRenderer_Render();
+         break;
+   }
 }

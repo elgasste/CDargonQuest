@@ -169,6 +169,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="renderer.c" />
     <ClCompile Include="render_config.c" />
+    <ClCompile Include="title_renderer.c" />
     <ClCompile Include="window.c" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +187,7 @@
     <ClInclude Include="render_config.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="strings.h" />
+    <ClInclude Include="title_renderer.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
