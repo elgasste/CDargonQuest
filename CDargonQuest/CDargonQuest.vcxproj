@@ -163,6 +163,7 @@
     <ClCompile Include="event_queue.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="clock.c" />
+    <ClCompile Include="input_handler.c" />
     <ClCompile Include="input_state.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="renderer.c" />
@@ -176,6 +177,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="clock.h" />
     <ClInclude Include="game_event.h" />
+    <ClInclude Include="input_handler.h" />
     <ClInclude Include="input_state.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_config.h" />

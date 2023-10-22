@@ -42,6 +42,9 @@
     <ClCompile Include="event_queue.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="input_handler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input_handler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

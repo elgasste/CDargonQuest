@@ -2,6 +2,7 @@
 #include "render_config.h"
 #include "game.h"
 #include "input_state.h"
+#include "input_handler.h"
 #include "event_queue.h"
 
 void dqWindow_Init()
@@ -46,4 +47,6 @@ void dqWindow_HandleEvents()
             break;
       }
    }
+
+   dqInputHandler_HandleInput();
 }
