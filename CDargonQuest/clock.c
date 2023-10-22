@@ -72,3 +72,13 @@ void dqClock_EndFrame()
    dqClock->lastFrameSeconds = ( GetTickCount64() - dqClock->frameStart ) / 1000.0f;
    dqClock->totalSeconds += dqClock->lastFrameSeconds;
 }
+
+unsigned int dqClock_CurrentFrameRate()
+{
+   return (unsigned int)( 1 / dqClock->lastFrameSeconds );
+}
+
+unsigned int dqClock_AverageFrameRate()
+{
+   return dqClock->frameCount == 0 ? 0 : (unsigned int)( 1 / ( dqClock->totalSeconds / dqClock->frameCount ) );
+}
