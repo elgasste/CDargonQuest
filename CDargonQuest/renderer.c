@@ -3,6 +3,7 @@
 #include "render_config.h"
 #include "diagnostics_renderer.h"
 #include "title_renderer.h"
+#include "overworld_renderer.h"
 #include "game.h"
 
 void dqRenderer_Init()
@@ -25,6 +26,9 @@ void dqRenderer_Render()
    {
       case dqStateTitle:
          dqTitleRenderer_Render();
+         break;
+      case dqStateOverworld:
+         dqOverworldRenderer_Render();
          break;
    }
 

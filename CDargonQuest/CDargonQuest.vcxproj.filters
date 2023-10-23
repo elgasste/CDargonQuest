@@ -81,6 +81,9 @@
     <ClCompile Include="overworld_input_handler.c">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
+    <ClCompile Include="overworld_renderer.c">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="overworld_input_handler.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="overworld_renderer.h">
+      <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
