@@ -75,13 +75,13 @@
     <ClCompile Include="menu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="diagnostics_renderer.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="overworld_input_handler.c">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="overworld_renderer.c">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="diagnostics_renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
@@ -143,13 +143,13 @@
     <ClInclude Include="menu_option.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="diagnostics_renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="overworld_input_handler.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="overworld_renderer.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="diagnostics_renderer.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
