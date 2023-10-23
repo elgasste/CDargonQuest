@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Menu">
       <UniqueIdentifier>{35352f72-1ef9-4eda-9dff-da405001dcd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{4b0de5ea-fbdc-48ae-a3ac-f1f33b8db26c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="menu_option.h">
       <Filter>Header Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="map_tile.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -191,6 +191,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     <ClInclude Include="event_type.h" />
     <ClInclude Include="input_handler.h" />
     <ClInclude Include="input_state.h" />
+    <ClInclude Include="map_tile.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="menu_option.h" />
     <ClInclude Include="overworld_input_handler.h" />
