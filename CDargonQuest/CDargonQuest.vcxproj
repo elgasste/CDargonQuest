@@ -171,6 +171,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     <ClCompile Include="input_state.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />
+    <ClCompile Include="overworld_input_handler.c" />
     <ClCompile Include="renderer.c" />
     <ClCompile Include="render_config.c" />
     <ClCompile Include="title_input_handler.c" />
@@ -191,6 +192,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     <ClInclude Include="input_state.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="menu_option.h" />
+    <ClInclude Include="overworld_input_handler.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_config.h" />
     <ClInclude Include="state.h" />
