@@ -99,6 +99,12 @@
     <ClCompile Include="map.c">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
+    <ClCompile Include="game_data.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map_loader.c">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -171,6 +177,12 @@
       <Filter>Header Files\Map</Filter>
     </ClInclude>
     <ClInclude Include="map.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="game_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="map_loader.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
