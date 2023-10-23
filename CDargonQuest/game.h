@@ -17,4 +17,5 @@ void dqGame_Cleanup();
 void dqGame_Run();
 void dqGame_HandleEvents();
 void dqGame_Tick();
+void dqGame_Start();
 void dqGame_Quit();

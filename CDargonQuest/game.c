@@ -65,6 +65,9 @@ void dqGame_HandleEvents()
 
       switch ( e->type )
       {
+         case dqEventStart:
+            dqGame_Start();
+            break;
          case dqEventQuit:
             dqGame_Quit();
             break;
@@ -75,6 +78,12 @@ void dqGame_HandleEvents()
 void dqGame_Tick()
 {
    // TODO: update game objects.
+}
+
+void dqGame_Start()
+{
+   dqEventQueue_Flush();
+   dqGame->state = dqStateOverworld;
 }
 
 void dqGame_Quit()
