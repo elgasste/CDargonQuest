@@ -40,6 +40,9 @@
     <Filter Include="Header Files\Map">
       <UniqueIdentifier>{4b0de5ea-fbdc-48ae-a3ac-f1f33b8db26c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{80a38cb5-c7f7-4082-a8c4-a734a5687df3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="menu.c">
       <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="map.c">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +168,9 @@
       <Filter>Header Files\Menu</Filter>
     </ClInclude>
     <ClInclude Include="map_tile.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
