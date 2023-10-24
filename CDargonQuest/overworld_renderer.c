@@ -17,10 +17,15 @@ void dqOverworldRenderer_Init()
    dqOverworldRenderer->lightTile = sfRectangleShape_create();
    sfRectangleShape_setSize( dqOverworldRenderer->lightTile, tileSize );
    sfRectangleShape_setFillColor( dqOverworldRenderer->lightTile, sfColor_fromRGB( 224, 224, 224 ) );
+
+   dqOverworldRenderer->entityRect = sfRectangleShape_create();
+   sfRectangleShape_setSize( dqOverworldRenderer->entityRect, dqGameData->player->hitBoxSize );
+   sfRectangleShape_setFillColor( dqOverworldRenderer->entityRect, sfBlue );
 }
 
 void dqOverworldRenderer_Cleanup()
 {
+   sfRectangleShape_destroy( dqOverworldRenderer->entityRect );
    sfRectangleShape_destroy( dqOverworldRenderer->darkTile );
    sfRectangleShape_destroy( dqOverworldRenderer->lightTile );
 
@@ -28,6 +33,12 @@ void dqOverworldRenderer_Cleanup()
 }
 
 void dqOverworldRenderer_Render()
+{
+   dqOverworldRenderer_RenderMap();
+   dqOverworldRenderer_RenderEntities();
+}
+
+void dqOverworldRenderer_RenderMap()
 {
    unsigned int i = 0, col = 0, row = 0;
    dqMap_t* map = &( dqGameData->maps[0] );
@@ -53,4 +64,10 @@ void dqOverworldRenderer_Render()
          row++;
       }
    }
+}
+
+void dqOverworldRenderer_RenderEntities()
+{
+   sfRectangleShape_setPosition( dqOverworldRenderer->entityRect, dqGameData->player->hitBoxPosition );
+   dqWindow_DrawRectangleShape( dqOverworldRenderer->entityRect );
 }
