@@ -86,19 +86,43 @@ void dqGame_HandleEvents()
 
 void dqGame_Tick()
 {
-   // TODO: collision detection
-   if ( dqGameData->player->velocityX != 0 )
+   // TODO: this should all go in some kind of collision detection file
+   dqEntity_t* player = dqGameData->player;
+
+   if ( player->velocityX != 0 )
    {
-      dqGameData->player->centerPosition.x += ( dqGameData->player->velocityX * dqClock->lastFrameSeconds );
-      dqGameData->player->hitBoxPosition.x += ( dqGameData->player->velocityX * dqClock->lastFrameSeconds );
-      dqGameData->player->velocityX = 0;
+      player->centerPosition.x += ( player->velocityX * dqClock->lastFrameSeconds );
+      player->hitBoxPosition.x += ( player->velocityX * dqClock->lastFrameSeconds );
+      player->velocityX = 0;
    }
 
-   if ( dqGameData->player->velocityY != 0 )
+   if ( player->velocityY != 0 )
    {
-      dqGameData->player->centerPosition.y += ( dqGameData->player->velocityY * dqClock->lastFrameSeconds );
-      dqGameData->player->hitBoxPosition.y += ( dqGameData->player->velocityY * dqClock->lastFrameSeconds );
-      dqGameData->player->velocityY = 0;
+      player->centerPosition.y += ( player->velocityY * dqClock->lastFrameSeconds );
+      player->hitBoxPosition.y += ( player->velocityY * dqClock->lastFrameSeconds );
+      player->velocityY = 0;
+   }
+
+   if ( player->hitBoxPosition.x < 0 )
+   {
+      player->hitBoxPosition.x = 0;
+      player->centerPosition.x = player->hitBoxSize.x / 2;
+   }
+   else if ( player->hitBoxPosition.x + player->hitBoxSize.x >= dqRenderConfig->screenWidth )
+   {
+      player->hitBoxPosition.x = dqRenderConfig->screenWidth - player->hitBoxSize.x;
+      player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
+   }
+
+   if ( player->hitBoxPosition.y < 0 )
+   {
+      player->hitBoxPosition.y = 0;
+      player->centerPosition.y = player->hitBoxSize.y / 2;
+   }
+   else if ( player->hitBoxPosition.y + player->hitBoxSize.y >= dqRenderConfig->screenHeight )
+   {
+      player->hitBoxPosition.y = dqRenderConfig->screenHeight - player->hitBoxSize.y;
+      player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
    }
 }
 
