@@ -1,8 +1,9 @@
 #pragma once
 
 #include "common.h"
-#include "map.h"
-#include "entity.h"
+
+typedef struct dqMap_t dqMap_t;
+typedef struct dqEntity_t dqEntity_t;
 
 typedef struct dqGameData_t
 {

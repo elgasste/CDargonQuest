@@ -1,5 +1,6 @@
 #include "game_data.h"
 #include "map_loader.h"
+#include "entity.h"
 #include "render_config.h"
 
 void dqGameData_Init()

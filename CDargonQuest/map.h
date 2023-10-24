@@ -1,7 +1,8 @@
 #pragma once
 
 #include "common.h"
-#include "map_tile.h"
+
+typedef struct dqMapTile_t dqMapTile_t;
 
 typedef struct dqMap_t
 {

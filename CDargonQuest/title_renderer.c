@@ -2,6 +2,7 @@
 #include "render_config.h"
 #include "window.h"
 #include "menu.h"
+#include "menu_option.h"
 #include "clock.h"
 
 void dqTitleRenderer_Init()

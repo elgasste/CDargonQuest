@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "menu_option.h"
 
 void dqMenu_Init()
 {

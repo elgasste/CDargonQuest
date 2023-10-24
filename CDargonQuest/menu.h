@@ -1,7 +1,8 @@
 #pragma once
 
 #include "common.h"
-#include "menu_option.h"
+
+typedef struct dqMenuOption_t dqMenuOption_t;
 
 typedef struct dqMenu_t
 {

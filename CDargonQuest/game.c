@@ -7,6 +7,7 @@
 #include "clock.h"
 #include "renderer.h"
 #include "event_queue.h"
+#include "entity.h"
 
 void dqGame_Init()
 {

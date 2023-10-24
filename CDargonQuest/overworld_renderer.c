@@ -1,6 +1,9 @@
 #include "overworld_renderer.h"
 #include "render_config.h"
 #include "game_data.h"
+#include "entity.h"
+#include "map.h"
+#include "map_tile.h"
 #include "window.h"
 
 void dqOverworldRenderer_Init()
