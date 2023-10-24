@@ -2,6 +2,7 @@
 #include "input_state.h"
 #include "render_config.h"
 #include "title_input_handler.h"
+#include "overworld_input_handler.h"
 #include "game.h"
 
 void dqInputHandler_HandleInput()
@@ -15,6 +16,9 @@ void dqInputHandler_HandleInput()
    {
       case dqStateTitle:
          dqTitleInputHandler_HandleInput();
+         break;
+      case dqStateOverworld:
+         dqOverworldInputHandler_HandleInput();
          break;
    }
 }

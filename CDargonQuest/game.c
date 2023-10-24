@@ -1,6 +1,7 @@
 #include "game.h"
 #include "menu.h"
 #include "render_config.h"
+#include "game_data.h"
 #include "window.h"
 #include "clock.h"
 #include "renderer.h"
@@ -16,6 +17,7 @@ void dqGame_Init()
 
    dqMenu_Init();
    dqRenderConfig_Init();
+   dqGameData_Init();
    dqWindow_Init();
    dqRenderer_Init();
    dqClock_Init();
@@ -28,6 +30,7 @@ void dqGame_Cleanup()
    dqClock_Cleanup();
    dqRenderer_Cleanup();
    dqWindow_Cleanup();
+   dqGameData_Cleanup();
    dqRenderConfig_Cleanup();
    dqMenu_Cleanup();
 
@@ -65,6 +68,9 @@ void dqGame_HandleEvents()
 
       switch ( e->type )
       {
+         case dqEventStart:
+            dqGame_Start();
+            break;
          case dqEventQuit:
             dqGame_Quit();
             break;
@@ -75,6 +81,12 @@ void dqGame_HandleEvents()
 void dqGame_Tick()
 {
    // TODO: update game objects.
+}
+
+void dqGame_Start()
+{
+   dqEventQueue_Flush();
+   dqGame->state = dqStateOverworld;
 }
 
 void dqGame_Quit()
