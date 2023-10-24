@@ -2,11 +2,14 @@
 
 #include "common.h"
 #include "map.h"
+#include "entity.h"
 
 typedef struct
 {
    dqMap_t* maps;
    unsigned int mapCount;
+
+   dqEntity_t* player;
 }
 dqGameData_t;
 
