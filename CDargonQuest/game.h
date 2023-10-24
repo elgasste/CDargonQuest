@@ -4,7 +4,7 @@
 #include "state.h"
 #include "event.h"
 
-typedef struct
+typedef struct dqGame_t
 {
    sfBool isRunning;
    dqState_t state;

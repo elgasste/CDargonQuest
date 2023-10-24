@@ -4,7 +4,7 @@
 #include "map.h"
 #include "entity.h"
 
-typedef struct
+typedef struct dqGameData_t
 {
    dqMap_t* maps;
    unsigned int mapCount;

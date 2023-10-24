@@ -3,7 +3,7 @@
 #include "common.h"
 #include "event.h"
 
-typedef struct
+typedef struct dqEventQueue_t
 {
    dqEvent_t queue [MAX_EVENTS];
    int front;

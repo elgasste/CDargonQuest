@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqDiagnosticsRenderer_t
 {
    char* textLine;
    sfRectangleShape* background;

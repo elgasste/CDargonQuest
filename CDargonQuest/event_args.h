@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqEventArgs_t
 {
    int argList[MAX_EVENT_ARGS];
 }

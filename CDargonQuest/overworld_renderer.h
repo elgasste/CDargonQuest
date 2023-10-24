@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqOverworldRenderer_t
 {
    sfRectangleShape* darkTile;
    sfRectangleShape* lightTile;

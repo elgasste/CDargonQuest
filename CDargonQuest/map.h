@@ -3,7 +3,7 @@
 #include "common.h"
 #include "map_tile.h"
 
-typedef struct
+typedef struct dqMap_t
 {
    dqMapTile_t* tiles;
    unsigned int tileCount;

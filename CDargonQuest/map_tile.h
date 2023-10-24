@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqMapTile_t
 {
    unsigned int textureId;
    unsigned int tileId;
