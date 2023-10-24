@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqWindow_t
 {
    sfRenderWindow* window;
    sfView* view;

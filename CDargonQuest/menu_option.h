@@ -3,7 +3,7 @@
 #include "common.h"
 #include "event_type.h"
 
-typedef struct
+typedef struct dqMenuOption_t
 {
    const char* text;
    dqEventType_t eventType;

@@ -2,6 +2,7 @@
 #include "input_state.h"
 #include "event_queue.h"
 #include "menu.h"
+#include "menu_option.h"
 
 void dqTitleInputHandler_HandleInput()
 {

@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqClock_t
 {
    unsigned long long minFrameDuration;
    unsigned long long maxFrameDuration;

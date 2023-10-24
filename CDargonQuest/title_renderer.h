@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqTitleRenderer_t
 {
    sfFont* menuFont;
    sfText* menuText;

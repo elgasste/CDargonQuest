@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqGameConfig_t
 {
    float maxPlayerVelocity;
 }

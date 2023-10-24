@@ -1,5 +1,7 @@
 #include "map_loader.h"
 #include "game_data.h"
+#include "map.h"
+#include "map_tile.h"
 
 void dqMapLoader_LoadMaps()
 {

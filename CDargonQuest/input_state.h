@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqInputState_t
 {
    sfBool* keysPressed;
    sfBool* keysReleased;

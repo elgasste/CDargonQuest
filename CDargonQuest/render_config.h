@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqRenderConfig_t
 {
    int minFrameRate;
    int maxFrameRate;
