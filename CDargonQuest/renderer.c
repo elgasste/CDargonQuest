@@ -10,10 +10,12 @@ void dqRenderer_Init()
 {
    dqDiagnosticsRenderer_Init();
    dqTitleRenderer_Init();
+   dqOverworldRenderer_Init();
 }
 
 void dqRenderer_Cleanup()
 {
+   dqOverworldRenderer_Cleanup();
    dqTitleRenderer_Cleanup();
    dqDiagnosticsRenderer_Cleanup();
 }

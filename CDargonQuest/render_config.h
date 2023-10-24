@@ -33,6 +33,8 @@ typedef struct
 
    float titleMenuOffsetX;
    float titleMenuOffsetY;
+
+   float tileSize;
 }
 dqRenderConfig_t;
 

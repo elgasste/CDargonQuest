@@ -6,6 +6,7 @@
 typedef struct
 {
    dqMapTile_t* tiles;
+   unsigned int tileCount;
    unsigned int width;
    unsigned int height;
 }

@@ -34,6 +34,8 @@ void dqRenderConfig_Init()
 
    dqRenderConfig->titleMenuOffsetX = 900;
    dqRenderConfig->titleMenuOffsetY = 600;
+
+   dqRenderConfig->tileSize = 16;
 }
 
 void dqRenderConfig_Cleanup()
