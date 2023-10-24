@@ -86,7 +86,20 @@ void dqGame_HandleEvents()
 
 void dqGame_Tick()
 {
-   // TODO: update game objects.
+   // TODO: collision detection
+   if ( dqGameData->player->velocityX != 0 )
+   {
+      dqGameData->player->centerPosition.x += ( dqGameData->player->velocityX * dqClock->lastFrameSeconds );
+      dqGameData->player->hitBoxPosition.x += ( dqGameData->player->velocityX * dqClock->lastFrameSeconds );
+      dqGameData->player->velocityX = 0;
+   }
+
+   if ( dqGameData->player->velocityY != 0 )
+   {
+      dqGameData->player->centerPosition.y += ( dqGameData->player->velocityY * dqClock->lastFrameSeconds );
+      dqGameData->player->hitBoxPosition.y += ( dqGameData->player->velocityY * dqClock->lastFrameSeconds );
+      dqGameData->player->velocityY = 0;
+   }
 }
 
 void dqGame_HandleStart()
