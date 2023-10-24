@@ -1,4 +1,5 @@
 #include "game.h"
+#include "game_config.h"
 #include "menu.h"
 #include "render_config.h"
 #include "game_data.h"
@@ -15,6 +16,7 @@ void dqGame_Init()
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
 
+   dqGameConfig_Init();
    dqMenu_Init();
    dqRenderConfig_Init();
    dqGameData_Init();
@@ -33,6 +35,7 @@ void dqGame_Cleanup()
    dqGameData_Cleanup();
    dqRenderConfig_Cleanup();
    dqMenu_Cleanup();
+   dqGameConfig_Cleanup();
 
    SAFE_DELETE( dqGame )
 }
@@ -69,10 +72,13 @@ void dqGame_HandleEvents()
       switch ( e->type )
       {
          case dqEventStart:
-            dqGame_Start();
+            dqGame_HandleStart();
             break;
          case dqEventQuit:
-            dqGame_Quit();
+            dqGame_HandleQuit();
+            break;
+         case dqEventMovePlayer:
+            dqGame_HandleMovePlayer( e );
             break;
       }
    }
@@ -83,14 +89,35 @@ void dqGame_Tick()
    // TODO: update game objects.
 }
 
-void dqGame_Start()
+void dqGame_HandleStart()
 {
    dqEventQueue_Flush();
    dqGame->state = dqStateOverworld;
 }
 
-void dqGame_Quit()
+void dqGame_HandleQuit()
 {
    dqEventQueue_Flush();
    dqGame->isRunning = sfFalse;
+}
+
+void dqGame_HandleMovePlayer( dqEvent_t* e )
+{
+   dqDirection direction = e->args.argList[0];
+
+   switch ( direction )
+   {
+      case dqDirectionLeft:
+         dqGameData->player->velocityX = -dqGameConfig->maxPlayerVelocity;
+         break;
+      case dqDirectionUp:
+         dqGameData->player->velocityY = -dqGameConfig->maxPlayerVelocity;
+         break;
+      case dqDirectionRight:
+         dqGameData->player->velocityX = dqGameConfig->maxPlayerVelocity;
+         break;
+      case dqDirectionDown:
+         dqGameData->player->velocityY = dqGameConfig->maxPlayerVelocity;
+         break;
+   }
 }

@@ -19,4 +19,5 @@ void dqInputState_Reset();
 
 sfBool dqInputState_WasKeyPressed( sfKeyCode keyCode );
 sfBool dqInputState_WasKeyReleased( sfKeyCode keyCode );
+sfBool dqInputState_IsKeyDown( sfKeyCode keyCode );
 sfBool dqInputState_IsAnyKeyDown();

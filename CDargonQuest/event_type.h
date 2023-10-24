@@ -4,7 +4,9 @@
 
 typedef enum
 {
-   dqEventStart,
-   dqEventQuit
+   dqEventStart = 0,
+   dqEventQuit,
+
+   dqEventMovePlayer
 }
 dqEventType_t;

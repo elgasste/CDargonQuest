@@ -4,7 +4,7 @@
 
 typedef enum
 {
-   dqDirectionLeft,
+   dqDirectionLeft = 0,
    dqDirectionUp,
    dqDirectionRight,
    dqDirectionDown

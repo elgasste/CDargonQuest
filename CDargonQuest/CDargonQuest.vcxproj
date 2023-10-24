@@ -163,10 +163,10 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
   <ItemGroup>
     <ClCompile Include="diagnostics_renderer.c" />
     <ClCompile Include="error.c" />
-    <ClCompile Include="event.c" />
     <ClCompile Include="event_queue.c" />
     <ClCompile Include="game.c" />
     <ClCompile Include="clock.c" />
+    <ClCompile Include="game_config.c" />
     <ClCompile Include="game_data.c" />
     <ClCompile Include="input_handler.c" />
     <ClCompile Include="input_state.c" />
@@ -194,6 +194,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     <ClInclude Include="game.h" />
     <ClInclude Include="clock.h" />
     <ClInclude Include="event_type.h" />
+    <ClInclude Include="game_config.h" />
     <ClInclude Include="game_data.h" />
     <ClInclude Include="input_handler.h" />
     <ClInclude Include="input_state.h" />

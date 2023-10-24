@@ -69,9 +69,6 @@
     <ClCompile Include="window.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="event.c">
-      <Filter>Source Files\Events</Filter>
-    </ClCompile>
     <ClCompile Include="event_queue.c">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
@@ -104,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="map_loader.c">
       <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="game_config.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +184,15 @@
     </ClInclude>
     <ClInclude Include="map_loader.h">
       <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="direction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_config.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

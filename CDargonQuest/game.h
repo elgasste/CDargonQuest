@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "state.h"
+#include "event.h"
 
 typedef struct
 {
@@ -17,5 +18,6 @@ void dqGame_Cleanup();
 void dqGame_Run();
 void dqGame_HandleEvents();
 void dqGame_Tick();
-void dqGame_Start();
-void dqGame_Quit();
+void dqGame_HandleStart();
+void dqGame_HandleQuit();
+void dqGame_HandleMovePlayer( dqEvent_t* e );
