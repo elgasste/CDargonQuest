@@ -16,7 +16,7 @@ dqEventQueue_t* dqEventQueue;
 void dqEventQueue_Init();
 void dqEventQueue_Cleanup();
 sfBool dqEventQueue_IsEmpty();
-void dqEventQueue_Push( dqEventType_t type, ... );
+void dqEventQueue_Push( dqEventType_t type, int argCount, ... );
 dqEvent_t* dqEventQueue_GetNext();
 dqEvent_t* dqEventQueue_PeekNext();
 void dqEventQueue_Flush();

@@ -4,6 +4,6 @@
 
 typedef struct
 {
-   int args[MAX_EVENT_ARGS];
+   int argList[MAX_EVENT_ARGS];
 }
 dqEventArgs_t;

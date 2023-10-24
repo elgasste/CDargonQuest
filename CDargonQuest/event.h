@@ -10,5 +10,3 @@ typedef struct
    dqEventArgs_t args;
 }
 dqEvent_t;
-
-int dqEvent_GetArgCount( dqEventType_t type );

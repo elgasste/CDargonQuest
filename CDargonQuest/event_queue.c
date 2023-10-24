@@ -16,9 +16,9 @@ sfBool dqEventQueue_IsEmpty()
    return dqEventQueue->back == -1;
 }
 
-void dqEventQueue_Push( dqEventType_t type, ... )
+void dqEventQueue_Push( dqEventType_t type, int argCount, ... )
 {
-   int argCount, i;
+   int i;
    va_list args;
 
    dqEventQueue->back++;
@@ -30,7 +30,6 @@ void dqEventQueue_Push( dqEventType_t type, ... )
    else
    {
       dqEventQueue->queue[dqEventQueue->back].type = type;
-      argCount = dqEvent_GetArgCount( type );
 
       if ( argCount > 0 )
       {
@@ -38,7 +37,7 @@ void dqEventQueue_Push( dqEventType_t type, ... )
 
          for ( i = 0; i < argCount; i++ )
          {
-            dqEventQueue->queue[dqEventQueue->back].args.args[i] = va_arg( args, int );
+            dqEventQueue->queue[dqEventQueue->back].args.argList[i] = va_arg( args, int );
          }
 
          va_end( args );

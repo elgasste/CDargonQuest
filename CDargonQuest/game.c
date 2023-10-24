@@ -1,4 +1,5 @@
 #include "game.h"
+#include "game_config.h"
 #include "menu.h"
 #include "render_config.h"
 #include "game_data.h"
@@ -15,6 +16,7 @@ void dqGame_Init()
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
 
+   dqGameConfig_Init();
    dqMenu_Init();
    dqRenderConfig_Init();
    dqGameData_Init();
@@ -33,6 +35,7 @@ void dqGame_Cleanup()
    dqGameData_Cleanup();
    dqRenderConfig_Cleanup();
    dqMenu_Cleanup();
+   dqGameConfig_Cleanup();
 
    SAFE_DELETE( dqGame )
 }
@@ -69,10 +72,13 @@ void dqGame_HandleEvents()
       switch ( e->type )
       {
          case dqEventStart:
-            dqGame_Start();
+            dqGame_HandleStart();
             break;
          case dqEventQuit:
-            dqGame_Quit();
+            dqGame_HandleQuit();
+            break;
+         case dqEventMovePlayer:
+            dqGame_HandleMovePlayer( e );
             break;
       }
    }
@@ -80,17 +86,75 @@ void dqGame_HandleEvents()
 
 void dqGame_Tick()
 {
-   // TODO: update game objects.
+   // TODO: this should all go in some kind of collision detection file
+   dqEntity_t* player = dqGameData->player;
+
+   if ( player->velocityX != 0 )
+   {
+      player->centerPosition.x += ( player->velocityX * dqClock->lastFrameSeconds );
+      player->hitBoxPosition.x += ( player->velocityX * dqClock->lastFrameSeconds );
+      player->velocityX = 0;
+   }
+
+   if ( player->velocityY != 0 )
+   {
+      player->centerPosition.y += ( player->velocityY * dqClock->lastFrameSeconds );
+      player->hitBoxPosition.y += ( player->velocityY * dqClock->lastFrameSeconds );
+      player->velocityY = 0;
+   }
+
+   if ( player->hitBoxPosition.x < 0 )
+   {
+      player->hitBoxPosition.x = 0;
+      player->centerPosition.x = player->hitBoxSize.x / 2;
+   }
+   else if ( player->hitBoxPosition.x + player->hitBoxSize.x >= dqRenderConfig->screenWidth )
+   {
+      player->hitBoxPosition.x = dqRenderConfig->screenWidth - player->hitBoxSize.x;
+      player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
+   }
+
+   if ( player->hitBoxPosition.y < 0 )
+   {
+      player->hitBoxPosition.y = 0;
+      player->centerPosition.y = player->hitBoxSize.y / 2;
+   }
+   else if ( player->hitBoxPosition.y + player->hitBoxSize.y >= dqRenderConfig->screenHeight )
+   {
+      player->hitBoxPosition.y = dqRenderConfig->screenHeight - player->hitBoxSize.y;
+      player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+   }
 }
 
-void dqGame_Start()
+void dqGame_HandleStart()
 {
    dqEventQueue_Flush();
    dqGame->state = dqStateOverworld;
 }
 
-void dqGame_Quit()
+void dqGame_HandleQuit()
 {
    dqEventQueue_Flush();
    dqGame->isRunning = sfFalse;
+}
+
+void dqGame_HandleMovePlayer( dqEvent_t* e )
+{
+   dqDirection direction = e->args.argList[0];
+
+   switch ( direction )
+   {
+      case dqDirectionLeft:
+         dqGameData->player->velocityX = -dqGameConfig->maxPlayerVelocity;
+         break;
+      case dqDirectionUp:
+         dqGameData->player->velocityY = -dqGameConfig->maxPlayerVelocity;
+         break;
+      case dqDirectionRight:
+         dqGameData->player->velocityX = dqGameConfig->maxPlayerVelocity;
+         break;
+      case dqDirectionDown:
+         dqGameData->player->velocityY = dqGameConfig->maxPlayerVelocity;
+         break;
+   }
 }

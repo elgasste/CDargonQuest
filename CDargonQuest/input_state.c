@@ -47,6 +47,11 @@ sfBool dqInputState_WasKeyReleased( sfKeyCode keyCode )
    return dqInputState->keysReleased[keyCode];
 }
 
+sfBool dqInputState_IsKeyDown( sfKeyCode keyCode )
+{
+   return sfKeyboard_isKeyPressed( keyCode );
+}
+
 sfBool dqInputState_IsAnyKeyDown()
 {
    static int i;

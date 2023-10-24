@@ -15,6 +15,6 @@ void dqTitleInputHandler_HandleInput()
    }
    else if ( dqInputState_WasKeyPressed( sfKeyReturn ) )
    {
-      dqEventQueue_Push( dqTitleMenu->options[dqTitleMenu->selectedOption].eventType );
+      dqEventQueue_Push( dqTitleMenu->options[dqTitleMenu->selectedOption].eventType, 0 );
    }
 }

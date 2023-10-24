@@ -4,7 +4,7 @@
 
 typedef enum
 {
-   dqStateInit,
+   dqStateInit = 0,
    dqStateTitle,
    dqStateOverworld,
    dqStateClosing
