@@ -3,13 +3,25 @@
 
 void dqMapLoader_LoadMaps()
 {
-   // TODO: just one map for now, but more to come later
+   unsigned int tileCount, i;
+
+   // TODO: just one temporary map for now, but more to come later
    dqGameData->mapCount = 1;
    dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) );
 
-   // TODO: actually load tiles
 #pragma warning ( suppress:6011 )
-   dqGameData->maps[0].tiles = NULL;
+   dqGameData->maps[0].width = 30;
+   dqGameData->maps[0].height = 20;
+   tileCount = dqGameData->maps[0].width * dqGameData->maps[0].height;
+   dqGameData->maps[0].tiles = (dqMapTile_t*)malloc( sizeof( dqMapTile_t ) * tileCount );
+
+   for ( i = 0; i < tileCount; i++ )
+   {
+#pragma warning ( suppress:6011 )
+      dqGameData->maps[0].tiles[i].textureId = 0;
+      dqGameData->maps[0].tiles[i].tileId = ( i % 2 == 0 ) ? 0 : 1;
+      dqGameData->maps[0].tiles[i].isPassable = sfTrue;
+   }
 }
 
 void dqMapLoader_CleanupMaps()
