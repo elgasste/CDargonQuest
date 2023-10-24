@@ -43,7 +43,7 @@ void dqOverworldRenderer_Render()
       dqOverworldRenderer->tilePosition.y = row * dqRenderConfig->tileSize;
 
       sfRectangleShape_setPosition( rect, dqOverworldRenderer->tilePosition );
-      sfRenderWindow_drawRectangleShape( dqWindow, rect, NULL );
+      dqWindow_DrawRectangleShape( rect );
 
       col++;
 

@@ -69,13 +69,13 @@ void dqTitleRenderer_Render()
          dqTitleRenderer->menuCaratPosition.y = dqRenderConfig->titleMenuOffsetY + ( i * dqTitleRenderer->menuLineSpacing );
          sfText_setPosition( dqTitleRenderer->menuCarat, dqTitleRenderer->menuCaratPosition );
 
-         sfRenderWindow_drawText( dqWindow, dqTitleRenderer->menuCarat, NULL );
+         dqWindow_DrawText( dqTitleRenderer->menuCarat );
       }
 
       dqTitleRenderer->menuTextPosition.y = dqRenderConfig->titleMenuOffsetY + ( i * dqTitleRenderer->menuLineSpacing );
       sfText_setPosition( dqTitleRenderer->menuText, dqTitleRenderer->menuTextPosition );
       sfText_setString( dqTitleRenderer->menuText, dqTitleMenu->options[i].text );
 
-      sfRenderWindow_drawText( dqWindow, dqTitleRenderer->menuText, NULL );
+      dqWindow_DrawText( dqTitleRenderer->menuText );
    }
 }

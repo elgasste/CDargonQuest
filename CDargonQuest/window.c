@@ -14,9 +14,17 @@ void dqWindow_Init()
       dqRenderConfig->windowBPP
    };
 
-   dqWindow = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, NULL );
+   sfFloatRect viewRect = { 0, 0, dqRenderConfig->screenWidth, dqRenderConfig->screenHeight };
 
-   sfRenderWindow_setKeyRepeatEnabled( dqWindow, sfFalse );
+   dqWindow = (dqWindow_t*)malloc( sizeof( dqWindow_t ) );
+
+#pragma warning ( suppress:6011 )
+   dqWindow->window = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, NULL );
+
+   dqWindow->view = sfView_createFromRect( viewRect );
+   sfRenderWindow_setView( dqWindow->window, dqWindow->view );
+
+   sfRenderWindow_setKeyRepeatEnabled( dqWindow->window, sfFalse );
 
    dqInputState_Init();
 }
@@ -24,8 +32,9 @@ void dqWindow_Init()
 void dqWindow_Cleanup()
 {
    dqInputState_Cleanup();
-   sfRenderWindow_close( dqWindow );
-   sfRenderWindow_destroy( dqWindow );
+   sfRenderWindow_close( dqWindow->window );
+   sfRenderWindow_destroy( dqWindow->window );
+   sfView_destroy( dqWindow->view );
 }
 
 void dqWindow_HandleEvents()
@@ -34,7 +43,7 @@ void dqWindow_HandleEvents()
 
    dqInputState_Reset();
 
-   while ( sfRenderWindow_pollEvent( dqWindow, &e ) )
+   while ( sfRenderWindow_pollEvent( dqWindow->window, &e ) )
    {
       switch ( e.type )
       {
@@ -51,4 +60,24 @@ void dqWindow_HandleEvents()
    }
 
    dqInputHandler_HandleInput();
+}
+
+void dqWindow_Clear()
+{
+   sfRenderWindow_clear( dqWindow->window, dqRenderConfig->windowClearColor );
+}
+
+void dqWindow_Display()
+{
+   sfRenderWindow_display( dqWindow->window );
+}
+
+void dqWindow_DrawRectangleShape( sfRectangleShape* rect )
+{
+   sfRenderWindow_drawRectangleShape( dqWindow->window, rect, NULL );
+}
+
+void dqWindow_DrawText( sfText* text )
+{
+   sfRenderWindow_drawText( dqWindow->window, text, NULL );
 }

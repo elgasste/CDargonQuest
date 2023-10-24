@@ -22,7 +22,7 @@ void dqRenderer_Cleanup()
 
 void dqRenderer_Render()
 {
-   sfRenderWindow_clear( dqWindow, dqRenderConfig->windowClearColor );
+   dqWindow_Clear( dqWindow, dqRenderConfig->windowClearColor );
 
    switch ( dqGame->state )
    {
@@ -39,5 +39,5 @@ void dqRenderer_Render()
       dqDiagnosticsRenderer_Render();
    }
 
-   sfRenderWindow_display( dqWindow );
+   dqWindow_Display();
 }

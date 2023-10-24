@@ -9,6 +9,8 @@ typedef struct
 
    unsigned int windowWidth;
    unsigned int windowHeight;
+   float screenWidth;
+   float screenHeight;
    unsigned int windowBPP;
    sfUint32 windowStyle;
    sfColor windowClearColor;
