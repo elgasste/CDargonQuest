@@ -162,6 +162,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="diagnostics_renderer.c" />
+    <ClCompile Include="entity_sprite.c" />
     <ClCompile Include="error.c" />
     <ClCompile Include="event_queue.c" />
     <ClCompile Include="game.c" />
@@ -187,6 +188,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     <ClInclude Include="diagnostics_renderer.h" />
     <ClInclude Include="direction.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="entity_sprite.h" />
     <ClInclude Include="error.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="event_args.h" />
