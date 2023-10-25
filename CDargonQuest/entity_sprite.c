@@ -58,6 +58,9 @@ void dqEntitySprite_Tick( dqEntitySprite_t* sprite )
       }
    }
 
+   // TODO: the hit box is smaller than the tile size, figure that one out....
+   sfSprite_setPosition( sprite->sprite, sprite->entity->hitBoxPosition );
+
    sprite->textureRect.left = sprite->currentFrame * sprite->textureRect.width;
    sprite->textureRect.top = (int)sprite->entity->direction * sprite->textureRect.height;
    sfSprite_setTextureRect( sprite->sprite, sprite->textureRect );

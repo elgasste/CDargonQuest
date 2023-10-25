@@ -1,5 +1,6 @@
 #include "overworld_renderer.h"
 #include "render_config.h"
+#include "render_data.h"
 #include "game_data.h"
 #include "entity.h"
 #include "map.h"
@@ -71,6 +72,5 @@ void dqOverworldRenderer_RenderMap()
 
 void dqOverworldRenderer_RenderEntities()
 {
-   sfRectangleShape_setPosition( dqOverworldRenderer->entityRect, dqGameData->player->hitBoxPosition );
-   dqWindow_DrawRectangleShape( dqOverworldRenderer->entityRect );
+   dqWindow_DrawEntitySprite( dqRenderData->playerSprite );
 }
