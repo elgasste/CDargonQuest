@@ -38,6 +38,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->titleMenuOffsetY = 150;
 
    dqRenderConfig->tileSize = 16;
+
+   dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 }
 
 void dqRenderConfig_Cleanup()

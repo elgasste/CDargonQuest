@@ -1,8 +1,9 @@
 #include "game.h"
 #include "game_config.h"
-#include "menu.h"
 #include "render_config.h"
 #include "game_data.h"
+#include "menu.h"
+#include "render_data.h"
 #include "window.h"
 #include "clock.h"
 #include "renderer.h"
@@ -18,9 +19,10 @@ void dqGame_Init()
    dqGame->state = dqStateInit;
 
    dqGameConfig_Init();
-   dqMenu_Init();
    dqRenderConfig_Init();
    dqGameData_Init();
+   dqMenu_Init();
+   dqRenderData_Init();
    dqWindow_Init();
    dqRenderer_Init();
    dqClock_Init();
@@ -33,9 +35,10 @@ void dqGame_Cleanup()
    dqClock_Cleanup();
    dqRenderer_Cleanup();
    dqWindow_Cleanup();
+   dqRenderData_Cleanup();
+   dqMenu_Cleanup();
    dqGameData_Cleanup();
    dqRenderConfig_Cleanup();
-   dqMenu_Cleanup();
    dqGameConfig_Cleanup();
 
    SAFE_DELETE( dqGame )

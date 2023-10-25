@@ -37,6 +37,8 @@ typedef struct dqRenderConfig_t
    float titleMenuOffsetY;
 
    float tileSize;
+
+   const char* playerTexturePath;
 }
 dqRenderConfig_t;
 
