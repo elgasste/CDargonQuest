@@ -105,10 +105,10 @@
     <ClCompile Include="game_config.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entity_sprite.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="render_data.c">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="entity_sprite.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,10 +200,10 @@
     <ClInclude Include="game_config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="entity_sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="render_data.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="entity_sprite.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>

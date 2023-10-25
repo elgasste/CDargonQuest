@@ -22,7 +22,7 @@ void dqGame_Init()
    dqRenderConfig_Init();
    dqGameData_Init();
    dqMenu_Init();
-   dqRenderData_Init();
+   dqRenderData_Init( dqGameData->player );
    dqWindow_Init();
    dqRenderer_Init();
    dqClock_Init();
