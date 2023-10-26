@@ -15,8 +15,8 @@ void dqGameData_Init()
 #pragma warning ( suppress:6011 )
    dqGameData->player->centerPosition.x = dqRenderConfig->screenWidth / 2;
    dqGameData->player->centerPosition.y = dqRenderConfig->screenHeight / 2;
-   dqGameData->player->hitBoxSize.x = 12;
-   dqGameData->player->hitBoxSize.y = 12;
+   dqGameData->player->hitBoxSize.x = 16;
+   dqGameData->player->hitBoxSize.y = 16;
    dqGameData->player->hitBoxPosition.x = dqGameData->player->centerPosition.x - ( dqGameData->player->hitBoxSize.x / 2 );
    dqGameData->player->hitBoxPosition.y = dqGameData->player->centerPosition.y - ( dqGameData->player->hitBoxSize.y / 2 );
    dqGameData->player->velocityX = 0;
