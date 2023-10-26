@@ -39,14 +39,14 @@ void dqOverworldInputHandler_HandleInput()
 
    if ( leftIsDown && !rightIsDown )
    {
-      dqEventQueue_Push( dqEventMovePlayer, 1, (int)dqDirectionLeft );
+      dqEventQueue_Push( dqEventMovePlayer, 2, (int)dqDirectionLeft, (int)( ( upIsDown && !downIsDown ) || ( downIsDown && !upIsDown ) ) );
       dqOverworldInputHandler_PointPlayer( dqDirectionLeft,
                                            dqDirectionUp, upIsDown && !downIsDown,
                                            dqDirectionDown, downIsDown && !upIsDown );
    }
    else if ( rightIsDown && !leftIsDown )
    {
-      dqEventQueue_Push( dqEventMovePlayer, 1, (int)dqDirectionRight );
+      dqEventQueue_Push( dqEventMovePlayer, 2, (int)dqDirectionRight, (int)( ( upIsDown && !downIsDown ) || ( downIsDown && !upIsDown ) ) );
       dqOverworldInputHandler_PointPlayer( dqDirectionRight,
                                            dqDirectionUp, upIsDown && !downIsDown,
                                            dqDirectionDown, downIsDown && !upIsDown );
@@ -54,14 +54,14 @@ void dqOverworldInputHandler_HandleInput()
 
    if ( upIsDown && !downIsDown )
    {
-      dqEventQueue_Push( dqEventMovePlayer, 1, (int)dqDirectionUp );
+      dqEventQueue_Push( dqEventMovePlayer, 2, (int)dqDirectionUp, (int)( ( leftIsDown && !rightIsDown ) || ( rightIsDown && !leftIsDown ) ) );
       dqOverworldInputHandler_PointPlayer( dqDirectionUp,
                                            dqDirectionLeft, leftIsDown && !rightIsDown,
                                            dqDirectionRight, rightIsDown && !leftIsDown );
    }
    else if ( downIsDown && !upIsDown )
    {
-      dqEventQueue_Push( dqEventMovePlayer, 1, (int)dqDirectionDown );
+      dqEventQueue_Push( dqEventMovePlayer, 2, (int)dqDirectionDown, (int)( ( leftIsDown && !rightIsDown ) || ( rightIsDown && !leftIsDown ) ) );
       dqOverworldInputHandler_PointPlayer( dqDirectionDown,
                                            dqDirectionLeft, leftIsDown && !rightIsDown,
                                            dqDirectionRight, rightIsDown && !leftIsDown );

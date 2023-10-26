@@ -151,20 +151,23 @@ void dqGame_HandleQuit()
 void dqGame_HandleMovePlayer( dqEvent_t* e )
 {
    dqDirection direction = e->args.argList[0];
+   float velocityDelta = e->args.argList[1]
+      ? dqGameConfig->playerVelocityDiagonal
+      : dqGameConfig->playerVelocityStraight;
 
    switch ( direction )
    {
       case dqDirectionLeft:
-         dqGameData->player->velocityX = -dqGameConfig->maxPlayerVelocity;
+         dqGameData->player->velocityX = -velocityDelta;
          break;
       case dqDirectionUp:
-         dqGameData->player->velocityY = -dqGameConfig->maxPlayerVelocity;
+         dqGameData->player->velocityY = -velocityDelta;
          break;
       case dqDirectionRight:
-         dqGameData->player->velocityX = dqGameConfig->maxPlayerVelocity;
+         dqGameData->player->velocityX = velocityDelta;
          break;
       case dqDirectionDown:
-         dqGameData->player->velocityY = dqGameConfig->maxPlayerVelocity;
+         dqGameData->player->velocityY = velocityDelta;
          break;
    }
 }
