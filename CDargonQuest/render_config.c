@@ -3,8 +3,8 @@
 void dqRenderConfig_Init()
 {
    dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
+   CHECK_MALLOC( dqRenderConfig )
 
-#pragma warning ( suppress:6011 )
    dqRenderConfig->minFrameRate = 20;
    dqRenderConfig->maxFrameRate = 60;
 
@@ -38,6 +38,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->titleMenuOffsetY = 150;
 
    dqRenderConfig->tileSize = 16;
+
+   dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 }
 
 void dqRenderConfig_Cleanup()

@@ -1,8 +1,9 @@
 #include "game.h"
 #include "game_config.h"
-#include "menu.h"
 #include "render_config.h"
 #include "game_data.h"
+#include "menu.h"
+#include "render_data.h"
 #include "window.h"
 #include "clock.h"
 #include "renderer.h"
@@ -12,15 +13,16 @@
 void dqGame_Init()
 {
    dqGame = (dqGame_t*)malloc( sizeof( dqGame_t ) );
+   CHECK_MALLOC( dqGame )
 
-#pragma warning ( suppress:6011 )
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
 
    dqGameConfig_Init();
-   dqMenu_Init();
    dqRenderConfig_Init();
    dqGameData_Init();
+   dqMenu_Init();
+   dqRenderData_Init( dqGameData->player );
    dqWindow_Init();
    dqRenderer_Init();
    dqClock_Init();
@@ -33,9 +35,10 @@ void dqGame_Cleanup()
    dqClock_Cleanup();
    dqRenderer_Cleanup();
    dqWindow_Cleanup();
+   dqMenu_Cleanup();
+   dqRenderData_Cleanup();
    dqGameData_Cleanup();
    dqRenderConfig_Cleanup();
-   dqMenu_Cleanup();
    dqGameConfig_Cleanup();
 
    SAFE_DELETE( dqGame )
@@ -81,6 +84,9 @@ void dqGame_HandleEvents()
          case dqEventMovePlayer:
             dqGame_HandleMovePlayer( e );
             break;
+         case dqEventPointPlayer:
+            dqGame_HandlePointPlayer( e );
+            break;
       }
    }
 }
@@ -94,14 +100,12 @@ void dqGame_Tick()
    {
       player->centerPosition.x += ( player->velocityX * dqClock->lastFrameSeconds );
       player->hitBoxPosition.x += ( player->velocityX * dqClock->lastFrameSeconds );
-      player->velocityX = 0;
    }
 
    if ( player->velocityY != 0 )
    {
       player->centerPosition.y += ( player->velocityY * dqClock->lastFrameSeconds );
       player->hitBoxPosition.y += ( player->velocityY * dqClock->lastFrameSeconds );
-      player->velocityY = 0;
    }
 
    if ( player->hitBoxPosition.x < 0 )
@@ -125,6 +129,11 @@ void dqGame_Tick()
       player->hitBoxPosition.y = dqRenderConfig->screenHeight - player->hitBoxSize.y;
       player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
    }
+
+   dqEntitySprite_Tick( dqRenderData->playerSprite );
+
+   player->velocityX = 0;
+   player->velocityY = 0;
 }
 
 void dqGame_HandleStart()
@@ -142,20 +151,44 @@ void dqGame_HandleQuit()
 void dqGame_HandleMovePlayer( dqEvent_t* e )
 {
    dqDirection direction = e->args.argList[0];
+   float velocityDelta = e->args.argList[1]
+      ? dqGameConfig->playerVelocityDiagonal
+      : dqGameConfig->playerVelocityStraight;
 
    switch ( direction )
    {
       case dqDirectionLeft:
-         dqGameData->player->velocityX = -dqGameConfig->maxPlayerVelocity;
+         dqGameData->player->velocityX = -velocityDelta;
          break;
       case dqDirectionUp:
-         dqGameData->player->velocityY = -dqGameConfig->maxPlayerVelocity;
+         dqGameData->player->velocityY = -velocityDelta;
          break;
       case dqDirectionRight:
-         dqGameData->player->velocityX = dqGameConfig->maxPlayerVelocity;
+         dqGameData->player->velocityX = velocityDelta;
          break;
       case dqDirectionDown:
-         dqGameData->player->velocityY = dqGameConfig->maxPlayerVelocity;
+         dqGameData->player->velocityY = velocityDelta;
+         break;
+   }
+}
+
+void dqGame_HandlePointPlayer( dqEvent_t* e )
+{
+   dqDirection direction = e->args.argList[0];
+
+   switch ( direction )
+   {
+      case dqDirectionLeft:
+         dqGameData->player->direction = dqDirectionLeft;
+         break;
+      case dqDirectionUp:
+         dqGameData->player->direction = dqDirectionUp;
+         break;
+      case dqDirectionRight:
+         dqGameData->player->direction = dqDirectionRight;
+         break;
+      case dqDirectionDown:
+         dqGameData->player->direction = dqDirectionDown;
          break;
    }
 }

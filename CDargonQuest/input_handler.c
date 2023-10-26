@@ -5,6 +5,16 @@
 #include "overworld_input_handler.h"
 #include "game.h"
 
+void dqInputHandler_Init()
+{
+   dqOverworldInputHandler_Init();
+}
+
+void dqInputHandler_Cleanup()
+{
+   dqOverworldInputHandler_Cleanup();
+}
+
 void dqInputHandler_HandleInput()
 {
    if ( dqInputState_WasKeyPressed( sfKeyF8 ) )

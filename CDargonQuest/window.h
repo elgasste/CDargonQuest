@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common.h"
+#include "entity_sprite.h"
 
 typedef struct dqWindow_t
 {
@@ -18,3 +19,4 @@ void dqWindow_Clear();
 void dqWindow_Display();
 void dqWindow_DrawRectangleShape( sfRectangleShape* rect );
 void dqWindow_DrawText( sfText* text );
+void dqWindow_DrawEntitySprite( dqEntitySprite_t* sprite );

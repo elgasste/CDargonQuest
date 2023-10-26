@@ -4,7 +4,8 @@
 
 typedef struct dqGameConfig_t
 {
-   float maxPlayerVelocity;
+   float playerVelocityStraight;
+   float playerVelocityDiagonal;
 }
 dqGameConfig_t;
 

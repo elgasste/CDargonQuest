@@ -8,8 +8,8 @@
 void dqTitleRenderer_Init()
 {
    dqTitleRenderer = (dqTitleRenderer_t*)malloc( sizeof( dqTitleRenderer_t ) );
+   CHECK_MALLOC( dqTitleRenderer )
 
-#pragma warning ( suppress:6011 )
    dqTitleRenderer->menuFont = sfFont_createFromFile( dqRenderConfig->menuFontFilePath );
 
    dqTitleRenderer->menuText = sfText_create();

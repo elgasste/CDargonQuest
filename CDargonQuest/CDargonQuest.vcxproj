@@ -132,7 +132,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y
-xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y</Command>
+xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sprites\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,11 +158,13 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     </Link>
     <PostBuildEvent>
       <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y
-xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y</Command>
+xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sprites\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="diagnostics_renderer.c" />
+    <ClCompile Include="entity_sprite.c" />
     <ClCompile Include="error.c" />
     <ClCompile Include="event_queue.c" />
     <ClCompile Include="game.c" />
@@ -178,6 +181,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     <ClCompile Include="overworld_renderer.c" />
     <ClCompile Include="renderer.c" />
     <ClCompile Include="render_config.c" />
+    <ClCompile Include="render_data.c" />
     <ClCompile Include="title_input_handler.c" />
     <ClCompile Include="title_renderer.c" />
     <ClCompile Include="window.c" />
@@ -187,6 +191,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     <ClInclude Include="diagnostics_renderer.h" />
     <ClInclude Include="direction.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="entity_sprite.h" />
     <ClInclude Include="error.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="event_args.h" />
@@ -207,6 +212,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
     <ClInclude Include="overworld_renderer.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="render_config.h" />
+    <ClInclude Include="render_data.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="strings.h" />
     <ClInclude Include="title_input_handler.h" />

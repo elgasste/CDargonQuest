@@ -1,5 +1,6 @@
 #include "overworld_renderer.h"
 #include "render_config.h"
+#include "render_data.h"
 #include "game_data.h"
 #include "entity.h"
 #include "map.h"
@@ -11,8 +12,8 @@ void dqOverworldRenderer_Init()
    sfVector2f tileSize = { dqRenderConfig->tileSize, dqRenderConfig->tileSize };
 
    dqOverworldRenderer = (dqOverworldRenderer_t*)malloc( sizeof( dqOverworldRenderer_t ) );
+   CHECK_MALLOC( dqOverworldRenderer )
 
-#pragma warning ( suppress:6011 )
    dqOverworldRenderer->darkTile = sfRectangleShape_create();
    sfRectangleShape_setSize( dqOverworldRenderer->darkTile, tileSize );
    sfRectangleShape_setFillColor( dqOverworldRenderer->darkTile, sfColor_fromRGB( 96, 96, 96 ) );
@@ -71,6 +72,5 @@ void dqOverworldRenderer_RenderMap()
 
 void dqOverworldRenderer_RenderEntities()
 {
-   sfRectangleShape_setPosition( dqOverworldRenderer->entityRect, dqGameData->player->hitBoxPosition );
-   dqWindow_DrawRectangleShape( dqOverworldRenderer->entityRect );
+   dqWindow_DrawEntitySprite( dqRenderData->playerSprite );
 }

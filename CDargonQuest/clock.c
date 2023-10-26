@@ -11,8 +11,8 @@ void dqClock_Init()
    MMRESULT res;
 
    dqClock = (dqClock_t*)malloc( sizeof( dqClock_t ) );
+   CHECK_MALLOC( dqClock )
 
-#pragma warning ( suppress:6011 )
    dqClock->minFrameSeconds = 1 / (float)dqRenderConfig->maxFrameRate;
    dqClock->maxFrameSeconds = 1 / (float)dqRenderConfig->minFrameRate;
 

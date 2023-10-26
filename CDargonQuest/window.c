@@ -17,8 +17,8 @@ void dqWindow_Init()
    sfFloatRect viewRect = { 0, 0, dqRenderConfig->screenWidth, dqRenderConfig->screenHeight };
 
    dqWindow = (dqWindow_t*)malloc( sizeof( dqWindow_t ) );
+   CHECK_MALLOC( dqWindow )
 
-#pragma warning ( suppress:6011 )
    dqWindow->window = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, NULL );
 
    dqWindow->view = sfView_createFromRect( viewRect );
@@ -27,10 +27,12 @@ void dqWindow_Init()
    sfRenderWindow_setKeyRepeatEnabled( dqWindow->window, sfFalse );
 
    dqInputState_Init();
+   dqInputHandler_Init();
 }
 
 void dqWindow_Cleanup()
 {
+   dqInputHandler_Cleanup();
    dqInputState_Cleanup();
    sfRenderWindow_close( dqWindow->window );
    sfRenderWindow_destroy( dqWindow->window );
@@ -80,4 +82,9 @@ void dqWindow_DrawRectangleShape( sfRectangleShape* rect )
 void dqWindow_DrawText( sfText* text )
 {
    sfRenderWindow_drawText( dqWindow->window, text, NULL );
+}
+
+void dqWindow_DrawEntitySprite( dqEntitySprite_t* sprite )
+{
+   sfRenderWindow_drawSprite( dqWindow->window, sprite->sprite, NULL );
 }

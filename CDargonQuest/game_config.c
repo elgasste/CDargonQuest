@@ -3,9 +3,10 @@
 void dqGameConfig_Init()
 {
    dqGameConfig = (dqGameConfig_t*)malloc( sizeof( dqGameConfig_t ) );
+   CHECK_MALLOC( dqGameConfig )
 
-#pragma warning ( suppress:6011 )
-   dqGameConfig->maxPlayerVelocity = 56;
+   dqGameConfig->playerVelocityStraight = 56;
+   dqGameConfig->playerVelocityDiagonal = 44;
 }
 
 void dqGameConfig_Cleanup()

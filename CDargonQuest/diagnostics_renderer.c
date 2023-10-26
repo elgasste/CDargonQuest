@@ -9,8 +9,8 @@ void dqDiagnosticsRenderer_Init()
    sfVector2f backgroundPosition = { dqRenderConfig->screenWidth - dqRenderConfig->diagnosticsWidth, 0 };
 
    dqDiagnosticsRenderer = (dqDiagnosticsRenderer_t*)malloc( sizeof( dqDiagnosticsRenderer_t ) );
+   CHECK_MALLOC( dqDiagnosticsRenderer )
 
-#pragma warning ( suppress:6011 )
    dqDiagnosticsRenderer->textLine = (char*)calloc( sizeof( char ), dqRenderConfig->diagnosticsLineWidth );
 
    dqDiagnosticsRenderer->background = sfRectangleShape_create();
