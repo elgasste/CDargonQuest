@@ -12,8 +12,8 @@ void dqOverworldRenderer_Init()
    sfVector2f tileSize = { dqRenderConfig->tileSize, dqRenderConfig->tileSize };
 
    dqOverworldRenderer = (dqOverworldRenderer_t*)malloc( sizeof( dqOverworldRenderer_t ) );
+   CHECK_MALLOC( dqOverworldRenderer )
 
-#pragma warning ( suppress:6011 )
    dqOverworldRenderer->darkTile = sfRectangleShape_create();
    sfRectangleShape_setSize( dqOverworldRenderer->darkTile, tileSize );
    sfRectangleShape_setFillColor( dqOverworldRenderer->darkTile, sfColor_fromRGB( 96, 96, 96 ) );

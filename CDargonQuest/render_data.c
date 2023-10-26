@@ -4,8 +4,8 @@
 void dqRenderData_Init( dqEntity_t* player )
 {
    dqRenderData = (dqRenderData_t*)malloc( sizeof( dqRenderData_t ) );
+   CHECK_MALLOC( dqRenderData )
 
-#pragma warning ( suppress:6011 )
    dqRenderData->playerTexture = sfTexture_createFromFile( dqRenderConfig->playerTexturePath, NULL );
    dqRenderData->playerSprite = dqEntitySprite_Create( player, dqRenderData->playerTexture, 16, 16, 2, 0.25f );
 }

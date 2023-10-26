@@ -4,11 +4,11 @@
 void dqMenu_Init()
 {
    dqTitleMenu = (dqMenu_t*)malloc( sizeof( dqMenu_t ) );
-#pragma warning ( suppress:6011 )
+   CHECK_MALLOC( dqTitleMenu )
    dqTitleMenu->optionCount = 2;
    dqTitleMenu->selectedOption = 0;
    dqTitleMenu->options = (dqMenuOption_t*)malloc( sizeof( dqMenuOption_t ) * dqTitleMenu->optionCount );
-#pragma warning ( suppress:6011 )
+   CHECK_MALLOC( dqTitleMenu->options )
    dqTitleMenu->options[0].text = STR_TITLE_MENU_START;
    dqTitleMenu->options[0].eventType = dqEventStart;
    dqTitleMenu->options[1].text = STR_TITLE_MENU_QUIT;

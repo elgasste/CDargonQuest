@@ -13,8 +13,8 @@
 void dqGame_Init()
 {
    dqGame = (dqGame_t*)malloc( sizeof( dqGame_t ) );
+   CHECK_MALLOC( dqGame )
 
-#pragma warning ( suppress:6011 )
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
 

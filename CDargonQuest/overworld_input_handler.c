@@ -6,8 +6,8 @@
 void dqOverworldInputHandler_Init()
 {
    dqOverworldInputHandler = (dqOverworldInputHandler_t*)malloc( sizeof( dqOverworldInputHandler_t ) );
+   CHECK_MALLOC( dqOverworldInputHandler )
 
-#pragma warning ( suppress:6011 )
    dqOverworldInputHandler->useDirectionCache = sfFalse;
 }
 

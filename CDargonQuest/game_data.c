@@ -6,13 +6,13 @@
 void dqGameData_Init()
 {
    dqGameData = (dqGameData_t*)malloc( sizeof( dqGameData_t ) );
+   CHECK_MALLOC( dqGameData )
 
    dqMapLoader_LoadMaps();
 
-#pragma warning ( suppress:6011 )
    dqGameData->player = (dqEntity_t*)malloc( sizeof( dqEntity_t ) );
+   CHECK_MALLOC( dqGameData->player )
 
-#pragma warning ( suppress:6011 )
    dqGameData->player->centerPosition.x = dqRenderConfig->screenWidth / 2;
    dqGameData->player->centerPosition.y = dqRenderConfig->screenHeight / 2;
    dqGameData->player->hitBoxSize.x = 16;

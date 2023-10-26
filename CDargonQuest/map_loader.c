@@ -10,12 +10,13 @@ void dqMapLoader_LoadMaps()
    // TODO: just one temporary map for now, but more to come later
    dqGameData->mapCount = 1;
    dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) );
+   CHECK_MALLOC( dqGameData->maps )
 
-#pragma warning ( suppress:6011 )
    dqGameData->maps[0].width = 30;
    dqGameData->maps[0].height = 20;
    dqGameData->maps[0].tileCount = dqGameData->maps[0].width * dqGameData->maps[0].height;
    dqGameData->maps[0].tiles = (dqMapTile_t*)malloc( sizeof( dqMapTile_t ) * dqGameData->maps[0].tileCount );
+   CHECK_MALLOC( dqGameData->maps[0].tiles )
 
    for ( i = 0; i < dqGameData->maps[0].tileCount; i++ )
    {
@@ -27,7 +28,6 @@ void dqMapLoader_LoadMaps()
          id2 = idTemp;
       }
 
-#pragma warning ( suppress:6011 )
       dqGameData->maps[0].tiles[i].textureId = 0;
       dqGameData->maps[0].tiles[i].tileId = ( i % 2 == 0 ) ? id1 : id2;
       dqGameData->maps[0].tiles[i].isPassable = sfTrue;

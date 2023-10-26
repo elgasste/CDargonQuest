@@ -10,8 +10,8 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntity_t* entity,
                                          float frameTimeThreshold )
 {
    dqEntitySprite_t* sprite = (dqEntitySprite_t*)malloc( sizeof( dqEntitySprite_t ) );
+   CHECK_MALLOC( sprite )
 
-#pragma warning ( suppress:6011 )
    sprite->entity = entity;
 
    sprite->sprite = sfSprite_create();
