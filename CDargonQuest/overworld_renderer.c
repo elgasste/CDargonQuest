@@ -21,15 +21,10 @@ void dqOverworldRenderer_Init()
    dqOverworldRenderer->lightTile = sfRectangleShape_create();
    sfRectangleShape_setSize( dqOverworldRenderer->lightTile, tileSize );
    sfRectangleShape_setFillColor( dqOverworldRenderer->lightTile, sfColor_fromRGB( 224, 224, 224 ) );
-
-   dqOverworldRenderer->entityRect = sfRectangleShape_create();
-   sfRectangleShape_setSize( dqOverworldRenderer->entityRect, dqGameData->player->hitBoxSize );
-   sfRectangleShape_setFillColor( dqOverworldRenderer->entityRect, sfBlue );
 }
 
 void dqOverworldRenderer_Cleanup()
 {
-   sfRectangleShape_destroy( dqOverworldRenderer->entityRect );
    sfRectangleShape_destroy( dqOverworldRenderer->darkTile );
    sfRectangleShape_destroy( dqOverworldRenderer->lightTile );
 
@@ -44,33 +39,70 @@ void dqOverworldRenderer_Render()
 
 void dqOverworldRenderer_RenderMap()
 {
-   unsigned int i = 0, column = 0, row = 0;
+   sfVector2f* viewOffset = &( dqOverworldRenderer->viewOffset );
+   float tileOffsetX, tileOffsetY;
+   unsigned int startTileColumn, startTileRow, endTileColumn, endTileRow, column, row, i, j;
    dqMap_t* map = &( dqGameData->maps[0] );
    dqMapTile_t* tile;
    sfRectangleShape* rect;
 
-   for ( ; i < map->tileCount; i++ )
+   // TODO: consider the cases where the whole map fits in the view either horizontally or vertically.
+
+   viewOffset->x = dqGameData->player->centerPosition.x - ( dqRenderConfig->screenWidth / 2 );
+
+   if ( viewOffset->x < 0 )
    {
-      tile = &( map->tiles[i] );
-      rect = tile->tileId == 0 ? dqOverworldRenderer->darkTile : dqOverworldRenderer->lightTile;
+      viewOffset->x = 0;
+   }
+   else if ( ( viewOffset->x + dqRenderConfig->screenWidth ) >= map->width )
+   {
+      viewOffset->x = map->width - dqRenderConfig->screenWidth;
+   }
 
-      dqOverworldRenderer->tilePosition.x = column * dqRenderConfig->tileSize;
-      dqOverworldRenderer->tilePosition.y = row * dqRenderConfig->tileSize;
+   viewOffset->y = dqGameData->player->centerPosition.y - ( dqRenderConfig->screenHeight / 2 );
 
-      sfRectangleShape_setPosition( rect, dqOverworldRenderer->tilePosition );
-      dqWindow_DrawRectangleShape( rect );
+   if ( viewOffset->y < 0 )
+   {
+      viewOffset->y = 0;
+   }
+   else if ( ( viewOffset->y + dqRenderConfig->screenHeight ) >= map->height )
+   {
+      viewOffset->y = map->height - dqRenderConfig->screenHeight;
+   }
 
-      column++;
+   tileOffsetX = (float)( (unsigned int)viewOffset->x % (unsigned int)dqRenderConfig->tileSize );
+   tileOffsetY = (float)( (unsigned int)viewOffset->y % (unsigned int)dqRenderConfig->tileSize );
 
-      if ( column >= map->columns )
+   startTileColumn = (unsigned int)( viewOffset->x / dqRenderConfig->tileSize );
+   startTileRow = (unsigned int)( viewOffset->y / dqRenderConfig->tileSize );
+
+   endTileColumn = (unsigned int)( ( viewOffset->x + dqRenderConfig->screenWidth ) / dqRenderConfig->tileSize );
+   endTileRow = (unsigned int)( ( viewOffset->y + dqRenderConfig->screenHeight ) / dqRenderConfig->tileSize );
+
+   for ( i = 0, row = startTileRow; row <= endTileRow; row++, i++ )
+   {
+      for ( j = 0, column = startTileColumn; column <= endTileColumn; column++, j++ )
       {
-         column = 0;
-         row++;
+         tile = dqMap_GetTile( map, column, row );
+         rect = tile->tileId == 0 ? dqOverworldRenderer->darkTile : dqOverworldRenderer->lightTile;
+
+         dqOverworldRenderer->tilePosition.x = ( j * dqRenderConfig->tileSize ) - tileOffsetX;
+         dqOverworldRenderer->tilePosition.y = ( i * dqRenderConfig->tileSize ) - tileOffsetY;
+
+         sfRectangleShape_setPosition( rect, dqOverworldRenderer->tilePosition );
+         dqWindow_DrawRectangleShape( rect );
       }
    }
 }
 
 void dqOverworldRenderer_RenderEntities()
 {
+   dqEntitySprite_t* playerSprite = dqRenderData->playerSprite;
+   sfVector2f position = {
+      playerSprite->entity->hitBoxPosition.x - dqOverworldRenderer->viewOffset.x,
+      playerSprite->entity->hitBoxPosition.y - dqOverworldRenderer->viewOffset.y
+   };
+
+   sfSprite_setPosition( playerSprite->sprite, position );
    dqWindow_DrawEntitySprite( dqRenderData->playerSprite );
 }

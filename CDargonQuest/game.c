@@ -116,7 +116,7 @@ void dqGame_Tick()
    }
    else if ( player->hitBoxPosition.x + player->hitBoxSize.x >= dqGameData->maps[0].width )
    {
-      player->hitBoxPosition.x = dqRenderConfig->screenWidth - player->hitBoxSize.x;
+      player->hitBoxPosition.x = dqGameData->maps[0].width - player->hitBoxSize.x;
       player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
    }
 
@@ -127,7 +127,7 @@ void dqGame_Tick()
    }
    else if ( player->hitBoxPosition.y + player->hitBoxSize.y >= dqGameData->maps[0].height )
    {
-      player->hitBoxPosition.y = dqRenderConfig->screenHeight - player->hitBoxSize.y;
+      player->hitBoxPosition.y = dqGameData->maps[0].height - player->hitBoxSize.y;
       player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
    }
 
