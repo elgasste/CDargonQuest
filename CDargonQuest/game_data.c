@@ -1,7 +1,7 @@
 #include "game_data.h"
 #include "map_loader.h"
 #include "entity.h"
-#include "render_config.h"
+#include "map.h"
 
 void dqGameData_Init()
 {
@@ -13,8 +13,9 @@ void dqGameData_Init()
    dqGameData->player = (dqEntity_t*)malloc( sizeof( dqEntity_t ) );
    CHECK_MALLOC( dqGameData->player )
 
-   dqGameData->player->centerPosition.x = dqRenderConfig->screenWidth / 2;
-   dqGameData->player->centerPosition.y = dqRenderConfig->screenHeight / 2;
+   // TODO: each map will have entrance and exit points depending on where the player just came from
+   dqGameData->player->centerPosition.x = dqGameData->maps[0].width / 2;
+   dqGameData->player->centerPosition.y = dqGameData->maps[0].height / 2;
    dqGameData->player->hitBoxSize.x = 16;
    dqGameData->player->hitBoxSize.y = 16;
    dqGameData->player->hitBoxPosition.x = dqGameData->player->centerPosition.x - ( dqGameData->player->hitBoxSize.x / 2 );

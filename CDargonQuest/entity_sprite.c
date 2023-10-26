@@ -42,10 +42,6 @@ void dqEntitySprite_Tick( dqEntitySprite_t* sprite )
    {
       sprite->elapsedFrameSeconds += dqClock->lastFrameSeconds;
    }
-   else
-   {
-      sprite->elapsedFrameSeconds = 0;
-   }
 
    while ( sprite->elapsedFrameSeconds >= sprite->frameTimeThreshold )
    {
@@ -57,8 +53,6 @@ void dqEntitySprite_Tick( dqEntitySprite_t* sprite )
          sprite->currentFrame = 0;
       }
    }
-
-   sfSprite_setPosition( sprite->sprite, sprite->entity->hitBoxPosition );
 
    sprite->textureRect.left = sprite->currentFrame * sprite->textureRect.width;
    sprite->textureRect.top = (int)sprite->entity->direction * sprite->textureRect.height;

@@ -8,7 +8,10 @@ typedef struct dqOverworldRenderer_t
    sfRectangleShape* lightTile;
    sfVector2f tilePosition;
 
-   sfRectangleShape* entityRect;
+   sfVector2f viewOffset;
+   sfVector2f sideOffset;
+
+   sfRectangleShape* occlusions[4];
 }
 dqOverworldRenderer_t;
 
