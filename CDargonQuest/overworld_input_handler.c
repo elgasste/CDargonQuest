@@ -3,6 +3,19 @@
 #include "event_queue.h"
 #include "direction.h"
 
+void dqOverworldInputHandler_Init()
+{
+   dqOverworldInputHandler = (dqOverworldInputHandler_t*)malloc( sizeof( dqOverworldInputHandler_t ) );
+
+#pragma warning ( suppress:6011 )
+   dqOverworldInputHandler->useDirectionCache = sfFalse;
+}
+
+void dqOverworldInputHandler_Cleanup()
+{
+   SAFE_DELETE( dqOverworldInputHandler );
+}
+
 void dqOverworldInputHandler_HandleInput()
 {
    sfBool leftIsDown, upIsDown, rightIsDown, downIsDown;
@@ -18,21 +31,58 @@ void dqOverworldInputHandler_HandleInput()
    rightIsDown = dqInputState_IsKeyDown( sfKeyRight );
    downIsDown = dqInputState_IsKeyDown( sfKeyDown );
 
+   if ( !leftIsDown && !upIsDown && !rightIsDown && !downIsDown )
+   {
+      dqOverworldInputHandler->useDirectionCache = sfFalse;
+      return;
+   }
+
    if ( leftIsDown && !rightIsDown )
    {
       dqEventQueue_Push( dqEventMovePlayer, 1, (int)dqDirectionLeft );
+      dqOverworldInputHandler_PointPlayer( dqDirectionLeft,
+                                           dqDirectionUp, upIsDown && !downIsDown,
+                                           dqDirectionDown, downIsDown && !upIsDown );
    }
    else if ( rightIsDown && !leftIsDown )
    {
       dqEventQueue_Push( dqEventMovePlayer, 1, (int)dqDirectionRight );
+      dqOverworldInputHandler_PointPlayer( dqDirectionRight,
+                                           dqDirectionUp, upIsDown && !downIsDown,
+                                           dqDirectionDown, downIsDown && !upIsDown );
    }
 
    if ( upIsDown && !downIsDown )
    {
       dqEventQueue_Push( dqEventMovePlayer, 1, (int)dqDirectionUp );
+      dqOverworldInputHandler_PointPlayer( dqDirectionUp,
+                                           dqDirectionLeft, leftIsDown && !rightIsDown,
+                                           dqDirectionRight, rightIsDown && !leftIsDown );
    }
    else if ( downIsDown && !upIsDown )
    {
       dqEventQueue_Push( dqEventMovePlayer, 1, (int)dqDirectionDown );
+      dqOverworldInputHandler_PointPlayer( dqDirectionDown,
+                                           dqDirectionLeft, leftIsDown && !rightIsDown,
+                                           dqDirectionRight, rightIsDown && !leftIsDown );
+   }
+}
+
+void dqOverworldInputHandler_PointPlayer( dqDirection direction,
+                                          dqDirection allowedCache1, sfBool cacheCheck1,
+                                          dqDirection allowedCache2, sfBool cacheCheck2 )
+{
+   sfBool canUseCache = ( ( dqOverworldInputHandler->directionCache == allowedCache1 ) && cacheCheck1 ) ||
+                        ( ( dqOverworldInputHandler->directionCache == allowedCache2 ) && cacheCheck2 );
+
+   if ( dqOverworldInputHandler->useDirectionCache && canUseCache )
+   {
+      dqEventQueue_Push( dqEventPointPlayer, 1, (int)dqOverworldInputHandler->directionCache );
+   }
+   else
+   {
+      dqOverworldInputHandler->useDirectionCache = sfTrue;
+      dqOverworldInputHandler->directionCache = direction;
+      dqEventQueue_Push( dqEventPointPlayer, 1, (int)direction );
    }
 }

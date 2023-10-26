@@ -7,6 +7,7 @@ typedef enum
    dqEventStart = 0,
    dqEventQuit,
 
-   dqEventMovePlayer
+   dqEventMovePlayer,
+   dqEventPointPlayer
 }
 dqEventType_t;

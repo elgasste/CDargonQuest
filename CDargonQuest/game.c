@@ -84,6 +84,9 @@ void dqGame_HandleEvents()
          case dqEventMovePlayer:
             dqGame_HandleMovePlayer( e );
             break;
+         case dqEventPointPlayer:
+            dqGame_HandlePointPlayer( e );
+            break;
       }
    }
 }
@@ -152,20 +155,37 @@ void dqGame_HandleMovePlayer( dqEvent_t* e )
    switch ( direction )
    {
       case dqDirectionLeft:
-         dqGameData->player->direction = dqDirectionLeft;
          dqGameData->player->velocityX = -dqGameConfig->maxPlayerVelocity;
          break;
       case dqDirectionUp:
-         dqGameData->player->direction = dqDirectionUp;
          dqGameData->player->velocityY = -dqGameConfig->maxPlayerVelocity;
          break;
       case dqDirectionRight:
-         dqGameData->player->direction = dqDirectionRight;
          dqGameData->player->velocityX = dqGameConfig->maxPlayerVelocity;
          break;
       case dqDirectionDown:
-         dqGameData->player->direction = dqDirectionDown;
          dqGameData->player->velocityY = dqGameConfig->maxPlayerVelocity;
+         break;
+   }
+}
+
+void dqGame_HandlePointPlayer( dqEvent_t* e )
+{
+   dqDirection direction = e->args.argList[0];
+
+   switch ( direction )
+   {
+      case dqDirectionLeft:
+         dqGameData->player->direction = dqDirectionLeft;
+         break;
+      case dqDirectionUp:
+         dqGameData->player->direction = dqDirectionUp;
+         break;
+      case dqDirectionRight:
+         dqGameData->player->direction = dqDirectionRight;
+         break;
+      case dqDirectionDown:
+         dqGameData->player->direction = dqDirectionDown;
          break;
    }
 }

@@ -27,10 +27,12 @@ void dqWindow_Init()
    sfRenderWindow_setKeyRepeatEnabled( dqWindow->window, sfFalse );
 
    dqInputState_Init();
+   dqInputHandler_Init();
 }
 
 void dqWindow_Cleanup()
 {
+   dqInputHandler_Cleanup();
    dqInputState_Cleanup();
    sfRenderWindow_close( dqWindow->window );
    sfRenderWindow_destroy( dqWindow->window );
