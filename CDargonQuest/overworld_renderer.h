@@ -9,6 +9,7 @@ typedef struct dqOverworldRenderer_t
    sfVector2f tilePosition;
 
    sfVector2f viewOffset;
+   sfVector2f sideOffset;
 }
 dqOverworldRenderer_t;
 
