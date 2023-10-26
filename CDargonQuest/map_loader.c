@@ -13,8 +13,8 @@ void dqMapLoader_LoadMaps()
    dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) );
    CHECK_MALLOC( dqGameData->maps )
 
-   dqGameData->maps[0].columns = 30;
-   dqGameData->maps[0].rows = 20;
+   dqGameData->maps[0].columns = 100;
+   dqGameData->maps[0].rows = 60;
    dqGameData->maps[0].width = dqGameData->maps[0].columns * dqRenderConfig->tileSize;
    dqGameData->maps[0].height = dqGameData->maps[0].rows * dqRenderConfig->tileSize;
    dqGameData->maps[0].tileCount = dqGameData->maps[0].columns * dqGameData->maps[0].rows;
