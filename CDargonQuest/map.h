@@ -10,6 +10,8 @@ typedef struct dqMap_t
    unsigned int tileCount;
    unsigned int columns;
    unsigned int rows;
+   float width;
+   float height;
 }
 dqMap_t;
 

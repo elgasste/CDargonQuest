@@ -9,6 +9,7 @@
 #include "renderer.h"
 #include "event_queue.h"
 #include "entity.h"
+#include "map.h"
 
 void dqGame_Init()
 {
@@ -113,7 +114,7 @@ void dqGame_Tick()
       player->hitBoxPosition.x = 0;
       player->centerPosition.x = player->hitBoxSize.x / 2;
    }
-   else if ( player->hitBoxPosition.x + player->hitBoxSize.x >= dqRenderConfig->screenWidth )
+   else if ( player->hitBoxPosition.x + player->hitBoxSize.x >= dqGameData->maps[0].width )
    {
       player->hitBoxPosition.x = dqRenderConfig->screenWidth - player->hitBoxSize.x;
       player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
@@ -124,7 +125,7 @@ void dqGame_Tick()
       player->hitBoxPosition.y = 0;
       player->centerPosition.y = player->hitBoxSize.y / 2;
    }
-   else if ( player->hitBoxPosition.y + player->hitBoxSize.y >= dqRenderConfig->screenHeight )
+   else if ( player->hitBoxPosition.y + player->hitBoxSize.y >= dqGameData->maps[0].height )
    {
       player->hitBoxPosition.y = dqRenderConfig->screenHeight - player->hitBoxSize.y;
       player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );

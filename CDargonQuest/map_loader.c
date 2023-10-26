@@ -2,6 +2,7 @@
 #include "game_data.h"
 #include "map.h"
 #include "map_tile.h"
+#include "render_config.h"
 
 void dqMapLoader_LoadMaps()
 {
@@ -14,6 +15,8 @@ void dqMapLoader_LoadMaps()
 
    dqGameData->maps[0].columns = 30;
    dqGameData->maps[0].rows = 20;
+   dqGameData->maps[0].width = dqGameData->maps[0].columns * dqRenderConfig->tileSize;
+   dqGameData->maps[0].height = dqGameData->maps[0].rows * dqRenderConfig->tileSize;
    dqGameData->maps[0].tileCount = dqGameData->maps[0].columns * dqGameData->maps[0].rows;
    dqGameData->maps[0].tiles = (dqMapTile_t*)malloc( sizeof( dqMapTile_t ) * dqGameData->maps[0].tileCount );
    CHECK_MALLOC( dqGameData->maps[0].tiles )
