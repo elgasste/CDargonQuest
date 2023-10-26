@@ -12,16 +12,16 @@ void dqMapLoader_LoadMaps()
    dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) );
    CHECK_MALLOC( dqGameData->maps )
 
-   dqGameData->maps[0].width = 30;
-   dqGameData->maps[0].height = 20;
-   dqGameData->maps[0].tileCount = dqGameData->maps[0].width * dqGameData->maps[0].height;
+   dqGameData->maps[0].columns = 30;
+   dqGameData->maps[0].rows = 20;
+   dqGameData->maps[0].tileCount = dqGameData->maps[0].columns * dqGameData->maps[0].rows;
    dqGameData->maps[0].tiles = (dqMapTile_t*)malloc( sizeof( dqMapTile_t ) * dqGameData->maps[0].tileCount );
    CHECK_MALLOC( dqGameData->maps[0].tiles )
 
    for ( i = 0; i < dqGameData->maps[0].tileCount; i++ )
    {
       // this makes a checkerboard
-      if ( i % dqGameData->maps[0].width == 0 )
+      if ( i % dqGameData->maps[0].columns == 0 )
       {
          idTemp = id1;
          id1 = id2;

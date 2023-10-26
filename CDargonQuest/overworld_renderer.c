@@ -44,7 +44,7 @@ void dqOverworldRenderer_Render()
 
 void dqOverworldRenderer_RenderMap()
 {
-   unsigned int i = 0, col = 0, row = 0;
+   unsigned int i = 0, column = 0, row = 0;
    dqMap_t* map = &( dqGameData->maps[0] );
    dqMapTile_t* tile;
    sfRectangleShape* rect;
@@ -54,17 +54,17 @@ void dqOverworldRenderer_RenderMap()
       tile = &( map->tiles[i] );
       rect = tile->tileId == 0 ? dqOverworldRenderer->darkTile : dqOverworldRenderer->lightTile;
 
-      dqOverworldRenderer->tilePosition.x = col * dqRenderConfig->tileSize;
+      dqOverworldRenderer->tilePosition.x = column * dqRenderConfig->tileSize;
       dqOverworldRenderer->tilePosition.y = row * dqRenderConfig->tileSize;
 
       sfRectangleShape_setPosition( rect, dqOverworldRenderer->tilePosition );
       dqWindow_DrawRectangleShape( rect );
 
-      col++;
+      column++;
 
-      if ( col >= map->width )
+      if ( column >= map->columns )
       {
-         col = 0;
+         column = 0;
          row++;
       }
    }
