@@ -38,6 +38,9 @@ typedef struct dqRenderConfig_t
 
    float tileSize;
 
+   sfVector2f overworldViewSize;
+   sfVector2f overworldViewOffset;
+
    const char* playerTexturePath;
 }
 dqRenderConfig_t;

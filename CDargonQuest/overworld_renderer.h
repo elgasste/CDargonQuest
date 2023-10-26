@@ -10,6 +10,8 @@ typedef struct dqOverworldRenderer_t
 
    sfVector2f viewOffset;
    sfVector2f sideOffset;
+
+   sfRectangleShape* occlusions[4];
 }
 dqOverworldRenderer_t;
 

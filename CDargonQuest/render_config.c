@@ -39,6 +39,11 @@ void dqRenderConfig_Init()
 
    dqRenderConfig->tileSize = 16;
 
+   dqRenderConfig->overworldViewSize.x = 448;
+   dqRenderConfig->overworldViewSize.y = 256;
+   dqRenderConfig->overworldViewOffset.x = 16;
+   dqRenderConfig->overworldViewOffset.y = 16;
+
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 }
 
