@@ -28,9 +28,9 @@ void dqCollision_ClipEntity( dqEntity_t* entity )
       entity->hitBoxPosition.x = 0;
       entity->centerPosition.x = entity->hitBoxSize.x / 2;
    }
-   else if ( entity->hitBoxPosition.x + entity->hitBoxSize.x >= dqGameData->maps[0].width )
+   else if ( entity->hitBoxPosition.x + entity->hitBoxSize.x >= dqGameData->maps[0].size.x )
    {
-      entity->hitBoxPosition.x = dqGameData->maps[0].width - entity->hitBoxSize.x;
+      entity->hitBoxPosition.x = dqGameData->maps[0].size.x - entity->hitBoxSize.x;
       entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
    }
 
@@ -39,9 +39,9 @@ void dqCollision_ClipEntity( dqEntity_t* entity )
       entity->hitBoxPosition.y = 0;
       entity->centerPosition.y = entity->hitBoxSize.y / 2;
    }
-   else if ( entity->hitBoxPosition.y + entity->hitBoxSize.y >= dqGameData->maps[0].height )
+   else if ( entity->hitBoxPosition.y + entity->hitBoxSize.y >= dqGameData->maps[0].size.y )
    {
-      entity->hitBoxPosition.y = dqGameData->maps[0].height - entity->hitBoxSize.y;
+      entity->hitBoxPosition.y = dqGameData->maps[0].size.y - entity->hitBoxSize.y;
       entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
    }
 }

@@ -90,10 +90,10 @@ void dqOverworldRenderer_RenderMap()
    dqMapTile_t* tile;
    sfRectangleShape* rect;
 
-   if ( map->width < dqRenderConfig->overworldViewSize.x )
+   if ( map->size.x < dqRenderConfig->overworldViewSize.x )
    {
       viewOffset->x = 0;
-      sideOffset->x = ( dqRenderConfig->overworldViewSize.x / 2 ) - ( map->width / 2 );
+      sideOffset->x = ( dqRenderConfig->overworldViewSize.x / 2 ) - ( map->size.x / 2 );
       tileOffsetX = 0;
       startTileColumn = 0;
       endTileColumn = map->columns - 1;
@@ -107,9 +107,9 @@ void dqOverworldRenderer_RenderMap()
       {
          viewOffset->x = 0;
       }
-      else if ( ( viewOffset->x + dqRenderConfig->overworldViewSize.x ) >= map->width )
+      else if ( ( viewOffset->x + dqRenderConfig->overworldViewSize.x ) >= map->size.x )
       {
-         viewOffset->x = map->width - dqRenderConfig->overworldViewSize.x;
+         viewOffset->x = map->size.x - dqRenderConfig->overworldViewSize.x;
       }
 
       tileOffsetX = (float)( (unsigned int)viewOffset->x % (unsigned int)dqRenderConfig->tileSize );
@@ -117,10 +117,10 @@ void dqOverworldRenderer_RenderMap()
       endTileColumn = (unsigned int)( ( viewOffset->x + dqRenderConfig->overworldViewSize.x ) / dqRenderConfig->tileSize );
    }
 
-   if ( map->height < dqRenderConfig->overworldViewSize.y )
+   if ( map->size.y < dqRenderConfig->overworldViewSize.y )
    {
       viewOffset->y = 0;
-      sideOffset->y = ( dqRenderConfig->overworldViewSize.y / 2 ) - ( map->height / 2 );
+      sideOffset->y = ( dqRenderConfig->overworldViewSize.y / 2 ) - ( map->size.y / 2 );
       tileOffsetY = 0;
       startTileRow = 0;
       endTileRow = map->rows - 1;
@@ -134,9 +134,9 @@ void dqOverworldRenderer_RenderMap()
       {
          viewOffset->y = 0;
       }
-      else if ( ( viewOffset->y + dqRenderConfig->overworldViewSize.y ) >= map->height )
+      else if ( ( viewOffset->y + dqRenderConfig->overworldViewSize.y ) >= map->size.y )
       {
-         viewOffset->y = map->height - dqRenderConfig->overworldViewSize.y;
+         viewOffset->y = map->size.y - dqRenderConfig->overworldViewSize.y;
       }
 
       tileOffsetY = (float)( (unsigned int)viewOffset->y % (unsigned int)dqRenderConfig->tileSize );
