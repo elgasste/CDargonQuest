@@ -9,7 +9,7 @@
 #include "renderer.h"
 #include "event_queue.h"
 #include "entity.h"
-#include "map.h"
+#include "collision.h"
 
 void dqGame_Init()
 {
@@ -94,47 +94,11 @@ void dqGame_HandleEvents()
 
 void dqGame_Tick()
 {
-   // TODO: this should all go in some kind of collision detection file
-   dqEntity_t* player = dqGameData->player;
-
-   if ( player->velocityX != 0 )
-   {
-      player->centerPosition.x += ( player->velocityX * dqClock->lastFrameSeconds );
-      player->hitBoxPosition.x += ( player->velocityX * dqClock->lastFrameSeconds );
-   }
-
-   if ( player->velocityY != 0 )
-   {
-      player->centerPosition.y += ( player->velocityY * dqClock->lastFrameSeconds );
-      player->hitBoxPosition.y += ( player->velocityY * dqClock->lastFrameSeconds );
-   }
-
-   if ( player->hitBoxPosition.x < 0 )
-   {
-      player->hitBoxPosition.x = 0;
-      player->centerPosition.x = player->hitBoxSize.x / 2;
-   }
-   else if ( player->hitBoxPosition.x + player->hitBoxSize.x >= dqGameData->maps[0].width )
-   {
-      player->hitBoxPosition.x = dqGameData->maps[0].width - player->hitBoxSize.x;
-      player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
-   }
-
-   if ( player->hitBoxPosition.y < 0 )
-   {
-      player->hitBoxPosition.y = 0;
-      player->centerPosition.y = player->hitBoxSize.y / 2;
-   }
-   else if ( player->hitBoxPosition.y + player->hitBoxSize.y >= dqGameData->maps[0].height )
-   {
-      player->hitBoxPosition.y = dqGameData->maps[0].height - player->hitBoxSize.y;
-      player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
-   }
+   dqCollision_MoveEntity( dqGameData->player );
 
    dqEntitySprite_Tick( dqRenderData->playerSprite );
-
-   player->velocityX = 0;
-   player->velocityY = 0;
+   dqGameData->player->velocityX = 0;
+   dqGameData->player->velocityY = 0;
 }
 
 void dqGame_HandleStart()

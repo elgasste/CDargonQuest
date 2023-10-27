@@ -163,6 +163,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sp
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="collision.c" />
     <ClCompile Include="diagnostics_renderer.c" />
     <ClCompile Include="entity_sprite.c" />
     <ClCompile Include="error.c" />
@@ -187,6 +188,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sp
     <ClCompile Include="window.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="collision.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="diagnostics_renderer.h" />
     <ClInclude Include="direction.h" />
