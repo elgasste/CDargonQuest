@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-typedef struct
+typedef struct dqCollisionTile_t
 {
    sfBool isPassable;
    sfBool slowsMovement;
