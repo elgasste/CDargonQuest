@@ -2,8 +2,6 @@
 #include "game_data.h"
 #include "map.h"
 #include "map_tile.h"
-#include "collision_map.h"
-#include "collision_tile.h"
 #include "render_config.h"
 #include "game_config.h"
 
@@ -41,25 +39,6 @@ void dqMapLoader_LoadMaps()
       map->tiles[i].tileId = ( i % 2 == 0 ) ? id1 : id2;
       map->tiles[i].isPassable = sfTrue;
    }
-
-   map->collisionMap = (dqCollisionMap_t*)malloc( sizeof( dqCollisionMap_t ) );
-   CHECK_MALLOC( map->collisionMap )
-
-   map->collisionMap->columns = 120;
-   map->collisionMap->rows = 80;
-   map->collisionMap->size.x = map->collisionMap->columns * dqGameConfig->collisionTileSize;
-   map->collisionMap->size.y = map->collisionMap->rows * dqGameConfig->collisionTileSize;
-   map->collisionMap->tileCount = map->collisionMap->columns * map->collisionMap->rows;
-   map->collisionMap->tiles = (dqCollisionTile_t*)malloc( sizeof( dqCollisionTile_t ) * map->collisionMap->tileCount );
-   CHECK_MALLOC( map->collisionMap->tiles )
-
-   for ( i = 0; i < map->collisionMap->tileCount; i++ )
-   {
-      map->collisionMap->tiles[i].isPassable = sfTrue;
-      map->collisionMap->tiles[i].slowsMovement = sfFalse;
-      map->collisionMap->tiles[i].isWater = sfFalse;
-      map->collisionMap->tiles[i].damage = 0;
-   }
 }
 
 void dqMapLoader_CleanupMaps()
@@ -68,7 +47,6 @@ void dqMapLoader_CleanupMaps()
 
    for ( i = 0; i < dqGameData->mapCount; i++ )
    {
-      SAFE_DELETE( dqGameData->maps[i].collisionMap->tiles );
       SAFE_DELETE( dqGameData->maps[i].collisionMap );
       SAFE_DELETE( dqGameData->maps[i].tiles );
    }
