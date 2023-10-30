@@ -11,8 +11,6 @@ void dqOverworldRenderer_Init()
 {
    int i;
 
-   sfVector2f tileSize = { dqRenderConfig->tileSize, dqRenderConfig->tileSize };
-
    sfVector2f occlusionSize0 = { dqRenderConfig->overworldViewOffset.x, dqRenderConfig->screenHeight };
    sfVector2f occlusionPos0 = { 0, 0 };
 
@@ -32,13 +30,10 @@ void dqOverworldRenderer_Init()
    dqOverworldRenderer = (dqOverworldRenderer_t*)malloc( sizeof( dqOverworldRenderer_t ) );
    CHECK_MALLOC( dqOverworldRenderer )
 
-   dqOverworldRenderer->darkTile = sfRectangleShape_create();
-   sfRectangleShape_setSize( dqOverworldRenderer->darkTile, tileSize );
-   sfRectangleShape_setFillColor( dqOverworldRenderer->darkTile, sfColor_fromRGB( 96, 96, 96 ) );
-
-   dqOverworldRenderer->lightTile = sfRectangleShape_create();
-   sfRectangleShape_setSize( dqOverworldRenderer->lightTile, tileSize );
-   sfRectangleShape_setFillColor( dqOverworldRenderer->lightTile, sfColor_fromRGB( 224, 224, 224 ) );
+   dqOverworldRenderer->tileSprite = sfSprite_create();
+   sfSprite_setTexture( dqOverworldRenderer->tileSprite, dqRenderData->overworldTileTexture, sfFalse );
+   dqOverworldRenderer->tileTextureRect.width = (int)dqRenderConfig->tileSize;
+   dqOverworldRenderer->tileTextureRect.height = (int)dqRenderConfig->tileSize;
 
    for ( i = 0; i < 4; i++ )
    {
@@ -68,8 +63,7 @@ void dqOverworldRenderer_Cleanup()
       sfRectangleShape_destroy( dqOverworldRenderer->occlusions[i] );
    }
 
-   sfRectangleShape_destroy( dqOverworldRenderer->darkTile );
-   sfRectangleShape_destroy( dqOverworldRenderer->lightTile );
+   sfSprite_destroy( dqOverworldRenderer->tileSprite );
 
    SAFE_DELETE( dqOverworldRenderer );
 }
@@ -78,11 +72,11 @@ void dqOverworldRenderer_RenderMap()
 {
    sfVector2f* viewOffset = &( dqOverworldRenderer->viewOffset );
    sfVector2f* sideOffset = &( dqOverworldRenderer->sideOffset );
+   sfVector2f tilePosition;
    float tileOffsetX, tileOffsetY;
    unsigned int startTileColumn, startTileRow, endTileColumn, endTileRow, column, row, i, j;
    dqMap_t* map = &( dqGameData->maps[0] );
    dqMapTile_t* tile;
-   sfRectangleShape* rect;
 
    if ( map->size.x < dqRenderConfig->overworldViewSize.x )
    {
@@ -143,13 +137,15 @@ void dqOverworldRenderer_RenderMap()
       for ( j = 0, column = startTileColumn; column <= endTileColumn; column++, j++ )
       {
          tile = dqMap_GetTile( map, column, row );
-         rect = tile->tileId == 0 ? dqOverworldRenderer->darkTile : dqOverworldRenderer->lightTile;
 
-         dqOverworldRenderer->tilePosition.x = ( j * dqRenderConfig->tileSize ) - tileOffsetX + sideOffset->x + dqRenderConfig->overworldViewOffset.x;
-         dqOverworldRenderer->tilePosition.y = ( i * dqRenderConfig->tileSize ) - tileOffsetY + sideOffset->y + dqRenderConfig->overworldViewOffset.y;
+         // TODO: figure out the texture rect position from the tile ID
 
-         sfRectangleShape_setPosition( rect, dqOverworldRenderer->tilePosition );
-         dqWindow_DrawRectangleShape( rect );
+         tilePosition.x = ( j * dqRenderConfig->tileSize ) - tileOffsetX + sideOffset->x + dqRenderConfig->overworldViewOffset.x;
+         tilePosition.y = ( i * dqRenderConfig->tileSize ) - tileOffsetY + sideOffset->y + dqRenderConfig->overworldViewOffset.y;
+
+         sfSprite_setPosition( dqOverworldRenderer->tileSprite, tilePosition );
+
+         dqWindow_DrawSprite( dqOverworldRenderer->tileSprite );
       }
    }
 

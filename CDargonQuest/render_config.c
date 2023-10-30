@@ -6,7 +6,7 @@ void dqRenderConfig_Init()
    CHECK_MALLOC( dqRenderConfig )
 
    dqRenderConfig->minFrameRate = 20;
-   dqRenderConfig->maxFrameRate = 60;
+   dqRenderConfig->maxFrameRate = 120;
 
    dqRenderConfig->windowWidth = 1920;
    dqRenderConfig->windowHeight = 1280;
@@ -43,6 +43,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->overworldViewSize.y = 256;
    dqRenderConfig->overworldViewOffset.x = 16;
    dqRenderConfig->overworldViewOffset.y = 16;
+
+   dqRenderConfig->overworldTileTexturePath = "Resources/Tilesets/overworld.png";
 
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 }
