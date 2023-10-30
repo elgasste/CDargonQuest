@@ -19,6 +19,5 @@ dqOverworldRenderer_t* dqOverworldRenderer;
 
 void dqOverworldRenderer_Init();
 void dqOverworldRenderer_Cleanup();
-void dqOverworldRenderer_Render();
 void dqOverworldRenderer_RenderMap();
 void dqOverworldRenderer_RenderEntities();

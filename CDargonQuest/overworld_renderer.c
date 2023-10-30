@@ -74,12 +74,6 @@ void dqOverworldRenderer_Cleanup()
    SAFE_DELETE( dqOverworldRenderer );
 }
 
-void dqOverworldRenderer_Render()
-{
-   dqOverworldRenderer_RenderMap();
-   dqOverworldRenderer_RenderEntities();
-}
-
 void dqOverworldRenderer_RenderMap()
 {
    sfVector2f* viewOffset = &( dqOverworldRenderer->viewOffset );

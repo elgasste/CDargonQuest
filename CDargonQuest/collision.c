@@ -4,6 +4,8 @@
 #include "game_data.h"
 #include "map.h"
 
+void dqCollision_ClipEntity( dqEntity_t* entity );
+
 void dqCollision_MoveEntity( dqEntity_t* entity )
 {
    if ( entity->velocityX != 0 )

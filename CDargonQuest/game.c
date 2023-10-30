@@ -11,6 +11,13 @@
 #include "entity.h"
 #include "collision.h"
 
+void dqGame_HandleEvents();
+void dqGame_Tick();
+void dqGame_HandleStart();
+void dqGame_HandleQuit();
+void dqGame_HandleMovePlayer( dqEvent_t* e );
+void dqGame_HandlePointPlayer( dqEvent_t* e );
+
 void dqGame_Init()
 {
    dqGame = (dqGame_t*)malloc( sizeof( dqGame_t ) );
