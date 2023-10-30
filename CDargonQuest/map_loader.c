@@ -39,6 +39,7 @@ void dqMapLoader_LoadMaps()
 
       map->tiles[i].textureId = 0;
       map->tiles[i].tileId = ( i % 2 == 0 ) ? id1 : id2;
+      map->tiles[i].isPassable = sfTrue;
    }
 
    map->collisionMap = (dqCollisionMap_t*)malloc( sizeof( dqCollisionMap_t ) );
