@@ -13,12 +13,13 @@ sfBool dqMapLoader_BoolFromInt( int i );
 
 void dqMapLoader_LoadMaps()
 {
-   // TODO: just one temporary map for now, but more to come later
-   dqGameData->mapCount = 1;
-   dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) );
+   // TODO: temporary maps for now, these will be loaded from a file later
+   dqGameData->mapCount = 2;
+   dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) * dqGameData->mapCount );
    CHECK_MALLOC( dqGameData->maps )
 
    dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ) );
+   dqMapLoader_LoadTempMap( &( dqGameData->maps[1] ) );
 }
 
 void dqMapLoader_CleanupMaps()
