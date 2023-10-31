@@ -43,8 +43,8 @@ void dqMapLoader_LoadTempMap( dqMap_t* map )
 
    map->columns = 51;
    map->rows = 43;
-   map->size.x = map->columns * dqRenderConfig->tileSize;
-   map->size.y = map->rows * dqRenderConfig->tileSize;
+   map->size.x = map->columns * dqGameConfig->mapTileSize;
+   map->size.y = map->rows * dqGameConfig->mapTileSize;
    map->tileCount = map->columns * map->rows;
    map->tiles = (dqMapTile_t*)malloc( sizeof( dqMapTile_t ) * map->tileCount );
    CHECK_MALLOC( map->tiles )

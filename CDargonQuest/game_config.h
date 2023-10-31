@@ -4,7 +4,7 @@
 
 typedef struct dqGameConfig_t
 {
-   float collisionTileSize;
+   float mapTileSize;
 
    float playerVelocityStraight;
    float playerVelocityDiagonal;

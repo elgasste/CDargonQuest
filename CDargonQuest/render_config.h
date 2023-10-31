@@ -36,8 +36,6 @@ typedef struct dqRenderConfig_t
    float titleMenuOffsetX;
    float titleMenuOffsetY;
 
-   float tileSize;
-
    sfVector2f overworldViewSize;
    sfVector2f overworldViewOffset;
 

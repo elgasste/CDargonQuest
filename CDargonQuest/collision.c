@@ -1,30 +1,50 @@
 #include "collision.h"
 #include "entity.h"
 #include "clock.h"
+#include "game_config.h"
 #include "game_data.h"
 #include "map.h"
+#include "map_tile.h"
 
-void dqCollision_ClipEntity( dqEntity_t* entity );
+void dqCollision_ClipHorizontal( dqEntity_t* entity, unsigned int prevLeftColumn, unsigned int prevRightColumn );
+void dqCollision_ClipVertical( dqEntity_t* entity, unsigned int prevTopRow, unsigned int prevBottomRow );
 
 void dqCollision_MoveEntity( dqEntity_t* entity )
 {
+   unsigned int leftColumn, rightColumn, topRow, bottomRow;
+
    if ( entity->velocityX != 0 )
    {
-      entity->centerPosition.x += ( entity->velocityX * dqClock->lastFrameSeconds );
-      entity->hitBoxPosition.x += ( entity->velocityX * dqClock->lastFrameSeconds );
+      leftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
+      rightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
+
+      entity->hitBoxPosition.x += entity->velocityX * dqClock->lastFrameSeconds;
+      entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
+
+      dqCollision_ClipHorizontal( entity, leftColumn, rightColumn );
    }
 
    if ( entity->velocityY != 0 )
    {
-      entity->centerPosition.y += ( entity->velocityY * dqClock->lastFrameSeconds );
-      entity->hitBoxPosition.y += ( entity->velocityY * dqClock->lastFrameSeconds );
-   }
+      topRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
+      bottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
 
-   dqCollision_ClipEntity( entity );
+      entity->hitBoxPosition.y += ( entity->velocityY * dqClock->lastFrameSeconds );
+      entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+
+      dqCollision_ClipVertical( entity, topRow, bottomRow );
+   }
 }
 
-void dqCollision_ClipEntity( dqEntity_t* entity )
+void dqCollision_ClipHorizontal( dqEntity_t* entity,
+                                 unsigned int prevLeftColumn, unsigned int prevRightColumn )
 {
+   unsigned int newLeftColumn, newRightColumn, i;
+   unsigned int topRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
+   unsigned int bottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
+   dqMap_t* map = &( dqGameData->maps[0] );
+   dqMapTile_t* tile;
+
    if ( entity->hitBoxPosition.x < 0 )
    {
       entity->hitBoxPosition.x = 0;
@@ -35,6 +55,50 @@ void dqCollision_ClipEntity( dqEntity_t* entity )
       entity->hitBoxPosition.x = dqGameData->maps[0].size.x - entity->hitBoxSize.x;
       entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
    }
+   else
+   {
+      newLeftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
+      newRightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
+
+      if ( newLeftColumn < prevLeftColumn )
+      {
+         for ( i = topRow; i <= bottomRow; i++ )
+         {
+            tile = dqMap_GetTile( map, newLeftColumn, i );
+
+            if ( !tile->isPassable )
+            {
+               entity->hitBoxPosition.x = prevLeftColumn * dqGameConfig->mapTileSize;
+               entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
+               break;
+            }
+         }
+      }
+      else if ( newRightColumn > prevRightColumn )
+      {
+         for ( i = topRow; i <= bottomRow; i++ )
+         {
+            tile = dqMap_GetTile( map, newRightColumn, i );
+
+            if ( !tile->isPassable )
+            {
+               entity->hitBoxPosition.x = ( newRightColumn * dqGameConfig->mapTileSize ) - entity->hitBoxSize.x - COLLISION_ADJUSTMENT;
+               entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
+               break;
+            }
+         }
+      }
+   }
+}
+
+void dqCollision_ClipVertical( dqEntity_t* entity,
+                               unsigned int prevTopRow, unsigned int prevBottomRow )
+{
+   unsigned int newTopRow, newBottomRow, i;
+   unsigned int leftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
+   unsigned int rightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
+   dqMap_t* map = &( dqGameData->maps[0] );
+   dqMapTile_t* tile;
 
    if ( entity->hitBoxPosition.y < 0 )
    {
@@ -45,5 +109,39 @@ void dqCollision_ClipEntity( dqEntity_t* entity )
    {
       entity->hitBoxPosition.y = dqGameData->maps[0].size.y - entity->hitBoxSize.y;
       entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+   }
+   else
+   {
+      newTopRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
+      newBottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
+
+      if ( newTopRow < prevTopRow )
+      {
+         for ( i = leftColumn; i <= rightColumn; i++ )
+         {
+            tile = dqMap_GetTile( map, i, newTopRow );
+
+            if ( !tile->isPassable )
+            {
+               entity->hitBoxPosition.y = prevTopRow * dqGameConfig->mapTileSize;
+               entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+               break;
+            }
+         }
+      }
+      else if ( newBottomRow > prevBottomRow )
+      {
+         for ( i = leftColumn; i <= rightColumn; i++ )
+         {
+            tile = dqMap_GetTile( map, i, newBottomRow );
+
+            if ( !tile->isPassable )
+            {
+               entity->hitBoxPosition.y = ( newBottomRow * dqGameConfig->mapTileSize ) - entity->hitBoxSize.y - COLLISION_ADJUSTMENT;
+               entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+               break;
+            }
+         }
+      }
    }
 }
