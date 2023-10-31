@@ -20,6 +20,9 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntity_t* entity,
    sprite->textureRect.width = width;
    sprite->textureRect.height = height;
 
+   sprite->hitBoxOffset.x = ( sprite->textureRect.width - entity->hitBoxSize.x ) / 2;
+   sprite->hitBoxOffset.y = ( sprite->textureRect.height - entity->hitBoxSize.y ) / 2;
+
    sprite->currentFrame = 0;
    sprite->frameCount = frameCount;
 

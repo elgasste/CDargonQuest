@@ -111,6 +111,9 @@
     <ClCompile Include="entity_sprite.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="collision.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -205,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="entity_sprite.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_map.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_tile.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

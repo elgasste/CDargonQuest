@@ -133,7 +133,10 @@
     <PostBuildEvent>
       <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y
 xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y
-xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sprites\" /Y</Command>
+xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sprites\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Tilesets\*.*" "$(OutDir)\Resources\Tilesets\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\tiles.txt" "$(OutDir)\Resources\Design\Maps\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\passable.txt" "$(OutDir)\Resources\Design\Maps\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,10 +162,14 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sp
     <PostBuildEvent>
       <Command>xcopy "C:\CSFML-2.5.1\bin\*.dll" "$(OutDir)" /Y
 xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Fonts\" /Y
-xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sprites\" /Y</Command>
+xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sprites\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Tilesets\*.*" "$(OutDir)\Resources\Tilesets\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\tiles.txt" "$(OutDir)\Resources\Design\Maps\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\passable.txt" "$(OutDir)\Resources\Design\Maps\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="collision.c" />
     <ClCompile Include="diagnostics_renderer.c" />
     <ClCompile Include="entity_sprite.c" />
     <ClCompile Include="error.c" />
@@ -187,6 +194,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sp
     <ClCompile Include="window.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="collision.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="diagnostics_renderer.h" />
     <ClInclude Include="direction.h" />

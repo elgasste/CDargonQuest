@@ -3,6 +3,10 @@
 #include "event_queue.h"
 #include "direction.h"
 
+void dqOverworldInputHandler_PointPlayer( dqDirection direction,
+                                          dqDirection allowedCache1, sfBool cacheCheck1,
+                                          dqDirection allowedCache2, sfBool cacheCheck2 );
+
 void dqOverworldInputHandler_Init()
 {
    dqOverworldInputHandler = (dqOverworldInputHandler_t*)malloc( sizeof( dqOverworldInputHandler_t ) );

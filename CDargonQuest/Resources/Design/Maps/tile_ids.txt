@@ -1,0 +1,33 @@
+0 - water
+1 - left shore
+2 - top shore
+3 - right shore
+4 - bottom shore
+5 - left and top shore
+6 - top and right shore
+7 - right and bottom shore
+8 - bottom and left shore
+9 - left and right shore
+a - top and bottom shore
+b - left, top and right shore
+c - top, right and bottom shore
+d - right, bottom and left shore
+e - bottom, left and top shore
+f - shore on all sides
+g - grass
+h - brushes
+i - forest
+j - hills
+k - desert
+l - mountain
+m - horizontal bridge
+n - cave on green
+o - castle top left on green
+p - castle top right on green
+q - castle bottom left on green
+r - castle bottom right on green
+s - village left on green
+t - village right on green
+u - tower top on green
+v - tower bottom on green
+w - shrine on green

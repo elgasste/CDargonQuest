@@ -9,6 +9,8 @@ typedef struct
 
    sfSprite* sprite;
    sfIntRect textureRect;
+   sfVector2f hitBoxOffset;
+
    unsigned int currentFrame;
    unsigned int frameCount;
 

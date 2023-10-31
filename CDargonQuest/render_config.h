@@ -36,10 +36,12 @@ typedef struct dqRenderConfig_t
    float titleMenuOffsetX;
    float titleMenuOffsetY;
 
-   float tileSize;
-
    sfVector2f overworldViewSize;
    sfVector2f overworldViewOffset;
+
+   const char* overworldTileTexturePath;
+   unsigned int overworldTileTextureColumns;
+   unsigned int overworldTileTextureRows;
 
    const char* playerTexturePath;
 }

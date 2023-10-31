@@ -5,8 +5,8 @@ void dqRenderConfig_Init()
    dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
    CHECK_MALLOC( dqRenderConfig )
 
-   dqRenderConfig->minFrameRate = 20;
-   dqRenderConfig->maxFrameRate = 60;
+   dqRenderConfig->minFrameRate = 30;
+   dqRenderConfig->maxFrameRate = 120;
 
    dqRenderConfig->windowWidth = 1920;
    dqRenderConfig->windowHeight = 1280;
@@ -37,12 +37,14 @@ void dqRenderConfig_Init()
    dqRenderConfig->titleMenuOffsetX = 225;
    dqRenderConfig->titleMenuOffsetY = 150;
 
-   dqRenderConfig->tileSize = 16;
-
    dqRenderConfig->overworldViewSize.x = 448;
    dqRenderConfig->overworldViewSize.y = 256;
    dqRenderConfig->overworldViewOffset.x = 16;
    dqRenderConfig->overworldViewOffset.y = 16;
+
+   dqRenderConfig->overworldTileTexturePath = "Resources/Tilesets/overworld.png";
+   dqRenderConfig->overworldTileTextureColumns = 16;
+   dqRenderConfig->overworldTileTextureRows = 3;
 
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 }

@@ -19,4 +19,5 @@ void dqWindow_Clear();
 void dqWindow_Display();
 void dqWindow_DrawRectangleShape( sfRectangleShape* rect );
 void dqWindow_DrawText( sfText* text );
+void dqWindow_DrawSprite( sfSprite* sprite );
 void dqWindow_DrawEntitySprite( dqEntitySprite_t* sprite );

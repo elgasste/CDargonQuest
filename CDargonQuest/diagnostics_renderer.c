@@ -49,8 +49,8 @@ void dqDiagnosticsRenderer_Render()
 
    if ( dqDiagnosticsRenderer->refreshElapsedSeconds >= dqRenderConfig->diagnosticsRefreshRate )
    {
-      dqDiagnosticsRenderer->currentFrameRateCache = dqClock_CurrentFrameRate();
-      dqDiagnosticsRenderer->averageFrameRateCache = dqClock_AverageFrameRate();
+      dqDiagnosticsRenderer->currentFrameRateCache = dqClock->currentFrameRate;
+      dqDiagnosticsRenderer->averageFrameRateCache = dqClock->averageFrameRate;
       dqDiagnosticsRenderer->refreshElapsedSeconds = 0;
    }
 

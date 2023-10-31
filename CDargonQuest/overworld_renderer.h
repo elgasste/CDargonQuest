@@ -4,8 +4,8 @@
 
 typedef struct dqOverworldRenderer_t
 {
-   sfRectangleShape* darkTile;
-   sfRectangleShape* lightTile;
+   sfSprite* tileSprite;
+   sfIntRect tileTextureRect;
    sfVector2f tilePosition;
 
    sfVector2f viewOffset;
@@ -19,6 +19,5 @@ dqOverworldRenderer_t* dqOverworldRenderer;
 
 void dqOverworldRenderer_Init();
 void dqOverworldRenderer_Cleanup();
-void dqOverworldRenderer_Render();
 void dqOverworldRenderer_RenderMap();
 void dqOverworldRenderer_RenderEntities();

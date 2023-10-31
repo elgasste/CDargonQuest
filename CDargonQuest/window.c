@@ -84,6 +84,11 @@ void dqWindow_DrawText( sfText* text )
    sfRenderWindow_drawText( dqWindow->window, text, NULL );
 }
 
+void dqWindow_DrawSprite( sfSprite* sprite )
+{
+   sfRenderWindow_drawSprite( dqWindow->window, sprite, NULL );
+}
+
 void dqWindow_DrawEntitySprite( dqEntitySprite_t* sprite )
 {
    sfRenderWindow_drawSprite( dqWindow->window, sprite->sprite, NULL );

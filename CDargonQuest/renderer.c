@@ -30,7 +30,8 @@ void dqRenderer_Render()
          dqTitleRenderer_Render();
          break;
       case dqStateOverworld:
-         dqOverworldRenderer_Render();
+         dqOverworldRenderer_RenderMap();
+         dqOverworldRenderer_RenderEntities();
          break;
    }
 
