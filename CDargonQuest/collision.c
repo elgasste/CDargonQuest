@@ -42,7 +42,7 @@ void dqCollision_ClipHorizontal( dqEntity_t* entity,
    unsigned int newLeftColumn, newRightColumn, i;
    unsigned int topRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
    unsigned int bottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
-   dqMap_t* map = &( dqGameData->maps[0] );
+   dqMap_t* map = dqGameData_GetCurrentMap();
    dqMapTile_t* tile;
 
    if ( entity->hitBoxPosition.x < 0 )
@@ -50,9 +50,9 @@ void dqCollision_ClipHorizontal( dqEntity_t* entity,
       entity->hitBoxPosition.x = 0;
       entity->centerPosition.x = entity->hitBoxSize.x / 2;
    }
-   else if ( entity->hitBoxPosition.x + entity->hitBoxSize.x >= dqGameData->maps[0].size.x )
+   else if ( entity->hitBoxPosition.x + entity->hitBoxSize.x >= map->size.x )
    {
-      entity->hitBoxPosition.x = dqGameData->maps[0].size.x - entity->hitBoxSize.x - COLLISION_ADJUSTMENT;
+      entity->hitBoxPosition.x = map->size.x - entity->hitBoxSize.x - COLLISION_ADJUSTMENT;
       entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
    }
    else
@@ -97,7 +97,7 @@ void dqCollision_ClipVertical( dqEntity_t* entity,
    unsigned int newTopRow, newBottomRow, i;
    unsigned int leftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
    unsigned int rightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
-   dqMap_t* map = &( dqGameData->maps[0] );
+   dqMap_t* map = dqGameData_GetCurrentMap();
    dqMapTile_t* tile;
 
    if ( entity->hitBoxPosition.y < 0 )
@@ -105,9 +105,9 @@ void dqCollision_ClipVertical( dqEntity_t* entity,
       entity->hitBoxPosition.y = 0;
       entity->centerPosition.y = entity->hitBoxSize.y / 2;
    }
-   else if ( entity->hitBoxPosition.y + entity->hitBoxSize.y >= dqGameData->maps[0].size.y )
+   else if ( entity->hitBoxPosition.y + entity->hitBoxSize.y >= map->size.y )
    {
-      entity->hitBoxPosition.y = dqGameData->maps[0].size.y - entity->hitBoxSize.y - COLLISION_ADJUSTMENT;
+      entity->hitBoxPosition.y = map->size.y - entity->hitBoxSize.y - COLLISION_ADJUSTMENT;
       entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
    }
    else

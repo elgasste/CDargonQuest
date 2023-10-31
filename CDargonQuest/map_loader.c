@@ -20,6 +20,8 @@ void dqMapLoader_LoadMaps()
 
    dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ) );
    dqMapLoader_LoadTempMap( &( dqGameData->maps[1] ) );
+
+   dqGameData->currentMapIndex = 0;
 }
 
 void dqMapLoader_CleanupMaps()

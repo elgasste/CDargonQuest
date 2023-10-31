@@ -39,3 +39,8 @@ void dqGameData_Cleanup()
    SAFE_DELETE( dqGameData->player );
    SAFE_DELETE( dqGameData );
 }
+
+dqMap_t* dqGameData_GetCurrentMap()
+{
+   return &( dqGameData->maps[dqGameData->currentMapIndex] );
+}

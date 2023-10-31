@@ -76,7 +76,7 @@ void dqOverworldRenderer_RenderMap()
    static sfVector2f tilePosition;
    static sfVector2f tileOffset;
    unsigned int startTileColumn, startTileRow, endTileColumn, endTileRow, column, row, i, j;
-   dqMap_t* map = &( dqGameData->maps[0] );
+   dqMap_t* map = dqGameData_GetCurrentMap();
    dqMapTile_t* tile;
 
    if ( map->size.x < dqRenderConfig->overworldViewSize.x )
