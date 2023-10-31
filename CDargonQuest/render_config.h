@@ -42,6 +42,8 @@ typedef struct dqRenderConfig_t
    sfVector2f overworldViewOffset;
 
    const char* overworldTileTexturePath;
+   unsigned int overworldTileTextureColumns;
+   unsigned int overworldTileTextureRows;
 
    const char* playerTexturePath;
 }

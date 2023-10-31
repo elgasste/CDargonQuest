@@ -138,11 +138,14 @@ void dqOverworldRenderer_RenderMap()
       {
          tile = dqMap_GetTile( map, column, row );
 
-         // TODO: figure out the texture rect position from the tile ID
+         dqOverworldRenderer->tileTextureRect.left = (int)( ( tile->tileId % 16 ) * dqRenderConfig->tileSize );
+         dqOverworldRenderer->tileTextureRect.top = (int)( ( tile->tileId / 16 ) * dqRenderConfig->tileSize );
+
+         sfSprite_setTextureRect( dqOverworldRenderer->tileSprite, dqOverworldRenderer->tileTextureRect );
 
          tilePosition.x = ( j * dqRenderConfig->tileSize ) - tileOffsetX + sideOffset->x + dqRenderConfig->overworldViewOffset.x;
          tilePosition.y = ( i * dqRenderConfig->tileSize ) - tileOffsetY + sideOffset->y + dqRenderConfig->overworldViewOffset.y;
-
+         
          sfSprite_setPosition( dqOverworldRenderer->tileSprite, tilePosition );
 
          dqWindow_DrawSprite( dqOverworldRenderer->tileSprite );

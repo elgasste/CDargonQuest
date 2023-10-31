@@ -45,6 +45,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->overworldViewOffset.y = 16;
 
    dqRenderConfig->overworldTileTexturePath = "Resources/Tilesets/overworld.png";
+   dqRenderConfig->overworldTileTextureColumns = 16;
+   dqRenderConfig->overworldTileTextureRows = 3;
 
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 }
