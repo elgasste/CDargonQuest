@@ -74,7 +74,7 @@ void dqOverworldRenderer_RenderMap()
    sfVector2f* viewOffset = &( dqOverworldRenderer->viewOffset );
    sfVector2f* sideOffset = &( dqOverworldRenderer->sideOffset );
    static sfVector2f tilePosition;
-   float tileOffsetX, tileOffsetY;
+   static sfVector2f tileOffset;
    unsigned int startTileColumn, startTileRow, endTileColumn, endTileRow, column, row, i, j;
    dqMap_t* map = &( dqGameData->maps[0] );
    dqMapTile_t* tile;
@@ -83,7 +83,7 @@ void dqOverworldRenderer_RenderMap()
    {
       viewOffset->x = 0;
       sideOffset->x = ( dqRenderConfig->overworldViewSize.x / 2 ) - ( map->size.x / 2 );
-      tileOffsetX = 0;
+      tileOffset.x = 0;
       startTileColumn = 0;
       endTileColumn = map->columns - 1;
    }
@@ -101,16 +101,16 @@ void dqOverworldRenderer_RenderMap()
          viewOffset->x = map->size.x - dqRenderConfig->overworldViewSize.x;
       }
 
-      tileOffsetX = (float)( (unsigned int)viewOffset->x % (unsigned int)dqGameConfig->mapTileSize );
       startTileColumn = (unsigned int)( viewOffset->x / dqGameConfig->mapTileSize );
       endTileColumn = (unsigned int)( ( viewOffset->x + dqRenderConfig->overworldViewSize.x ) / dqGameConfig->mapTileSize );
+      tileOffset.x = viewOffset->x - ( startTileColumn * dqGameConfig->mapTileSize );
    }
 
    if ( map->size.y < dqRenderConfig->overworldViewSize.y )
    {
       viewOffset->y = 0;
       sideOffset->y = ( dqRenderConfig->overworldViewSize.y / 2 ) - ( map->size.y / 2 );
-      tileOffsetY = 0;
+      tileOffset.y = 0;
       startTileRow = 0;
       endTileRow = map->rows - 1;
    }
@@ -128,9 +128,9 @@ void dqOverworldRenderer_RenderMap()
          viewOffset->y = map->size.y - dqRenderConfig->overworldViewSize.y;
       }
 
-      tileOffsetY = (float)( (unsigned int)viewOffset->y % (unsigned int)dqGameConfig->mapTileSize );
       startTileRow = (unsigned int)( viewOffset->y / dqGameConfig->mapTileSize );
       endTileRow = (unsigned int)( ( viewOffset->y + dqRenderConfig->overworldViewSize.y ) / dqGameConfig->mapTileSize );
+      tileOffset.y = viewOffset->y - ( startTileRow * dqGameConfig->mapTileSize );
    }
 
    for ( i = 0, row = startTileRow; row <= endTileRow; row++, i++ )
@@ -144,8 +144,8 @@ void dqOverworldRenderer_RenderMap()
 
          sfSprite_setTextureRect( dqOverworldRenderer->tileSprite, dqOverworldRenderer->tileTextureRect );
 
-         tilePosition.x = ( j * dqGameConfig->mapTileSize ) - tileOffsetX + sideOffset->x + dqRenderConfig->overworldViewOffset.x;
-         tilePosition.y = ( i * dqGameConfig->mapTileSize ) - tileOffsetY + sideOffset->y + dqRenderConfig->overworldViewOffset.y;
+         tilePosition.x = ( j * dqGameConfig->mapTileSize ) - tileOffset.x + sideOffset->x + dqRenderConfig->overworldViewOffset.x;
+         tilePosition.y = ( i * dqGameConfig->mapTileSize ) - tileOffset.y + sideOffset->y + dqRenderConfig->overworldViewOffset.y;
          
          sfSprite_setPosition( dqOverworldRenderer->tileSprite, tilePosition );
 
