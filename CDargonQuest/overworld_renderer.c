@@ -163,8 +163,16 @@ void dqOverworldRenderer_RenderEntities()
 {
    dqEntitySprite_t* playerSprite = dqRenderData->playerSprite;
    sfVector2f position = {
-      playerSprite->entity->hitBoxPosition.x - dqOverworldRenderer->viewOffset.x + dqOverworldRenderer->sideOffset.x + dqRenderConfig->overworldViewOffset.x,
-      playerSprite->entity->hitBoxPosition.y - dqOverworldRenderer->viewOffset.y + dqOverworldRenderer->sideOffset.y + dqRenderConfig->overworldViewOffset.y
+      playerSprite->entity->hitBoxPosition.x
+         - playerSprite->hitBoxOffset.x
+         - dqOverworldRenderer->viewOffset.x
+         + dqOverworldRenderer->sideOffset.x
+         + dqRenderConfig->overworldViewOffset.x,
+      playerSprite->entity->hitBoxPosition.y
+         - playerSprite->hitBoxOffset.y
+         - dqOverworldRenderer->viewOffset.y
+         + dqOverworldRenderer->sideOffset.y
+         + dqRenderConfig->overworldViewOffset.y
    };
 
    sfSprite_setPosition( playerSprite->sprite, position );

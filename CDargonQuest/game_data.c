@@ -16,8 +16,8 @@ void dqGameData_Init()
    // TODO: each map will have entrance and exit points depending on where the player just came from
    dqGameData->player->centerPosition.x = dqGameData->maps[0].size.x / 2;
    dqGameData->player->centerPosition.y = dqGameData->maps[0].size.y / 2;
-   dqGameData->player->hitBoxSize.x = 16;
-   dqGameData->player->hitBoxSize.y = 16;
+   dqGameData->player->hitBoxSize.x = 14;
+   dqGameData->player->hitBoxSize.y = 14;
    dqGameData->player->hitBoxPosition.x = dqGameData->player->centerPosition.x - ( dqGameData->player->hitBoxSize.x / 2 );
    dqGameData->player->hitBoxPosition.y = dqGameData->player->centerPosition.y - ( dqGameData->player->hitBoxSize.y / 2 );
    dqGameData->player->velocityX = 0;
