@@ -1,3 +1,4 @@
+#include "game_config.h"
 #include "game_data.h"
 #include "map_loader.h"
 #include "entity.h"
@@ -5,24 +6,30 @@
 
 void dqGameData_Init()
 {
+   dqEntity_t* player;
+
    dqGameData = (dqGameData_t*)malloc( sizeof( dqGameData_t ) );
    CHECK_MALLOC( dqGameData )
+
+   dqGameData->playerStartTileCoordinates.x = 28;
+   dqGameData->playerStartTileCoordinates.y = 35;
 
    dqMapLoader_LoadMaps();
 
    dqGameData->player = (dqEntity_t*)malloc( sizeof( dqEntity_t ) );
    CHECK_MALLOC( dqGameData->player )
 
-   // TODO: each map will have entrance and exit points depending on where the player just came from
-   dqGameData->player->centerPosition.x = dqGameData->maps[0].size.x / 2;
-   dqGameData->player->centerPosition.y = dqGameData->maps[0].size.y / 2;
-   dqGameData->player->hitBoxSize.x = 14;
-   dqGameData->player->hitBoxSize.y = 14;
-   dqGameData->player->hitBoxPosition.x = dqGameData->player->centerPosition.x - ( dqGameData->player->hitBoxSize.x / 2 );
-   dqGameData->player->hitBoxPosition.y = dqGameData->player->centerPosition.y - ( dqGameData->player->hitBoxSize.y / 2 );
-   dqGameData->player->velocityX = 0;
-   dqGameData->player->velocityY = 0;
-   dqGameData->player->direction = dqDirectionDown;
+   // TODO: most of this will eventually be loaded from a file
+   player = dqGameData->player;
+   player->hitBoxSize.x = 14;
+   player->hitBoxSize.y = 14;
+   player->hitBoxPosition.x = dqGameData->playerStartTileCoordinates.x * dqGameConfig->mapTileSize;
+   player->hitBoxPosition.y = dqGameData->playerStartTileCoordinates.y * dqGameConfig->mapTileSize;
+   player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
+   player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+   player->velocityX = 0;
+   player->velocityY = 0;
+   player->direction = dqDirectionDown;
 }
 
 void dqGameData_Cleanup()

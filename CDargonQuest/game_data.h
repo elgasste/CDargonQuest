@@ -11,6 +11,7 @@ typedef struct dqGameData_t
    unsigned int mapCount;
 
    dqEntity_t* player;
+   sfVector2u playerStartTileCoordinates;
 }
 dqGameData_t;
 
