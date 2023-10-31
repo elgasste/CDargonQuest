@@ -5,7 +5,7 @@ void dqRenderConfig_Init()
    dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
    CHECK_MALLOC( dqRenderConfig )
 
-   dqRenderConfig->minFrameRate = 20;
+   dqRenderConfig->minFrameRate = 30;
    dqRenderConfig->maxFrameRate = 120;
 
    dqRenderConfig->windowWidth = 1920;

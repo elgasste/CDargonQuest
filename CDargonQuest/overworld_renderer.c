@@ -73,7 +73,7 @@ void dqOverworldRenderer_RenderMap()
 {
    sfVector2f* viewOffset = &( dqOverworldRenderer->viewOffset );
    sfVector2f* sideOffset = &( dqOverworldRenderer->sideOffset );
-   sfVector2f tilePosition;
+   static sfVector2f tilePosition;
    float tileOffsetX, tileOffsetY;
    unsigned int startTileColumn, startTileRow, endTileColumn, endTileRow, column, row, i, j;
    dqMap_t* map = &( dqGameData->maps[0] );
@@ -161,19 +161,19 @@ void dqOverworldRenderer_RenderMap()
 
 void dqOverworldRenderer_RenderEntities()
 {
+   static sfVector2f position;
    dqEntitySprite_t* playerSprite = dqRenderData->playerSprite;
-   sfVector2f position = {
-      playerSprite->entity->hitBoxPosition.x
-         - playerSprite->hitBoxOffset.x
-         - dqOverworldRenderer->viewOffset.x
-         + dqOverworldRenderer->sideOffset.x
-         + dqRenderConfig->overworldViewOffset.x,
-      playerSprite->entity->hitBoxPosition.y
-         - playerSprite->hitBoxOffset.y
-         - dqOverworldRenderer->viewOffset.y
-         + dqOverworldRenderer->sideOffset.y
-         + dqRenderConfig->overworldViewOffset.y
-   };
+
+   position.x = playerSprite->entity->hitBoxPosition.x
+      - playerSprite->hitBoxOffset.x
+      - dqOverworldRenderer->viewOffset.x
+      + dqOverworldRenderer->sideOffset.x
+      + dqRenderConfig->overworldViewOffset.x;
+   position.y = playerSprite->entity->hitBoxPosition.y
+      - playerSprite->hitBoxOffset.y
+      - dqOverworldRenderer->viewOffset.y
+      + dqOverworldRenderer->sideOffset.y
+      + dqRenderConfig->overworldViewOffset.y;
 
    sfSprite_setPosition( playerSprite->sprite, position );
    dqWindow_DrawEntitySprite( dqRenderData->playerSprite );

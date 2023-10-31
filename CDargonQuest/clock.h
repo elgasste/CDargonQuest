@@ -4,9 +4,12 @@
 
 typedef struct dqClock_t
 {
-   unsigned long long minFrameDuration;
-   unsigned long long maxFrameDuration;
-   unsigned long long frameStart;
+   sfClock* clock;
+
+   sfInt64 minFrameMicro;
+   sfInt64 maxFrameMicro;
+
+   sfTime frameStartTime;
 
    float minFrameSeconds;
    float maxFrameSeconds;
@@ -16,7 +19,8 @@ typedef struct dqClock_t
    unsigned int frameCount;
    unsigned int lagFrameCount;
 
-   unsigned int minTimePeriod;
+   unsigned int currentFrameRate;
+   unsigned int averageFrameRate;
 }
 dqClock_t;
 
@@ -26,5 +30,3 @@ void dqClock_Init();
 void dqClock_Cleanup();
 void dqClock_StartFrame();
 void dqClock_EndFrame();
-unsigned int dqClock_CurrentFrameRate();
-unsigned int dqClock_AverageFrameRate();
