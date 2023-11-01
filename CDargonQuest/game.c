@@ -10,6 +10,7 @@
 #include "event_queue.h"
 #include "entity.h"
 #include "collision.h"
+#include "map.h"
 
 void dqGame_HandleEvents();
 void dqGame_Tick();
@@ -102,10 +103,12 @@ void dqGame_HandleEvents()
 void dqGame_Tick()
 {
    dqCollision_MoveEntity( dqGameData->player );
-
    dqEntitySprite_Tick( dqRenderData->playerSprite );
+
    dqGameData->player->velocityX = 0;
    dqGameData->player->velocityY = 0;
+
+   dqMap_CheckSwap();
 }
 
 void dqGame_HandleStart()

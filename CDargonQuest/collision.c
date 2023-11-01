@@ -64,7 +64,7 @@ void dqCollision_ClipHorizontal( dqEntity_t* entity,
       {
          for ( i = topRow; i <= bottomRow; i++ )
          {
-            tile = dqMap_GetTile( map, newLeftColumn, i );
+            tile = dqMap_GetTileFromCoordinates( map, newLeftColumn, i );
 
             if ( !tile->isPassable )
             {
@@ -78,7 +78,7 @@ void dqCollision_ClipHorizontal( dqEntity_t* entity,
       {
          for ( i = topRow; i <= bottomRow; i++ )
          {
-            tile = dqMap_GetTile( map, newRightColumn, i );
+            tile = dqMap_GetTileFromCoordinates( map, newRightColumn, i );
 
             if ( !tile->isPassable )
             {
@@ -119,7 +119,7 @@ void dqCollision_ClipVertical( dqEntity_t* entity,
       {
          for ( i = leftColumn; i <= rightColumn; i++ )
          {
-            tile = dqMap_GetTile( map, i, newTopRow );
+            tile = dqMap_GetTileFromCoordinates( map, i, newTopRow );
 
             if ( !tile->isPassable )
             {
@@ -133,7 +133,7 @@ void dqCollision_ClipVertical( dqEntity_t* entity,
       {
          for ( i = leftColumn; i <= rightColumn; i++ )
          {
-            tile = dqMap_GetTile( map, i, newBottomRow );
+            tile = dqMap_GetTileFromCoordinates( map, i, newBottomRow );
 
             if ( !tile->isPassable )
             {

@@ -13,6 +13,8 @@ sfBool dqMapLoader_BoolFromInt( int i );
 
 void dqMapLoader_LoadMaps()
 {
+   dqMapTile_t* testExitTile;
+
    // TODO: temporary maps for now, these will be loaded from a file later
    dqGameData->mapCount = 2;
    dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) * dqGameData->mapCount );
@@ -20,6 +22,11 @@ void dqMapLoader_LoadMaps()
 
    dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ) );
    dqMapLoader_LoadTempMap( &( dqGameData->maps[1] ) );
+
+   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 16, 38 );
+   testExitTile->isExit = sfTrue;
+   testExitTile->exitMapIndex = 1;
+   testExitTile->entranceTileIndex = ( 30 * 51 ) + 45; // col 45, row 30
 
    dqGameData->currentMapIndex = 0;
 }

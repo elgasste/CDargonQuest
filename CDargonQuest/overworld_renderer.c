@@ -137,7 +137,7 @@ void dqOverworldRenderer_RenderMap()
    {
       for ( j = 0, column = startTileColumn; column <= endTileColumn; column++, j++ )
       {
-         tile = dqMap_GetTile( map, column, row );
+         tile = dqMap_GetTileFromCoordinates( map, column, row );
 
          dqOverworldRenderer->tileTextureRect.left = (int)( ( tile->tileId % 16 ) * dqGameConfig->mapTileSize );
          dqOverworldRenderer->tileTextureRect.top = (int)( ( tile->tileId / 16 ) * dqGameConfig->mapTileSize );

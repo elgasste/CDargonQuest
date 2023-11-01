@@ -14,4 +14,6 @@ typedef struct dqMap_t
 }
 dqMap_t;
 
-dqMapTile_t* dqMap_GetTile( dqMap_t* map, unsigned int column, unsigned int row );
+dqMapTile_t* dqMap_GetTileFromCoordinates( dqMap_t* map, unsigned int column, unsigned int row );
+dqMapTile_t* dqMap_GetTileFromPosition( dqMap_t* map, sfVector2f* pos );
+void dqMap_CheckSwap();
