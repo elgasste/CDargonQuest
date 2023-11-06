@@ -86,22 +86,29 @@ static void dqGame_HandlePointPlayer( dqEvent_t* e )
 
 static void dqGame_HandleSwapMap( dqEvent_t* e )
 {
-   unsigned int newColumn, newRow;
-   unsigned int newMapIndex = (unsigned int)( e->args.argList[0] );
-   unsigned int newTileIndex = (unsigned int)( e->args.argList[1] );
-   dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
-   dqEntity_t* player = dqGameData->player;
+   if ( dqGame->state == dqStateOverworld )
+   {
+      dqGame->nextMapIndex = (unsigned int)( e->args.argList[0] );
+      dqGame->nextMapTileIndex = (unsigned int)( e->args.argList[1] );
 
-   dqGameData->currentMapIndex = newMapIndex;
+      dqGame->state = dqStateOverworldTransition;
+   }
+}
 
-   newColumn = newTileIndex % newMap->columns;
-   newRow = newTileIndex / newMap->columns;
+static void dqGame_HandleOverworldFadedOut()
+{
+   if ( dqGame->state == dqStateOverworldTransition )
+   {
+      dqMap_Swap( dqGame->nextMapIndex, dqGame->nextMapTileIndex );
+   }
+}
 
-   player->hitBoxPosition.x = newColumn * dqGameConfig->mapTileSize;
-   player->hitBoxPosition.y = newRow * dqGameConfig->mapTileSize;
-
-   player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
-   player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+static void dqGame_HandleOverworldFadedIn()
+{
+   if ( dqGame->state == dqStateOverworldTransition )
+   {
+      dqGame->state = dqStateOverworld;
+   }
 }
 
 static void dqGame_HandleEvents()
@@ -131,6 +138,12 @@ static void dqGame_HandleEvents()
          case dqEventSwapMap:
             dqGame_HandleSwapMap( e );
             break;
+         case dqEventOverworldFadedOut:
+            dqGame_HandleOverworldFadedOut();
+            break;
+         case dqEventOverworldFadedIn:
+            dqGame_HandleOverworldFadedIn();
+            break;
       }
    }
 }
@@ -152,6 +165,9 @@ void dqGame_Init()
 
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
+
+   dqGame->nextMapIndex = 0;
+   dqGame->nextMapTileIndex = 0;
 
    dqGameConfig_Init();
    dqRenderConfig_Init();

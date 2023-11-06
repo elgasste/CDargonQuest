@@ -28,3 +28,21 @@ void dqMap_CheckSwap()
       dqEventQueue_Push( dqEventSwapMap, 2, (int)tile->exitMapIndex, (int)tile->entranceTileIndex );
    }
 }
+
+void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
+{
+   unsigned int newColumn, newRow;
+   dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
+   dqEntity_t* player = dqGameData->player;
+
+   dqGameData->currentMapIndex = newMapIndex;
+
+   newColumn = newTileIndex % newMap->columns;
+   newRow = newTileIndex / newMap->columns;
+
+   player->hitBoxPosition.x = newColumn * dqGameConfig->mapTileSize;
+   player->hitBoxPosition.y = newRow * dqGameConfig->mapTileSize;
+
+   player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
+   player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+}
