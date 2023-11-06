@@ -32,7 +32,7 @@ void dqOverworldRenderer_Init()
    CHECK_MALLOC( dqOverworldRenderer )
 
    dqOverworldRenderer->tileSprite = sfSprite_create();
-   sfSprite_setTexture( dqOverworldRenderer->tileSprite, dqRenderData->overworldTileTexture, sfFalse );
+   sfSprite_setTexture( dqOverworldRenderer->tileSprite, dqRenderData->overworldTilesetTexture, sfFalse );
    dqOverworldRenderer->tileTextureRect.width = (int)dqGameConfig->mapTileSize;
    dqOverworldRenderer->tileTextureRect.height = (int)dqGameConfig->mapTileSize;
 

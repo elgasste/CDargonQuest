@@ -3,9 +3,24 @@
 #include "event_queue.h"
 #include "direction.h"
 
-void dqOverworldInputHandler_PointPlayer( dqDirection direction,
-                                          dqDirection allowedCache1, sfBool cacheCheck1,
-                                          dqDirection allowedCache2, sfBool cacheCheck2 );
+static void dqOverworldInputHandler_PointPlayer( dqDirection direction,
+                                                 dqDirection allowedCache1, sfBool cacheCheck1,
+                                                 dqDirection allowedCache2, sfBool cacheCheck2 )
+{
+   sfBool canUseCache = ( ( dqOverworldInputHandler->directionCache == allowedCache1 ) && cacheCheck1 ) ||
+      ( ( dqOverworldInputHandler->directionCache == allowedCache2 ) && cacheCheck2 );
+
+   if ( dqOverworldInputHandler->useDirectionCache && canUseCache )
+   {
+      dqEventQueue_Push( dqEventPointPlayer, 1, (int)dqOverworldInputHandler->directionCache );
+   }
+   else
+   {
+      dqOverworldInputHandler->useDirectionCache = sfTrue;
+      dqOverworldInputHandler->directionCache = direction;
+      dqEventQueue_Push( dqEventPointPlayer, 1, (int)direction );
+   }
+}
 
 void dqOverworldInputHandler_Init()
 {
@@ -69,24 +84,5 @@ void dqOverworldInputHandler_HandleInput()
       dqOverworldInputHandler_PointPlayer( dqDirectionDown,
                                            dqDirectionLeft, leftIsDown && !rightIsDown,
                                            dqDirectionRight, rightIsDown && !leftIsDown );
-   }
-}
-
-void dqOverworldInputHandler_PointPlayer( dqDirection direction,
-                                          dqDirection allowedCache1, sfBool cacheCheck1,
-                                          dqDirection allowedCache2, sfBool cacheCheck2 )
-{
-   sfBool canUseCache = ( ( dqOverworldInputHandler->directionCache == allowedCache1 ) && cacheCheck1 ) ||
-                        ( ( dqOverworldInputHandler->directionCache == allowedCache2 ) && cacheCheck2 );
-
-   if ( dqOverworldInputHandler->useDirectionCache && canUseCache )
-   {
-      dqEventQueue_Push( dqEventPointPlayer, 1, (int)dqOverworldInputHandler->directionCache );
-   }
-   else
-   {
-      dqOverworldInputHandler->useDirectionCache = sfTrue;
-      dqOverworldInputHandler->directionCache = direction;
-      dqEventQueue_Push( dqEventPointPlayer, 1, (int)direction );
    }
 }

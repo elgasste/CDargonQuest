@@ -20,6 +20,7 @@ dqMapTile_t* dqMap_GetTileFromPosition( dqMap_t* map, sfVector2f* pos )
 
 void dqMap_CheckSwap()
 {
+   // TODO: figure out a way to animate a fade-out/fade-in between maps
    dqEntity_t* player = dqGameData->player;
    dqMap_t* map = dqGameData_GetCurrentMap();
    dqMapTile_t* tile = dqMap_GetTileFromPosition( map, &( player->centerPosition ) );
