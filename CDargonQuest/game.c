@@ -84,6 +84,26 @@ static void dqGame_HandlePointPlayer( dqEvent_t* e )
    }
 }
 
+static void dqGame_HandleSwapMap( dqEvent_t* e )
+{
+   unsigned int newColumn, newRow;
+   unsigned int newMapIndex = (unsigned int)( e->args.argList[0] );
+   unsigned int newTileIndex = (unsigned int)( e->args.argList[1] );
+   dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
+   dqEntity_t* player = dqGameData->player;
+
+   dqGameData->currentMapIndex = newMapIndex;
+
+   newColumn = newTileIndex % newMap->columns;
+   newRow = newTileIndex / newMap->columns;
+
+   player->hitBoxPosition.x = newColumn * dqGameConfig->mapTileSize;
+   player->hitBoxPosition.y = newRow * dqGameConfig->mapTileSize;
+
+   player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
+   player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+}
+
 static void dqGame_HandleEvents()
 {
    dqEvent_t* e;
@@ -107,6 +127,9 @@ static void dqGame_HandleEvents()
             break;
          case dqEventPointPlayer:
             dqGame_HandlePointPlayer( e );
+            break;
+         case dqEventSwapMap:
+            dqGame_HandleSwapMap( e );
             break;
       }
    }
