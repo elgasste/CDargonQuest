@@ -9,14 +9,118 @@
 #include "renderer.h"
 #include "event_queue.h"
 #include "entity.h"
-#include "collision.h"
+#include "physics.h"
+#include "map.h"
 
-void dqGame_HandleEvents();
-void dqGame_Tick();
-void dqGame_HandleStart();
-void dqGame_HandleQuit();
-void dqGame_HandleMovePlayer( dqEvent_t* e );
-void dqGame_HandlePointPlayer( dqEvent_t* e );
+static void dqGame_HandleStart()
+{
+   if ( dqGame->state == dqStateTitle )
+   {
+      dqEventQueue_Flush();
+      dqGame->state = dqStateOverworld;
+   }
+}
+
+static void dqGame_HandleQuit()
+{
+   // TODO: maybe ask about saving the game or whatnot
+   dqEventQueue_Flush();
+   dqGame->isRunning = sfFalse;
+}
+
+static void dqGame_HandleMovePlayer( dqEvent_t* e )
+{
+   dqDirection direction;
+   float velocityDelta;
+
+   if ( dqGame->state == dqStateOverworld )
+   {
+      direction = e->args.argList[0];
+      velocityDelta = e->args.argList[1]
+         ? dqGameConfig->playerVelocityDiagonal
+         : dqGameConfig->playerVelocityStraight;
+
+      switch ( direction )
+      {
+         case dqDirectionLeft:
+            dqGameData->player->velocityX = -velocityDelta;
+            break;
+         case dqDirectionUp:
+            dqGameData->player->velocityY = -velocityDelta;
+            break;
+         case dqDirectionRight:
+            dqGameData->player->velocityX = velocityDelta;
+            break;
+         case dqDirectionDown:
+            dqGameData->player->velocityY = velocityDelta;
+            break;
+      }
+   }
+}
+
+static void dqGame_HandlePointPlayer( dqEvent_t* e )
+{
+   dqDirection direction;
+
+   if ( dqGame->state == dqStateOverworld )
+   {
+      direction = e->args.argList[0];
+
+      switch ( direction )
+      {
+         case dqDirectionLeft:
+            dqGameData->player->direction = dqDirectionLeft;
+            break;
+         case dqDirectionUp:
+            dqGameData->player->direction = dqDirectionUp;
+            break;
+         case dqDirectionRight:
+            dqGameData->player->direction = dqDirectionRight;
+            break;
+         case dqDirectionDown:
+            dqGameData->player->direction = dqDirectionDown;
+            break;
+      }
+   }
+}
+
+static void dqGame_HandleEvents()
+{
+   dqEvent_t* e;
+
+   dqWindow_HandleEvents();
+
+   while ( !dqEventQueue_IsEmpty() )
+   {
+      e = dqEventQueue_GetNext();
+
+      switch ( e->type )
+      {
+         case dqEventStart:
+            dqGame_HandleStart();
+            break;
+         case dqEventQuit:
+            dqGame_HandleQuit();
+            break;
+         case dqEventMovePlayer:
+            dqGame_HandleMovePlayer( e );
+            break;
+         case dqEventPointPlayer:
+            dqGame_HandlePointPlayer( e );
+            break;
+      }
+   }
+}
+
+static void dqGame_Tick()
+{
+   // TODO: eventually do this for all entities on the map
+   dqPhysics_MoveEntity( dqGameData->player );
+   dqEntitySprite_Tick( dqRenderData->playerSprite );
+   dqPhysics_DecelerateEntity( dqGameData->player );
+
+   dqMap_CheckSwap();
+}
 
 void dqGame_Init()
 {
@@ -69,98 +173,4 @@ void dqGame_Run()
    }
 
    dqGame->state = dqStateClosing;
-}
-
-void dqGame_HandleEvents()
-{
-   dqEvent_t* e;
-
-   dqWindow_HandleEvents();
-
-   while ( !dqEventQueue_IsEmpty() )
-   {
-      e = dqEventQueue_GetNext();
-
-      switch ( e->type )
-      {
-         case dqEventStart:
-            dqGame_HandleStart();
-            break;
-         case dqEventQuit:
-            dqGame_HandleQuit();
-            break;
-         case dqEventMovePlayer:
-            dqGame_HandleMovePlayer( e );
-            break;
-         case dqEventPointPlayer:
-            dqGame_HandlePointPlayer( e );
-            break;
-      }
-   }
-}
-
-void dqGame_Tick()
-{
-   dqCollision_MoveEntity( dqGameData->player );
-
-   dqEntitySprite_Tick( dqRenderData->playerSprite );
-   dqGameData->player->velocityX = 0;
-   dqGameData->player->velocityY = 0;
-}
-
-void dqGame_HandleStart()
-{
-   dqEventQueue_Flush();
-   dqGame->state = dqStateOverworld;
-}
-
-void dqGame_HandleQuit()
-{
-   dqEventQueue_Flush();
-   dqGame->isRunning = sfFalse;
-}
-
-void dqGame_HandleMovePlayer( dqEvent_t* e )
-{
-   dqDirection direction = e->args.argList[0];
-   float velocityDelta = e->args.argList[1]
-      ? dqGameConfig->playerVelocityDiagonal
-      : dqGameConfig->playerVelocityStraight;
-
-   switch ( direction )
-   {
-      case dqDirectionLeft:
-         dqGameData->player->velocityX = -velocityDelta;
-         break;
-      case dqDirectionUp:
-         dqGameData->player->velocityY = -velocityDelta;
-         break;
-      case dqDirectionRight:
-         dqGameData->player->velocityX = velocityDelta;
-         break;
-      case dqDirectionDown:
-         dqGameData->player->velocityY = velocityDelta;
-         break;
-   }
-}
-
-void dqGame_HandlePointPlayer( dqEvent_t* e )
-{
-   dqDirection direction = e->args.argList[0];
-
-   switch ( direction )
-   {
-      case dqDirectionLeft:
-         dqGameData->player->direction = dqDirectionLeft;
-         break;
-      case dqDirectionUp:
-         dqGameData->player->direction = dqDirectionUp;
-         break;
-      case dqDirectionRight:
-         dqGameData->player->direction = dqDirectionRight;
-         break;
-      case dqDirectionDown:
-         dqGameData->player->direction = dqDirectionDown;
-         break;
-   }
 }

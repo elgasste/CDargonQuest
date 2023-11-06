@@ -58,11 +58,6 @@ dqEvent_t* dqEventQueue_GetNext()
    return e;
 }
 
-dqEvent_t* dqEventQueue_PeekNext()
-{
-   return &( dqEventQueue->queue[dqEventQueue->front] );
-}
-
 void dqEventQueue_Flush()
 {
    dqEventQueue->front = 0;

@@ -1,0 +1,2 @@
+0 - overworld
+1 - aliahan ground floor

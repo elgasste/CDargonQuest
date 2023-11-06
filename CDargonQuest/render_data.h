@@ -5,7 +5,7 @@
 
 typedef struct
 {
-   sfTexture* overworldTileTexture;
+   sfTexture* overworldTilesetTexture;
 
    sfTexture* playerTexture;
    dqEntitySprite_t* playerSprite;
