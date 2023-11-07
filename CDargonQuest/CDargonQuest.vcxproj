@@ -136,7 +136,8 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
 xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sprites\" /Y
 xcopy "$(SolutionDir)CDargonQuest\Resources\Tilesets\*.*" "$(OutDir)\Resources\Tilesets\" /Y
 xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_tiles.txt" "$(OutDir)\Resources\Design\Maps\" /Y
-xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_passable.txt" "$(OutDir)\Resources\Design\Maps\" /Y</Command>
+xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_passable.txt" "$(OutDir)\Resources\Design\Maps\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_encounter_rates.txt" "$(OutDir)\Resources\Design\Maps\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -165,7 +166,8 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Fonts\*.*" "$(OutDir)\Resources\Font
 xcopy "$(SolutionDir)CDargonQuest\Resources\Sprites\*.*" "$(OutDir)\Resources\Sprites\" /Y
 xcopy "$(SolutionDir)CDargonQuest\Resources\Tilesets\*.*" "$(OutDir)\Resources\Tilesets\" /Y
 xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_tiles.txt" "$(OutDir)\Resources\Design\Maps\" /Y
-xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_passable.txt" "$(OutDir)\Resources\Design\Maps\" /Y</Command>
+xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_passable.txt" "$(OutDir)\Resources\Design\Maps\" /Y
+xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_encounter_rates.txt" "$(OutDir)\Resources\Design\Maps\" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

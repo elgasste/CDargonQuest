@@ -176,6 +176,9 @@ void dqGame_Init()
 
    dqGameConfig_Init();
    dqLog_Init();
+
+   dqLog_Message( "Loading game objects" );
+
    dqRenderConfig_Init();
    dqGameData_Init();
    dqMenu_Init();
@@ -185,7 +188,7 @@ void dqGame_Init()
    dqClock_Init();
    dqEventQueue_Init();
 
-   dqLog_Message( "Game objects initialized" );
+   dqLog_Message( "Game objects loaded" );
 }
 
 void dqGame_Cleanup()
