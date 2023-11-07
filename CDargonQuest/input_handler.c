@@ -13,20 +13,24 @@ static void dqInputHandler_HandleCheat()
    if ( !strcmp( cheat, "dqclip" ) )
    {
       dqGameConfig->noClipCheat = dqGameConfig->noClipCheat ? sfFalse : sfTrue;
+      dqLog_Message( "Toggled no-clip cheat" );
    }
    else if ( !strcmp( cheat, "dqpass" ) )
    {
       dqGameConfig->passableCheat = dqGameConfig->passableCheat ? sfFalse : sfTrue;
+      dqLog_Message( "Toggled passable tiles overlay cheat" );
    }
    else if ( !strcmp( cheat, "dqswap" ) )
    {
       dqGameConfig->mapSwapCheat = dqGameConfig->mapSwapCheat ? sfFalse : sfTrue;
+      dqLog_Message( "Toggled map-swap tiles overlay cheat" );
    }
    else if ( !strcmp( cheat, "dqclear" ) )
    {
       dqGameConfig->noClipCheat = sfFalse;
       dqGameConfig->passableCheat = sfFalse;
       dqGameConfig->mapSwapCheat = sfFalse;
+      dqLog_Message( "Cleared all cheats" );
    }
 
    dqInputHandler->cheatString[0] = '\0';
@@ -97,6 +101,7 @@ void dqInputHandler_HandleInput()
    if ( dqInputState_WasKeyPressed( sfKeyF8 ) )
    {
       dqRenderConfig->showDiagnostics = dqRenderConfig->showDiagnostics ? sfFalse : sfTrue;
+      dqLog_Message( "Toggled diagnostics view" );
    }
 
    dqInputHandler_CheckCheats();

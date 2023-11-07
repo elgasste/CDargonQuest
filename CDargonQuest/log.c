@@ -1,3 +1,5 @@
+#include <time.h>
+
 #include "log.h"
 #include "game_config.h"
 
@@ -21,7 +23,17 @@ void dqLog_Cleanup()
 
 void dqLog_Message( const char* message )
 {
-   if ( fprintf( dqLog->logFile, message ) < 0 )
+   time_t t = time( NULL );
+   struct tm tm;
+   if ( localtime_s( &tm, &t ) )
+   {
+      dqError_ExitWithMessageNoLog( STR_ERROR_LOG_TIME );
+   }
+
+   if ( fprintf( dqLog->logFile, "%d-%02d-%02d %02d:%02d:%02d - %s\n",
+                 tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
+                 tm.tm_hour, tm.tm_min, tm.tm_sec,
+                 message ) < 0 )
    {
       dqError_ExitWithMessageNoLog( STR_ERROR_LOG_FILE_WRITE );
    }
