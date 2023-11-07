@@ -11,6 +11,7 @@
 #include "entity.h"
 #include "physics.h"
 #include "map.h"
+#include "transition_renderer.h"
 
 static void dqGame_HandleStart()
 {
@@ -88,6 +89,8 @@ static void dqGame_HandleSwapMap( dqEvent_t* e )
 {
    if ( dqGame->state == dqStateOverworld )
    {
+      dqTransitionRenderer_Reset();
+
       dqGame->nextMapIndex = (unsigned int)( e->args.argList[0] );
       dqGame->nextMapTileIndex = (unsigned int)( e->args.argList[1] );
 

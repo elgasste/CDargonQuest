@@ -7,6 +7,11 @@ typedef struct dqTransitionRenderer_t
    float fadeInSeconds;
    float fadeOutSeconds;
    float elapsedSeconds;
+
+   sfBool raisedFadedOut;
+   sfBool raisedFadedIn;
+
+   sfRectangleShape* fadeRect;
 }
 dqTransitionRenderer_t;
 
