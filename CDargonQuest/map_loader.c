@@ -33,16 +33,19 @@ static sfBool dqMapLoader_BoolFromInt( int i )
    return i == 48 ? sfFalse : sfTrue;
 }
 
-static float dqMapLoader_EncounterRateFromInt( int i )
+static unsigned int dqMapLoader_EncounterRateFromInt( int i )
 {
-   switch ( i )
+   // 48 is zero
+   int adjustedValue = i - 48;
+
+   switch ( adjustedValue )
    {
       case 1:
-         return 0.05f;
+         return 5;
       case 2:
-         return 0.1f;
+         return 10;
       case 3:
-         return 0.14f;
+         return 15;
       default:
          return 0;
    }
@@ -100,6 +103,8 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
             newLine = fgetc( tileFile );
             assert( newLine == 10 );
             newLine = fgetc( passableFile );
+            assert( newLine == 10 );
+            newLine = fgetc( encounterFile );
             assert( newLine == 10 );
             fileIndex = -1;
          }

@@ -1,6 +1,7 @@
 #include "game.h"
-#include "log.h"
 #include "game_config.h"
+#include "log.h"
+#include "random.h"
 #include "render_config.h"
 #include "game_data.h"
 #include "menu.h"
@@ -96,6 +97,8 @@ static void dqGame_HandleSwapMap( dqEvent_t* e )
       dqGame->nextMapIndex = (unsigned int)( e->args.argList[0] );
       dqGame->nextMapTileIndex = (unsigned int)( e->args.argList[1] );
 
+      dqEventQueue_Flush();
+
       dqGame->state = dqStateOverworldTransition;
    }
 }
@@ -161,6 +164,7 @@ static void dqGame_Tick()
    dqPhysics_DecelerateEntity( dqGameData->player );
 
    dqMap_CheckSwap();
+   dqMap_CheckEncounter();
 }
 
 void dqGame_Init()
@@ -179,6 +183,7 @@ void dqGame_Init()
 
    dqLog_Message( "Loading game objects" );
 
+   dqRandom_Init();
    dqRenderConfig_Init();
    dqGameData_Init();
    dqMenu_Init();

@@ -4,6 +4,7 @@
 #include "game_data.h"
 #include "entity.h"
 #include "event_queue.h"
+#include "random.h"
 
 dqMapTile_t* dqMap_GetTileFromCoordinates( dqMap_t* map, unsigned int column, unsigned int row )
 {
@@ -38,9 +39,10 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
 {
    unsigned int newColumn, newRow;
    dqEntity_t* player = dqGameData->player;
-   dqMap_t* oldMap = &( dqGameData->maps[dqGameData->currentMapIndex] );
+   dqMap_t* oldMap = dqGameData_GetCurrentMap();
    dqMapTile_t* oldTile = dqMap_GetTileFromPosition( oldMap, &( player->centerPosition ) );
    dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
+   dqMapTile_t* newTile;
 
    dqGameData->currentMapIndex = newMapIndex;
 
@@ -56,5 +58,27 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
    if ( oldTile->hasEntranceDirection )
    {
       player->direction = oldTile->entranceDirection;
+   }
+
+   // don't check for encounters right away
+   newTile = dqMap_GetTileFromPosition( newMap, &( player->centerPosition ) );
+   newMap->playerTileCache = newTile;
+}
+
+void dqMap_CheckEncounter()
+{
+   unsigned int encounterValue;
+   dqMap_t* map = dqGameData_GetCurrentMap();
+   dqMapTile_t* tile = dqMap_GetTileFromPosition( map, &( dqGameData->player->centerPosition ));
+
+   if ( tile != map->playerTileCache )
+   {
+      map->playerTileCache = tile;
+      encounterValue = dqRandom_Percent();
+
+      if ( encounterValue < tile->encounterRate )
+      {
+         dqEventQueue_Push( dqEventEncounter, 0 );
+      }
    }
 }

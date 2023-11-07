@@ -13,6 +13,8 @@ typedef enum
    dqEventSwapMap,
 
    dqEventOverworldFadedOut,
-   dqEventOverworldFadedIn
+   dqEventOverworldFadedIn,
+
+   dqEventEncounter
 }
 dqEventType_t;
