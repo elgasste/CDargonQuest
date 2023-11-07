@@ -11,6 +11,7 @@
 #include "entity.h"
 #include "physics.h"
 #include "map.h"
+#include "transition_renderer.h"
 
 static void dqGame_HandleStart()
 {
@@ -84,6 +85,35 @@ static void dqGame_HandlePointPlayer( dqEvent_t* e )
    }
 }
 
+static void dqGame_HandleSwapMap( dqEvent_t* e )
+{
+   if ( dqGame->state == dqStateOverworld )
+   {
+      dqTransitionRenderer_Reset();
+
+      dqGame->nextMapIndex = (unsigned int)( e->args.argList[0] );
+      dqGame->nextMapTileIndex = (unsigned int)( e->args.argList[1] );
+
+      dqGame->state = dqStateOverworldTransition;
+   }
+}
+
+static void dqGame_HandleOverworldFadedOut()
+{
+   if ( dqGame->state == dqStateOverworldTransition )
+   {
+      dqMap_Swap( dqGame->nextMapIndex, dqGame->nextMapTileIndex );
+   }
+}
+
+static void dqGame_HandleOverworldFadedIn()
+{
+   if ( dqGame->state == dqStateOverworldTransition )
+   {
+      dqGame->state = dqStateOverworld;
+   }
+}
+
 static void dqGame_HandleEvents()
 {
    dqEvent_t* e;
@@ -108,6 +138,15 @@ static void dqGame_HandleEvents()
          case dqEventPointPlayer:
             dqGame_HandlePointPlayer( e );
             break;
+         case dqEventSwapMap:
+            dqGame_HandleSwapMap( e );
+            break;
+         case dqEventOverworldFadedOut:
+            dqGame_HandleOverworldFadedOut();
+            break;
+         case dqEventOverworldFadedIn:
+            dqGame_HandleOverworldFadedIn();
+            break;
       }
    }
 }
@@ -129,6 +168,9 @@ void dqGame_Init()
 
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
+
+   dqGame->nextMapIndex = 0;
+   dqGame->nextMapTileIndex = 0;
 
    dqGameConfig_Init();
    dqRenderConfig_Init();

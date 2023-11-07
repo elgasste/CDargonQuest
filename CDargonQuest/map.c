@@ -3,6 +3,7 @@
 #include "game_config.h"
 #include "game_data.h"
 #include "entity.h"
+#include "event_queue.h"
 
 dqMapTile_t* dqMap_GetTileFromCoordinates( dqMap_t* map, unsigned int column, unsigned int row )
 {
@@ -20,24 +21,35 @@ dqMapTile_t* dqMap_GetTileFromPosition( dqMap_t* map, sfVector2f* pos )
 
 void dqMap_CheckSwap()
 {
-   // TODO: figure out a way to animate a fade-out/fade-in between maps
-   dqEntity_t* player = dqGameData->player;
-   dqMap_t* map = dqGameData_GetCurrentMap();
-   dqMapTile_t* tile = dqMap_GetTileFromPosition( map, &( player->centerPosition ) );
-   unsigned int entranceColumn, entranceRow;
+   dqMapTile_t* tile = dqMap_GetTileFromPosition( dqGameData_GetCurrentMap(), &( dqGameData->player->centerPosition ));
 
    if ( tile->isExit )
    {
-      dqGameData->currentMapIndex = tile->exitMapIndex;
-      map = dqGameData_GetCurrentMap();
+      dqEventQueue_Push( dqEventSwapMap, 2, (int)tile->exitMapIndex, (int)tile->entranceTileIndex );
+   }
+}
 
-      entranceColumn = tile->entranceTileIndex % map->columns;
-      entranceRow = tile->entranceTileIndex / map->columns;
+void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
+{
+   unsigned int newColumn, newRow;
+   dqEntity_t* player = dqGameData->player;
+   dqMap_t* oldMap = &( dqGameData->maps[dqGameData->currentMapIndex] );
+   dqMapTile_t* oldTile = dqMap_GetTileFromPosition( oldMap, &( player->centerPosition ) );
+   dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
 
-      player->hitBoxPosition.x = entranceColumn * dqGameConfig->mapTileSize;
-      player->hitBoxPosition.y = entranceRow * dqGameConfig->mapTileSize;
+   dqGameData->currentMapIndex = newMapIndex;
 
-      player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
-      player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+   newColumn = newTileIndex % newMap->columns;
+   newRow = newTileIndex / newMap->columns;
+
+   player->hitBoxPosition.x = newColumn * dqGameConfig->mapTileSize;
+   player->hitBoxPosition.y = newRow * dqGameConfig->mapTileSize;
+
+   player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
+   player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+
+   if ( oldTile->hasEntranceDirection )
+   {
+      player->direction = oldTile->entranceDirection;
    }
 }

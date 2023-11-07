@@ -8,6 +8,11 @@ typedef enum
    dqEventQuit,
 
    dqEventMovePlayer,
-   dqEventPointPlayer
+   dqEventPointPlayer,
+
+   dqEventSwapMap,
+
+   dqEventOverworldFadedOut,
+   dqEventOverworldFadedIn
 }
 dqEventType_t;
