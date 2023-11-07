@@ -22,6 +22,12 @@ static void dqInputHandler_HandleCheat()
    {
       dqGameConfig->mapSwapCheat = dqGameConfig->mapSwapCheat ? sfFalse : sfTrue;
    }
+   else if ( !strcmp( cheat, "dqclear" ) )
+   {
+      dqGameConfig->noClipCheat = sfFalse;
+      dqGameConfig->passableCheat = sfFalse;
+      dqGameConfig->mapSwapCheat = sfFalse;
+   }
 
    dqInputHandler->cheatString[0] = '\0';
 }
@@ -32,7 +38,8 @@ static void dqInputHandler_CheckCheats()
    static const char* cheats[] = {
       "dqclip",
       "dqpass",
-      "dqswap"
+      "dqswap",
+      "dqclear"
    };
    static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );
 
