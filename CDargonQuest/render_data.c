@@ -19,5 +19,5 @@ void dqRenderData_Cleanup()
 
    sfTexture_destroy( dqRenderData->overworldTilesetTexture );
 
-   SAFE_DELETE( dqRenderData );
+   SAFE_DELETE( dqRenderData )
 }

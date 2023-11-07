@@ -20,7 +20,7 @@ void dqTransitionRenderer_Cleanup()
 {
    sfRectangleShape_destroy( dqTransitionRenderer->fadeRect );
 
-   SAFE_DELETE( dqTransitionRenderer );
+   SAFE_DELETE( dqTransitionRenderer )
 }
 
 void dqTransitionRenderer_Reset()

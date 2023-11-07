@@ -36,7 +36,7 @@ void dqEntitySprite_Cleanup( dqEntitySprite_t* sprite )
 {
    sfSprite_destroy( sprite->sprite );
 
-   SAFE_DELETE( sprite );
+   SAFE_DELETE( sprite )
 }
 
 void dqEntitySprite_Tick( dqEntitySprite_t* sprite )

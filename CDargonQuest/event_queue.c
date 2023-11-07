@@ -8,7 +8,7 @@ void dqEventQueue_Init()
 
 void dqEventQueue_Cleanup()
 {
-   SAFE_DELETE( dqEventQueue );
+   SAFE_DELETE( dqEventQueue )
 }
 
 sfBool dqEventQueue_IsEmpty()

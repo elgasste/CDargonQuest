@@ -39,7 +39,7 @@ void dqTitleRenderer_Cleanup()
    sfText_destroy( dqTitleRenderer->menuText );
    sfFont_destroy( dqTitleRenderer->menuFont );
 
-   SAFE_DELETE( dqTitleRenderer );
+   SAFE_DELETE( dqTitleRenderer )
 }
 
 void dqTitleRenderer_Render()

@@ -17,8 +17,8 @@ void dqMenu_Init()
 
 void dqMenu_Cleanup()
 {
-   SAFE_DELETE( dqTitleMenu->options );
-   SAFE_DELETE( dqTitleMenu );
+   SAFE_DELETE( dqTitleMenu->options )
+   SAFE_DELETE( dqTitleMenu )
 }
 
 void dqMenu_ScrollDown( dqMenu_t* menu )

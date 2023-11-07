@@ -66,7 +66,7 @@ void dqOverworldRenderer_Cleanup()
 
    sfSprite_destroy( dqOverworldRenderer->tileSprite );
 
-   SAFE_DELETE( dqOverworldRenderer );
+   SAFE_DELETE( dqOverworldRenderer )
 }
 
 void dqOverworldRenderer_RenderMap()

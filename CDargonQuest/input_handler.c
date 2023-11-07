@@ -7,11 +7,18 @@
 
 void dqInputHandler_Init()
 {
+   dqInputHandler = (dqInputHandler_t*)malloc( sizeof( dqInputHandler_t ) );
+   CHECK_MALLOC( dqInputHandler )
+
+   dqInputHandler->cheatString[0] = '\0';
+
    dqOverworldInputHandler_Init();
 }
 
 void dqInputHandler_Cleanup()
 {
+   SAFE_DELETE( dqInputHandler )
+
    dqOverworldInputHandler_Cleanup();
 }
 

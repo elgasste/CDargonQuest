@@ -13,5 +13,5 @@ void dqGameConfig_Init()
 
 void dqGameConfig_Cleanup()
 {
-   SAFE_DELETE( dqGameConfig );
+   SAFE_DELETE( dqGameConfig )
 }
