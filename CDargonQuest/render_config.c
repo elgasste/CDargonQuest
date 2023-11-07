@@ -42,6 +42,10 @@ void dqRenderConfig_Init()
    dqRenderConfig->overworldViewOffset.x = 16;
    dqRenderConfig->overworldViewOffset.y = 16;
 
+   dqRenderConfig->passableOverlayColor = sfColor_fromRGBA( 0, 255, 0, 128 );
+   dqRenderConfig->impassableOverlayColor = sfColor_fromRGBA( 255, 0, 0, 128 );
+   dqRenderConfig->mapSwapOverlayColor = sfColor_fromRGBA( 0, 0, 255, 128 );
+
    dqRenderConfig->overworldTileTexturePath = "Resources/Tilesets/overworld.png";
    dqRenderConfig->overworldTileTextureColumns = 16;
    dqRenderConfig->overworldTileTextureRows = 3;

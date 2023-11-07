@@ -32,7 +32,7 @@ void dqOverworldInputHandler_Init()
 
 void dqOverworldInputHandler_Cleanup()
 {
-   SAFE_DELETE( dqOverworldInputHandler );
+   SAFE_DELETE( dqOverworldInputHandler )
 }
 
 void dqOverworldInputHandler_HandleInput()

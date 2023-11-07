@@ -119,6 +119,7 @@ static void dqPhysics_ClipVertical( dqEntity_t* entity,
 void dqPhysics_MoveEntity( dqEntity_t* entity )
 {
    unsigned int leftColumn, rightColumn, topRow, bottomRow;
+   sfBool clip = entity != dqGameData->player || !dqGameConfig->noClipCheat;
 
    if ( entity->velocityX != 0 )
    {
@@ -128,7 +129,10 @@ void dqPhysics_MoveEntity( dqEntity_t* entity )
       entity->hitBoxPosition.x += entity->velocityX * dqClock->lastFrameSeconds;
       entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
 
-      dqPhysics_ClipHorizontal( entity, leftColumn, rightColumn );
+      if ( clip )
+      {
+         dqPhysics_ClipHorizontal( entity, leftColumn, rightColumn );
+      }
    }
 
    if ( entity->velocityY != 0 )
@@ -139,7 +143,10 @@ void dqPhysics_MoveEntity( dqEntity_t* entity )
       entity->hitBoxPosition.y += ( entity->velocityY * dqClock->lastFrameSeconds );
       entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
 
-      dqPhysics_ClipVertical( entity, topRow, bottomRow );
+      if ( clip )
+      {
+         dqPhysics_ClipVertical( entity, topRow, bottomRow );
+      }
    }
 }
 

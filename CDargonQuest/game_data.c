@@ -36,8 +36,8 @@ void dqGameData_Cleanup()
 {
    dqMapLoader_CleanupMaps();
 
-   SAFE_DELETE( dqGameData->player );
-   SAFE_DELETE( dqGameData );
+   SAFE_DELETE( dqGameData->player )
+   SAFE_DELETE( dqGameData )
 }
 
 dqMap_t* dqGameData_GetCurrentMap()

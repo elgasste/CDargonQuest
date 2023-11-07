@@ -28,6 +28,8 @@ void dqOverworldRenderer_Init()
       dqRenderConfig->screenHeight - occlusionSize1.y - dqRenderConfig->overworldViewSize.y };
    sfVector2f occlusionPos3 = { occlusionSize0.x, occlusionSize1.y + dqRenderConfig->overworldViewSize.y };
 
+   sfVector2f tileSize = { dqGameConfig->mapTileSize, dqGameConfig->mapTileSize };
+
    dqOverworldRenderer = (dqOverworldRenderer_t*)malloc( sizeof( dqOverworldRenderer_t ) );
    CHECK_MALLOC( dqOverworldRenderer )
 
@@ -53,11 +55,27 @@ void dqOverworldRenderer_Init()
 
    sfRectangleShape_setSize( dqOverworldRenderer->occlusions[3], occlusionSize3 );
    sfRectangleShape_setPosition( dqOverworldRenderer->occlusions[3], occlusionPos3 );
+
+   dqOverworldRenderer->passableRect = sfRectangleShape_create();
+   dqOverworldRenderer->impassableRect = sfRectangleShape_create();
+   dqOverworldRenderer->mapSwapRect = sfRectangleShape_create();
+
+   sfRectangleShape_setSize( dqOverworldRenderer->passableRect, tileSize );
+   sfRectangleShape_setSize( dqOverworldRenderer->impassableRect, tileSize );
+   sfRectangleShape_setSize( dqOverworldRenderer->mapSwapRect, tileSize );
+
+   sfRectangleShape_setFillColor( dqOverworldRenderer->passableRect, dqRenderConfig->passableOverlayColor );
+   sfRectangleShape_setFillColor( dqOverworldRenderer->impassableRect, dqRenderConfig->impassableOverlayColor );
+   sfRectangleShape_setFillColor( dqOverworldRenderer->mapSwapRect, dqRenderConfig->mapSwapOverlayColor );
 }
 
 void dqOverworldRenderer_Cleanup()
 {
    int i;
+
+   sfRectangleShape_destroy( dqOverworldRenderer->passableRect );
+   sfRectangleShape_destroy( dqOverworldRenderer->impassableRect );
+   sfRectangleShape_destroy( dqOverworldRenderer->mapSwapRect );
 
    for ( i = 0; i < 4; i++ )
    {
@@ -66,7 +84,7 @@ void dqOverworldRenderer_Cleanup()
 
    sfSprite_destroy( dqOverworldRenderer->tileSprite );
 
-   SAFE_DELETE( dqOverworldRenderer );
+   SAFE_DELETE( dqOverworldRenderer )
 }
 
 void dqOverworldRenderer_RenderMap()
@@ -148,8 +166,27 @@ void dqOverworldRenderer_RenderMap()
          tilePosition.y = ( i * dqGameConfig->mapTileSize ) - tileOffset.y + sideOffset->y + dqRenderConfig->overworldViewOffset.y;
          
          sfSprite_setPosition( dqOverworldRenderer->tileSprite, tilePosition );
-
          dqWindow_DrawSprite( dqOverworldRenderer->tileSprite );
+
+         if ( dqGameConfig->passableCheat )
+         {
+            if ( tile->isPassable )
+            {
+               sfRectangleShape_setPosition( dqOverworldRenderer->passableRect, tilePosition );
+               dqWindow_DrawRectangleShape( dqOverworldRenderer->passableRect );
+            }
+            else
+            {
+               sfRectangleShape_setPosition( dqOverworldRenderer->impassableRect, tilePosition );
+               dqWindow_DrawRectangleShape( dqOverworldRenderer->impassableRect );
+            }
+         }
+
+         if ( dqGameConfig->mapSwapCheat && tile->isExit )
+         {
+            sfRectangleShape_setPosition( dqOverworldRenderer->mapSwapRect, tilePosition );
+            dqWindow_DrawRectangleShape( dqOverworldRenderer->mapSwapRect );
+         }
       }
    }
 

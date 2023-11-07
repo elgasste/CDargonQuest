@@ -9,9 +9,13 @@ void dqGameConfig_Init()
 
    dqGameConfig->playerVelocityStraight = 56;
    dqGameConfig->playerVelocityDiagonal = 44;
+
+   dqGameConfig->noClipCheat = sfFalse;
+   dqGameConfig->passableCheat = sfFalse;
+   dqGameConfig->mapSwapCheat = sfFalse;
 }
 
 void dqGameConfig_Cleanup()
 {
-   SAFE_DELETE( dqGameConfig );
+   SAFE_DELETE( dqGameConfig )
 }

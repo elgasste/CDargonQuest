@@ -21,11 +21,16 @@ dqMapTile_t* dqMap_GetTileFromPosition( dqMap_t* map, sfVector2f* pos )
 
 void dqMap_CheckSwap()
 {
-   dqMapTile_t* tile = dqMap_GetTileFromPosition( dqGameData_GetCurrentMap(), &( dqGameData->player->centerPosition ));
+   dqMapTile_t* tile;
 
-   if ( tile->isExit )
+   if ( !dqGameConfig->noClipCheat )
    {
-      dqEventQueue_Push( dqEventSwapMap, 2, (int)tile->exitMapIndex, (int)tile->entranceTileIndex );
+      tile = dqMap_GetTileFromPosition( dqGameData_GetCurrentMap(), &( dqGameData->player->centerPosition ));
+
+      if ( tile->isExit )
+      {
+         dqEventQueue_Push( dqEventSwapMap, 2, (int)tile->exitMapIndex, (int)tile->entranceTileIndex );
+      }  
    }
 }
 

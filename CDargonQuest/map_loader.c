@@ -172,8 +172,8 @@ void dqMapLoader_CleanupMaps()
 
    for ( i = 0; i < dqGameData->mapCount; i++ )
    {
-      SAFE_DELETE( dqGameData->maps[i].tiles );
+      SAFE_DELETE( dqGameData->maps[i].tiles )
    }
 
-   SAFE_DELETE( dqGameData->maps );
+   SAFE_DELETE( dqGameData->maps )
 }

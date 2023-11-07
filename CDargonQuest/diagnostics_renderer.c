@@ -40,7 +40,7 @@ void dqDiagnosticsRenderer_Cleanup()
    sfText_destroy( dqDiagnosticsRenderer->text );
    sfFont_destroy( dqDiagnosticsRenderer->font );
 
-   SAFE_DELETE( dqDiagnosticsRenderer );
+   SAFE_DELETE( dqDiagnosticsRenderer )
 }
 
 void dqDiagnosticsRenderer_Render()
