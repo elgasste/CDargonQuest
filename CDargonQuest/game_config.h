@@ -10,6 +10,7 @@ typedef struct dqGameConfig_t
    float playerVelocityDiagonal;
 
    sfBool noClipCheat;
+   sfBool passableCheat;
 }
 dqGameConfig_t;
 

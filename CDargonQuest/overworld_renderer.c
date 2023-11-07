@@ -28,6 +28,8 @@ void dqOverworldRenderer_Init()
       dqRenderConfig->screenHeight - occlusionSize1.y - dqRenderConfig->overworldViewSize.y };
    sfVector2f occlusionPos3 = { occlusionSize0.x, occlusionSize1.y + dqRenderConfig->overworldViewSize.y };
 
+   sfVector2f tileSize = { dqGameConfig->mapTileSize, dqGameConfig->mapTileSize };
+
    dqOverworldRenderer = (dqOverworldRenderer_t*)malloc( sizeof( dqOverworldRenderer_t ) );
    CHECK_MALLOC( dqOverworldRenderer )
 
@@ -53,11 +55,23 @@ void dqOverworldRenderer_Init()
 
    sfRectangleShape_setSize( dqOverworldRenderer->occlusions[3], occlusionSize3 );
    sfRectangleShape_setPosition( dqOverworldRenderer->occlusions[3], occlusionPos3 );
+
+   dqOverworldRenderer->passableRect = sfRectangleShape_create();
+   dqOverworldRenderer->impassableRect = sfRectangleShape_create();
+
+   sfRectangleShape_setSize( dqOverworldRenderer->passableRect, tileSize );
+   sfRectangleShape_setSize( dqOverworldRenderer->impassableRect, tileSize );
+
+   sfRectangleShape_setFillColor( dqOverworldRenderer->passableRect, dqRenderConfig->passableOverlayColor );
+   sfRectangleShape_setFillColor( dqOverworldRenderer->impassableRect, dqRenderConfig->impassableOverlayColor );
 }
 
 void dqOverworldRenderer_Cleanup()
 {
    int i;
+
+   sfRectangleShape_destroy( dqOverworldRenderer->passableRect );
+   sfRectangleShape_destroy( dqOverworldRenderer->impassableRect );
 
    for ( i = 0; i < 4; i++ )
    {
@@ -148,8 +162,21 @@ void dqOverworldRenderer_RenderMap()
          tilePosition.y = ( i * dqGameConfig->mapTileSize ) - tileOffset.y + sideOffset->y + dqRenderConfig->overworldViewOffset.y;
          
          sfSprite_setPosition( dqOverworldRenderer->tileSprite, tilePosition );
-
          dqWindow_DrawSprite( dqOverworldRenderer->tileSprite );
+
+         if ( dqGameConfig->passableCheat )
+         {
+            if ( tile->isPassable )
+            {
+               sfRectangleShape_setPosition( dqOverworldRenderer->passableRect, tilePosition );
+               dqWindow_DrawRectangleShape( dqOverworldRenderer->passableRect );
+            }
+            else
+            {
+               sfRectangleShape_setPosition( dqOverworldRenderer->impassableRect, tilePosition );
+               dqWindow_DrawRectangleShape( dqOverworldRenderer->impassableRect );
+            }
+         }
       }
    }
 

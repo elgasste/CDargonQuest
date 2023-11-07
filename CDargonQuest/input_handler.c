@@ -8,12 +8,16 @@
 
 static void dqInputHandler_HandleCheat()
 {
-   // TODO: dqpass and dqexit
+   // TODO: dqexit
    char* cheat = dqInputHandler->cheatString;
 
    if ( !strcmp( cheat, "dqclip" ) )
    {
       dqGameConfig->noClipCheat = dqGameConfig->noClipCheat ? sfFalse : sfTrue;
+   }
+   else if ( !strcmp( cheat, "dqpass" ) )
+   {
+      dqGameConfig->passableCheat = dqGameConfig->passableCheat ? sfFalse : sfTrue;
    }
 
    dqInputHandler->cheatString[0] = '\0';

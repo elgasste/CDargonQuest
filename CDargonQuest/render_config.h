@@ -39,6 +39,9 @@ typedef struct dqRenderConfig_t
    sfVector2f overworldViewSize;
    sfVector2f overworldViewOffset;
 
+   sfColor passableOverlayColor;
+   sfColor impassableOverlayColor;
+
    const char* overworldTileTexturePath;
    unsigned int overworldTileTextureColumns;
    unsigned int overworldTileTextureRows;
