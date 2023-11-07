@@ -9,6 +9,8 @@ void dqGameConfig_Init()
 
    dqGameConfig->playerVelocityStraight = 56;
    dqGameConfig->playerVelocityDiagonal = 44;
+
+   dqGameConfig->noClipCheat = sfFalse;
 }
 
 void dqGameConfig_Cleanup()

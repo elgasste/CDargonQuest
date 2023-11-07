@@ -1,5 +1,6 @@
 #include "input_handler.h"
 #include "input_state.h"
+#include "game_config.h"
 #include "render_config.h"
 #include "title_input_handler.h"
 #include "overworld_input_handler.h"
@@ -7,7 +8,14 @@
 
 static void dqInputHandler_HandleCheat()
 {
-   // TODO
+   // TODO: dqpass and dqexit
+   char* cheat = dqInputHandler->cheatString;
+
+   if ( !strcmp( cheat, "dqclip" ) )
+   {
+      dqGameConfig->noClipCheat = dqGameConfig->noClipCheat ? sfFalse : sfTrue;
+   }
+
    dqInputHandler->cheatString[0] = '\0';
 }
 
