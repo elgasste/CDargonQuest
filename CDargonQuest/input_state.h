@@ -6,6 +6,8 @@ typedef struct dqInputState_t
 {
    sfBool* keysPressed;
    sfBool* keysReleased;
+   sfBool keyWasPressed;
+   sfKeyCode lastPressedKey;
 }
 dqInputState_t;
 

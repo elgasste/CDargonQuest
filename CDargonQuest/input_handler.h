@@ -2,11 +2,9 @@
 
 #include "common.h"
 
-#define CHEAT_STRING_SIZE 7
-
 typedef struct dqInputHandler_t
 {
-   char cheatString[CHEAT_STRING_SIZE];
+   char cheatString[32];
 }
 dqInputHandler_t;
 

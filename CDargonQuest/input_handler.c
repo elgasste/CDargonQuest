@@ -5,6 +5,54 @@
 #include "overworld_input_handler.h"
 #include "game.h"
 
+static void dqInputHandler_HandleCheat()
+{
+   // TODO
+   dqInputHandler->cheatString[0] = '\0';
+}
+
+static void dqInputHandler_CheckCheats()
+{
+   int cheatStringLength, i, lastIndex, matchCount;
+   static const char* cheats[] = {
+      "dqclip",
+      "dqpass",
+      "dqexit"
+   };
+   static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );
+
+   if ( !dqInputState->keyWasPressed )
+   {
+      return;
+   }
+
+   cheatStringLength = (int)strlen( dqInputHandler->cheatString );
+   dqInputHandler->cheatString[cheatStringLength] = (char)( dqInputState->lastPressedKey + 97 );
+   cheatStringLength++;
+   dqInputHandler->cheatString[cheatStringLength] = '\0';
+
+   matchCount = cheatCount;
+   lastIndex = cheatStringLength - 1;
+
+   for ( i = 0; i < cheatCount; i++ )
+   {
+      if ( cheats[i][lastIndex] != dqInputHandler->cheatString[lastIndex] )
+      {
+         matchCount--;
+      }
+      else if ( cheatStringLength == (int)strlen( cheats[i] ) )
+      {
+         dqInputHandler_HandleCheat();
+         return;
+      }
+   }
+
+   if ( matchCount == 0 )
+   {
+      dqInputHandler->cheatString[0] = '\0';
+   }
+}
+
 void dqInputHandler_Init()
 {
    dqInputHandler = (dqInputHandler_t*)malloc( sizeof( dqInputHandler_t ) );
@@ -28,6 +76,8 @@ void dqInputHandler_HandleInput()
    {
       dqRenderConfig->showDiagnostics = dqRenderConfig->showDiagnostics ? sfFalse : sfTrue;
    }
+
+   dqInputHandler_CheckCheats();
 
    switch ( dqGame->state )
    {

@@ -7,6 +7,8 @@ void dqInputState_Init()
 
    dqInputState->keysPressed = (sfBool*)calloc( sizeof( sfBool ), sfKeyCount );
    dqInputState->keysReleased = (sfBool*)calloc( sizeof( sfBool ), sfKeyCount );
+   dqInputState->keyWasPressed = sfFalse;
+   dqInputState->lastPressedKey = sfKeyCount;
 }
 
 void dqInputState_Cleanup()
@@ -24,12 +26,15 @@ void dqInputState_Reset()
    {
       dqInputState->keysPressed[i] = sfFalse;
       dqInputState->keysReleased[i] = sfFalse;
+      dqInputState->keyWasPressed = sfFalse;
    }
 }
 
 void dqInputState_SetKeyPressed( sfKeyCode keyCode )
 {
    dqInputState->keysPressed[(int)keyCode] = sfTrue;
+   dqInputState->keyWasPressed = sfTrue;
+   dqInputState->lastPressedKey = keyCode;
 }
 
 void dqInputState_SetKeyReleased( sfKeyCode keyCode )
@@ -54,7 +59,7 @@ sfBool dqInputState_IsKeyDown( sfKeyCode keyCode )
 
 sfBool dqInputState_IsAnyKeyDown()
 {
-   static int i;
+   int i;
 
    for ( i = 0; i < (int)sfKeyCount; i++ )
    {
