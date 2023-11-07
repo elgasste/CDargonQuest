@@ -8,7 +8,7 @@ void dqLog_Init()
 
    if ( fopen_s( &( dqLog->logFile ), dqGameConfig->logFileName, "w" ) )
    {
-      dqError_ExitWithMessage( STR_ERROR_LOG_FILE_OPEN );
+      dqError_ExitWithMessageNoLog( STR_ERROR_LOG_FILE_OPEN );
    }
 }
 
@@ -23,6 +23,12 @@ void dqLog_Message( const char* message )
 {
    if ( fprintf( dqLog->logFile, message ) < 0 )
    {
-      dqError_ExitWithMessage( STR_ERROR_LOG_FILE_WRITE );
+      dqError_ExitWithMessageNoLog( STR_ERROR_LOG_FILE_WRITE );
    }
+}
+
+void dqLog_Error( const char* message )
+{
+   // don't bother check the result, we're probably already exiting
+   fprintf( dqLog->logFile, "%s%s\n", STR_ERROR_MESSAGE_PREFIX, message );
 }

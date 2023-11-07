@@ -1,4 +1,5 @@
 #include "game.h"
+#include "log.h"
 #include "game_config.h"
 #include "render_config.h"
 #include "game_data.h"
@@ -173,6 +174,7 @@ void dqGame_Init()
    dqGame->nextMapTileIndex = 0;
 
    dqGameConfig_Init();
+   dqLog_Init();
    dqRenderConfig_Init();
    dqGameData_Init();
    dqMenu_Init();
@@ -193,6 +195,7 @@ void dqGame_Cleanup()
    dqRenderData_Cleanup();
    dqGameData_Cleanup();
    dqRenderConfig_Cleanup();
+   dqLog_Cleanup();
    dqGameConfig_Cleanup();
 
    SAFE_DELETE( dqGame )

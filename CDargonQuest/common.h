@@ -8,6 +8,7 @@
 
 #include "strings.h"
 #include "error.h"
+#include "log.h"
 
 #define CHECK_MALLOC( x ) if ( x == NULL ) { dqError_Message( STR_ERROR_MALLOC ); exit( 1 ); }
 #define SAFE_DELETE( x ) if ( x != NULL ) { free( x ); x = NULL; }
