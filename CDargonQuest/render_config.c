@@ -48,8 +48,9 @@ void dqRenderConfig_Init()
 
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 
-   dqRenderConfig->overworldFadeOutSeconds = 0.5f;
-   dqRenderConfig->overworldFadeInSeconds = 0.5f;
+   dqRenderConfig->overworldFadeOutSeconds = 0.3f;
+   dqRenderConfig->overworldStayFadedSeconds = 0.2f;
+   dqRenderConfig->overworldFadeInSeconds = 0.3f;
 }
 
 void dqRenderConfig_Cleanup()

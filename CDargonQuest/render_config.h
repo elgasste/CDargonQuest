@@ -46,6 +46,7 @@ typedef struct dqRenderConfig_t
    const char* playerTexturePath;
 
    float overworldFadeOutSeconds;
+   float overworldStayFadedSeconds;
    float overworldFadeInSeconds;
 }
 dqRenderConfig_t;
