@@ -4,6 +4,8 @@
 
 typedef struct dqGameConfig_t
 {
+   const char* logFileName;
+
    float mapTileSize;
 
    float playerVelocityStraight;

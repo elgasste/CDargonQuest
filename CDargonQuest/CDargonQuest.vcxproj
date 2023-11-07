@@ -169,6 +169,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_passable.txt" "$(OutDi
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="log.c" />
     <ClCompile Include="transition_renderer.c" />
     <ClCompile Include="physics.c" />
     <ClCompile Include="diagnostics_renderer.c" />
@@ -195,6 +196,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_passable.txt" "$(OutDi
     <ClCompile Include="window.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="log.h" />
     <ClInclude Include="transition_renderer.h" />
     <ClInclude Include="physics.h" />
     <ClInclude Include="common.h" />

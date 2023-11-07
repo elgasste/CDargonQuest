@@ -22,5 +22,7 @@
 
 #define STR_ERROR_THREAD_PRIORITY         "could not set thread priority"
 #define STR_ERROR_MALLOC                  "could not allocate memory for game object"
+#define STR_ERROR_LOG_FILE_OPEN           "could not open log file"
+#define STR_ERROR_LOG_FILE_WRITE          "could not write to log file"
 #define STR_ERROR_CLOCK_RESOLUTION        "could not set Windows timer resolution"
 #define STR_ERROR_EVENT_OVERFLOW          "game event queue has overflowed"

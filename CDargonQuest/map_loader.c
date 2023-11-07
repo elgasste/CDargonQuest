@@ -49,7 +49,7 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
    map->tiles = (dqMapTile_t*)malloc( sizeof( dqMapTile_t ) * map->tileCount );
    CHECK_MALLOC( map->tiles )
 
-      err = fopen_s( &tileFile, tilesPath, "r" );
+   err = fopen_s( &tileFile, tilesPath, "r" );
 
    if ( err )
    {
