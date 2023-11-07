@@ -1,6 +1,7 @@
 #include "game.h"
-#include "log.h"
 #include "game_config.h"
+#include "log.h"
+#include "random.h"
 #include "render_config.h"
 #include "game_data.h"
 #include "menu.h"
@@ -28,7 +29,7 @@ static void dqGame_HandleQuit()
    // TODO: maybe ask about saving the game or whatnot
    dqEventQueue_Flush();
    dqGame->isRunning = sfFalse;
-   dqLog_Message( "Quitting game" );
+   dqLog_Message( "quitting game" );
 }
 
 static void dqGame_HandleMovePlayer( dqEvent_t* e )
@@ -96,6 +97,8 @@ static void dqGame_HandleSwapMap( dqEvent_t* e )
       dqGame->nextMapIndex = (unsigned int)( e->args.argList[0] );
       dqGame->nextMapTileIndex = (unsigned int)( e->args.argList[1] );
 
+      dqEventQueue_Flush();
+
       dqGame->state = dqStateOverworldTransition;
    }
 }
@@ -161,6 +164,7 @@ static void dqGame_Tick()
    dqPhysics_DecelerateEntity( dqGameData->player );
 
    dqMap_CheckSwap();
+   dqMap_CheckEncounter();
 }
 
 void dqGame_Init()
@@ -176,6 +180,10 @@ void dqGame_Init()
 
    dqGameConfig_Init();
    dqLog_Init();
+
+   dqLog_Message( "loading game objects" );
+
+   dqRandom_Init();
    dqRenderConfig_Init();
    dqGameData_Init();
    dqMenu_Init();
@@ -185,7 +193,7 @@ void dqGame_Init()
    dqClock_Init();
    dqEventQueue_Init();
 
-   dqLog_Message( "Game objects initialized" );
+   dqLog_Message( "game objects loaded" );
 }
 
 void dqGame_Cleanup()
@@ -200,7 +208,7 @@ void dqGame_Cleanup()
    dqRenderConfig_Cleanup();
    dqGameConfig_Cleanup();
 
-   dqLog_Message( "Game objects cleaned up" );
+   dqLog_Message( "game objects cleaned up" );
 
    dqLog_Cleanup();
 
@@ -209,7 +217,7 @@ void dqGame_Cleanup()
 
 void dqGame_Run()
 {
-   dqLog_Message( "Game loop starting" );
+   dqLog_Message( "game loop starting" );
 
    dqGame->isRunning = sfTrue;
    dqGame->state = dqStateTitle;
@@ -225,7 +233,7 @@ void dqGame_Run()
       dqClock_EndFrame();
    }
 
-   dqLog_Message( "Game loop ended" );
+   dqLog_Message( "game loop ended" );
 
    dqGame->state = dqStateClosing;
 }

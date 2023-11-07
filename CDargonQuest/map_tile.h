@@ -12,5 +12,6 @@ typedef struct dqMapTile_t
    unsigned int entranceTileIndex;
    sfBool hasEntranceDirection;
    dqDirection entranceDirection;
+   unsigned int encounterRate;
 }
 dqMapTile_t;

@@ -13,24 +13,62 @@ static void dqInputHandler_HandleCheat()
    if ( !strcmp( cheat, "dqclip" ) )
    {
       dqGameConfig->noClipCheat = dqGameConfig->noClipCheat ? sfFalse : sfTrue;
-      dqLog_Message( "Toggled no-clip cheat" );
+
+      if ( dqGameConfig->noClipCheat )
+      {
+         dqLog_Message( "no-clip cheat on" );
+      }
+      else
+      {
+         dqLog_Message( "no-clip cheat off" );
+      }
    }
    else if ( !strcmp( cheat, "dqpass" ) )
    {
       dqGameConfig->passableCheat = dqGameConfig->passableCheat ? sfFalse : sfTrue;
-      dqLog_Message( "Toggled passable tiles overlay cheat" );
+
+      if ( dqGameConfig->passableCheat )
+      {
+         dqLog_Message( "passable tiles overlay cheat on" );
+      }
+      else
+      {
+         dqLog_Message( "passable tiles overlay cheat off" );
+      }
    }
    else if ( !strcmp( cheat, "dqswap" ) )
    {
       dqGameConfig->mapSwapCheat = dqGameConfig->mapSwapCheat ? sfFalse : sfTrue;
-      dqLog_Message( "Toggled map-swap tiles overlay cheat" );
+
+      if ( dqGameConfig->mapSwapCheat )
+      {
+         dqLog_Message( "map-swap tiles overlay cheat on" );
+      }
+      else
+      {
+         dqLog_Message( "map-swap tiles overlay cheat off" );
+      }
+   }
+   else if ( !strcmp( cheat, "dqinvis" ) )
+   {
+      dqGameConfig->invisibleCheat = dqGameConfig->invisibleCheat ? sfFalse : sfTrue;
+
+      if ( dqGameConfig->invisibleCheat )
+      {
+         dqLog_Message( "invisibility cheat on" );
+      }
+      else
+      {
+         dqLog_Message( "invisibility cheat off" );
+      }
    }
    else if ( !strcmp( cheat, "dqclear" ) )
    {
       dqGameConfig->noClipCheat = sfFalse;
       dqGameConfig->passableCheat = sfFalse;
       dqGameConfig->mapSwapCheat = sfFalse;
-      dqLog_Message( "Cleared all cheats" );
+      dqGameConfig->invisibleCheat = sfFalse;
+      dqLog_Message( "cleared all cheats" );
    }
 
    dqInputHandler->cheatString[0] = '\0';
@@ -43,6 +81,7 @@ static void dqInputHandler_CheckCheats()
       "dqclip",
       "dqpass",
       "dqswap",
+      "dqinvis",
       "dqclear"
    };
    static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );
@@ -101,7 +140,15 @@ void dqInputHandler_HandleInput()
    if ( dqInputState_WasKeyPressed( sfKeyF8 ) )
    {
       dqRenderConfig->showDiagnostics = dqRenderConfig->showDiagnostics ? sfFalse : sfTrue;
-      dqLog_Message( "Toggled diagnostics view" );
+
+      if ( dqRenderConfig->showDiagnostics )
+      {
+         dqLog_Message( "diagnostics view on" );
+      }
+      else
+      {
+         dqLog_Message( "diagnostics view off" );
+      }
    }
 
    dqInputHandler_CheckCheats();

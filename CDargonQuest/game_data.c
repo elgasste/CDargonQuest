@@ -7,6 +7,8 @@
 void dqGameData_Init()
 {
    dqEntity_t* player;
+   dqMap_t* map;
+   dqMapTile_t* tile;
 
    dqGameData = (dqGameData_t*)malloc( sizeof( dqGameData_t ) );
    CHECK_MALLOC( dqGameData )
@@ -30,6 +32,10 @@ void dqGameData_Init()
    player->velocityX = 0;
    player->velocityY = 0;
    player->direction = dqDirectionDown;
+
+   map = dqGameData_GetCurrentMap();
+   tile = dqMap_GetTileFromPosition( map, &( player->centerPosition ) );
+   map->playerTileCache = tile;
 }
 
 void dqGameData_Cleanup()

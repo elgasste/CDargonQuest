@@ -33,11 +33,30 @@ static sfBool dqMapLoader_BoolFromInt( int i )
    return i == 48 ? sfFalse : sfTrue;
 }
 
-static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigned int rows, const char* tilesPath, const char* passablePath )
+static unsigned int dqMapLoader_EncounterRateFromInt( int i )
 {
-   errno_t err;
+   // 48 is zero
+   int adjustedValue = i - 48;
+
+   switch ( adjustedValue )
+   {
+      case 1:
+         return 5;
+      case 2:
+         return 10;
+      case 3:
+         return 15;
+      default:
+         return 0;
+   }
+}
+
+static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigned int rows,
+                                     const char* tilesPath, const char* passablePath, const char* encounterPath )
+{
    FILE* tileFile;
    FILE* passableFile;
+   FILE* encounterFile;
    unsigned int i;
    int fileIndex, newLine;
 
@@ -49,21 +68,22 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
    map->tiles = (dqMapTile_t*)malloc( sizeof( dqMapTile_t ) * map->tileCount );
    CHECK_MALLOC( map->tiles )
 
-   err = fopen_s( &tileFile, tilesPath, "r" );
-
-   if ( err )
+   if ( fopen_s( &tileFile, tilesPath, "r" ) )
    {
       dqError_ExitWithMessage( "could not open map tiles file" );
    }
 
-   err = fopen_s( &passableFile, passablePath, "r" );
-
-   if ( err )
+   if ( fopen_s( &passableFile, passablePath, "r" ) )
    {
       dqError_ExitWithMessage( "could not open map passable file" );
    }
 
-   if ( tileFile && passableFile )
+   if ( fopen_s( &encounterFile, encounterPath, "r" ) )
+   {
+      dqError_ExitWithMessage( "could not open map encounter file" );
+   }
+
+   if ( tileFile && passableFile && encounterFile )
    {
       for ( i = 0, fileIndex = 0; i < map->tileCount; i++, fileIndex++ )
       {
@@ -71,6 +91,7 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
          map->tiles[i].isPassable = dqMapLoader_BoolFromInt( fgetc( passableFile ) );
          map->tiles[i].isExit = sfFalse;
          map->tiles[i].hasEntranceDirection = sfFalse;
+         map->tiles[i].encounterRate = dqMapLoader_EncounterRateFromInt( fgetc( encounterFile ) );
 
          if ( i == ( ( map->columns * map->rows ) - 1 ) )
          {
@@ -83,12 +104,15 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
             assert( newLine == 10 );
             newLine = fgetc( passableFile );
             assert( newLine == 10 );
+            newLine = fgetc( encounterFile );
+            assert( newLine == 10 );
             fileIndex = -1;
          }
       }
 
       fclose( tileFile );
       fclose( passableFile );
+      fclose( encounterFile );
    }
 }
 
@@ -101,8 +125,14 @@ void dqMapLoader_LoadMaps()
    dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) * dqGameData->mapCount );
    CHECK_MALLOC( dqGameData->maps )
 
-   dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ), 51, 43, "Resources\\Design\\Maps\\0_tiles.txt", "Resources\\Design\\Maps\\0_passable.txt" );
-   dqMapLoader_LoadTempMap( &( dqGameData->maps[1] ), 33, 40, "Resources\\Design\\Maps\\1_tiles.txt", "Resources\\Design\\Maps\\1_passable.txt" );
+   dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ), 51, 43,
+                            "Resources\\Design\\Maps\\0_tiles.txt",
+                            "Resources\\Design\\Maps\\0_passable.txt",
+                            "Resources\\Design\\Maps\\0_encounter_rates.txt" );
+   dqMapLoader_LoadTempMap( &( dqGameData->maps[1] ), 33, 40,
+                            "Resources\\Design\\Maps\\1_tiles.txt",
+                            "Resources\\Design\\Maps\\1_passable.txt",
+                            "Resources\\Design\\Maps\\1_encounter_rates.txt" );
 
    // overworld Aliahan entrance
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 29, 32 );
