@@ -32,8 +32,10 @@ void dqMap_CheckSwap()
 void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
 {
    unsigned int newColumn, newRow;
-   dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
    dqEntity_t* player = dqGameData->player;
+   dqMap_t* oldMap = &( dqGameData->maps[dqGameData->currentMapIndex] );
+   dqMapTile_t* oldTile = dqMap_GetTileFromPosition( oldMap, &( player->centerPosition ) );
+   dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
 
    dqGameData->currentMapIndex = newMapIndex;
 
@@ -45,4 +47,9 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
 
    player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
    player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+
+   if ( oldTile->hasEntranceDirection )
+   {
+      player->direction = oldTile->entranceDirection;
+   }
 }

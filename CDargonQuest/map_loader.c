@@ -70,6 +70,7 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
          map->tiles[i].tileId = dqMapLoader_TileIdFromInt( fgetc( tileFile ) );
          map->tiles[i].isPassable = dqMapLoader_BoolFromInt( fgetc( passableFile ) );
          map->tiles[i].isExit = sfFalse;
+         map->tiles[i].hasEntranceDirection = sfFalse;
 
          if ( i == ( ( map->columns * map->rows ) - 1 ) )
          {
@@ -108,43 +109,59 @@ void dqMapLoader_LoadMaps()
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 1;
    testExitTile->entranceTileIndex = ( 24 * 33 ) + 1; // col 1, row 24
+   testExitTile->hasEntranceDirection = sfTrue;
+   testExitTile->entranceDirection = dqDirectionRight;
 
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 30, 32 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 1;
    testExitTile->entranceTileIndex = ( 24 * 33 ) + 1; // col 1, row 24
+   testExitTile->hasEntranceDirection = sfTrue;
+   testExitTile->entranceDirection = dqDirectionRight;
 
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 29, 33 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 1;
    testExitTile->entranceTileIndex = ( 24 * 33 ) + 1; // col 1, row 24
+   testExitTile->hasEntranceDirection = sfTrue;
+   testExitTile->entranceDirection = dqDirectionRight;
 
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 30, 33 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 1;
    testExitTile->entranceTileIndex = ( 24 * 33 ) + 1; // col 1, row 24
+   testExitTile->hasEntranceDirection = sfTrue;
+   testExitTile->entranceDirection = dqDirectionRight;
 
    // Aliahan west exit
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[1] ), 0, 24 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 0;
    testExitTile->entranceTileIndex = ( 34 * 51 ) + 29; // col 29, row 33
+   testExitTile->hasEntranceDirection = sfTrue;
+   testExitTile->entranceDirection = dqDirectionDown;
 
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[1] ), 0, 25 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 0;
    testExitTile->entranceTileIndex = ( 34 * 51 ) + 29; // col 29, row 33
+   testExitTile->hasEntranceDirection = sfTrue;
+   testExitTile->entranceDirection = dqDirectionDown;
 
    // Aliahan south exit
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[1] ), 25, 39 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 0;
    testExitTile->entranceTileIndex = ( 34 * 51 ) + 29; // col 29, row 33
+   testExitTile->hasEntranceDirection = sfTrue;
+   testExitTile->entranceDirection = dqDirectionDown;
 
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[1] ), 26, 39 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 0;
    testExitTile->entranceTileIndex = ( 34 * 51 ) + 29; // col 29, row 33
+   testExitTile->hasEntranceDirection = sfTrue;
+   testExitTile->entranceDirection = dqDirectionDown;
 
    dqGameData->currentMapIndex = 0;
 }
