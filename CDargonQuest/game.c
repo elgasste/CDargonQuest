@@ -29,7 +29,7 @@ static void dqGame_HandleQuit()
    // TODO: maybe ask about saving the game or whatnot
    dqEventQueue_Flush();
    dqGame->isRunning = sfFalse;
-   dqLog_Message( "Quitting game" );
+   dqLog_Message( "quitting game" );
 }
 
 static void dqGame_HandleMovePlayer( dqEvent_t* e )
@@ -181,7 +181,7 @@ void dqGame_Init()
    dqGameConfig_Init();
    dqLog_Init();
 
-   dqLog_Message( "Loading game objects" );
+   dqLog_Message( "loading game objects" );
 
    dqRandom_Init();
    dqRenderConfig_Init();
@@ -193,7 +193,7 @@ void dqGame_Init()
    dqClock_Init();
    dqEventQueue_Init();
 
-   dqLog_Message( "Game objects loaded" );
+   dqLog_Message( "game objects loaded" );
 }
 
 void dqGame_Cleanup()
@@ -208,7 +208,7 @@ void dqGame_Cleanup()
    dqRenderConfig_Cleanup();
    dqGameConfig_Cleanup();
 
-   dqLog_Message( "Game objects cleaned up" );
+   dqLog_Message( "game objects cleaned up" );
 
    dqLog_Cleanup();
 
@@ -217,7 +217,7 @@ void dqGame_Cleanup()
 
 void dqGame_Run()
 {
-   dqLog_Message( "Game loop starting" );
+   dqLog_Message( "game loop starting" );
 
    dqGame->isRunning = sfTrue;
    dqGame->state = dqStateTitle;
@@ -233,7 +233,7 @@ void dqGame_Run()
       dqClock_EndFrame();
    }
 
-   dqLog_Message( "Game loop ended" );
+   dqLog_Message( "game loop ended" );
 
    dqGame->state = dqStateClosing;
 }

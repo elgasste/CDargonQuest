@@ -76,7 +76,7 @@ void dqMap_CheckEncounter()
       map->playerTileCache = tile;
       encounterValue = dqRandom_Percent();
 
-      if ( encounterValue < tile->encounterRate )
+      if ( encounterValue < tile->encounterRate && !dqGameConfig->invisibleCheat )
       {
          dqEventQueue_Push( dqEventEncounter, 0 );
       }
