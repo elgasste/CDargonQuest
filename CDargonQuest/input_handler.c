@@ -8,7 +8,6 @@
 
 static void dqInputHandler_HandleCheat()
 {
-   // TODO: dqexit
    char* cheat = dqInputHandler->cheatString;
 
    if ( !strcmp( cheat, "dqclip" ) )
@@ -18,6 +17,10 @@ static void dqInputHandler_HandleCheat()
    else if ( !strcmp( cheat, "dqpass" ) )
    {
       dqGameConfig->passableCheat = dqGameConfig->passableCheat ? sfFalse : sfTrue;
+   }
+   else if ( !strcmp( cheat, "dqswap" ) )
+   {
+      dqGameConfig->mapSwapCheat = dqGameConfig->mapSwapCheat ? sfFalse : sfTrue;
    }
 
    dqInputHandler->cheatString[0] = '\0';
@@ -29,7 +32,7 @@ static void dqInputHandler_CheckCheats()
    static const char* cheats[] = {
       "dqclip",
       "dqpass",
-      "dqexit"
+      "dqswap"
    };
    static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );
 

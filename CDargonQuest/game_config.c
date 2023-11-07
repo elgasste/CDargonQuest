@@ -12,6 +12,7 @@ void dqGameConfig_Init()
 
    dqGameConfig->noClipCheat = sfFalse;
    dqGameConfig->passableCheat = sfFalse;
+   dqGameConfig->mapSwapCheat = sfFalse;
 }
 
 void dqGameConfig_Cleanup()

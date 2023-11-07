@@ -12,8 +12,10 @@ typedef struct dqOverworldRenderer_t
    sfVector2f sideOffset;
 
    sfRectangleShape* occlusions[4];
+
    sfRectangleShape* passableRect;
    sfRectangleShape* impassableRect;
+   sfRectangleShape* mapSwapRect;
 }
 dqOverworldRenderer_t;
 
