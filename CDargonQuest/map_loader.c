@@ -67,7 +67,6 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
    {
       for ( i = 0, fileIndex = 0; i < map->tileCount; i++, fileIndex++ )
       {
-         map->tiles[i].textureId = 0;
          map->tiles[i].tileId = dqMapLoader_TileIdFromInt( fgetc( tileFile ) );
          map->tiles[i].isPassable = dqMapLoader_BoolFromInt( fgetc( passableFile ) );
          map->tiles[i].isExit = sfFalse;
