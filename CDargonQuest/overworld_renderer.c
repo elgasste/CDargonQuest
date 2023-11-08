@@ -68,19 +68,20 @@ void dqOverworldRenderer_Init()
    sfRectangleShape_setFillColor( dqOverworldRenderer->impassableRect, dqRenderConfig->impassableOverlayColor );
    sfRectangleShape_setFillColor( dqOverworldRenderer->mapSwapRect, dqRenderConfig->mapSwapOverlayColor );
 
-   dqOverworldRenderer->encounterRateFont = sfFont_createFromFile( dqRenderConfig->encounterRateFontFilePath );
-   dqOverworldRenderer->encounterRateText = sfText_create();
-   sfText_setFont( dqOverworldRenderer->encounterRateText, dqOverworldRenderer->encounterRateFont );
-   sfText_setCharacterSize( dqOverworldRenderer->encounterRateText, dqRenderConfig->encounterRateFontSize );
-   sfText_setFillColor( dqOverworldRenderer->encounterRateText, dqRenderConfig->encounterRateFontColor );
+   dqOverworldRenderer->cheatFont = sfFont_createFromFile( dqRenderConfig->cheatFontFilePath );
+   dqOverworldRenderer->cheatText = sfText_create();
+   sfText_setFont( dqOverworldRenderer->cheatText, dqOverworldRenderer->cheatFont );
+   sfText_setCharacterSize( dqOverworldRenderer->cheatText, dqRenderConfig->cheatFontSize );
+   sfText_setLetterSpacing( dqOverworldRenderer->cheatText, dqRenderConfig->cheatLetterSpacing );
+   sfText_setFillColor( dqOverworldRenderer->cheatText, dqRenderConfig->cheatFontColor );
 }
 
 void dqOverworldRenderer_Cleanup()
 {
    int i;
 
-   sfText_destroy( dqOverworldRenderer->encounterRateText );
-   sfFont_destroy( dqOverworldRenderer->encounterRateFont );
+   sfText_destroy( dqOverworldRenderer->cheatText );
+   sfFont_destroy( dqOverworldRenderer->cheatFont );
 
    sfRectangleShape_destroy( dqOverworldRenderer->passableRect );
    sfRectangleShape_destroy( dqOverworldRenderer->impassableRect );
@@ -199,10 +200,18 @@ void dqOverworldRenderer_RenderMap()
 
          if ( dqGameConfig->encounterRateCheat )
          {
-            sprintf_s( dqOverworldRenderer->encounterRateChars, 32, "%d", tile->encounterRate );
-            sfText_setString( dqOverworldRenderer->encounterRateText, dqOverworldRenderer->encounterRateChars );
-            sfText_setPosition( dqOverworldRenderer->encounterRateText, tilePosition );
-            dqWindow_DrawText( dqOverworldRenderer->encounterRateText );
+            sprintf_s( dqOverworldRenderer->cheatChars, 32, "%d", tile->encounterRate );
+            sfText_setString( dqOverworldRenderer->cheatText, dqOverworldRenderer->cheatChars );
+            sfText_setPosition( dqOverworldRenderer->cheatText, tilePosition );
+            dqWindow_DrawText( dqOverworldRenderer->cheatText );
+         }
+
+         if ( dqGameConfig->enemyTierCheat )
+         {
+            sprintf_s( dqOverworldRenderer->cheatChars, 32, "%d-%d", tile->minEnemyTier, tile->maxEnemyTier );
+            sfText_setString( dqOverworldRenderer->cheatText, dqOverworldRenderer->cheatChars );
+            sfText_setPosition( dqOverworldRenderer->cheatText, tilePosition );
+            dqWindow_DrawText( dqOverworldRenderer->cheatText );
          }
       }
    }

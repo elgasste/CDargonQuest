@@ -55,9 +55,10 @@ void dqRenderConfig_Init()
    dqRenderConfig->overworldFadeOutSeconds = 0.3f;
    dqRenderConfig->overworldStayFadedSeconds = 0.2f;
    dqRenderConfig->overworldFadeInSeconds = 0.3f;
-   dqRenderConfig->encounterRateFontFilePath = "Resources/Fonts/Consolas.ttf";
-   dqRenderConfig->encounterRateFontSize = 11;
-   dqRenderConfig->encounterRateFontColor = sfWhite;
+   dqRenderConfig->cheatFontFilePath = "Resources/Fonts/Consolas.ttf";
+   dqRenderConfig->cheatFontSize = 11;
+   dqRenderConfig->cheatLetterSpacing = 0.1f;
+   dqRenderConfig->cheatFontColor = sfWhite;
 }
 
 void dqRenderConfig_Cleanup()

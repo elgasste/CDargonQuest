@@ -16,6 +16,7 @@ typedef struct dqGameConfig_t
    sfBool mapSwapCheat;
    sfBool invisibleCheat;
    sfBool encounterRateCheat;
+   sfBool enemyTierCheat;
 }
 dqGameConfig_t;
 

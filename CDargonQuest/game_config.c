@@ -17,6 +17,7 @@ void dqGameConfig_Init()
    dqGameConfig->mapSwapCheat = sfFalse;
    dqGameConfig->invisibleCheat = sfFalse;
    dqGameConfig->encounterRateCheat = sfFalse;
+   dqGameConfig->enemyTierCheat = sfFalse;
 }
 
 void dqGameConfig_Cleanup()

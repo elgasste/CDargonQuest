@@ -114,6 +114,15 @@
     <ClCompile Include="physics.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="random.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="transition_renderer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -210,6 +219,15 @@
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="transition_renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

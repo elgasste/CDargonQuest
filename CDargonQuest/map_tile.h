@@ -13,5 +13,7 @@ typedef struct dqMapTile_t
    sfBool hasEntranceDirection;
    dqDirection entranceDirection;
    unsigned int encounterRate;
+   unsigned int minEnemyTier;
+   unsigned int maxEnemyTier;
 }
 dqMapTile_t;
