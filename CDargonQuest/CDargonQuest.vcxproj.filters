@@ -121,7 +121,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="transition_renderer.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="battle_renderer.c">
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,7 +231,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="transition_renderer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="battle_renderer.h">
+      <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

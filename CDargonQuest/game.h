@@ -8,6 +8,7 @@ typedef struct dqGame_t
 {
    sfBool isRunning;
    dqState_t state;
+   dqState_t previousState;
 
    unsigned int nextMapIndex;
    unsigned int nextMapTileIndex;

@@ -15,12 +15,18 @@
 #include "map.h"
 #include "transition_renderer.h"
 
+static void dqGame_SetState( dqState_t state )
+{
+   dqGame->previousState = dqGame->state;
+   dqGame->state = state;
+}
+
 static void dqGame_HandleStart()
 {
    if ( dqGame->state == dqStateTitle )
    {
       dqEventQueue_Flush();
-      dqGame->state = dqStateOverworld;
+      dqGame_SetState( dqStateOverworld );
    }
 }
 
@@ -92,36 +98,57 @@ static void dqGame_HandleSwapMap( dqEvent_t* e )
 {
    if ( dqGame->state == dqStateOverworld )
    {
-      dqTransitionRenderer_Reset();
-
       dqGame->nextMapIndex = (unsigned int)( e->args.argList[0] );
       dqGame->nextMapTileIndex = (unsigned int)( e->args.argList[1] );
 
       dqEventQueue_Flush();
-
-      dqGame->state = dqStateOverworldTransition;
+      dqTransitionRenderer_Reset();
+      dqGame_SetState( dqStateOverworldTransition );
    }
 }
 
-static void dqGame_HandleOverworldFadedOut()
+static void dqGame_HandleFadedOut()
 {
    if ( dqGame->state == dqStateOverworldTransition )
    {
       dqMap_Swap( dqGame->nextMapIndex, dqGame->nextMapTileIndex );
    }
+   else if ( dqGame->state == dqStateBattleTransitionIn )
+   {
+      // TODO: generate a battle
+   }
 }
 
-static void dqGame_HandleOverworldFadedIn()
+static void dqGame_HandleFadedIn()
 {
-   if ( dqGame->state == dqStateOverworldTransition )
+   if ( dqGame->state == dqStateOverworldTransition || dqGame->state == dqStateBattleTransitionOut )
    {
-      dqGame->state = dqStateOverworld;
+      dqGame_SetState( dqStateOverworld );
+   }
+   else if ( dqGame->state == dqStateBattleTransitionIn )
+   {
+      dqGame_SetState( dqStateBattle );
    }
 }
 
 static void dqGame_HandleEncounter()
 {
-   // TODO: generate a battle
+   if ( dqGame->state == dqStateOverworld )
+   {
+      dqEventQueue_Flush();
+      dqTransitionRenderer_Reset();
+      dqGame_SetState( dqStateBattleTransitionIn );
+   }
+}
+
+static void dqGame_HandleExitBattle()
+{
+   if ( dqGame->state == dqStateBattle )
+   {
+      dqEventQueue_Flush();
+      dqTransitionRenderer_Reset();
+      dqGame_SetState( dqStateBattleTransitionOut );
+   }
 }
 
 static void dqGame_HandleEvents()
@@ -151,14 +178,17 @@ static void dqGame_HandleEvents()
          case dqEventSwapMap:
             dqGame_HandleSwapMap( e );
             break;
-         case dqEventOverworldFadedOut:
-            dqGame_HandleOverworldFadedOut();
+         case dqEventFadedOut:
+            dqGame_HandleFadedOut();
             break;
-         case dqEventOverworldFadedIn:
-            dqGame_HandleOverworldFadedIn();
+         case dqEventFadedIn:
+            dqGame_HandleFadedIn();
             break;
          case dqEventEncounter:
             dqGame_HandleEncounter();
+            break;
+         case dqEventExitBattle:
+            dqGame_HandleExitBattle();
             break;
       }
    }
@@ -166,13 +196,16 @@ static void dqGame_HandleEvents()
 
 static void dqGame_Tick()
 {
-   // TODO: eventually do this for all entities on the map
-   dqPhysics_MoveEntity( dqGameData->player );
-   dqEntitySprite_Tick( dqRenderData->playerSprite );
-   dqPhysics_DecelerateEntity( dqGameData->player );
+   if ( dqGame->state == dqStateOverworld )
+   {
+      // TODO: eventually do this for all entities on the map
+      dqPhysics_MoveEntity( dqGameData->player );
+      dqEntitySprite_Tick( dqRenderData->playerSprite );
+      dqPhysics_DecelerateEntity( dqGameData->player );
 
-   dqMap_CheckSwap();
-   dqMap_CheckEncounter();
+      dqMap_CheckSwap();
+      dqMap_CheckEncounter();
+   }
 }
 
 void dqGame_Init()
@@ -182,6 +215,7 @@ void dqGame_Init()
 
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
+   dqGame->previousState = dqStateInit;
 
    dqGame->nextMapIndex = 0;
    dqGame->nextMapTileIndex = 0;
@@ -217,7 +251,6 @@ void dqGame_Cleanup()
    dqGameConfig_Cleanup();
 
    dqLog_Message( "game objects cleaned up" );
-
    dqLog_Cleanup();
 
    SAFE_DELETE( dqGame )
@@ -226,9 +259,8 @@ void dqGame_Cleanup()
 void dqGame_Run()
 {
    dqLog_Message( "game loop starting" );
-
+   dqGame_SetState( dqStateTitle );
    dqGame->isRunning = sfTrue;
-   dqGame->state = dqStateTitle;
 
    while ( dqGame->isRunning )
    {
@@ -242,6 +274,5 @@ void dqGame_Run()
    }
 
    dqLog_Message( "game loop ended" );
-
-   dqGame->state = dqStateClosing;
+   dqGame_SetState( dqStateClosing );
 }
