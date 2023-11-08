@@ -15,12 +15,18 @@
 #include "map.h"
 #include "transition_renderer.h"
 
+static void dqGame_SetState( dqState_t state )
+{
+   dqGame->previousState = dqGame->state;
+   dqGame->state = state;
+}
+
 static void dqGame_HandleStart()
 {
    if ( dqGame->state == dqStateTitle )
    {
       dqEventQueue_Flush();
-      dqGame->state = dqStateOverworld;
+      dqGame_SetState( dqStateOverworld );
    }
 }
 
@@ -99,7 +105,7 @@ static void dqGame_HandleSwapMap( dqEvent_t* e )
 
       dqEventQueue_Flush();
 
-      dqGame->state = dqStateOverworldTransition;
+      dqGame_SetState( dqStateOverworldTransition );
    }
 }
 
@@ -119,11 +125,11 @@ static void dqGame_HandleOverworldFadedIn()
 {
    if ( dqGame->state == dqStateOverworldTransition )
    {
-      dqGame->state = dqStateOverworld;
+      dqGame_SetState( dqStateOverworld );
    }
    else if ( dqGame->state == dqStateBattleTransition )
    {
-      dqGame->state = dqStateBattle;
+      dqGame_SetState( dqStateBattle );
    }
 }
 
@@ -132,7 +138,7 @@ static void dqGame_HandleEncounter()
    if ( dqGame->state == dqStateOverworld )
    {
       dqEventQueue_Flush();
-      dqGame->state = dqStateBattleTransition;
+      dqGame_SetState( dqStateBattleTransition );
    }
 }
 
@@ -194,6 +200,7 @@ void dqGame_Init()
 
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
+   dqGame->previousState = dqStateInit;
 
    dqGame->nextMapIndex = 0;
    dqGame->nextMapTileIndex = 0;
@@ -229,7 +236,6 @@ void dqGame_Cleanup()
    dqGameConfig_Cleanup();
 
    dqLog_Message( "game objects cleaned up" );
-
    dqLog_Cleanup();
 
    SAFE_DELETE( dqGame )
@@ -238,9 +244,8 @@ void dqGame_Cleanup()
 void dqGame_Run()
 {
    dqLog_Message( "game loop starting" );
-
+   dqGame_SetState( dqStateTitle );
    dqGame->isRunning = sfTrue;
-   dqGame->state = dqStateTitle;
 
    while ( dqGame->isRunning )
    {
@@ -254,6 +259,5 @@ void dqGame_Run()
    }
 
    dqLog_Message( "game loop ended" );
-
-   dqGame->state = dqStateClosing;
+   dqGame_SetState( dqStateClosing );
 }
