@@ -119,6 +119,11 @@ static void dqGame_HandleOverworldFadedIn()
    }
 }
 
+static void dqGame_HandleEncounter()
+{
+   // TODO: generate a battle
+}
+
 static void dqGame_HandleEvents()
 {
    dqEvent_t* e;
@@ -151,6 +156,9 @@ static void dqGame_HandleEvents()
             break;
          case dqEventOverworldFadedIn:
             dqGame_HandleOverworldFadedIn();
+            break;
+         case dqEventEncounter:
+            dqGame_HandleEncounter();
             break;
       }
    }
