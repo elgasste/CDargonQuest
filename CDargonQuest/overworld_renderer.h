@@ -18,7 +18,7 @@ typedef struct dqOverworldRenderer_t
    sfRectangleShape* mapSwapRect;
    sfFont* cheatFont;
    sfText* cheatText;
-   char cheatChars[32];
+   char cheatChars[64];
 }
 dqOverworldRenderer_t;
 
