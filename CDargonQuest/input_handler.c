@@ -4,6 +4,7 @@
 #include "render_config.h"
 #include "title_input_handler.h"
 #include "overworld_input_handler.h"
+#include "battle_input_handler.h"
 #include "game.h"
 
 static void dqInputHandler_HandleCheat()
@@ -147,6 +148,9 @@ void dqInputHandler_HandleInput()
          break;
       case dqStateOverworld:
          dqOverworldInputHandler_HandleInput();
+         break;
+      case dqStateBattle:
+         dqBattleInputHandler_HandleInput();
          break;
    }
 }

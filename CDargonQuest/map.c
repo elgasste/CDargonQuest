@@ -2,7 +2,9 @@
 #include "map_tile.h"
 #include "game_config.h"
 #include "game_data.h"
+#include "render_data.h"
 #include "entity.h"
+#include "entity_sprite.h"
 #include "event_queue.h"
 #include "random.h"
 
@@ -55,10 +57,16 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
    player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
    player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
 
+   player->velocityX = 0;
+   player->velocityY = 0;
+
    if ( oldTile->hasEntranceDirection )
    {
       player->direction = oldTile->entranceDirection;
    }
+
+   // TODO: is there a better way to do this? the map shouldn't care about render data
+   dqEntitySprite_Tick( dqRenderData->playerSprite );
 
    // don't check for encounters right away
    newTile = dqMap_GetTileFromPosition( newMap, &( player->centerPosition ) );

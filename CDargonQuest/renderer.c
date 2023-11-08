@@ -43,7 +43,8 @@ void dqRenderer_Render()
          dqOverworldRenderer_RenderMap();
          dqOverworldRenderer_RenderEntities();
          dqTransitionRenderer_Render( sfTrue ); // black
-      case dqStateBattleTransition:
+         break;
+      case dqStateBattleTransitionIn:
          if ( dqTransitionRenderer->fadingIn )
          {
             dqBattleRenderer_Render();  
@@ -54,6 +55,18 @@ void dqRenderer_Render()
             dqOverworldRenderer_RenderEntities();
          }
          dqTransitionRenderer_Render( sfFalse ); // white
+         break;
+      case dqStateBattleTransitionOut:
+         if ( dqTransitionRenderer->fadingOut )
+         {
+            dqBattleRenderer_Render();
+         }
+         else
+         {
+            dqOverworldRenderer_RenderMap();
+            dqOverworldRenderer_RenderEntities();
+         }
+         dqTransitionRenderer_Render( sfTrue ); // black
          break;
       case dqStateBattle:
          dqBattleRenderer_Render();

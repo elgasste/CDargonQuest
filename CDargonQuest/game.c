@@ -98,36 +98,34 @@ static void dqGame_HandleSwapMap( dqEvent_t* e )
 {
    if ( dqGame->state == dqStateOverworld )
    {
-      dqTransitionRenderer_Reset();
-
       dqGame->nextMapIndex = (unsigned int)( e->args.argList[0] );
       dqGame->nextMapTileIndex = (unsigned int)( e->args.argList[1] );
 
       dqEventQueue_Flush();
-
+      dqTransitionRenderer_Reset();
       dqGame_SetState( dqStateOverworldTransition );
    }
 }
 
-static void dqGame_HandleOverworldFadedOut()
+static void dqGame_HandleFadedOut()
 {
    if ( dqGame->state == dqStateOverworldTransition )
    {
       dqMap_Swap( dqGame->nextMapIndex, dqGame->nextMapTileIndex );
    }
-   else if ( dqGame->state == dqStateBattleTransition )
+   else if ( dqGame->state == dqStateBattleTransitionIn )
    {
       // TODO: generate a battle
    }
 }
 
-static void dqGame_HandleOverworldFadedIn()
+static void dqGame_HandleFadedIn()
 {
-   if ( dqGame->state == dqStateOverworldTransition )
+   if ( dqGame->state == dqStateOverworldTransition || dqGame->state == dqStateBattleTransitionOut )
    {
       dqGame_SetState( dqStateOverworld );
    }
-   else if ( dqGame->state == dqStateBattleTransition )
+   else if ( dqGame->state == dqStateBattleTransitionIn )
    {
       dqGame_SetState( dqStateBattle );
    }
@@ -138,7 +136,18 @@ static void dqGame_HandleEncounter()
    if ( dqGame->state == dqStateOverworld )
    {
       dqEventQueue_Flush();
-      dqGame_SetState( dqStateBattleTransition );
+      dqTransitionRenderer_Reset();
+      dqGame_SetState( dqStateBattleTransitionIn );
+   }
+}
+
+static void dqGame_HandleExitBattle()
+{
+   if ( dqGame->state == dqStateBattle )
+   {
+      dqEventQueue_Flush();
+      dqTransitionRenderer_Reset();
+      dqGame_SetState( dqStateBattleTransitionOut );
    }
 }
 
@@ -169,14 +178,17 @@ static void dqGame_HandleEvents()
          case dqEventSwapMap:
             dqGame_HandleSwapMap( e );
             break;
-         case dqEventOverworldFadedOut:
-            dqGame_HandleOverworldFadedOut();
+         case dqEventFadedOut:
+            dqGame_HandleFadedOut();
             break;
-         case dqEventOverworldFadedIn:
-            dqGame_HandleOverworldFadedIn();
+         case dqEventFadedIn:
+            dqGame_HandleFadedIn();
             break;
          case dqEventEncounter:
             dqGame_HandleEncounter();
+            break;
+         case dqEventExitBattle:
+            dqGame_HandleExitBattle();
             break;
       }
    }
@@ -184,13 +196,16 @@ static void dqGame_HandleEvents()
 
 static void dqGame_Tick()
 {
-   // TODO: eventually do this for all entities on the map
-   dqPhysics_MoveEntity( dqGameData->player );
-   dqEntitySprite_Tick( dqRenderData->playerSprite );
-   dqPhysics_DecelerateEntity( dqGameData->player );
+   if ( dqGame->state == dqStateOverworld )
+   {
+      // TODO: eventually do this for all entities on the map
+      dqPhysics_MoveEntity( dqGameData->player );
+      dqEntitySprite_Tick( dqRenderData->playerSprite );
+      dqPhysics_DecelerateEntity( dqGameData->player );
 
-   dqMap_CheckSwap();
-   dqMap_CheckEncounter();
+      dqMap_CheckSwap();
+      dqMap_CheckEncounter();
+   }
 }
 
 void dqGame_Init()

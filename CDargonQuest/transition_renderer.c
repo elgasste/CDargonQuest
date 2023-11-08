@@ -28,10 +28,14 @@ void dqTransitionRenderer_Reset()
    sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 0, 0, 0, 0 ) );
 
    dqTransitionRenderer->elapsedSeconds = 0;
+   dqTransitionRenderer->fadingIn = sfFalse;
+   dqTransitionRenderer->fadingOut = sfTrue;
    dqTransitionRenderer->raisedFadedOut = sfFalse;
    dqTransitionRenderer->raisedFadedIn = sfFalse;
 }
 
+// TODO: I suppose it's possible for the frame rate to drop so low that we completely skip over
+// one of the conditions in here, that should probably be addressed.
 void dqTransitionRenderer_Render( sfBool black )
 {
    float fadePercentage, fadeInSeconds, sec;
@@ -61,7 +65,7 @@ void dqTransitionRenderer_Render( sfBool black )
 
       if ( !dqTransitionRenderer->raisedFadedOut )
       {
-         dqEventQueue_Push( dqEventOverworldFadedOut, 0 );
+         dqEventQueue_Push( dqEventFadedOut, 0 );
          dqTransitionRenderer->raisedFadedOut = sfTrue;
       }
 
@@ -97,7 +101,7 @@ void dqTransitionRenderer_Render( sfBool black )
 
       if ( !dqTransitionRenderer->raisedFadedIn )
       {
-         dqEventQueue_Push( dqEventOverworldFadedIn, 0 );
+         dqEventQueue_Push( dqEventFadedIn, 0 );
          dqTransitionRenderer->raisedFadedIn = sfTrue;
       }
 
