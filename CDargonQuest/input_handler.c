@@ -68,11 +68,26 @@ static void dqInputHandler_HandleCheat()
 
       if ( dqGameConfig->encounterRateCheat )
       {
+         dqGameConfig->enemyTierCheat = sfFalse;
          dqLog_Message( "encounter rate overlay cheat on" );
       }
       else
       {
          dqLog_Message( "encounter rate overlay cheat off" );
+      }
+   }
+   else if ( !strcmp( cheat, "dqtier" ) )
+   {
+      dqGameConfig->enemyTierCheat = dqGameConfig->enemyTierCheat ? sfFalse : sfTrue;
+
+      if ( dqGameConfig->enemyTierCheat )
+      {
+         dqGameConfig->encounterRateCheat = sfFalse;
+         dqLog_Message( "enemy tier overlay cheat on" );
+      }
+      else
+      {
+         dqLog_Message( "enemy tier overlay cheat off" );
       }
    }
    else if ( !strcmp( cheat, "dqclear" ) )
@@ -82,6 +97,7 @@ static void dqInputHandler_HandleCheat()
       dqGameConfig->mapSwapCheat = sfFalse;
       dqGameConfig->invisibleCheat = sfFalse;
       dqGameConfig->encounterRateCheat = sfFalse;
+      dqGameConfig->enemyTierCheat = sfFalse;
       dqLog_Message( "cleared all cheats" );
    }
 
@@ -97,6 +113,7 @@ static void dqInputHandler_CheckCheats()
       "dqswap",
       "dqinvis",
       "dqenc",
+      "dqtier",
       "dqclear"
    };
    static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );

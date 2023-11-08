@@ -68,17 +68,23 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
 void dqMap_CheckEncounter()
 {
    unsigned int encounterValue;
-   dqMap_t* map = dqGameData_GetCurrentMap();
-   dqMapTile_t* tile = dqMap_GetTileFromPosition( map, &( dqGameData->player->centerPosition ));
+   dqMap_t* map;
+   dqMapTile_t* tile;
 
-   if ( tile != map->playerTileCache )
+   if ( !dqGameConfig->noClipCheat && !dqGameConfig->invisibleCheat )
    {
-      map->playerTileCache = tile;
-      encounterValue = dqRandom_Percent();
+      map = dqGameData_GetCurrentMap();
+      tile = dqMap_GetTileFromPosition( map, &( dqGameData->player->centerPosition ));
 
-      if ( encounterValue < tile->encounterRate && !dqGameConfig->invisibleCheat )
+      if ( tile != map->playerTileCache )
       {
-         dqEventQueue_Push( dqEventEncounter, 0 );
+         map->playerTileCache = tile;
+         encounterValue = dqRandom_Percent();
+
+         if ( encounterValue < tile->encounterRate )
+         {
+            dqEventQueue_Push( dqEventEncounter, 0 );
+         }
       }
    }
 }
