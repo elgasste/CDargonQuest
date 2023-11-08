@@ -16,6 +16,9 @@ typedef struct dqOverworldRenderer_t
    sfRectangleShape* passableRect;
    sfRectangleShape* impassableRect;
    sfRectangleShape* mapSwapRect;
+   sfFont* encounterRateFont;
+   sfText* encounterRateText;
+   char encounterRateChars[32];
 }
 dqOverworldRenderer_t;
 

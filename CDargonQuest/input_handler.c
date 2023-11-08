@@ -62,12 +62,26 @@ static void dqInputHandler_HandleCheat()
          dqLog_Message( "invisibility cheat off" );
       }
    }
+   else if ( !strcmp( cheat, "dqenc" ) )
+   {
+      dqGameConfig->encounterRateCheat = dqGameConfig->encounterRateCheat ? sfFalse : sfTrue;
+
+      if ( dqGameConfig->encounterRateCheat )
+      {
+         dqLog_Message( "encounter rate overlay cheat on" );
+      }
+      else
+      {
+         dqLog_Message( "encounter rate overlay cheat off" );
+      }
+   }
    else if ( !strcmp( cheat, "dqclear" ) )
    {
       dqGameConfig->noClipCheat = sfFalse;
       dqGameConfig->passableCheat = sfFalse;
       dqGameConfig->mapSwapCheat = sfFalse;
       dqGameConfig->invisibleCheat = sfFalse;
+      dqGameConfig->encounterRateCheat = sfFalse;
       dqLog_Message( "cleared all cheats" );
    }
 
@@ -82,6 +96,7 @@ static void dqInputHandler_CheckCheats()
       "dqpass",
       "dqswap",
       "dqinvis",
+      "dqenc",
       "dqclear"
    };
    static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );

@@ -16,6 +16,7 @@ void dqGameConfig_Init()
    dqGameConfig->passableCheat = sfFalse;
    dqGameConfig->mapSwapCheat = sfFalse;
    dqGameConfig->invisibleCheat = sfFalse;
+   dqGameConfig->encounterRateCheat = sfFalse;
 }
 
 void dqGameConfig_Cleanup()
