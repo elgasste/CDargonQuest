@@ -52,11 +52,14 @@ static unsigned int dqMapLoader_EncounterRateFromInt( int i )
 }
 
 static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigned int rows,
-                                     const char* tilesPath, const char* passablePath, const char* encounterPath )
+                                     const char* tilesPath, const char* passablePath, const char* encounterPath,
+                                     const char* minTiersPath, const char* maxTiersPath )
 {
    FILE* tileFile;
    FILE* passableFile;
    FILE* encounterFile;
+   FILE* minTiersFile;
+   FILE* maxTiersFile;
    unsigned int i;
    int fileIndex, newLine;
 
@@ -83,7 +86,17 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
       dqError_ExitWithMessage( "could not open map encounter file" );
    }
 
-   if ( tileFile && passableFile && encounterFile )
+   if ( fopen_s( &minTiersFile, minTiersPath, "r" ) )
+   {
+      dqError_ExitWithMessage( "could not open map min tiers file" );
+   }
+
+   if ( fopen_s( &maxTiersFile, maxTiersPath, "r" ) )
+   {
+      dqError_ExitWithMessage( "could not open map max tiers file" );
+   }
+
+   if ( tileFile && passableFile && encounterFile && minTiersFile && maxTiersFile )
    {
       for ( i = 0, fileIndex = 0; i < map->tileCount; i++, fileIndex++ )
       {
@@ -92,6 +105,8 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
          map->tiles[i].isExit = sfFalse;
          map->tiles[i].hasEntranceDirection = sfFalse;
          map->tiles[i].encounterRate = dqMapLoader_EncounterRateFromInt( fgetc( encounterFile ) );
+         map->tiles[i].minEnemyTier = fgetc( minTiersFile ) - 48;
+         map->tiles[i].maxEnemyTier = fgetc( maxTiersFile ) - 48;
 
          if ( i == ( ( map->columns * map->rows ) - 1 ) )
          {
@@ -106,6 +121,10 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
             assert( newLine == 10 );
             newLine = fgetc( encounterFile );
             assert( newLine == 10 );
+            newLine = fgetc( minTiersFile );
+            assert( newLine == 10 );
+            newLine = fgetc( maxTiersFile );
+            assert( newLine == 10 );
             fileIndex = -1;
          }
       }
@@ -113,6 +132,8 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
       fclose( tileFile );
       fclose( passableFile );
       fclose( encounterFile );
+      fclose( minTiersFile );
+      fclose( maxTiersFile );
    }
 }
 
@@ -128,11 +149,15 @@ void dqMapLoader_LoadMaps()
    dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ), 51, 43,
                             "Resources\\Design\\Maps\\0_tiles.txt",
                             "Resources\\Design\\Maps\\0_passable.txt",
-                            "Resources\\Design\\Maps\\0_encounter_rates.txt" );
+                            "Resources\\Design\\Maps\\0_encounter_rates.txt",
+                            "Resources\\Design\\Maps\\0_min_enemy_tiers.txt",
+                            "Resources\\Design\\Maps\\0_max_enemy_tiers.txt" );
    dqMapLoader_LoadTempMap( &( dqGameData->maps[1] ), 33, 40,
                             "Resources\\Design\\Maps\\1_tiles.txt",
                             "Resources\\Design\\Maps\\1_passable.txt",
-                            "Resources\\Design\\Maps\\1_encounter_rates.txt" );
+                            "Resources\\Design\\Maps\\1_encounter_rates.txt",
+                            "Resources\\Design\\Maps\\1_min_enemy_tiers.txt",
+                            "Resources\\Design\\Maps\\1_max_enemy_tiers.txt");
 
    // overworld Aliahan entrance
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 29, 32 );
