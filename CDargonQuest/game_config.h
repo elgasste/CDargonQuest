@@ -15,6 +15,7 @@ typedef struct dqGameConfig_t
    sfBool passableCheat;
    sfBool mapSwapCheat;
    sfBool invisibleCheat;
+   sfBool encounterRateCheat;
 }
 dqGameConfig_t;
 

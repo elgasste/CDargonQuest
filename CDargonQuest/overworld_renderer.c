@@ -67,11 +67,20 @@ void dqOverworldRenderer_Init()
    sfRectangleShape_setFillColor( dqOverworldRenderer->passableRect, dqRenderConfig->passableOverlayColor );
    sfRectangleShape_setFillColor( dqOverworldRenderer->impassableRect, dqRenderConfig->impassableOverlayColor );
    sfRectangleShape_setFillColor( dqOverworldRenderer->mapSwapRect, dqRenderConfig->mapSwapOverlayColor );
+
+   dqOverworldRenderer->encounterRateFont = sfFont_createFromFile( dqRenderConfig->encounterRateFontFilePath );
+   dqOverworldRenderer->encounterRateText = sfText_create();
+   sfText_setFont( dqOverworldRenderer->encounterRateText, dqOverworldRenderer->encounterRateFont );
+   sfText_setCharacterSize( dqOverworldRenderer->encounterRateText, dqRenderConfig->encounterRateFontSize );
+   sfText_setFillColor( dqOverworldRenderer->encounterRateText, dqRenderConfig->encounterRateFontColor );
 }
 
 void dqOverworldRenderer_Cleanup()
 {
    int i;
+
+   sfText_destroy( dqOverworldRenderer->encounterRateText );
+   sfFont_destroy( dqOverworldRenderer->encounterRateFont );
 
    sfRectangleShape_destroy( dqOverworldRenderer->passableRect );
    sfRectangleShape_destroy( dqOverworldRenderer->impassableRect );
@@ -186,6 +195,14 @@ void dqOverworldRenderer_RenderMap()
          {
             sfRectangleShape_setPosition( dqOverworldRenderer->mapSwapRect, tilePosition );
             dqWindow_DrawRectangleShape( dqOverworldRenderer->mapSwapRect );
+         }
+
+         if ( dqGameConfig->encounterRateCheat )
+         {
+            sprintf_s( dqOverworldRenderer->encounterRateChars, 32, "%d", tile->encounterRate );
+            sfText_setString( dqOverworldRenderer->encounterRateText, dqOverworldRenderer->encounterRateChars );
+            sfText_setPosition( dqOverworldRenderer->encounterRateText, tilePosition );
+            dqWindow_DrawText( dqOverworldRenderer->encounterRateText );
          }
       }
    }

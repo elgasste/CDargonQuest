@@ -39,7 +39,9 @@ void dqDiagnosticsRenderer_Cleanup()
 {
    sfText_destroy( dqDiagnosticsRenderer->text );
    sfFont_destroy( dqDiagnosticsRenderer->font );
+   sfRectangleShape_destroy( dqDiagnosticsRenderer->background );
 
+   SAFE_DELETE( dqDiagnosticsRenderer->textLine )
    SAFE_DELETE( dqDiagnosticsRenderer )
 }
 

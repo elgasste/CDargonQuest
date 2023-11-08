@@ -52,6 +52,9 @@ typedef struct dqRenderConfig_t
    float overworldFadeOutSeconds;
    float overworldStayFadedSeconds;
    float overworldFadeInSeconds;
+   const char* encounterRateFontFilePath;
+   unsigned int encounterRateFontSize;
+   sfColor encounterRateFontColor;
 }
 dqRenderConfig_t;
 
