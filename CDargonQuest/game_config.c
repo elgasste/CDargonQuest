@@ -13,11 +13,8 @@ void dqGameConfig_Init()
    dqGameConfig->playerVelocityDiagonal = 44;
 
    dqGameConfig->noClipCheat = sfFalse;
-   dqGameConfig->passableCheat = sfFalse;
-   dqGameConfig->mapSwapCheat = sfFalse;
    dqGameConfig->invisibleCheat = sfFalse;
-   dqGameConfig->encounterRateCheat = sfFalse;
-   dqGameConfig->enemyTierCheat = sfFalse;
+   dqGameConfig->tileStatCheat = sfFalse;
 }
 
 void dqGameConfig_Cleanup()

@@ -12,11 +12,8 @@ typedef struct dqGameConfig_t
    float playerVelocityDiagonal;
 
    sfBool noClipCheat;
-   sfBool passableCheat;
-   sfBool mapSwapCheat;
    sfBool invisibleCheat;
-   sfBool encounterRateCheat;
-   sfBool enemyTierCheat;
+   sfBool tileStatCheat;
 }
 dqGameConfig_t;
 
