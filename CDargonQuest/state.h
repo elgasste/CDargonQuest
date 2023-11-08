@@ -8,6 +8,8 @@ typedef enum
    dqStateTitle,
    dqStateOverworld,
    dqStateOverworldTransition,
+   dqStateBattleTransition,
+   dqStateBattle,
    dqStateClosing
 }
 dqState_t;

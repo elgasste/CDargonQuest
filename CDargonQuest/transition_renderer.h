@@ -6,6 +6,9 @@ typedef struct dqTransitionRenderer_t
 {
    float elapsedSeconds;
 
+   sfBool fadingOut;
+   sfBool fadingIn;
+
    sfBool raisedFadedOut;
    sfBool raisedFadedIn;
 
@@ -18,4 +21,4 @@ dqTransitionRenderer_t* dqTransitionRenderer;
 void dqTransitionRenderer_Init();
 void dqTransitionRenderer_Cleanup();
 void dqTransitionRenderer_Reset();
-void dqTransitionRenderer_Render();
+void dqTransitionRenderer_Render( sfBool black );

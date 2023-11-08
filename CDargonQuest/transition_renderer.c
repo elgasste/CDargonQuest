@@ -32,7 +32,7 @@ void dqTransitionRenderer_Reset()
    dqTransitionRenderer->raisedFadedIn = sfFalse;
 }
 
-void dqTransitionRenderer_Render()
+void dqTransitionRenderer_Render( sfBool black )
 {
    float fadePercentage, fadeInSeconds, sec;
 
@@ -41,38 +41,74 @@ void dqTransitionRenderer_Render()
 
    if ( sec < dqRenderConfig->overworldFadeOutSeconds )
    {
-      // fading out
+      dqTransitionRenderer->fadingIn = sfFalse;
+      dqTransitionRenderer->fadingOut = sfTrue;
       fadePercentage = sec / dqRenderConfig->overworldFadeOutSeconds;
-      sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 0, 0, 0, (sfUint8)( fadePercentage * 255 ) ) );
+
+      if ( black )
+      {
+         sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 0, 0, 0, (sfUint8)( fadePercentage * 255 ) ) );
+      }
+      else
+      {
+         sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 255, 255, 255, (sfUint8)( fadePercentage * 255 ) ) );
+      }
    }
    else if ( sec < ( dqRenderConfig->overworldFadeOutSeconds + dqRenderConfig->overworldStayFadedSeconds ) )
    {
-      // faded out, waiting to fade in
+      dqTransitionRenderer->fadingIn = sfFalse;
+      dqTransitionRenderer->fadingOut = sfFalse;
+
       if ( !dqTransitionRenderer->raisedFadedOut )
       {
          dqEventQueue_Push( dqEventOverworldFadedOut, 0 );
          dqTransitionRenderer->raisedFadedOut = sfTrue;
       }
 
-      sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfBlack );
+      if ( black )
+      {
+         sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfBlack );
+      }
+      else
+      {
+         sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfWhite );
+      }
    }
    else if ( sec < ( dqRenderConfig->overworldFadeOutSeconds + dqRenderConfig->overworldStayFadedSeconds + dqRenderConfig->overworldFadeInSeconds ) )
    {
-      // fading in
+      dqTransitionRenderer->fadingIn = sfTrue;
+      dqTransitionRenderer->fadingOut = sfFalse;
       fadeInSeconds = sec - ( dqRenderConfig->overworldFadeOutSeconds + dqRenderConfig->overworldStayFadedSeconds );
       fadePercentage = 1.0f - ( fadeInSeconds / dqRenderConfig->overworldFadeInSeconds );
-      sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 0, 0, 0, (sfUint8)( fadePercentage * 255 ) ) );
+
+      if ( black )
+      {
+         sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 0, 0, 0, (sfUint8)( fadePercentage * 255 ) ) );
+      }
+      else
+      {
+         sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 255, 255, 255, (sfUint8)( fadePercentage * 255 ) ) );
+      }
    }
    else
    {
-      // done fading
+      dqTransitionRenderer->fadingIn = sfFalse;
+      dqTransitionRenderer->fadingOut = sfFalse;
+
       if ( !dqTransitionRenderer->raisedFadedIn )
       {
          dqEventQueue_Push( dqEventOverworldFadedIn, 0 );
          dqTransitionRenderer->raisedFadedIn = sfTrue;
       }
 
-      sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 0, 0, 0, 0 ) );
+      if ( black )
+      {
+         sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 0, 0, 0, 0 ) );
+      }
+      else
+      {
+         sfRectangleShape_setFillColor( dqTransitionRenderer->fadeRect, sfColor_fromRGBA( 255, 255, 255, 0 ) );
+      }
    }
 
    dqWindow_DrawRectangleShape( dqTransitionRenderer->fadeRect );

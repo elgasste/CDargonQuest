@@ -175,6 +175,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="battle_renderer.c" />
     <ClCompile Include="log.c" />
     <ClCompile Include="random.c" />
     <ClCompile Include="transition_renderer.c" />
@@ -203,6 +204,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     <ClCompile Include="window.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="battle_renderer.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="transition_renderer.h" />

@@ -4,6 +4,7 @@
 #include "diagnostics_renderer.h"
 #include "title_renderer.h"
 #include "overworld_renderer.h"
+#include "battle_renderer.h"
 #include "transition_renderer.h"
 #include "game.h"
 
@@ -12,12 +13,14 @@ void dqRenderer_Init()
    dqDiagnosticsRenderer_Init();
    dqTitleRenderer_Init();
    dqOverworldRenderer_Init();
+   dqBattleRenderer_Init();
    dqTransitionRenderer_Init();
 }
 
 void dqRenderer_Cleanup()
 {
    dqTransitionRenderer_Cleanup();
+   dqBattleRenderer_Cleanup();
    dqOverworldRenderer_Cleanup();
    dqTitleRenderer_Cleanup();
    dqDiagnosticsRenderer_Cleanup();
@@ -39,7 +42,21 @@ void dqRenderer_Render()
       case dqStateOverworldTransition:
          dqOverworldRenderer_RenderMap();
          dqOverworldRenderer_RenderEntities();
-         dqTransitionRenderer_Render();
+         dqTransitionRenderer_Render( sfTrue ); // black
+      case dqStateBattleTransition:
+         if ( dqTransitionRenderer->fadingIn )
+         {
+            dqBattleRenderer_Render();  
+         }
+         else
+         {
+            dqOverworldRenderer_RenderMap();
+            dqOverworldRenderer_RenderEntities();
+         }
+         dqTransitionRenderer_Render( sfFalse ); // white
+         break;
+      case dqStateBattle:
+         dqBattleRenderer_Render();
          break;
    }
 

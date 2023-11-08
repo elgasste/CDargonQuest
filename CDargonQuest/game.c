@@ -109,6 +109,10 @@ static void dqGame_HandleOverworldFadedOut()
    {
       dqMap_Swap( dqGame->nextMapIndex, dqGame->nextMapTileIndex );
    }
+   else if ( dqGame->state == dqStateBattleTransition )
+   {
+      // TODO: generate a battle
+   }
 }
 
 static void dqGame_HandleOverworldFadedIn()
@@ -117,11 +121,19 @@ static void dqGame_HandleOverworldFadedIn()
    {
       dqGame->state = dqStateOverworld;
    }
+   else if ( dqGame->state == dqStateBattleTransition )
+   {
+      dqGame->state = dqStateBattle;
+   }
 }
 
 static void dqGame_HandleEncounter()
 {
-   // TODO: generate a battle
+   if ( dqGame->state == dqStateOverworld )
+   {
+      dqEventQueue_Flush();
+      dqGame->state = dqStateBattleTransition;
+   }
 }
 
 static void dqGame_HandleEvents()
