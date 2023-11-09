@@ -5,7 +5,8 @@ void dqRenderData_Init( dqEntity_t* player )
 {
    dqRenderData = (dqRenderData_t*)dqMalloc( sizeof( dqRenderData_t ) );
 
-   dqRenderData->overworldTilesetTexture = sfTexture_createFromFile( dqRenderConfig->overworldTileTexturePath, NULL );
+   dqRenderData->overworldTilesetTexture = sfTexture_createFromFile( dqRenderConfig->overworldTilesetTexturePath, NULL );
+   dqRenderData->textTilesetTexture = sfTexture_createFromFile( dqRenderConfig->textTilesetTexturePath, NULL );
 
    dqRenderData->playerTexture = sfTexture_createFromFile( dqRenderConfig->playerTexturePath, NULL );
    dqRenderData->playerSprite = dqEntitySprite_Create( player, dqRenderData->playerTexture, 16, 16, 2, 0.25f );

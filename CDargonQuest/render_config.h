@@ -43,7 +43,9 @@ typedef struct dqRenderConfig_t
    sfColor impassableOverlayColor;
    sfColor mapSwapOverlayColor;
 
-   const char* overworldTileTexturePath;
+   const char* overworldTilesetTexturePath;
+   const char* textTilesetTexturePath;
+
    unsigned int overworldTileTextureColumns;
    unsigned int overworldTileTextureRows;
 
