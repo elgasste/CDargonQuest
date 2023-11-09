@@ -197,7 +197,7 @@ void dqOverworldRenderer_RenderMap()
                dqWindow_DrawRectangleShape( dqOverworldRenderer->impassableRect );
             }
 
-            sprintf_s( dqOverworldRenderer->cheatChars, 64, "R:%d\nE:%d-%d", tile->encounterRate, tile->minEnemyTier, tile->maxEnemyTier );
+            sprintf_s( dqOverworldRenderer->cheatChars, 64, "R:%d\nT:%d-%d", tile->encounterRate, tile->minEnemyTier, tile->maxEnemyTier );
             sfText_setString( dqOverworldRenderer->cheatText, dqOverworldRenderer->cheatChars );
             sfText_setPosition( dqOverworldRenderer->cheatText, tilePosition );
             dqWindow_DrawText( dqOverworldRenderer->cheatText );
