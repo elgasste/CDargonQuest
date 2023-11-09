@@ -2,8 +2,7 @@
 
 void dqRenderConfig_Init()
 {
-   dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
-   CHECK_MALLOC( dqRenderConfig )
+   dqRenderConfig = (dqRenderConfig_t*)dqMalloc( sizeof( dqRenderConfig_t ) );
 
    dqRenderConfig->minFrameRate = 30;
    dqRenderConfig->maxFrameRate = 120;
@@ -65,5 +64,5 @@ void dqRenderConfig_Init()
 
 void dqRenderConfig_Cleanup()
 {
-   SAFE_DELETE( dqRenderConfig )
+   dqFree( dqRenderConfig );
 }

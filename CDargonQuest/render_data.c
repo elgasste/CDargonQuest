@@ -3,8 +3,7 @@
 
 void dqRenderData_Init( dqEntity_t* player )
 {
-   dqRenderData = (dqRenderData_t*)malloc( sizeof( dqRenderData_t ) );
-   CHECK_MALLOC( dqRenderData )
+   dqRenderData = (dqRenderData_t*)dqMalloc( sizeof( dqRenderData_t ) );
 
    dqRenderData->overworldTilesetTexture = sfTexture_createFromFile( dqRenderConfig->overworldTileTexturePath, NULL );
 
@@ -19,5 +18,5 @@ void dqRenderData_Cleanup()
 
    sfTexture_destroy( dqRenderData->overworldTilesetTexture );
 
-   SAFE_DELETE( dqRenderData )
+   dqFree( dqRenderData );
 }

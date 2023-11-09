@@ -2,8 +2,7 @@
 
 void dqGameConfig_Init()
 {
-   dqGameConfig = (dqGameConfig_t*)malloc( sizeof( dqGameConfig_t ) );
-   CHECK_MALLOC( dqGameConfig )
+   dqGameConfig = (dqGameConfig_t*)dqMalloc( sizeof( dqGameConfig_t ) );
 
    dqGameConfig->logFileName = "log.txt";
 
@@ -19,5 +18,5 @@ void dqGameConfig_Init()
 
 void dqGameConfig_Cleanup()
 {
-   SAFE_DELETE( dqGameConfig )
+   dqFree( dqGameConfig );
 }

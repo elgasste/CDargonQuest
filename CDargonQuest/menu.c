@@ -3,12 +3,10 @@
 
 void dqMenu_Init()
 {
-   dqTitleMenu = (dqMenu_t*)malloc( sizeof( dqMenu_t ) );
-   CHECK_MALLOC( dqTitleMenu )
+   dqTitleMenu = (dqMenu_t*)dqMalloc( sizeof( dqMenu_t ) );
    dqTitleMenu->optionCount = 2;
    dqTitleMenu->selectedOption = 0;
-   dqTitleMenu->options = (dqMenuOption_t*)malloc( sizeof( dqMenuOption_t ) * dqTitleMenu->optionCount );
-   CHECK_MALLOC( dqTitleMenu->options )
+   dqTitleMenu->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqTitleMenu->optionCount );
    dqTitleMenu->options[0].text = STR_TITLE_MENU_START;
    dqTitleMenu->options[0].eventType = dqEventStart;
    dqTitleMenu->options[1].text = STR_TITLE_MENU_QUIT;
@@ -17,8 +15,8 @@ void dqMenu_Init()
 
 void dqMenu_Cleanup()
 {
-   SAFE_DELETE( dqTitleMenu->options )
-   SAFE_DELETE( dqTitleMenu )
+   dqFree( dqTitleMenu->options );
+   dqFree( dqTitleMenu );
 }
 
 void dqMenu_ScrollDown( dqMenu_t* menu )

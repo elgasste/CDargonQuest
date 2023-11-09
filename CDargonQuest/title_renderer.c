@@ -7,8 +7,7 @@
 
 void dqTitleRenderer_Init()
 {
-   dqTitleRenderer = (dqTitleRenderer_t*)malloc( sizeof( dqTitleRenderer_t ) );
-   CHECK_MALLOC( dqTitleRenderer )
+   dqTitleRenderer = (dqTitleRenderer_t*)dqMalloc( sizeof( dqTitleRenderer_t ) );
 
    dqTitleRenderer->menuFont = sfFont_createFromFile( dqRenderConfig->menuFontFilePath );
 
@@ -39,7 +38,7 @@ void dqTitleRenderer_Cleanup()
    sfText_destroy( dqTitleRenderer->menuText );
    sfFont_destroy( dqTitleRenderer->menuFont );
 
-   SAFE_DELETE( dqTitleRenderer )
+   dqFree( dqTitleRenderer );
 }
 
 void dqTitleRenderer_Render()

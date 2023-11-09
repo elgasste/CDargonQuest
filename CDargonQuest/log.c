@@ -3,8 +3,7 @@
 
 void dqLog_Init()
 {
-   dqLog = (dqLog_t*)malloc( sizeof( dqLog_t ) );
-   CHECK_MALLOC( dqLog )
+   dqLog = (dqLog_t*)dqMalloc( sizeof( dqLog_t ) );
 
    if ( fopen_s( &( dqLog->logFile ), dqGameConfig->logFileName, "w" ) )
    {
@@ -16,7 +15,7 @@ void dqLog_Cleanup()
 {
    fclose( dqLog->logFile );
 
-   SAFE_DELETE( dqLog )
+   dqFree( dqLog );
 }
 
 void dqLog_Message( const char* message )

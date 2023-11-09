@@ -16,8 +16,7 @@ void dqWindow_Init()
 
    sfFloatRect viewRect = { 0, 0, dqRenderConfig->screenWidth, dqRenderConfig->screenHeight };
 
-   dqWindow = (dqWindow_t*)malloc( sizeof( dqWindow_t ) );
-   CHECK_MALLOC( dqWindow )
+   dqWindow = (dqWindow_t*)dqMalloc( sizeof( dqWindow_t ) );
 
    dqWindow->window = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, NULL );
 
@@ -37,6 +36,9 @@ void dqWindow_Cleanup()
    sfRenderWindow_close( dqWindow->window );
    sfRenderWindow_destroy( dqWindow->window );
    sfView_destroy( dqWindow->view );
+
+   // MUFFINS: will this cause a crash?
+   dqFree( dqWindow );
 }
 
 void dqWindow_HandleEvents()

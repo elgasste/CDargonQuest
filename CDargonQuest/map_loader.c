@@ -68,8 +68,7 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
    map->size.x = map->columns * dqGameConfig->mapTileSize;
    map->size.y = map->rows * dqGameConfig->mapTileSize;
    map->tileCount = map->columns * map->rows;
-   map->tiles = (dqMapTile_t*)malloc( sizeof( dqMapTile_t ) * map->tileCount );
-   CHECK_MALLOC( map->tiles )
+   map->tiles = (dqMapTile_t*)dqMalloc( sizeof( dqMapTile_t ) * map->tileCount );
 
    if ( fopen_s( &tileFile, tilesPath, "r" ) )
    {
@@ -143,8 +142,7 @@ void dqMapLoader_LoadMaps()
 
    // TODO: temporary maps for now, these will be loaded from a file later
    dqGameData->mapCount = 2;
-   dqGameData->maps = (dqMap_t*)malloc( sizeof( dqMap_t ) * dqGameData->mapCount );
-   CHECK_MALLOC( dqGameData->maps )
+   dqGameData->maps = (dqMap_t*)dqMalloc( sizeof( dqMap_t ) * dqGameData->mapCount );
 
    dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ), 51, 43,
                             "Resources\\Design\\Maps\\0_tiles.txt",
@@ -227,8 +225,8 @@ void dqMapLoader_CleanupMaps()
 
    for ( i = 0; i < dqGameData->mapCount; i++ )
    {
-      SAFE_DELETE( dqGameData->maps[i].tiles )
+      dqFree( dqGameData->maps[i].tiles );
    }
 
-   SAFE_DELETE( dqGameData->maps )
+   dqFree( dqGameData->maps );
 }

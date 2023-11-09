@@ -10,16 +10,14 @@ void dqGameData_Init()
    dqMap_t* map;
    dqMapTile_t* tile;
 
-   dqGameData = (dqGameData_t*)malloc( sizeof( dqGameData_t ) );
-   CHECK_MALLOC( dqGameData )
+   dqGameData = (dqGameData_t*)dqMalloc( sizeof( dqGameData_t ) );
 
    dqGameData->playerStartTileCoordinates.x = 28;
    dqGameData->playerStartTileCoordinates.y = 35;
 
    dqMapLoader_LoadMaps();
 
-   dqGameData->player = (dqEntity_t*)malloc( sizeof( dqEntity_t ) );
-   CHECK_MALLOC( dqGameData->player )
+   dqGameData->player = (dqEntity_t*)dqMalloc( sizeof( dqEntity_t ) );
 
    // TODO: most of this will eventually be loaded from a file
    player = dqGameData->player;
@@ -42,8 +40,8 @@ void dqGameData_Cleanup()
 {
    dqMapLoader_CleanupMaps();
 
-   SAFE_DELETE( dqGameData->player )
-   SAFE_DELETE( dqGameData )
+   dqFree( dqGameData->player );
+   dqFree( dqGameData );
 }
 
 dqMap_t* dqGameData_GetCurrentMap()

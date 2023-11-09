@@ -2,13 +2,13 @@
 
 void dqEventQueue_Init()
 {
-   dqEventQueue = (dqEventQueue_t*)malloc( sizeof( dqEventQueue_t ) );
+   dqEventQueue = (dqEventQueue_t*)dqMalloc( sizeof( dqEventQueue_t ) );
    dqEventQueue_Flush();
 }
 
 void dqEventQueue_Cleanup()
 {
-   SAFE_DELETE( dqEventQueue )
+   dqFree( dqEventQueue );
 }
 
 sfBool dqEventQueue_IsEmpty()

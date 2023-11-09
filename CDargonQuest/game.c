@@ -210,8 +210,7 @@ static void dqGame_Tick()
 
 void dqGame_Init()
 {
-   dqGame = (dqGame_t*)malloc( sizeof( dqGame_t ) );
-   CHECK_MALLOC( dqGame )
+   dqGame = (dqGame_t*)dqMalloc( sizeof( dqGame_t ) );
 
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
@@ -253,7 +252,7 @@ void dqGame_Cleanup()
    dqLog_Message( "game objects cleaned up" );
    dqLog_Cleanup();
 
-   SAFE_DELETE( dqGame )
+   dqFree( dqGame );
 }
 
 void dqGame_Run()

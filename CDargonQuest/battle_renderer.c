@@ -2,13 +2,12 @@
 
 void dqBattleRenderer_Init()
 {
-   dqBattleRenderer = (dqBattleRenderer_t*)malloc( sizeof( dqBattleRenderer_t ) );
-   CHECK_MALLOC( dqBattleRenderer )
+   dqBattleRenderer = (dqBattleRenderer_t*)dqMalloc( sizeof( dqBattleRenderer_t ) );
 }
 
 void dqBattleRenderer_Cleanup()
 {
-   SAFE_DELETE( dqBattleRenderer )
+   dqFree( dqBattleRenderer );
 }
 
 void dqBattleRenderer_Render()

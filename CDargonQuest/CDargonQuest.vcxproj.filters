@@ -126,6 +126,12 @@
     <ClCompile Include="battle_renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="battle_input_handler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -235,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="battle_renderer.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="battle_input_handler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -30,8 +30,7 @@ void dqOverworldRenderer_Init()
 
    sfVector2f tileSize = { dqGameConfig->mapTileSize, dqGameConfig->mapTileSize };
 
-   dqOverworldRenderer = (dqOverworldRenderer_t*)malloc( sizeof( dqOverworldRenderer_t ) );
-   CHECK_MALLOC( dqOverworldRenderer )
+   dqOverworldRenderer = (dqOverworldRenderer_t*)dqMalloc( sizeof( dqOverworldRenderer_t ) );
 
    dqOverworldRenderer->tileSprite = sfSprite_create();
    sfSprite_setTexture( dqOverworldRenderer->tileSprite, dqRenderData->overworldTilesetTexture, sfFalse );
@@ -95,7 +94,7 @@ void dqOverworldRenderer_Cleanup()
 
    sfSprite_destroy( dqOverworldRenderer->tileSprite );
 
-   SAFE_DELETE( dqOverworldRenderer )
+   dqFree( dqOverworldRenderer );
 }
 
 void dqOverworldRenderer_RenderMap()
