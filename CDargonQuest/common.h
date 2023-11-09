@@ -15,4 +15,5 @@
 #define MAX_EVENT_ARGS     4
 
 void* dqMalloc( size_t size );
+void* dqCalloc( size_t count, size_t size );
 void dqFree( void* mem );

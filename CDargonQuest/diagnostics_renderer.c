@@ -10,7 +10,7 @@ void dqDiagnosticsRenderer_Init()
 
    dqDiagnosticsRenderer = (dqDiagnosticsRenderer_t*)dqMalloc( sizeof( dqDiagnosticsRenderer_t ) );
 
-   dqDiagnosticsRenderer->textLine = (char*)calloc( sizeof( char ), dqRenderConfig->diagnosticsLineWidth );
+   dqDiagnosticsRenderer->textLine = (char*)dqCalloc( sizeof( char ), dqRenderConfig->diagnosticsLineWidth );
 
    dqDiagnosticsRenderer->background = sfRectangleShape_create();
    sfRectangleShape_setSize( dqDiagnosticsRenderer->background, backgroundSize );
