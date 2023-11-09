@@ -46,7 +46,7 @@ void dqRenderConfig_Init()
    dqRenderConfig->mapSwapOverlayColor = sfColor_fromRGBA( 0, 0, 255, 128 );
 
    dqRenderConfig->overworldTilesetTexturePath = "Resources/Tilesets/overworld.png";
-   dqRenderConfig->textTilesetTexturePath = "Resources/Tilesets/text.png";
+   dqRenderConfig->dialogTilesetTexturePath = "Resources/Tilesets/text.png";
 
    dqRenderConfig->overworldTileTextureColumns = 16;
    dqRenderConfig->overworldTileTextureRows = 3;
