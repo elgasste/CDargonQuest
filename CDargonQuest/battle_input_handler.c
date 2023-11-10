@@ -4,7 +4,7 @@
 
 void dqBattleInputHandler_HandleInput()
 {
-   if ( dqInputState_WasKeyPressed( sfKeyEscape ) )
+   if ( dqInputState->keyWasPressed )
    {
       dqEventQueue_Push( dqEventExitBattle, 0 );
    }
