@@ -132,6 +132,9 @@
     <ClCompile Include="common.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dialog_renderer.c">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="battle_input_handler.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dialog_renderer.h">
+      <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

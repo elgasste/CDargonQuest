@@ -48,6 +48,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->overworldTilesetTexturePath = "Resources/Tilesets/overworld.png";
    dqRenderConfig->dialogTilesetTexturePath = "Resources/Tilesets/text.png";
 
+   dqRenderConfig->dialogSpriteSize = 8;
+
    dqRenderConfig->overworldTileTextureColumns = 16;
    dqRenderConfig->overworldTileTextureRows = 3;
 

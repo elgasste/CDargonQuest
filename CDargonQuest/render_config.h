@@ -46,6 +46,8 @@ typedef struct dqRenderConfig_t
    const char* overworldTilesetTexturePath;
    const char* dialogTilesetTexturePath;
 
+   int dialogSpriteSize;
+
    unsigned int overworldTileTextureColumns;
    unsigned int overworldTileTextureRows;
 
