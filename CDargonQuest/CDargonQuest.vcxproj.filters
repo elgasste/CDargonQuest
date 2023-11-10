@@ -126,14 +126,14 @@
     <ClCompile Include="battle_renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="battle_input_handler.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="common.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dialog_renderer.c">
       <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="battle_input_handler.c">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,11 +245,11 @@
     <ClInclude Include="battle_renderer.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="battle_input_handler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dialog_renderer.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="battle_input_handler.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
