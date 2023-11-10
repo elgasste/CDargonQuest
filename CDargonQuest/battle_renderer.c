@@ -15,7 +15,7 @@ void dqBattleRenderer_Cleanup()
 void dqBattleRenderer_Render()
 {
    dqDialogRenderer_DrawDialogWithText( dqRenderConfig->battleMessageDialogPos,
-                                        "Hi!!",
+                                        "Imagine this is some crazy battle against zombies and dragons or whatever, and you've got like one health left but you can't run away. Sweet, right?!",
                                         dqRenderConfig->battleMessageDialogWidth,
                                         dqRenderConfig->battleMessageDialogHeight );
 }

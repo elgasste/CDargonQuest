@@ -51,6 +51,9 @@ typedef struct dqRenderConfig_t
    unsigned int overworldTileTextureColumns;
    unsigned int overworldTileTextureRows;
 
+   unsigned int dialogTileTextureColumns;
+   unsigned int dialogTileTextureRows;
+
    const char* playerTexturePath;
 
    float overworldFadeOutSeconds;

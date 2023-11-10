@@ -53,6 +53,9 @@ void dqRenderConfig_Init()
    dqRenderConfig->overworldTileTextureColumns = 16;
    dqRenderConfig->overworldTileTextureRows = 3;
 
+   dqRenderConfig->dialogTileTextureColumns = 9;
+   dqRenderConfig->dialogTileTextureRows = 8;
+
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 
    dqRenderConfig->overworldFadeOutSeconds = 0.3f;

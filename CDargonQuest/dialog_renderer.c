@@ -3,6 +3,40 @@
 #include "render_data.h"
 #include "window.h"
 
+static unsigned int dqDialogRenderer_GetTileIdForChar( char c )
+{
+   if ( c >= 'A' && c <= 'Z' )
+   {
+      // capital letters start at 65 in the ASCII table, and at index 9 in the tileset
+      return (unsigned int)c - 56;
+   }
+   else if ( c >= 'a' && c <= 'z' )
+   {
+      // lower case letters start at 97 in the ASCII table, and at index 35 in the tileset
+      return (unsigned int)c - 62;
+   }
+   else
+   {
+      switch ( c )
+      {
+         case ' ': return 61;
+         case '!': return 62;
+         case '"': return 63;
+         case '\'': return 64;
+         case '?': return 65;
+         case '(': return 66;
+         case ')': return 67;
+         case '-': return 68;
+         case ',': return 69;
+         case '.': return 70;
+         case '*': return 71;
+      }
+   }
+
+   // default to space
+   return 61;
+}
+
 void dqDialogRenderer_Init()
 {
    dqDialogRenderer = (dqDialogRenderer_t*)dqMalloc( sizeof( dqDialogRenderer_t ) );
@@ -126,24 +160,63 @@ void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned i
 
 void dqDialogRenderer_DrawDialogWithText( sfVector2f pos, const char* text, unsigned int width, unsigned int height )
 {
+   int i, j;
+   char c, peek;
+   unsigned int tileIndex, textIndex, peekIndex, textureX, textureY;
+   sfBool skip;
    sfVector2f p;
+
    p.x = pos.x + ( dqRenderConfig->dialogSpriteSize );
    p.y = pos.y + ( dqRenderConfig->dialogSpriteSize );
+
+   dqDialogRenderer_DrawBorder( pos, width, height );
 
    if ( !text )
    {
       return;
    }
 
-   dqDialogRenderer_DrawBorder( pos, width, height );
+   for ( textIndex = 0, i = 1, j = 1; ; i++, textIndex++ )
+   {
+      c = text[textIndex];
+      skip = sfFalse;
 
-   // MUFFINS: this draws an "A".
-   //
-   // - we need a function that takes a const char and draws a tile
-   dqDialogRenderer->textureRect.left = 0;
-   dqDialogRenderer->textureRect.top = 8;
-   sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-   sfSprite_setPosition( dqDialogRenderer->sprite, p );
+      if ( c == '\0' )
+      {
+         break;
+      }
 
-   dqWindow_DrawSprite( dqDialogRenderer->sprite );
+      for ( peekIndex = textIndex + 1; ; peekIndex++ )
+      {
+         peek = text[peekIndex];
+
+         if ( peek == ' ' || peek == '\0' )
+         {
+            if ( i + ( peekIndex - textIndex ) >= ( width - 2 ) )
+            {
+               i = 0;
+               j++;
+               skip = sfTrue;
+            }
+
+            break;
+         }
+      }
+
+      if ( !skip )
+      {
+         tileIndex = dqDialogRenderer_GetTileIdForChar( c );
+         textureX = tileIndex % dqRenderConfig->dialogTileTextureColumns;
+         textureY = tileIndex / dqRenderConfig->dialogTileTextureColumns;
+
+         dqDialogRenderer->textureRect.left = textureX * dqRenderConfig->dialogSpriteSize;
+         dqDialogRenderer->textureRect.top = textureY * dqRenderConfig->dialogSpriteSize;
+         p.x = pos.x + ( i * dqRenderConfig->dialogSpriteSize );
+         p.y = pos.y + ( j * dqRenderConfig->dialogSpriteSize );
+
+         sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
+         sfSprite_setPosition( dqDialogRenderer->sprite, p );
+         dqWindow_DrawSprite( dqDialogRenderer->sprite );
+      }
+   }
 }
