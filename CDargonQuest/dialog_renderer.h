@@ -14,3 +14,4 @@ dqDialogRenderer_t* dqDialogRenderer;
 void dqDialogRenderer_Init();
 void dqDialogRenderer_Cleanup();
 void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned int height );
+void dqDialogRenderer_DrawDialogWithText( sfVector2f pos, const char* text, unsigned int width, unsigned int height );

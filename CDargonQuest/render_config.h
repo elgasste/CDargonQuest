@@ -62,6 +62,10 @@ typedef struct dqRenderConfig_t
    sfVector2f cheatFontScale;
    float cheatLetterSpacing;
    sfColor cheatFontColor;
+
+   sfVector2f battleMessageDialogPos;
+   unsigned int battleMessageDialogWidth;
+   unsigned int battleMessageDialogHeight;
 }
 dqRenderConfig_t;
 

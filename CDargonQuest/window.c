@@ -37,7 +37,6 @@ void dqWindow_Cleanup()
    sfRenderWindow_destroy( dqWindow->window );
    sfView_destroy( dqWindow->view );
 
-   // MUFFINS: will this cause a crash?
    dqFree( dqWindow );
 }
 

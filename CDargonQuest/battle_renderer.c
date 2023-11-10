@@ -1,4 +1,6 @@
 #include "battle_renderer.h"
+#include "render_config.h"
+#include "dialog_renderer.h"
 
 void dqBattleRenderer_Init()
 {
@@ -12,5 +14,8 @@ void dqBattleRenderer_Cleanup()
 
 void dqBattleRenderer_Render()
 {
-   // TODO
+   dqDialogRenderer_DrawDialogWithText( dqRenderConfig->battleMessageDialogPos,
+                                        "Hi!!",
+                                        dqRenderConfig->battleMessageDialogWidth,
+                                        dqRenderConfig->battleMessageDialogHeight );
 }

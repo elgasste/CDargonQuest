@@ -123,3 +123,27 @@ void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned i
       }
    }
 }
+
+void dqDialogRenderer_DrawDialogWithText( sfVector2f pos, const char* text, unsigned int width, unsigned int height )
+{
+   sfVector2f p;
+   p.x = pos.x + ( dqRenderConfig->dialogSpriteSize );
+   p.y = pos.y + ( dqRenderConfig->dialogSpriteSize );
+
+   if ( !text )
+   {
+      return;
+   }
+
+   dqDialogRenderer_DrawBorder( pos, width, height );
+
+   // MUFFINS: this draws an "A".
+   //
+   // - we need a function that takes a const char and draws a tile
+   dqDialogRenderer->textureRect.left = 0;
+   dqDialogRenderer->textureRect.top = 8;
+   sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
+   sfSprite_setPosition( dqDialogRenderer->sprite, p );
+
+   dqWindow_DrawSprite( dqDialogRenderer->sprite );
+}

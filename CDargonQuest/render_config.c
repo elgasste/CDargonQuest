@@ -64,6 +64,11 @@ void dqRenderConfig_Init()
    dqRenderConfig->cheatFontScale.y = 0.2f;
    dqRenderConfig->cheatLetterSpacing = 0.1f;
    dqRenderConfig->cheatFontColor = sfWhite;
+
+   dqRenderConfig->battleMessageDialogPos.x = dqRenderConfig->overworldViewOffset.x;
+   dqRenderConfig->battleMessageDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 8 ) - dqRenderConfig->overworldViewOffset.y;
+   dqRenderConfig->battleMessageDialogWidth = 28 * 2; // dialog sprites are 8 pixels, overworld sprites are 16 pixels
+   dqRenderConfig->battleMessageDialogHeight = 6 * 2;
 }
 
 void dqRenderConfig_Cleanup()

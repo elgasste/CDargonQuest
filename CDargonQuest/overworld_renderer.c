@@ -7,8 +7,6 @@
 #include "map.h"
 #include "map_tile.h"
 #include "window.h"
-// MUFFINS
-#include "dialog_renderer.h"
 
 void dqOverworldRenderer_Init()
 {
