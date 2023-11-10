@@ -97,6 +97,7 @@ void dqDialogRenderer_DrawText( sfVector2f pos, const char* text, unsigned int w
 
          if ( peek == ' ' || peek == '\0' )
          {
+            // TODO: if a single word is wider than the dialog, do we need to worry?
             if ( i + ( peekIndex - textIndex ) >= width )
             {
                i = -1;

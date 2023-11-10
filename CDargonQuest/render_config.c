@@ -55,8 +55,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->overworldTileTextureColumns = 16;
    dqRenderConfig->overworldTileTextureRows = 3;
 
-   dqRenderConfig->dialogTileTextureColumns = 9;
-   dqRenderConfig->dialogTileTextureRows = 8;
+   dqRenderConfig->dialogTileTextureColumns = 10;
+   dqRenderConfig->dialogTileTextureRows = 10;
 
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 
@@ -77,44 +77,24 @@ void dqRenderConfig_Init()
 
    for ( i = 0; i < 128; i++ )
    {
-      if ( i >= 65 && i <= 90 )
+      if ( i >= 32 && i <= 122 )
       {
-         // 65-90 are upper-case letters, starting at tile index 9
-         dqRenderConfig->textMap[i] = i - 56;
-      }
-      else if ( i >= 97 && i <= 122 )
-      {
-         // 97-122 are lower-case letters, starting at tile index 35
-         dqRenderConfig->textMap[i] = i - 62;
+         dqRenderConfig->textMap[i] = i - 32;
       }
       else
       {
-         switch ( i )
-         {
-            case 32: dqRenderConfig->textMap[i] = 61; break; // space
-            case 33: dqRenderConfig->textMap[i] = 62; break; // exclamation point
-            case 34: dqRenderConfig->textMap[i] = 63; break; // double-quote
-            case 39: dqRenderConfig->textMap[i] = 64; break; // single-quote
-            case 40: dqRenderConfig->textMap[i] = 66; break; // left parenthesis
-            case 41: dqRenderConfig->textMap[i] = 67; break; // right parenthesis
-            case 42: dqRenderConfig->textMap[i] = 71; break; // star
-            case 44: dqRenderConfig->textMap[i] = 69; break; // comma
-            case 45: dqRenderConfig->textMap[i] = 68; break; // dash
-            case 46: dqRenderConfig->textMap[i] = 70; break; // period
-            case 63: dqRenderConfig->textMap[i] = 65; break; // question mark
-            default: dqRenderConfig->textMap[i] = 61; break; // space
-         }
+         dqRenderConfig->textMap[i] = 61; // space
       }
    }
 
-   dqRenderConfig->dialogTopLeftBorderIndex = 4;
-   dqRenderConfig->dialogTopRightBorderIndex = 5;
-   dqRenderConfig->dialogBottomLeftBorderIndex = 7;
-   dqRenderConfig->dialogBottomRightBorderIndex = 6;
-   dqRenderConfig->dialogLeftBorderIndex = 0;
-   dqRenderConfig->dialogTopBorderIndex = 1;
-   dqRenderConfig->dialogRightBorderIndex = 2;
-   dqRenderConfig->dialogBottomBorderIndex = 3;
+   dqRenderConfig->dialogLeftBorderIndex = 92;
+   dqRenderConfig->dialogTopBorderIndex = 93;
+   dqRenderConfig->dialogRightBorderIndex = 94;
+   dqRenderConfig->dialogBottomBorderIndex = 95;
+   dqRenderConfig->dialogTopLeftBorderIndex = 96;
+   dqRenderConfig->dialogTopRightBorderIndex = 97;
+   dqRenderConfig->dialogBottomRightBorderIndex = 98;
+   dqRenderConfig->dialogBottomLeftBorderIndex = 99;
 }
 
 void dqRenderConfig_Cleanup()

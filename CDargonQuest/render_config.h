@@ -71,14 +71,15 @@ typedef struct dqRenderConfig_t
    unsigned int battleMessageDialogHeight;
 
    unsigned int textMap[128];
-   unsigned int dialogTopLeftBorderIndex;
-   unsigned int dialogTopRightBorderIndex;
-   unsigned int dialogBottomLeftBorderIndex;
-   unsigned int dialogBottomRightBorderIndex;
+
    unsigned int dialogLeftBorderIndex;
    unsigned int dialogTopBorderIndex;
    unsigned int dialogRightBorderIndex;
    unsigned int dialogBottomBorderIndex;
+   unsigned int dialogTopLeftBorderIndex;
+   unsigned int dialogTopRightBorderIndex;
+   unsigned int dialogBottomRightBorderIndex;
+   unsigned int dialogBottomLeftBorderIndex;
 }
 dqRenderConfig_t;
 
