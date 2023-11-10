@@ -14,8 +14,15 @@ void dqBattleRenderer_Cleanup()
 
 void dqBattleRenderer_Render()
 {
-   dqDialogRenderer_DrawDialogWithText( dqRenderConfig->battleMessageDialogPos,
-                                        "Imagine this is some crazy battle against zombies and dragons or whatever, and you've got like one health left but you can't run away. Sweet, right?!",
-                                        dqRenderConfig->battleMessageDialogWidth,
-                                        dqRenderConfig->battleMessageDialogHeight );
+   static sfVector2f textPos;
+
+   textPos.x = dqRenderConfig->battleMessageDialogPos.x + dqRenderConfig->dialogSpriteSize;
+   textPos.y = dqRenderConfig->battleMessageDialogPos.y + dqRenderConfig->dialogSpriteSize;
+
+   dqDialogRenderer_DrawBorder( dqRenderConfig->battleMessageDialogPos,
+                                dqRenderConfig->battleMessageDialogWidth,
+                                dqRenderConfig->battleMessageDialogHeight );
+   dqDialogRenderer_DrawText( textPos,
+                              "Imagine this is some crazy battle against zombies and dragons or whatever, and you've got like one health left but you can't run away. Sweet, right?!",
+                              dqRenderConfig->battleMessageDialogWidth - 2 );
 }

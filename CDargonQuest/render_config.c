@@ -106,6 +106,15 @@ void dqRenderConfig_Init()
          }
       }
    }
+
+   dqRenderConfig->dialogTopLeftBorderIndex = 4;
+   dqRenderConfig->dialogTopRightBorderIndex = 5;
+   dqRenderConfig->dialogBottomLeftBorderIndex = 7;
+   dqRenderConfig->dialogBottomRightBorderIndex = 6;
+   dqRenderConfig->dialogLeftBorderIndex = 0;
+   dqRenderConfig->dialogTopBorderIndex = 1;
+   dqRenderConfig->dialogRightBorderIndex = 2;
+   dqRenderConfig->dialogBottomBorderIndex = 3;
 }
 
 void dqRenderConfig_Cleanup()

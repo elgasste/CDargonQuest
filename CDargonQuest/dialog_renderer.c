@@ -26,7 +26,7 @@ void dqDialogRenderer_Cleanup()
 
 void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned int height )
 {
-   unsigned int row, col;
+   unsigned int row, col, idx;
    sfVector2f p;
 
    for ( row = 0; row < height; row++ )
@@ -38,93 +38,34 @@ void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned i
 
          if ( row == 0 )
          {
-            if ( col == 0 )
-            {
-               // upper-left corner
-               dqDialogRenderer->textureRect.left = 4 * dqRenderConfig->dialogSpriteSize;
-               dqDialogRenderer->textureRect.top = 0;
-               sfSprite_setPosition( dqDialogRenderer->sprite, p );
-               sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-               dqWindow_DrawSprite( dqDialogRenderer->sprite );
-            }
-            else if ( col == width - 1 )
-            {
-               // upper-right corner
-               dqDialogRenderer->textureRect.left = 5 * dqRenderConfig->dialogSpriteSize;
-               dqDialogRenderer->textureRect.top = 0;
-               sfSprite_setPosition( dqDialogRenderer->sprite, p );
-               sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-               dqWindow_DrawSprite( dqDialogRenderer->sprite );
-            }
-            else
-            {
-               // upper border
-               dqDialogRenderer->textureRect.left = dqRenderConfig->dialogSpriteSize;
-               dqDialogRenderer->textureRect.top = 0;
-               sfSprite_setPosition( dqDialogRenderer->sprite, p );
-               sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-               dqWindow_DrawSprite( dqDialogRenderer->sprite );
-            }
+            idx = ( col == 0 )         ? dqRenderConfig->dialogTopLeftBorderIndex :
+                  ( col == width - 1 ) ? dqRenderConfig->dialogTopRightBorderIndex :
+                                         dqRenderConfig->dialogTopBorderIndex;
          }
          else if ( row == height - 1 )
          {
-            if ( col == 0 )
-            {
-               // bottom-left corner
-               dqDialogRenderer->textureRect.left = 7 * dqRenderConfig->dialogSpriteSize;
-               dqDialogRenderer->textureRect.top = 0;
-               sfSprite_setPosition( dqDialogRenderer->sprite, p );
-               sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-               dqWindow_DrawSprite( dqDialogRenderer->sprite );
-            }
-            else if ( col == width - 1 )
-            {
-               // bottom-right corner
-               dqDialogRenderer->textureRect.left = 6 * dqRenderConfig->dialogSpriteSize;
-               dqDialogRenderer->textureRect.top = 0;
-               sfSprite_setPosition( dqDialogRenderer->sprite, p );
-               sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-               dqWindow_DrawSprite( dqDialogRenderer->sprite );
-            }
-            else
-            {
-               // bottom border
-               dqDialogRenderer->textureRect.left = dqRenderConfig->dialogSpriteSize * 3;
-               dqDialogRenderer->textureRect.top = 0;
-               sfSprite_setPosition( dqDialogRenderer->sprite, p );
-               sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-               dqWindow_DrawSprite( dqDialogRenderer->sprite );
-            }
-         }
-         else if ( col == 0 )
-         {
-            dqDialogRenderer->textureRect.left = 0;
-            dqDialogRenderer->textureRect.top = 0;
-            sfSprite_setPosition( dqDialogRenderer->sprite, p );
-            sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-            dqWindow_DrawSprite( dqDialogRenderer->sprite );
-         }
-         else if ( col == width - 1 )
-         {
-            dqDialogRenderer->textureRect.left = dqRenderConfig->dialogSpriteSize * 2;
-            dqDialogRenderer->textureRect.top = 0;
-            sfSprite_setPosition( dqDialogRenderer->sprite, p );
-            sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-            dqWindow_DrawSprite( dqDialogRenderer->sprite );
+            idx = ( col == 0 )         ? dqRenderConfig->dialogBottomLeftBorderIndex :
+                  ( col == width - 1 ) ? dqRenderConfig->dialogBottomRightBorderIndex :
+                                         dqRenderConfig->dialogBottomBorderIndex;
          }
          else
          {
-            dqDialogRenderer->textureRect.left = dqRenderConfig->dialogSpriteSize * 7;
-            dqDialogRenderer->textureRect.top = dqRenderConfig->dialogSpriteSize * 6;
-            sfSprite_setPosition( dqDialogRenderer->sprite, p );
-            sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
-            dqWindow_DrawSprite( dqDialogRenderer->sprite );
+            idx = ( col == 0 )         ? dqRenderConfig->dialogLeftBorderIndex :
+                  ( col == width - 1 ) ? dqRenderConfig->dialogRightBorderIndex :
+                                         dqRenderConfig->textMap[' '];
          }
+
+         dqDialogRenderer->textureRect.left = ( idx % dqRenderConfig->dialogTileTextureColumns ) * dqRenderConfig->dialogSpriteSize;
+         dqDialogRenderer->textureRect.top = ( idx / dqRenderConfig->dialogTileTextureColumns ) * dqRenderConfig->dialogSpriteSize;
+
+         sfSprite_setPosition( dqDialogRenderer->sprite, p );
+         sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
+         dqWindow_DrawSprite( dqDialogRenderer->sprite );
       }
    }
 }
 
-void dqDialogRenderer_DrawDialogWithText( sfVector2f pos, const char* text, unsigned int width, unsigned int height )
+void dqDialogRenderer_DrawText( sfVector2f pos, const char* text, unsigned int width )
 {
    int i, j;
    char c, peek;
@@ -135,14 +76,12 @@ void dqDialogRenderer_DrawDialogWithText( sfVector2f pos, const char* text, unsi
    p.x = pos.x + ( dqRenderConfig->dialogSpriteSize );
    p.y = pos.y + ( dqRenderConfig->dialogSpriteSize );
 
-   dqDialogRenderer_DrawBorder( pos, width, height );
-
    if ( !text )
    {
       return;
    }
 
-   for ( textIndex = 0, i = 1, j = 1; ; i++, textIndex++ )
+   for ( textIndex = 0, i = 0, j = 0; ; i++, textIndex++ )
    {
       c = text[textIndex];
       skip = sfFalse;
@@ -158,9 +97,9 @@ void dqDialogRenderer_DrawDialogWithText( sfVector2f pos, const char* text, unsi
 
          if ( peek == ' ' || peek == '\0' )
          {
-            if ( i + ( peekIndex - textIndex ) >= ( width - 2 ) )
+            if ( i + ( peekIndex - textIndex ) >= width )
             {
-               i = 0;
+               i = -1;
                j++;
                skip = sfTrue;
             }
