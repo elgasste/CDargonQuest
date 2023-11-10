@@ -3,40 +3,6 @@
 #include "render_data.h"
 #include "window.h"
 
-static unsigned int dqDialogRenderer_GetTileIdForChar( char c )
-{
-   if ( c >= 'A' && c <= 'Z' )
-   {
-      // capital letters start at 65 in the ASCII table, and at index 9 in the tileset
-      return (unsigned int)c - 56;
-   }
-   else if ( c >= 'a' && c <= 'z' )
-   {
-      // lower case letters start at 97 in the ASCII table, and at index 35 in the tileset
-      return (unsigned int)c - 62;
-   }
-   else
-   {
-      switch ( c )
-      {
-         case ' ': return 61;
-         case '!': return 62;
-         case '"': return 63;
-         case '\'': return 64;
-         case '?': return 65;
-         case '(': return 66;
-         case ')': return 67;
-         case '-': return 68;
-         case ',': return 69;
-         case '.': return 70;
-         case '*': return 71;
-      }
-   }
-
-   // default to space
-   return 61;
-}
-
 void dqDialogRenderer_Init()
 {
    dqDialogRenderer = (dqDialogRenderer_t*)dqMalloc( sizeof( dqDialogRenderer_t ) );
@@ -205,7 +171,7 @@ void dqDialogRenderer_DrawDialogWithText( sfVector2f pos, const char* text, unsi
 
       if ( !skip )
       {
-         tileIndex = dqDialogRenderer_GetTileIdForChar( c );
+         tileIndex = dqRenderConfig->textMap[c];
          textureX = tileIndex % dqRenderConfig->dialogTileTextureColumns;
          textureY = tileIndex / dqRenderConfig->dialogTileTextureColumns;
 

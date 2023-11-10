@@ -2,6 +2,8 @@
 
 void dqRenderConfig_Init()
 {
+   int i;
+
    dqRenderConfig = (dqRenderConfig_t*)dqMalloc( sizeof( dqRenderConfig_t ) );
 
    dqRenderConfig->minFrameRate = 30;
@@ -72,6 +74,38 @@ void dqRenderConfig_Init()
    dqRenderConfig->battleMessageDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 8 ) - dqRenderConfig->overworldViewOffset.y;
    dqRenderConfig->battleMessageDialogWidth = 28 * 2; // dialog sprites are 8 pixels, overworld sprites are 16 pixels
    dqRenderConfig->battleMessageDialogHeight = 6 * 2;
+
+   for ( i = 0; i < 128; i++ )
+   {
+      if ( i >= 65 && i <= 90 )
+      {
+         // 65-90 are upper-case letters, starting at tile index 9
+         dqRenderConfig->textMap[i] = i - 56;
+      }
+      else if ( i >= 97 && i <= 122 )
+      {
+         // 97-122 are lower-case letters, starting at tile index 35
+         dqRenderConfig->textMap[i] = i - 62;
+      }
+      else
+      {
+         switch ( i )
+         {
+            case 32: dqRenderConfig->textMap[i] = 61; break; // space
+            case 33: dqRenderConfig->textMap[i] = 62; break; // exclamation point
+            case 34: dqRenderConfig->textMap[i] = 63; break; // double-quote
+            case 39: dqRenderConfig->textMap[i] = 64; break; // single-quote
+            case 40: dqRenderConfig->textMap[i] = 66; break; // left parenthesis
+            case 41: dqRenderConfig->textMap[i] = 67; break; // right parenthesis
+            case 42: dqRenderConfig->textMap[i] = 71; break; // star
+            case 44: dqRenderConfig->textMap[i] = 69; break; // comma
+            case 45: dqRenderConfig->textMap[i] = 68; break; // dash
+            case 46: dqRenderConfig->textMap[i] = 70; break; // period
+            case 63: dqRenderConfig->textMap[i] = 65; break; // question mark
+            default: dqRenderConfig->textMap[i] = 61; break; // space
+         }
+      }
+   }
 }
 
 void dqRenderConfig_Cleanup()

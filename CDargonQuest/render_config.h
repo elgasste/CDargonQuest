@@ -69,6 +69,8 @@ typedef struct dqRenderConfig_t
    sfVector2f battleMessageDialogPos;
    unsigned int battleMessageDialogWidth;
    unsigned int battleMessageDialogHeight;
+
+   unsigned int textMap[128];
 }
 dqRenderConfig_t;
 
