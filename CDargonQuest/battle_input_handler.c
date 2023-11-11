@@ -5,21 +5,8 @@
 #include "menu.h"
 #include "menu_option.h"
 
-static void dqBattleInputHandler_HandleIntroState()
-{
-   if ( dqInputState->keyWasPressed )
-   {
-      dqBattle_SetState( dqBattleStateSelectAction );
-   }
-}
-
-static void dqBattleInputHandler_HandleResultState()
-{
-   if ( dqInputState->keyWasPressed )
-   {
-      dqEventQueue_Push( dqEventBattleExit, 0 );
-   }
-}
+static void dqBattleInputHandler_HandleIntroState();
+static void dqBattleInputHandler_HandleResultState();
 
 void dqBattleInputHandler_HandleInput()
 {
@@ -34,5 +21,21 @@ void dqBattleInputHandler_HandleInput()
       case dqBattleStateResult:
          dqBattleInputHandler_HandleResultState();
          break;
+   }
+}
+
+static void dqBattleInputHandler_HandleIntroState()
+{
+   if ( dqInputState->keyWasPressed )
+   {
+      dqBattle_SetState( dqBattleStateSelectAction );
+   }
+}
+
+static void dqBattleInputHandler_HandleResultState()
+{
+   if ( dqInputState->keyWasPressed )
+   {
+      dqEventQueue_Push( dqEventBattleExit, 0 );
    }
 }

@@ -5,6 +5,8 @@
 #include "clock.h"
 #include "window.h"
 
+static void dqDialogRenderer_DrawTextPortion( sfVector2f* pos, const char* text, unsigned int width, unsigned int charCount );
+
 void dqDialogRenderer_Init()
 {
    dqDialogRenderer = (dqDialogRenderer_t*)dqMalloc( sizeof( dqDialogRenderer_t ) );
@@ -77,6 +79,43 @@ void dqDialogRenderer_DrawBorder( sfVector2f* pos, unsigned int width, unsigned 
    }
 }
 
+void dqDialogRenderer_DrawText( sfVector2f* pos, const char* text, unsigned int width )
+{
+   dqDialogRenderer_DrawTextPortion( pos, text, width, (unsigned int)strlen( text ) );
+}
+
+void dqDialogRenderer_ScrollText( sfVector2f* pos, const char* text, unsigned int width )
+{
+   unsigned int textLength;
+
+   if ( dqDialogRenderer->hasScrolled )
+   {
+      dqDialogRenderer_DrawText( pos, text, width );
+   }
+   else
+   {
+      dqDialogRenderer->scrollElapsedSeconds += dqClock->lastFrameSeconds;
+      dqDialogRenderer->scrollCharCount = (unsigned int)( dqDialogRenderer->scrollElapsedSeconds / dqRenderConfig->dialogScrollCharSeconds );
+
+      textLength = (unsigned int)strlen( text );
+
+      if ( dqDialogRenderer->scrollCharCount >= textLength )
+      {
+         dqDialogRenderer->isScrolling = sfFalse;
+         dqDialogRenderer->hasScrolled = sfTrue;
+         dqDialogRenderer->scrollCharCount = textLength;
+         dqRenderer_UnblockInput();
+      }
+      else
+      {
+         dqDialogRenderer->isScrolling = sfTrue;
+         dqRenderer_BlockInput();
+      }
+
+      dqDialogRenderer_DrawTextPortion( pos, text, width, dqDialogRenderer->scrollCharCount );
+   }
+}
+
 static void dqDialogRenderer_DrawTextPortion( sfVector2f* pos, const char* text, unsigned int width, unsigned int charCount )
 {
    int i, j;
@@ -138,42 +177,5 @@ static void dqDialogRenderer_DrawTextPortion( sfVector2f* pos, const char* text,
          sfSprite_setPosition( dqDialogRenderer->sprite, p );
          dqWindow_DrawSprite( dqDialogRenderer->sprite );
       }
-   }
-}
-
-void dqDialogRenderer_DrawText( sfVector2f* pos, const char* text, unsigned int width )
-{
-   dqDialogRenderer_DrawTextPortion( pos, text, width, (unsigned int)strlen( text ) );
-}
-
-void dqDialogRenderer_ScrollText( sfVector2f* pos, const char* text, unsigned int width )
-{
-   unsigned int textLength;
-
-   if ( dqDialogRenderer->hasScrolled )
-   {
-      dqDialogRenderer_DrawText( pos, text, width );
-   }
-   else
-   {
-      dqDialogRenderer->scrollElapsedSeconds += dqClock->lastFrameSeconds;
-      dqDialogRenderer->scrollCharCount = (unsigned int)( dqDialogRenderer->scrollElapsedSeconds / dqRenderConfig->dialogScrollCharSeconds );
-
-      textLength = (unsigned int)strlen( text );
-
-      if ( dqDialogRenderer->scrollCharCount >= textLength )
-      {
-         dqDialogRenderer->isScrolling = sfFalse;
-         dqDialogRenderer->hasScrolled = sfTrue;
-         dqDialogRenderer->scrollCharCount = textLength;
-         dqRenderer_UnblockInput();
-      }
-      else
-      {
-         dqDialogRenderer->isScrolling = sfTrue;
-         dqRenderer_BlockInput();
-      }
-
-      dqDialogRenderer_DrawTextPortion( pos, text, width, dqDialogRenderer->scrollCharCount );
    }
 }
