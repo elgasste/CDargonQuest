@@ -25,10 +25,6 @@ void dqTitleRenderer_Render()
    unsigned int i;
    static sfVector2f textPos;
 
-   dqDialogRenderer_DrawBorder( &( dqRenderConfig->titleMenuBorderPos ),
-                                dqRenderConfig->titleMenuBorderWidth,
-                                dqRenderConfig->titleMenuBorderHeight );
-
    if ( dqTitleMenu->selectedOption != dqTitleRenderer->selectedOptionCache )
    {
       dqTitleRenderer->showCarat = sfTrue;
@@ -50,13 +46,13 @@ void dqTitleRenderer_Render()
    {
       if ( dqTitleRenderer->showCarat && dqTitleRenderer->selectedOptionCache == i )
       {
-         textPos.x = dqRenderConfig->titleMenuBorderPos.x + ( ( dqRenderConfig->titleMenuOptionsOffset.x + dqRenderConfig->titleMenuCaratOffsetX ) * dqRenderConfig->dialogSpriteSize );
-         textPos.y = dqRenderConfig->titleMenuBorderPos.y + ( (float)( i + dqRenderConfig->titleMenuOptionsOffset.y ) * dqRenderConfig->dialogSpriteSize );
+         textPos.x = dqRenderConfig->titleMenuOptionsPos.x + ( dqRenderConfig->titleMenuCaratOffsetX * (int)( dqRenderConfig->dialogSpriteSize ) );
+         textPos.y = dqRenderConfig->titleMenuOptionsPos.y + (float)( i * dqRenderConfig->dialogSpriteSize );
          dqDialogRenderer_DrawText( &textPos, dqRenderConfig->menuCaratText, 2 );
       }
 
-      textPos.x = dqRenderConfig->titleMenuBorderPos.x + ( 8 *dqRenderConfig->dialogSpriteSize );
-      textPos.y = dqRenderConfig->titleMenuBorderPos.y + ( (float)( i + dqRenderConfig->titleMenuOptionsOffset.y ) * dqRenderConfig->dialogSpriteSize );
+      textPos.x = dqRenderConfig->titleMenuOptionsPos.x;
+      textPos.y = dqRenderConfig->titleMenuOptionsPos.y + (float)( i * dqRenderConfig->dialogSpriteSize );
       dqDialogRenderer_DrawText( &textPos, dqTitleMenu->options[i].text, dqRenderConfig->titleMenuOptionsWidth );
    }
 }

@@ -31,10 +31,7 @@ typedef struct dqRenderConfig_t
    const char* menuCaratText;
    float menuCaratBlinkRate;
 
-   sfVector2f titleMenuBorderPos;
-   unsigned int titleMenuBorderWidth;
-   unsigned int titleMenuBorderHeight;
-   sfVector2u titleMenuOptionsOffset;
+   sfVector2f titleMenuOptionsPos;
    unsigned int titleMenuOptionsWidth;
    int titleMenuCaratOffsetX;
 

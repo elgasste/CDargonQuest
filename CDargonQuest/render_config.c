@@ -33,13 +33,9 @@ void dqRenderConfig_Init()
    dqRenderConfig->menuCaratText = ">";
    dqRenderConfig->menuCaratBlinkRate = 0.3f;
 
-   dqRenderConfig->titleMenuBorderPos.x = (float)( 20 * dqRenderConfig->dialogSpriteSize );
-   dqRenderConfig->titleMenuBorderPos.y = (float)( 15 * dqRenderConfig->dialogSpriteSize );
-   dqRenderConfig->titleMenuBorderWidth = 20;
-   dqRenderConfig->titleMenuBorderHeight = 10;
-   dqRenderConfig->titleMenuOptionsOffset.x = 8;
-   dqRenderConfig->titleMenuOptionsOffset.y = 4;
-   dqRenderConfig->titleMenuOptionsWidth = dqRenderConfig->titleMenuBorderWidth - dqRenderConfig->titleMenuOptionsOffset.x - 2;
+   dqRenderConfig->titleMenuOptionsPos.x = (float)( 28 * dqRenderConfig->dialogSpriteSize );
+   dqRenderConfig->titleMenuOptionsPos.y = (float)( 19 * dqRenderConfig->dialogSpriteSize );
+   dqRenderConfig->titleMenuOptionsWidth = 8;
    dqRenderConfig->titleMenuCaratOffsetX = -2;
 
    dqRenderConfig->overworldViewSize.x = 448;
