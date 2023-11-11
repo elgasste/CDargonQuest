@@ -209,6 +209,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
   <ItemGroup>
     <ClInclude Include="battle_input_handler.h" />
     <ClInclude Include="battle_renderer.h" />
+    <ClInclude Include="battle_state.h" />
     <ClInclude Include="dialog_renderer.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="random.h" />

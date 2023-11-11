@@ -254,5 +254,8 @@
     <ClInclude Include="state.h">
       <Filter>Header Files\Enums</Filter>
     </ClInclude>
+    <ClInclude Include="battle_state.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
