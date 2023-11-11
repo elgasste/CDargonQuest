@@ -2,6 +2,7 @@
 #include "render_config.h"
 #include "dialog_renderer.h"
 #include "transition_renderer.h"
+#include "battle.h"
 
 void dqBattleRenderer_Init()
 {
@@ -24,10 +25,15 @@ void dqBattleRenderer_Render()
                                 dqRenderConfig->battleMessageDialogWidth,
                                 dqRenderConfig->battleMessageDialogHeight );
 
-   if ( !dqTransitionRenderer->fadingIn )
+   if ( dqBattle->state == dqBattleStateIntro )
    {
-      dqDialogRenderer_ScrollText( &textPos,
-                                   "Imagine this is some crazy battle against zombies and dragons or whatever, and you've got like 1 health left but you can't run away. Sweet, right?!",
-                                   dqRenderConfig->battleMessageDialogWidth - 2 );
+      if ( !dqTransitionRenderer->fadingIn )
+      {
+         dqDialogRenderer_ScrollText( &textPos, "You've encountered some enemies or something!", dqRenderConfig->battleMessageDialogWidth - 2 );
+      }
+   }
+   else
+   {
+      dqDialogRenderer_ScrollText( &textPos, "...and you ran away from them. Wuss.", dqRenderConfig->battleMessageDialogWidth - 2 );
    }
 }

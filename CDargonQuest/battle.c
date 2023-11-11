@@ -4,8 +4,6 @@
 void dqBattle_Init()
 {
    dqBattle = (dqBattle_t*)dqMalloc( sizeof( dqBattle_t ) );
-
-   dqBattle->state = dqBattleStateIntro;
 }
 
 void dqBattle_Cleanup()
@@ -16,6 +14,11 @@ void dqBattle_Cleanup()
 void dqBattle_Generate()
 {
    // TODO: set up enemy groups based on the current map tile tiers
-   dqBattle->state = dqBattleStateIntro;
+   dqBattle_SetState( dqBattleStateIntro );
+}
+
+void dqBattle_SetState( dqBattleState state )
+{
+   dqBattle->state = state;
    dqDialogRenderer_ResetScroll();
 }

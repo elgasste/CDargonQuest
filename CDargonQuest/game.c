@@ -129,7 +129,6 @@ static void dqGame_HandleFadedIn()
    }
    else if ( dqGame->state == dqStateBattleTransitionIn )
    {
-      // TODO: start the battle
       dqGame_SetState( dqStateBattle );
    }
 }
