@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Map">
       <UniqueIdentifier>{80a38cb5-c7f7-4082-a8c4-a734a5687df3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Enums">
+      <UniqueIdentifier>{b05a2cd6-280f-4b94-a714-7c6b85cdb17f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="win_main.c">
@@ -149,9 +152,6 @@
     <ClInclude Include="clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="strings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -174,9 +174,6 @@
       <Filter>Header Files\Events</Filter>
     </ClInclude>
     <ClInclude Include="event_queue.h">
-      <Filter>Header Files\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="event_type.h">
       <Filter>Header Files\Events</Filter>
     </ClInclude>
     <ClInclude Include="input_handler.h">
@@ -215,9 +212,6 @@
     <ClInclude Include="map_loader.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
-    <ClInclude Include="direction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -250,6 +244,15 @@
     </ClInclude>
     <ClInclude Include="battle_input_handler.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="event_type.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="direction.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>Header Files\Enums</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
