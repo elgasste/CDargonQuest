@@ -89,9 +89,6 @@ static void dqDialogRenderer_DrawTextPortion( sfVector2f* pos, const char* text,
       return;
    }
 
-   p.x = pos->x + ( dqRenderConfig->dialogSpriteSize );
-   p.y = pos->y + ( dqRenderConfig->dialogSpriteSize );
-
    for ( textIndex = 0, i = 0, j = 0; ; i++, textIndex++ )
    {
       if ( textIndex >= charCount )
@@ -114,7 +111,7 @@ static void dqDialogRenderer_DrawTextPortion( sfVector2f* pos, const char* text,
          if ( peek == ' ' || peek == '\0' )
          {
             // TODO: if a single word is wider than the dialog, do we need to worry?
-            if ( i + ( peekIndex - textIndex ) >= width )
+            if ( i + ( peekIndex - textIndex ) > width )
             {
                i = -1;
                j++;

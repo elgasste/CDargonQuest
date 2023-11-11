@@ -48,7 +48,7 @@ void dqTitleRenderer_Render()
       {
          textPos.x = dqRenderConfig->titleMenuOptionsPos.x + ( dqRenderConfig->titleMenuCaratOffsetX * (int)( dqRenderConfig->dialogSpriteSize ) );
          textPos.y = dqRenderConfig->titleMenuOptionsPos.y + (float)( i * dqRenderConfig->dialogSpriteSize );
-         dqDialogRenderer_DrawText( &textPos, dqRenderConfig->menuCaratText, 2 );
+         dqDialogRenderer_DrawText( &textPos, dqRenderConfig->menuCaratText, 1 );
       }
 
       textPos.x = dqRenderConfig->titleMenuOptionsPos.x;
