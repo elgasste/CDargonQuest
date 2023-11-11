@@ -138,6 +138,9 @@
     <ClCompile Include="battle_input_handler.c">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
+    <ClCompile Include="battle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -256,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="battle_state.h">
       <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="battle.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

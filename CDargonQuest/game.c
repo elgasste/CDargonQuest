@@ -13,6 +13,7 @@
 #include "entity.h"
 #include "physics.h"
 #include "map.h"
+#include "battle.h"
 #include "transition_renderer.h"
 #include "dialog_renderer.h"
 
@@ -116,11 +117,7 @@ static void dqGame_HandleFadedOut()
    }
    else if ( dqGame->state == dqStateBattleTransitionIn )
    {
-      // TODO: generate a battle
-
-      // TODO: this will probably go into the battle generation code.
-      // or will it? I'm not sure where this belongs.
-      dqDialogRenderer_ResetScroll();
+      dqBattle_Generate();
    }
 }
 
@@ -239,12 +236,14 @@ void dqGame_Init()
    dqRenderer_Init();
    dqClock_Init();
    dqEventQueue_Init();
+   dqBattle_Init();
 
    dqLog_Message( "game objects loaded" );
 }
 
 void dqGame_Cleanup()
 {
+   dqBattle_Cleanup();
    dqEventQueue_Cleanup();
    dqClock_Cleanup();
    dqRenderer_Cleanup();

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "common.h"
-
 typedef enum
 {
    dqStateInit = 0,
