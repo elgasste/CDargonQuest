@@ -27,7 +27,7 @@ void dqDialogRenderer_Cleanup()
 void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned int height )
 {
    unsigned int row, col, idx;
-   sfVector2f p;
+   static sfVector2f p;
 
    for ( row = 0; row < height; row++ )
    {
@@ -71,15 +71,15 @@ void dqDialogRenderer_DrawText( sfVector2f pos, const char* text, unsigned int w
    char c, peek;
    unsigned int tileIndex, textIndex, peekIndex, textureX, textureY;
    sfBool skip;
-   sfVector2f p;
-
-   p.x = pos.x + ( dqRenderConfig->dialogSpriteSize );
-   p.y = pos.y + ( dqRenderConfig->dialogSpriteSize );
+   static sfVector2f p;
 
    if ( !text )
    {
       return;
    }
+
+   p.x = pos.x + ( dqRenderConfig->dialogSpriteSize );
+   p.y = pos.y + ( dqRenderConfig->dialogSpriteSize );
 
    for ( textIndex = 0, i = 0, j = 0; ; i++, textIndex++ )
    {
