@@ -58,6 +58,8 @@ void dqRenderConfig_Init()
    dqRenderConfig->dialogTileTextureColumns = 10;
    dqRenderConfig->dialogTileTextureRows = 10;
 
+   dqRenderConfig->dialogScrollCharSeconds = 0.01f;
+
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 
    dqRenderConfig->overworldFadeOutSeconds = 0.3f;

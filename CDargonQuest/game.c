@@ -14,6 +14,7 @@
 #include "physics.h"
 #include "map.h"
 #include "transition_renderer.h"
+#include "dialog_renderer.h"
 
 static void dqGame_SetState( dqState_t state )
 {
@@ -116,6 +117,10 @@ static void dqGame_HandleFadedOut()
    else if ( dqGame->state == dqStateBattleTransitionIn )
    {
       // TODO: generate a battle
+
+      // TODO: this will probably go into the battle generation code.
+      // or will it? I'm not sure where this belongs.
+      dqDialogRenderer_ResetScroll();
    }
 }
 
@@ -127,6 +132,7 @@ static void dqGame_HandleFadedIn()
    }
    else if ( dqGame->state == dqStateBattleTransitionIn )
    {
+      // TODO: start the battle
       dqGame_SetState( dqStateBattle );
    }
 }
