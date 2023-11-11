@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Map">
       <UniqueIdentifier>{80a38cb5-c7f7-4082-a8c4-a734a5687df3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Enums">
+      <UniqueIdentifier>{b05a2cd6-280f-4b94-a714-7c6b85cdb17f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="win_main.c">
@@ -63,9 +66,6 @@
     <ClCompile Include="renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="title_renderer.c">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="window.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
@@ -76,9 +76,6 @@
       <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="input_state.c">
-      <Filter>Source Files\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="title_input_handler.c">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="overworld_input_handler.c">
@@ -135,6 +132,12 @@
     <ClCompile Include="battle_input_handler.c">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
+    <ClCompile Include="battle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_renderer.c">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -149,9 +152,6 @@
     <ClInclude Include="clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="strings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -159,9 +159,6 @@
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="render_config.h">
-      <Filter>Header Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="title_renderer.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="window.h">
@@ -176,16 +173,10 @@
     <ClInclude Include="event_queue.h">
       <Filter>Header Files\Events</Filter>
     </ClInclude>
-    <ClInclude Include="event_type.h">
-      <Filter>Header Files\Events</Filter>
-    </ClInclude>
     <ClInclude Include="input_handler.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="input_state.h">
-      <Filter>Header Files\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="title_input_handler.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
     <ClInclude Include="overworld_input_handler.h">
@@ -214,9 +205,6 @@
     </ClInclude>
     <ClInclude Include="map_loader.h">
       <Filter>Header Files\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="direction.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
       <Filter>Header Files</Filter>
@@ -250,6 +238,24 @@
     </ClInclude>
     <ClInclude Include="battle_input_handler.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="event_type.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="direction.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="battle_state.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="battle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu_renderer.h">
+      <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

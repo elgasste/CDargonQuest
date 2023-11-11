@@ -35,6 +35,10 @@ typedef struct dqRenderConfig_t
    unsigned int titleMenuOptionsWidth;
    int titleMenuCaratOffsetX;
 
+   sfVector2f battleActionMenuOptionsPos;
+   unsigned int battleActionMenuOptionsWidth;
+   int battleActionMenuCaratOffsetX;
+
    sfVector2f overworldViewSize;
    sfVector2f overworldViewOffset;
 

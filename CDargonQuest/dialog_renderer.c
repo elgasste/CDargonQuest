@@ -1,6 +1,7 @@
 #include "dialog_renderer.h"
 #include "render_config.h"
 #include "render_data.h"
+#include "renderer.h"
 #include "clock.h"
 #include "window.h"
 
@@ -165,10 +166,12 @@ void dqDialogRenderer_ScrollText( sfVector2f* pos, const char* text, unsigned in
          dqDialogRenderer->isScrolling = sfFalse;
          dqDialogRenderer->hasScrolled = sfTrue;
          dqDialogRenderer->scrollCharCount = textLength;
+         dqRenderer_UnblockInput();
       }
       else
       {
          dqDialogRenderer->isScrolling = sfTrue;
+         dqRenderer_BlockInput();
       }
 
       dqDialogRenderer_DrawTextPortion( pos, text, width, dqDialogRenderer->scrollCharCount );

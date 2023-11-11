@@ -175,11 +175,13 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="battle.c" />
     <ClCompile Include="battle_input_handler.c" />
     <ClCompile Include="battle_renderer.c" />
     <ClCompile Include="common.c" />
     <ClCompile Include="dialog_renderer.c" />
     <ClCompile Include="log.c" />
+    <ClCompile Include="menu_renderer.c" />
     <ClCompile Include="random.c" />
     <ClCompile Include="transition_renderer.c" />
     <ClCompile Include="physics.c" />
@@ -202,15 +204,16 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     <ClCompile Include="renderer.c" />
     <ClCompile Include="render_config.c" />
     <ClCompile Include="render_data.c" />
-    <ClCompile Include="title_input_handler.c" />
-    <ClCompile Include="title_renderer.c" />
     <ClCompile Include="window.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="battle.h" />
     <ClInclude Include="battle_input_handler.h" />
     <ClInclude Include="battle_renderer.h" />
+    <ClInclude Include="battle_state.h" />
     <ClInclude Include="dialog_renderer.h" />
     <ClInclude Include="log.h" />
+    <ClInclude Include="menu_renderer.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="transition_renderer.h" />
     <ClInclude Include="physics.h" />
@@ -242,8 +245,6 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     <ClInclude Include="render_data.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="strings.h" />
-    <ClInclude Include="title_input_handler.h" />
-    <ClInclude Include="title_renderer.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

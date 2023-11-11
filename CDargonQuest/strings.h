@@ -20,6 +20,9 @@
 #define STR_TITLE_MENU_START              "Start"
 #define STR_TITLE_MENU_QUIT               "Quit"
 
+#define STR_BATTLE_MENU_ATTACK            "Attack"
+#define STR_BATTLE_MENU_RUN               "Run"
+
 #define STR_ERROR_THREAD_PRIORITY         "could not set thread priority"
 #define STR_ERROR_MALLOC                  "could not allocate memory for game object"
 #define STR_ERROR_LOG_FILE_OPEN           "could not open log file"

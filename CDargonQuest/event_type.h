@@ -1,7 +1,5 @@
 #pragma once
 
-#include "common.h"
-
 typedef enum
 {
    dqEventStart = 0,
@@ -16,6 +14,9 @@ typedef enum
    dqEventFadedIn,
 
    dqEventEncounter,
-   dqEventExitBattle
+
+   dqEventBattleAttack,
+   dqEventBattleRun,
+   dqEventBattleExit
 }
 dqEventType_t;
