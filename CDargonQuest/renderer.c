@@ -2,6 +2,7 @@
 #include "window.h"
 #include "render_config.h"
 #include "diagnostics_renderer.h"
+#include "dialog_renderer.h"
 #include "title_renderer.h"
 #include "overworld_renderer.h"
 #include "battle_renderer.h"
@@ -11,6 +12,7 @@
 void dqRenderer_Init()
 {
    dqDiagnosticsRenderer_Init();
+   dqDialogRenderer_Init();
    dqTitleRenderer_Init();
    dqOverworldRenderer_Init();
    dqBattleRenderer_Init();
@@ -23,6 +25,7 @@ void dqRenderer_Cleanup()
    dqBattleRenderer_Cleanup();
    dqOverworldRenderer_Cleanup();
    dqTitleRenderer_Cleanup();
+   dqDialogRenderer_Cleanup();
    dqDiagnosticsRenderer_Cleanup();
 }
 

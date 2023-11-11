@@ -108,8 +108,7 @@ static void dqInputHandler_CheckCheats()
 
 void dqInputHandler_Init()
 {
-   dqInputHandler = (dqInputHandler_t*)malloc( sizeof( dqInputHandler_t ) );
-   CHECK_MALLOC( dqInputHandler )
+   dqInputHandler = (dqInputHandler_t*)dqMalloc( sizeof( dqInputHandler_t ) );
 
    dqInputHandler->cheatString[0] = '\0';
 
@@ -118,9 +117,9 @@ void dqInputHandler_Init()
 
 void dqInputHandler_Cleanup()
 {
-   SAFE_DELETE( dqInputHandler )
-
    dqOverworldInputHandler_Cleanup();
+
+   dqFree( dqInputHandler );
 }
 
 void dqInputHandler_HandleInput()

@@ -9,8 +9,7 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntity_t* entity,
                                          unsigned int frameCount,
                                          float frameTimeThreshold )
 {
-   dqEntitySprite_t* sprite = (dqEntitySprite_t*)malloc( sizeof( dqEntitySprite_t ) );
-   CHECK_MALLOC( sprite )
+   dqEntitySprite_t* sprite = (dqEntitySprite_t*)dqMalloc( sizeof( dqEntitySprite_t ) );
 
    sprite->entity = entity;
 
@@ -36,7 +35,7 @@ void dqEntitySprite_Cleanup( dqEntitySprite_t* sprite )
 {
    sfSprite_destroy( sprite->sprite );
 
-   SAFE_DELETE( sprite )
+   dqFree( sprite );
 }
 
 void dqEntitySprite_Tick( dqEntitySprite_t* sprite )

@@ -2,8 +2,9 @@
 
 void dqRenderConfig_Init()
 {
-   dqRenderConfig = (dqRenderConfig_t*)malloc( sizeof( dqRenderConfig_t ) );
-   CHECK_MALLOC( dqRenderConfig )
+   int i;
+
+   dqRenderConfig = (dqRenderConfig_t*)dqMalloc( sizeof( dqRenderConfig_t ) );
 
    dqRenderConfig->minFrameRate = 30;
    dqRenderConfig->maxFrameRate = 120;
@@ -46,9 +47,16 @@ void dqRenderConfig_Init()
    dqRenderConfig->impassableOverlayColor = sfColor_fromRGBA( 255, 0, 0, 128 );
    dqRenderConfig->mapSwapOverlayColor = sfColor_fromRGBA( 0, 0, 255, 128 );
 
-   dqRenderConfig->overworldTileTexturePath = "Resources/Tilesets/overworld.png";
+   dqRenderConfig->overworldTilesetTexturePath = "Resources/Tilesets/overworld.png";
+   dqRenderConfig->dialogTilesetTexturePath = "Resources/Tilesets/text.png";
+
+   dqRenderConfig->dialogSpriteSize = 8;
+
    dqRenderConfig->overworldTileTextureColumns = 16;
    dqRenderConfig->overworldTileTextureRows = 3;
+
+   dqRenderConfig->dialogTileTextureColumns = 10;
+   dqRenderConfig->dialogTileTextureRows = 10;
 
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 
@@ -61,9 +69,35 @@ void dqRenderConfig_Init()
    dqRenderConfig->cheatFontScale.y = 0.2f;
    dqRenderConfig->cheatLetterSpacing = 0.1f;
    dqRenderConfig->cheatFontColor = sfWhite;
+
+   dqRenderConfig->battleMessageDialogPos.x = dqRenderConfig->overworldViewOffset.x;
+   dqRenderConfig->battleMessageDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 8 ) - dqRenderConfig->overworldViewOffset.y;
+   dqRenderConfig->battleMessageDialogWidth = 28 * 2; // dialog sprites are 8 pixels, overworld sprites are 16 pixels
+   dqRenderConfig->battleMessageDialogHeight = 6 * 2;
+
+   for ( i = 0; i < 128; i++ )
+   {
+      if ( i >= 32 && i <= 122 )
+      {
+         dqRenderConfig->textMap[i] = i - 32;
+      }
+      else
+      {
+         dqRenderConfig->textMap[i] = 61; // space
+      }
+   }
+
+   dqRenderConfig->dialogLeftBorderIndex = 92;
+   dqRenderConfig->dialogTopBorderIndex = 93;
+   dqRenderConfig->dialogRightBorderIndex = 94;
+   dqRenderConfig->dialogBottomBorderIndex = 95;
+   dqRenderConfig->dialogTopLeftBorderIndex = 96;
+   dqRenderConfig->dialogTopRightBorderIndex = 97;
+   dqRenderConfig->dialogBottomRightBorderIndex = 98;
+   dqRenderConfig->dialogBottomLeftBorderIndex = 99;
 }
 
 void dqRenderConfig_Cleanup()
 {
-   SAFE_DELETE( dqRenderConfig )
+   dqFree( dqRenderConfig );
 }

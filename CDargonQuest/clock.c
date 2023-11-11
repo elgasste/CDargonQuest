@@ -3,8 +3,7 @@
 
 void dqClock_Init()
 {
-   dqClock = (dqClock_t*)malloc( sizeof( dqClock_t ) );
-   CHECK_MALLOC( dqClock )
+   dqClock = (dqClock_t*)dqMalloc( sizeof( dqClock_t ) );
 
    dqClock->clock = sfClock_create();
 
@@ -27,7 +26,7 @@ void dqClock_Cleanup()
 {
    sfClock_destroy( dqClock->clock );
 
-   SAFE_DELETE( dqClock )
+   dqFree( dqClock );
 }
 
 void dqClock_StartFrame()

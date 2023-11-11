@@ -11,8 +11,9 @@
 #include "error.h"
 #include "log.h"
 
-#define CHECK_MALLOC( x ) if ( x == NULL ) { dqError_Message( STR_ERROR_MALLOC ); exit( 1 ); }
-#define SAFE_DELETE( x ) if ( x != NULL ) { free( x ); x = NULL; }
-
 #define MAX_EVENTS         100
 #define MAX_EVENT_ARGS     4
+
+void* dqMalloc( size_t size );
+void* dqCalloc( size_t count, size_t size );
+void dqFree( void* mem );

@@ -6,6 +6,7 @@
 typedef struct
 {
    sfTexture* overworldTilesetTexture;
+   sfTexture* dialogTilesetTexture;
 
    sfTexture* playerTexture;
    dqEntitySprite_t* playerSprite;

@@ -30,8 +30,7 @@ void dqOverworldRenderer_Init()
 
    sfVector2f tileSize = { dqGameConfig->mapTileSize, dqGameConfig->mapTileSize };
 
-   dqOverworldRenderer = (dqOverworldRenderer_t*)malloc( sizeof( dqOverworldRenderer_t ) );
-   CHECK_MALLOC( dqOverworldRenderer )
+   dqOverworldRenderer = (dqOverworldRenderer_t*)dqMalloc( sizeof( dqOverworldRenderer_t ) );
 
    dqOverworldRenderer->tileSprite = sfSprite_create();
    sfSprite_setTexture( dqOverworldRenderer->tileSprite, dqRenderData->overworldTilesetTexture, sfFalse );
@@ -95,7 +94,7 @@ void dqOverworldRenderer_Cleanup()
 
    sfSprite_destroy( dqOverworldRenderer->tileSprite );
 
-   SAFE_DELETE( dqOverworldRenderer )
+   dqFree( dqOverworldRenderer );
 }
 
 void dqOverworldRenderer_RenderMap()
@@ -197,7 +196,7 @@ void dqOverworldRenderer_RenderMap()
                dqWindow_DrawRectangleShape( dqOverworldRenderer->impassableRect );
             }
 
-            sprintf_s( dqOverworldRenderer->cheatChars, 64, "R:%d\nE:%d-%d", tile->encounterRate, tile->minEnemyTier, tile->maxEnemyTier );
+            sprintf_s( dqOverworldRenderer->cheatChars, 64, "R:%d\nT:%d-%d", tile->encounterRate, tile->minEnemyTier, tile->maxEnemyTier );
             sfText_setString( dqOverworldRenderer->cheatText, dqOverworldRenderer->cheatChars );
             sfText_setPosition( dqOverworldRenderer->cheatText, tilePosition );
             dqWindow_DrawText( dqOverworldRenderer->cheatText );

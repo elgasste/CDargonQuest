@@ -8,10 +8,9 @@ void dqDiagnosticsRenderer_Init()
    sfVector2f backgroundSize = { dqRenderConfig->diagnosticsWidth, dqRenderConfig->diagnosticsHeight };
    sfVector2f backgroundPosition = { dqRenderConfig->screenWidth - dqRenderConfig->diagnosticsWidth, 0 };
 
-   dqDiagnosticsRenderer = (dqDiagnosticsRenderer_t*)malloc( sizeof( dqDiagnosticsRenderer_t ) );
-   CHECK_MALLOC( dqDiagnosticsRenderer )
+   dqDiagnosticsRenderer = (dqDiagnosticsRenderer_t*)dqMalloc( sizeof( dqDiagnosticsRenderer_t ) );
 
-   dqDiagnosticsRenderer->textLine = (char*)calloc( sizeof( char ), dqRenderConfig->diagnosticsLineWidth );
+   dqDiagnosticsRenderer->textLine = (char*)dqCalloc( sizeof( char ), dqRenderConfig->diagnosticsLineWidth );
 
    dqDiagnosticsRenderer->background = sfRectangleShape_create();
    sfRectangleShape_setSize( dqDiagnosticsRenderer->background, backgroundSize );
@@ -41,8 +40,8 @@ void dqDiagnosticsRenderer_Cleanup()
    sfFont_destroy( dqDiagnosticsRenderer->font );
    sfRectangleShape_destroy( dqDiagnosticsRenderer->background );
 
-   SAFE_DELETE( dqDiagnosticsRenderer->textLine )
-   SAFE_DELETE( dqDiagnosticsRenderer )
+   dqFree( dqDiagnosticsRenderer->textLine );
+   dqFree( dqDiagnosticsRenderer );
 }
 
 void dqDiagnosticsRenderer_Render()
