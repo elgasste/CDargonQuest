@@ -7,6 +7,52 @@
 #include "map_tile.h"
 
 static void dqPhysics_ClipHorizontal( dqEntity_t* entity,
+                                      unsigned int prevLeftColumn, unsigned int prevRightColumn );
+static void dqPhysics_ClipVertical( dqEntity_t* entity,
+                                    unsigned int prevTopRow, unsigned int prevBottomRow );
+
+void dqPhysics_MoveEntity( dqEntity_t* entity )
+{
+   unsigned int leftColumn, rightColumn, topRow, bottomRow;
+   sfBool clip = entity != dqGameData->player || !dqGameConfig->noClipCheat;
+
+   if ( entity->velocityX != 0 )
+   {
+      leftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
+      rightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
+
+      entity->hitBoxPosition.x += entity->velocityX * dqClock->lastFrameSeconds;
+      entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
+
+      if ( clip )
+      {
+         dqPhysics_ClipHorizontal( entity, leftColumn, rightColumn );
+      }
+   }
+
+   if ( entity->velocityY != 0 )
+   {
+      topRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
+      bottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
+
+      entity->hitBoxPosition.y += ( entity->velocityY * dqClock->lastFrameSeconds );
+      entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+
+      if ( clip )
+      {
+         dqPhysics_ClipVertical( entity, topRow, bottomRow );
+      }
+   }
+}
+
+void dqPhysics_DecelerateEntity( dqEntity_t* entity )
+{
+   // TODO: maybe have deceleration rates?
+   entity->velocityX = 0;
+   entity->velocityY = 0;
+}
+
+static void dqPhysics_ClipHorizontal( dqEntity_t* entity,
                                       unsigned int prevLeftColumn, unsigned int prevRightColumn )
 {
    unsigned int newLeftColumn, newRightColumn, i;
@@ -114,45 +160,4 @@ static void dqPhysics_ClipVertical( dqEntity_t* entity,
          }
       }
    }
-}
-
-void dqPhysics_MoveEntity( dqEntity_t* entity )
-{
-   unsigned int leftColumn, rightColumn, topRow, bottomRow;
-   sfBool clip = entity != dqGameData->player || !dqGameConfig->noClipCheat;
-
-   if ( entity->velocityX != 0 )
-   {
-      leftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
-      rightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
-
-      entity->hitBoxPosition.x += entity->velocityX * dqClock->lastFrameSeconds;
-      entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
-
-      if ( clip )
-      {
-         dqPhysics_ClipHorizontal( entity, leftColumn, rightColumn );
-      }
-   }
-
-   if ( entity->velocityY != 0 )
-   {
-      topRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
-      bottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
-
-      entity->hitBoxPosition.y += ( entity->velocityY * dqClock->lastFrameSeconds );
-      entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
-
-      if ( clip )
-      {
-         dqPhysics_ClipVertical( entity, topRow, bottomRow );
-      }
-   }
-}
-
-void dqPhysics_DecelerateEntity( dqEntity_t* entity )
-{
-   // TODO: maybe have deceleration rates?
-   entity->velocityX = 0;
-   entity->velocityY = 0;
 }

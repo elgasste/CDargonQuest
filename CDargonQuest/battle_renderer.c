@@ -6,23 +6,9 @@
 #include "battle.h"
 #include "menu.h"
 
-static void dqBattleRenderer_RenderIntroState( sfVector2f* textPos )
-{
-   if ( !dqTransitionRenderer->fadingIn )
-   {
-      dqDialogRenderer_ScrollText( textPos, "You've encountered some enemies or something!", dqRenderConfig->battleMessageDialogWidth - 2 );
-   }
-}
-
-static void dqBattleRenderer_RenderSelectActionState()
-{
-   dqMenuRenderer_Render( dqMenuBattleAction );
-}
-
-static void dqBattleRenderer_RenderResultState( sfVector2f* textPos )
-{
-   dqDialogRenderer_ScrollText( textPos, dqBattle->resultMessage, dqRenderConfig->battleMessageDialogWidth - 2 );
-}
+static void dqBattleRenderer_RenderIntroState( sfVector2f* textPos );
+static void dqBattleRenderer_RenderSelectActionState();
+static void dqBattleRenderer_RenderResultState( sfVector2f* textPos );
 
 void dqBattleRenderer_Init()
 {
@@ -55,4 +41,22 @@ void dqBattleRenderer_Render()
          dqBattleRenderer_RenderResultState( &textPos );
          break;
    }
+}
+
+static void dqBattleRenderer_RenderIntroState( sfVector2f* textPos )
+{
+   if ( !dqTransitionRenderer->fadingIn )
+   {
+      dqDialogRenderer_ScrollText( textPos, "You've encountered some enemies or something!", dqRenderConfig->battleMessageDialogWidth - 2 );
+   }
+}
+
+static void dqBattleRenderer_RenderSelectActionState()
+{
+   dqMenuRenderer_Render( dqMenuBattleAction );
+}
+
+static void dqBattleRenderer_RenderResultState( sfVector2f* textPos )
+{
+   dqDialogRenderer_ScrollText( textPos, dqBattle->resultMessage, dqRenderConfig->battleMessageDialogWidth - 2 );
 }

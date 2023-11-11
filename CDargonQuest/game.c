@@ -17,6 +17,154 @@
 #include "transition_renderer.h"
 #include "dialog_renderer.h"
 
+static void dqGame_HandleEvents();
+static void dqGame_Tick();
+static void dqGame_SetState( dqState_t state );
+static void dqGame_HandleStart();
+static void dqGame_HandleQuit();
+static void dqGame_HandleMovePlayer( dqEvent_t* e );
+static void dqGame_HandlePointPlayer( dqEvent_t* e );
+static void dqGame_HandleSwapMap( dqEvent_t* e );
+static void dqGame_HandleFadedOut();
+static void dqGame_HandleFadedIn();
+static void dqGame_HandleEncounter();
+static void dqGame_HandleBattleAttack();
+static void dqGame_HandleBattleRun();
+static void dqGame_HandleBattleExit();
+
+void dqGame_Init()
+{
+   dqGame = (dqGame_t*)dqMalloc( sizeof( dqGame_t ) );
+
+   dqGame->isRunning = sfFalse;
+   dqGame->state = dqStateInit;
+   dqGame->previousState = dqStateInit;
+
+   dqGame->nextMapIndex = 0;
+   dqGame->nextMapTileIndex = 0;
+
+   dqGameConfig_Init();
+   dqLog_Init();
+
+   dqLog_Message( "loading game objects" );
+
+   dqRandom_Init();
+   dqRenderConfig_Init();
+   dqGameData_Init();
+   dqMenu_Init();
+   dqRenderData_Init( dqGameData->player );
+   dqWindow_Init();
+   dqRenderer_Init();
+   dqClock_Init();
+   dqEventQueue_Init();
+   dqBattle_Init();
+
+   dqLog_Message( "game objects loaded" );
+}
+
+void dqGame_Cleanup()
+{
+   dqBattle_Cleanup();
+   dqEventQueue_Cleanup();
+   dqClock_Cleanup();
+   dqRenderer_Cleanup();
+   dqWindow_Cleanup();
+   dqMenu_Cleanup();
+   dqRenderData_Cleanup();
+   dqGameData_Cleanup();
+   dqRenderConfig_Cleanup();
+   dqGameConfig_Cleanup();
+
+   dqLog_Message( "game objects cleaned up" );
+   dqLog_Cleanup();
+
+   dqFree( dqGame );
+}
+
+void dqGame_Run()
+{
+   dqLog_Message( "game loop starting" );
+   dqGame_SetState( dqStateTitle );
+   dqGame->isRunning = sfTrue;
+
+   while ( dqGame->isRunning )
+   {
+      dqClock_StartFrame();
+
+      dqGame_HandleEvents();
+      dqGame_Tick();
+      dqRenderer_Render();
+
+      dqClock_EndFrame();
+   }
+
+   dqLog_Message( "game loop ended" );
+   dqGame_SetState( dqStateClosing );
+}
+
+static void dqGame_HandleEvents()
+{
+   dqEvent_t* e;
+
+   dqWindow_HandleEvents();
+
+   while ( !dqEventQueue_IsEmpty() )
+   {
+      e = dqEventQueue_GetNext();
+
+      switch ( e->type )
+      {
+         case dqEventStart:
+            dqGame_HandleStart();
+            break;
+         case dqEventQuit:
+            dqGame_HandleQuit();
+            break;
+         case dqEventMovePlayer:
+            dqGame_HandleMovePlayer( e );
+            break;
+         case dqEventPointPlayer:
+            dqGame_HandlePointPlayer( e );
+            break;
+         case dqEventSwapMap:
+            dqGame_HandleSwapMap( e );
+            break;
+         case dqEventFadedOut:
+            dqGame_HandleFadedOut();
+            break;
+         case dqEventFadedIn:
+            dqGame_HandleFadedIn();
+            break;
+         case dqEventEncounter:
+            dqGame_HandleEncounter();
+            break;
+         case dqEventBattleAttack:
+            dqGame_HandleBattleAttack();
+            break;
+         case dqEventBattleRun:
+            dqGame_HandleBattleRun();
+            break;
+         case dqEventBattleExit:
+            dqGame_HandleBattleExit();
+            break;
+      }
+   }
+}
+
+static void dqGame_Tick()
+{
+   if ( dqGame->state == dqStateOverworld )
+   {
+      // TODO: eventually do this for all entities on the map
+      dqPhysics_MoveEntity( dqGameData->player );
+      dqEntitySprite_Tick( dqRenderData->playerSprite );
+      dqPhysics_DecelerateEntity( dqGameData->player );
+
+      dqMap_CheckSwap();
+      dqMap_CheckEncounter();
+   }
+}
+
 static void dqGame_SetState( dqState_t state )
 {
    dqGame->previousState = dqGame->state;
@@ -167,137 +315,4 @@ static void dqGame_HandleBattleExit()
       dqTransitionRenderer_Reset();
       dqGame_SetState( dqStateBattleTransitionOut );
    }
-}
-
-static void dqGame_HandleEvents()
-{
-   dqEvent_t* e;
-
-   dqWindow_HandleEvents();
-
-   while ( !dqEventQueue_IsEmpty() )
-   {
-      e = dqEventQueue_GetNext();
-
-      switch ( e->type )
-      {
-         case dqEventStart:
-            dqGame_HandleStart();
-            break;
-         case dqEventQuit:
-            dqGame_HandleQuit();
-            break;
-         case dqEventMovePlayer:
-            dqGame_HandleMovePlayer( e );
-            break;
-         case dqEventPointPlayer:
-            dqGame_HandlePointPlayer( e );
-            break;
-         case dqEventSwapMap:
-            dqGame_HandleSwapMap( e );
-            break;
-         case dqEventFadedOut:
-            dqGame_HandleFadedOut();
-            break;
-         case dqEventFadedIn:
-            dqGame_HandleFadedIn();
-            break;
-         case dqEventEncounter:
-            dqGame_HandleEncounter();
-            break;
-         case dqEventBattleAttack:
-            dqGame_HandleBattleAttack();
-            break;
-         case dqEventBattleRun:
-            dqGame_HandleBattleRun();
-            break;
-         case dqEventBattleExit:
-            dqGame_HandleBattleExit();
-            break;
-      }
-   }
-}
-
-static void dqGame_Tick()
-{
-   if ( dqGame->state == dqStateOverworld )
-   {
-      // TODO: eventually do this for all entities on the map
-      dqPhysics_MoveEntity( dqGameData->player );
-      dqEntitySprite_Tick( dqRenderData->playerSprite );
-      dqPhysics_DecelerateEntity( dqGameData->player );
-
-      dqMap_CheckSwap();
-      dqMap_CheckEncounter();
-   }
-}
-
-void dqGame_Init()
-{
-   dqGame = (dqGame_t*)dqMalloc( sizeof( dqGame_t ) );
-
-   dqGame->isRunning = sfFalse;
-   dqGame->state = dqStateInit;
-   dqGame->previousState = dqStateInit;
-
-   dqGame->nextMapIndex = 0;
-   dqGame->nextMapTileIndex = 0;
-
-   dqGameConfig_Init();
-   dqLog_Init();
-
-   dqLog_Message( "loading game objects" );
-
-   dqRandom_Init();
-   dqRenderConfig_Init();
-   dqGameData_Init();
-   dqMenu_Init();
-   dqRenderData_Init( dqGameData->player );
-   dqWindow_Init();
-   dqRenderer_Init();
-   dqClock_Init();
-   dqEventQueue_Init();
-   dqBattle_Init();
-
-   dqLog_Message( "game objects loaded" );
-}
-
-void dqGame_Cleanup()
-{
-   dqBattle_Cleanup();
-   dqEventQueue_Cleanup();
-   dqClock_Cleanup();
-   dqRenderer_Cleanup();
-   dqWindow_Cleanup();
-   dqMenu_Cleanup();
-   dqRenderData_Cleanup();
-   dqGameData_Cleanup();
-   dqRenderConfig_Cleanup();
-   dqGameConfig_Cleanup();
-
-   dqLog_Message( "game objects cleaned up" );
-   dqLog_Cleanup();
-
-   dqFree( dqGame );
-}
-
-void dqGame_Run()
-{
-   dqLog_Message( "game loop starting" );
-   dqGame_SetState( dqStateTitle );
-   dqGame->isRunning = sfTrue;
-
-   while ( dqGame->isRunning )
-   {
-      dqClock_StartFrame();
-
-      dqGame_HandleEvents();
-      dqGame_Tick();
-      dqRenderer_Render();
-
-      dqClock_EndFrame();
-   }
-
-   dqLog_Message( "game loop ended" );
-   dqGame_SetState( dqStateClosing );
 }
