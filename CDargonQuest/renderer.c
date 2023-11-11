@@ -11,6 +11,10 @@
 
 void dqRenderer_Init()
 {
+   dqRenderer = (dqRenderer_t*)dqMalloc( sizeof( dqRenderer_t ) );
+
+   dqRenderer->isBlockingInput = sfFalse;
+
    dqDiagnosticsRenderer_Init();
    dqDialogRenderer_Init();
    dqTitleRenderer_Init();
@@ -27,6 +31,8 @@ void dqRenderer_Cleanup()
    dqTitleRenderer_Cleanup();
    dqDialogRenderer_Cleanup();
    dqDiagnosticsRenderer_Cleanup();
+
+   dqFree( dqRenderer );
 }
 
 void dqRenderer_Render()
@@ -82,4 +88,14 @@ void dqRenderer_Render()
    }
 
    dqWindow_Display();
+}
+
+void dqRenderer_BlockInput()
+{
+   dqRenderer->isBlockingInput = sfTrue;
+}
+
+void dqRenderer_UnblockInput()
+{
+   dqRenderer->isBlockingInput = sfFalse;
 }

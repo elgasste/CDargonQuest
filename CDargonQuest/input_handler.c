@@ -6,7 +6,7 @@
 #include "overworld_input_handler.h"
 #include "battle_input_handler.h"
 #include "game.h"
-#include "dialog_renderer.h"
+#include "renderer.h"
 
 static void dqInputHandler_HandleCheat()
 {
@@ -141,7 +141,7 @@ void dqInputHandler_HandleInput()
 
    dqInputHandler_CheckCheats();
 
-   if ( !dqDialogRenderer->isScrolling )
+   if ( !dqRenderer->isBlockingInput )
    {
       switch ( dqGame->state )
       {
