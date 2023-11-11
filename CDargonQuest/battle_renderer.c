@@ -20,13 +20,13 @@ void dqBattleRenderer_Render()
    textPos.x = dqRenderConfig->battleMessageDialogPos.x + dqRenderConfig->dialogSpriteSize;
    textPos.y = dqRenderConfig->battleMessageDialogPos.y + dqRenderConfig->dialogSpriteSize;
 
-   dqDialogRenderer_DrawBorder( dqRenderConfig->battleMessageDialogPos,
+   dqDialogRenderer_DrawBorder( &( dqRenderConfig->battleMessageDialogPos ),
                                 dqRenderConfig->battleMessageDialogWidth,
                                 dqRenderConfig->battleMessageDialogHeight );
 
    if ( !dqTransitionRenderer->fadingIn )
    {
-      dqDialogRenderer_ScrollText( textPos,
+      dqDialogRenderer_ScrollText( &textPos,
                                    "Imagine this is some crazy battle against zombies and dragons or whatever, and you've got like 1 health left but you can't run away. Sweet, right?!",
                                    dqRenderConfig->battleMessageDialogWidth - 2 );
    }

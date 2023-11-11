@@ -26,15 +26,17 @@ typedef struct dqRenderConfig_t
    unsigned int diagnosticsLineWidth;
    float diagnosticsRefreshRate;
 
-   const char* menuFontFilePath;
-   unsigned int menuFontSize;
-   sfColor menuFontColor;
+   unsigned int dialogSpriteSize;
+
    const char* menuCaratText;
-   float menuCaratOffsetX;
    float menuCaratBlinkRate;
 
-   float titleMenuOffsetX;
-   float titleMenuOffsetY;
+   sfVector2f titleMenuBorderPos;
+   unsigned int titleMenuBorderWidth;
+   unsigned int titleMenuBorderHeight;
+   sfVector2u titleMenuOptionsOffset;
+   unsigned int titleMenuOptionsWidth;
+   int titleMenuCaratOffsetX;
 
    sfVector2f overworldViewSize;
    sfVector2f overworldViewOffset;
@@ -45,8 +47,6 @@ typedef struct dqRenderConfig_t
 
    const char* overworldTilesetTexturePath;
    const char* dialogTilesetTexturePath;
-
-   int dialogSpriteSize;
 
    unsigned int overworldTileTextureColumns;
    unsigned int overworldTileTextureRows;

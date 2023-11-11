@@ -28,15 +28,19 @@ void dqRenderConfig_Init()
    dqRenderConfig->diagnosticsLineWidth = 40;
    dqRenderConfig->diagnosticsRefreshRate = 0.25f;
 
-   dqRenderConfig->menuFontFilePath = "Resources/Fonts/Consolas.ttf";
-   dqRenderConfig->menuFontSize = 14;
-   dqRenderConfig->menuFontColor = sfWhite;
+   dqRenderConfig->dialogSpriteSize = 8;
+
    dqRenderConfig->menuCaratText = ">";
-   dqRenderConfig->menuCaratOffsetX = -14;
    dqRenderConfig->menuCaratBlinkRate = 0.3f;
 
-   dqRenderConfig->titleMenuOffsetX = 225;
-   dqRenderConfig->titleMenuOffsetY = 150;
+   dqRenderConfig->titleMenuBorderPos.x = (float)( 20 * dqRenderConfig->dialogSpriteSize );
+   dqRenderConfig->titleMenuBorderPos.y = (float)( 15 * dqRenderConfig->dialogSpriteSize );
+   dqRenderConfig->titleMenuBorderWidth = 20;
+   dqRenderConfig->titleMenuBorderHeight = 10;
+   dqRenderConfig->titleMenuOptionsOffset.x = 8;
+   dqRenderConfig->titleMenuOptionsOffset.y = 4;
+   dqRenderConfig->titleMenuOptionsWidth = dqRenderConfig->titleMenuBorderWidth - dqRenderConfig->titleMenuOptionsOffset.x - 2;
+   dqRenderConfig->titleMenuCaratOffsetX = -2;
 
    dqRenderConfig->overworldViewSize.x = 448;
    dqRenderConfig->overworldViewSize.y = 256;
@@ -49,8 +53,6 @@ void dqRenderConfig_Init()
 
    dqRenderConfig->overworldTilesetTexturePath = "Resources/Tilesets/overworld.png";
    dqRenderConfig->dialogTilesetTexturePath = "Resources/Tilesets/text.png";
-
-   dqRenderConfig->dialogSpriteSize = 8;
 
    dqRenderConfig->overworldTileTextureColumns = 16;
    dqRenderConfig->overworldTileTextureRows = 3;

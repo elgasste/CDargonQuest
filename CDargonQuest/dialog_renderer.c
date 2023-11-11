@@ -35,7 +35,7 @@ void dqDialogRenderer_ResetScroll()
    dqDialogRenderer->scrollCharCount = 0;
 }
 
-void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned int height )
+void dqDialogRenderer_DrawBorder( sfVector2f* pos, unsigned int width, unsigned int height )
 {
    unsigned int row, col, idx;
    static sfVector2f p;
@@ -44,8 +44,8 @@ void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned i
    {
       for ( col = 0; col < width; col++ )
       {
-         p.x = pos.x + ( col * dqRenderConfig->dialogSpriteSize );
-         p.y = pos.y + ( row * dqRenderConfig->dialogSpriteSize );
+         p.x = pos->x + ( col * dqRenderConfig->dialogSpriteSize );
+         p.y = pos->y + ( row * dqRenderConfig->dialogSpriteSize );
 
          if ( row == 0 )
          {
@@ -76,7 +76,7 @@ void dqDialogRenderer_DrawBorder( sfVector2f pos, unsigned int width, unsigned i
    }
 }
 
-static void dqDialogRenderer_DrawTextPortion( sfVector2f pos, const char* text, unsigned int width, unsigned int charCount )
+static void dqDialogRenderer_DrawTextPortion( sfVector2f* pos, const char* text, unsigned int width, unsigned int charCount )
 {
    int i, j;
    char c, peek;
@@ -89,8 +89,8 @@ static void dqDialogRenderer_DrawTextPortion( sfVector2f pos, const char* text, 
       return;
    }
 
-   p.x = pos.x + ( dqRenderConfig->dialogSpriteSize );
-   p.y = pos.y + ( dqRenderConfig->dialogSpriteSize );
+   p.x = pos->x + ( dqRenderConfig->dialogSpriteSize );
+   p.y = pos->y + ( dqRenderConfig->dialogSpriteSize );
 
    for ( textIndex = 0, i = 0, j = 0; ; i++, textIndex++ )
    {
@@ -133,8 +133,8 @@ static void dqDialogRenderer_DrawTextPortion( sfVector2f pos, const char* text, 
 
          dqDialogRenderer->textureRect.left = textureX * dqRenderConfig->dialogSpriteSize;
          dqDialogRenderer->textureRect.top = textureY * dqRenderConfig->dialogSpriteSize;
-         p.x = pos.x + ( i * dqRenderConfig->dialogSpriteSize );
-         p.y = pos.y + ( j * dqRenderConfig->dialogSpriteSize );
+         p.x = pos->x + ( i * dqRenderConfig->dialogSpriteSize );
+         p.y = pos->y + ( j * dqRenderConfig->dialogSpriteSize );
 
          sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
          sfSprite_setPosition( dqDialogRenderer->sprite, p );
@@ -143,12 +143,12 @@ static void dqDialogRenderer_DrawTextPortion( sfVector2f pos, const char* text, 
    }
 }
 
-void dqDialogRenderer_DrawText( sfVector2f pos, const char* text, unsigned int width )
+void dqDialogRenderer_DrawText( sfVector2f* pos, const char* text, unsigned int width )
 {
    dqDialogRenderer_DrawTextPortion( pos, text, width, (unsigned int)strlen( text ) );
 }
 
-void dqDialogRenderer_ScrollText( sfVector2f pos, const char* text, unsigned int width )
+void dqDialogRenderer_ScrollText( sfVector2f* pos, const char* text, unsigned int width )
 {
    unsigned int textLength;
 
