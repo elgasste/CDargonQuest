@@ -29,7 +29,7 @@ void dqBattleInputHandler_HandleInput()
          dqBattleInputHandler_HandleIntroState();
          break;
       case dqBattleStateSelectAction:
-         dqMenu_HandleInputDefault( dqMenuBattleAction );
+         dqMenu_HandleDefaultInput( dqMenuBattleAction );
          break;
       case dqBattleStateResult:
          dqBattleInputHandler_HandleResultState();

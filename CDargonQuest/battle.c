@@ -1,4 +1,5 @@
 #include "battle.h"
+#include "menu.h"
 #include "dialog_renderer.h"
 
 void dqBattle_Init()
@@ -16,6 +17,7 @@ void dqBattle_Cleanup()
 void dqBattle_Generate()
 {
    // TODO: set up enemy groups based on the current map tile tiers
+   dqMenuBattleAction->selectedOption = 0;
    dqBattle_SetState( dqBattleStateIntro );
 }
 

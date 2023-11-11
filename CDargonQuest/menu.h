@@ -24,4 +24,4 @@ void dqMenu_Cleanup();
 
 void dqMenu_ScrollDown( dqMenu_t* menu );
 void dqMenu_ScrollUp( dqMenu_t* menu );
-void dqMenu_HandleInputDefault( dqMenu_t* menu );
+void dqMenu_HandleDefaultInput( dqMenu_t* menu );

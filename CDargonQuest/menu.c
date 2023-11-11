@@ -61,7 +61,7 @@ void dqMenu_ScrollUp( dqMenu_t* menu )
    }
 }
 
-void dqMenu_HandleInputDefault( dqMenu_t* menu )
+void dqMenu_HandleDefaultInput( dqMenu_t* menu )
 {
    if ( dqInputState_WasKeyPressed( sfKeyDown ) )
    {

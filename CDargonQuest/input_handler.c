@@ -146,7 +146,7 @@ void dqInputHandler_HandleInput()
       switch ( dqGame->state )
       {
          case dqStateTitle:
-            dqMenu_HandleInputDefault( dqMenuTitle );
+            dqMenu_HandleDefaultInput( dqMenuTitle );
             break;
          case dqStateOverworld:
             dqOverworldInputHandler_HandleInput();
