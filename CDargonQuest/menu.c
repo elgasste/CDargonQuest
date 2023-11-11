@@ -22,11 +22,13 @@ void dqMenu_Init()
    dqMenuBattleAction->optionsPos = dqRenderConfig->battleActionMenuOptionsPos;
    dqMenuBattleAction->optionsWidth = dqRenderConfig->battleActionMenuOptionsWidth;
    dqMenuBattleAction->caratOffsetX = dqRenderConfig->battleActionMenuCaratOffsetX;
-   dqMenuBattleAction->optionCount = 1;
+   dqMenuBattleAction->optionCount = 2;
    dqMenuBattleAction->selectedOption = 0;
    dqMenuBattleAction->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqMenuBattleAction->optionCount );
    dqMenuBattleAction->options[0].text = STR_BATTLE_MENU_ATTACK;
    dqMenuBattleAction->options[0].eventType = dqEventBattleAttack;
+   dqMenuBattleAction->options[1].text = STR_BATTLE_MENU_RUN;
+   dqMenuBattleAction->options[1].eventType = dqEventBattleRun;
 }
 
 void dqMenu_Cleanup()

@@ -6,6 +6,7 @@
 typedef struct dqBattle_t
 {
    dqBattleState state;
+   char resultMessage[128];
 }
 dqBattle_t;
 
@@ -16,3 +17,4 @@ void dqBattle_Cleanup();
 void dqBattle_Generate();
 void dqBattle_SetState( dqBattleState state );
 void dqBattle_Attack();
+void dqBattle_Run();

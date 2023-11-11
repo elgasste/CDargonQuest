@@ -4,6 +4,8 @@
 void dqBattle_Init()
 {
    dqBattle = (dqBattle_t*)dqMalloc( sizeof( dqBattle_t ) );
+
+   dqBattle->resultMessage[0] = '\0';
 }
 
 void dqBattle_Cleanup()
@@ -27,6 +29,16 @@ void dqBattle_Attack()
 {
    if ( dqBattle->state == dqBattleStateSelectAction )
    {
+      sprintf_s( dqBattle->resultMessage, 128, "Your killing spree was a success!" );
+      dqBattle_SetState( dqBattleStateResult );
+   }
+}
+
+void dqBattle_Run()
+{
+   if ( dqBattle->state == dqBattleStateSelectAction )
+   {
+      sprintf_s( dqBattle->resultMessage, 128, "Wow, so brave. At least you got away, I guess." );
       dqBattle_SetState( dqBattleStateResult );
    }
 }

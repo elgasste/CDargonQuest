@@ -21,7 +21,7 @@ static void dqBattleRenderer_RenderSelectActionState()
 
 static void dqBattleRenderer_RenderResultState( sfVector2f* textPos )
 {
-   dqDialogRenderer_ScrollText( textPos, "Your killing spree was a success!", dqRenderConfig->battleMessageDialogWidth - 2 );
+   dqDialogRenderer_ScrollText( textPos, dqBattle->resultMessage, dqRenderConfig->battleMessageDialogWidth - 2 );
 }
 
 void dqBattleRenderer_Init()

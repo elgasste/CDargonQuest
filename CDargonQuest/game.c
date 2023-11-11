@@ -151,6 +151,14 @@ static void dqGame_HandleBattleAttack()
    }
 }
 
+static void dqGame_HandleBattleRun()
+{
+   if ( dqGame->state == dqStateBattle )
+   {
+      dqBattle_Run();
+   }
+}
+
 static void dqGame_HandleBattleExit()
 {
    if ( dqGame->state == dqStateBattle )
@@ -199,6 +207,9 @@ static void dqGame_HandleEvents()
             break;
          case dqEventBattleAttack:
             dqGame_HandleBattleAttack();
+            break;
+         case dqEventBattleRun:
+            dqGame_HandleBattleRun();
             break;
          case dqEventBattleExit:
             dqGame_HandleBattleExit();
