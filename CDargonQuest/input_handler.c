@@ -6,6 +6,7 @@
 #include "overworld_input_handler.h"
 #include "battle_input_handler.h"
 #include "game.h"
+#include "dialog_renderer.h"
 
 static void dqInputHandler_HandleCheat()
 {
@@ -140,16 +141,19 @@ void dqInputHandler_HandleInput()
 
    dqInputHandler_CheckCheats();
 
-   switch ( dqGame->state )
+   if ( !dqDialogRenderer->isScrolling )
    {
-      case dqStateTitle:
-         dqTitleInputHandler_HandleInput();
-         break;
-      case dqStateOverworld:
-         dqOverworldInputHandler_HandleInput();
-         break;
-      case dqStateBattle:
-         dqBattleInputHandler_HandleInput();
-         break;
+      switch ( dqGame->state )
+      {
+         case dqStateTitle:
+            dqTitleInputHandler_HandleInput();
+            break;
+         case dqStateOverworld:
+            dqOverworldInputHandler_HandleInput();
+            break;
+         case dqStateBattle:
+            dqBattleInputHandler_HandleInput();
+            break;
+      }
    }
 }

@@ -22,7 +22,7 @@ void dqBattleRenderer_Render()
    dqDialogRenderer_DrawBorder( dqRenderConfig->battleMessageDialogPos,
                                 dqRenderConfig->battleMessageDialogWidth,
                                 dqRenderConfig->battleMessageDialogHeight );
-   dqDialogRenderer_DrawText( textPos,
-                              "Imagine this is some crazy battle against zombies and dragons or whatever, and you've got like one health left but you can't run away. Sweet, right?!",
-                              dqRenderConfig->battleMessageDialogWidth - 2 );
+   dqDialogRenderer_ScrollText( textPos,
+                                "Imagine this is some crazy battle against zombies and dragons or whatever, and you've got like 1 health left but you can't run away. Sweet, right?!",
+                                dqRenderConfig->battleMessageDialogWidth - 2 );
 }
