@@ -1,22 +1,40 @@
 #include "menu.h"
 #include "menu_option.h"
+#include "render_config.h"
+#include "input_state.h"
+#include "event_queue.h"
 
 void dqMenu_Init()
 {
-   dqTitleMenu = (dqMenu_t*)dqMalloc( sizeof( dqMenu_t ) );
-   dqTitleMenu->optionCount = 2;
-   dqTitleMenu->selectedOption = 0;
-   dqTitleMenu->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqTitleMenu->optionCount );
-   dqTitleMenu->options[0].text = STR_TITLE_MENU_START;
-   dqTitleMenu->options[0].eventType = dqEventStart;
-   dqTitleMenu->options[1].text = STR_TITLE_MENU_QUIT;
-   dqTitleMenu->options[1].eventType = dqEventQuit;
+   dqMenuTitle = (dqMenu_t*)dqMalloc( sizeof( dqMenu_t ) );
+   dqMenuTitle->optionsPos = dqRenderConfig->titleMenuOptionsPos;
+   dqMenuTitle->optionsWidth = dqRenderConfig->titleMenuOptionsWidth;
+   dqMenuTitle->caratOffsetX = dqRenderConfig->titleMenuCaratOffsetX;
+   dqMenuTitle->optionCount = 2;
+   dqMenuTitle->selectedOption = 0;
+   dqMenuTitle->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqMenuTitle->optionCount );
+   dqMenuTitle->options[0].text = STR_TITLE_MENU_START;
+   dqMenuTitle->options[0].eventType = dqEventStart;
+   dqMenuTitle->options[1].text = STR_TITLE_MENU_QUIT;
+   dqMenuTitle->options[1].eventType = dqEventQuit;
+
+   dqMenuBattleAction = (dqMenu_t*)dqMalloc( sizeof( dqMenu_t ) );
+   dqMenuBattleAction->optionsPos = dqRenderConfig->battleActionMenuOptionsPos;
+   dqMenuBattleAction->optionsWidth = dqRenderConfig->battleActionMenuOptionsWidth;
+   dqMenuBattleAction->caratOffsetX = dqRenderConfig->battleActionMenuCaratOffsetX;
+   dqMenuBattleAction->optionCount = 1;
+   dqMenuBattleAction->selectedOption = 0;
+   dqMenuBattleAction->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqMenuBattleAction->optionCount );
+   dqMenuBattleAction->options[0].text = STR_BATTLE_MENU_ATTACK;
+   dqMenuBattleAction->options[0].eventType = dqEventBattleAttack;
 }
 
 void dqMenu_Cleanup()
 {
-   dqFree( dqTitleMenu->options );
-   dqFree( dqTitleMenu );
+   dqFree( dqMenuBattleAction->options );
+   dqFree( dqMenuBattleAction );
+   dqFree( dqMenuTitle->options );
+   dqFree( dqMenuTitle );
 }
 
 void dqMenu_ScrollDown( dqMenu_t* menu )
@@ -38,5 +56,21 @@ void dqMenu_ScrollUp( dqMenu_t* menu )
    else
    {
       menu->selectedOption--;
+   }
+}
+
+void dqMenu_HandleInputDefault( dqMenu_t* menu )
+{
+   if ( dqInputState_WasKeyPressed( sfKeyDown ) )
+   {
+      dqMenu_ScrollDown( menu );
+   }
+   else if ( dqInputState_WasKeyPressed( sfKeyUp ) )
+   {
+      dqMenu_ScrollUp( menu );
+   }
+   else if ( dqInputState_WasKeyPressed( sfKeyReturn ) )
+   {
+      dqEventQueue_Push( menu->options[menu->selectedOption].eventType, 0 );
    }
 }

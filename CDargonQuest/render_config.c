@@ -30,6 +30,16 @@ void dqRenderConfig_Init()
 
    dqRenderConfig->dialogSpriteSize = 8;
 
+   dqRenderConfig->overworldViewSize.x = 448;
+   dqRenderConfig->overworldViewSize.y = 256;
+   dqRenderConfig->overworldViewOffset.x = 16;
+   dqRenderConfig->overworldViewOffset.y = 16;
+
+   dqRenderConfig->battleMessageDialogPos.x = dqRenderConfig->overworldViewOffset.x;
+   dqRenderConfig->battleMessageDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 8 ) - dqRenderConfig->overworldViewOffset.y;
+   dqRenderConfig->battleMessageDialogWidth = 56;
+   dqRenderConfig->battleMessageDialogHeight = 12;
+
    dqRenderConfig->menuCaratText = ">";
    dqRenderConfig->menuCaratBlinkRate = 0.3f;
 
@@ -38,10 +48,10 @@ void dqRenderConfig_Init()
    dqRenderConfig->titleMenuOptionsWidth = 8;
    dqRenderConfig->titleMenuCaratOffsetX = -2;
 
-   dqRenderConfig->overworldViewSize.x = 448;
-   dqRenderConfig->overworldViewSize.y = 256;
-   dqRenderConfig->overworldViewOffset.x = 16;
-   dqRenderConfig->overworldViewOffset.y = 16;
+   dqRenderConfig->battleActionMenuOptionsPos.x = dqRenderConfig->battleMessageDialogPos.x + ( dqRenderConfig->dialogSpriteSize * 2 );
+   dqRenderConfig->battleActionMenuOptionsPos.y = dqRenderConfig->battleMessageDialogPos.y + dqRenderConfig->dialogSpriteSize;
+   dqRenderConfig->battleActionMenuOptionsWidth = 6;
+   dqRenderConfig->battleActionMenuCaratOffsetX = -1;
 
    dqRenderConfig->passableOverlayColor = sfColor_fromRGBA( 0, 255, 0, 128 );
    dqRenderConfig->impassableOverlayColor = sfColor_fromRGBA( 255, 0, 0, 128 );
@@ -69,11 +79,6 @@ void dqRenderConfig_Init()
    dqRenderConfig->cheatFontScale.y = 0.2f;
    dqRenderConfig->cheatLetterSpacing = 0.1f;
    dqRenderConfig->cheatFontColor = sfWhite;
-
-   dqRenderConfig->battleMessageDialogPos.x = dqRenderConfig->overworldViewOffset.x;
-   dqRenderConfig->battleMessageDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 8 ) - dqRenderConfig->overworldViewOffset.y;
-   dqRenderConfig->battleMessageDialogWidth = 28 * 2; // dialog sprites are 8 pixels, overworld sprites are 16 pixels
-   dqRenderConfig->battleMessageDialogHeight = 6 * 2;
 
    for ( i = 0; i < 128; i++ )
    {

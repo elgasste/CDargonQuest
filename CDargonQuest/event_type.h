@@ -14,6 +14,8 @@ typedef enum
    dqEventFadedIn,
 
    dqEventEncounter,
-   dqEventExitBattle
+
+   dqEventBattleAttack,
+   dqEventBattleExit
 }
 dqEventType_t;

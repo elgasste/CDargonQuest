@@ -2,12 +2,14 @@
 #include "input_state.h"
 #include "event_queue.h"
 #include "battle.h"
+#include "menu.h"
+#include "menu_option.h"
 
 static void dqBattleInputHandler_HandleIntroState()
 {
    if ( dqInputState->keyWasPressed )
    {
-      dqBattle_SetState( dqBattleStateResult );
+      dqBattle_SetState( dqBattleStateSelectAction );
    }
 }
 
@@ -15,7 +17,7 @@ static void dqBattleInputHandler_HandleResultState()
 {
    if ( dqInputState->keyWasPressed )
    {
-      dqEventQueue_Push( dqEventExitBattle, 0 );
+      dqEventQueue_Push( dqEventBattleExit, 0 );
    }
 }
 
@@ -25,6 +27,9 @@ void dqBattleInputHandler_HandleInput()
    {
       case dqBattleStateIntro:
          dqBattleInputHandler_HandleIntroState();
+         break;
+      case dqBattleStateSelectAction:
+         dqMenu_HandleInputDefault( dqMenuBattleAction );
          break;
       case dqBattleStateResult:
          dqBattleInputHandler_HandleResultState();

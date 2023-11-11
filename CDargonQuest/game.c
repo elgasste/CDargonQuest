@@ -143,7 +143,15 @@ static void dqGame_HandleEncounter()
    }
 }
 
-static void dqGame_HandleExitBattle()
+static void dqGame_HandleBattleAttack()
+{
+   if ( dqGame->state == dqStateBattle )
+   {
+      dqBattle_Attack();
+   }
+}
+
+static void dqGame_HandleBattleExit()
 {
    if ( dqGame->state == dqStateBattle )
    {
@@ -189,8 +197,11 @@ static void dqGame_HandleEvents()
          case dqEventEncounter:
             dqGame_HandleEncounter();
             break;
-         case dqEventExitBattle:
-            dqGame_HandleExitBattle();
+         case dqEventBattleAttack:
+            dqGame_HandleBattleAttack();
+            break;
+         case dqEventBattleExit:
+            dqGame_HandleBattleExit();
             break;
       }
    }

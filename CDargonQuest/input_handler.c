@@ -2,10 +2,10 @@
 #include "input_state.h"
 #include "game_config.h"
 #include "render_config.h"
-#include "title_input_handler.h"
 #include "overworld_input_handler.h"
 #include "battle_input_handler.h"
 #include "game.h"
+#include "menu.h"
 #include "renderer.h"
 
 static void dqInputHandler_HandleCheat()
@@ -146,7 +146,7 @@ void dqInputHandler_HandleInput()
       switch ( dqGame->state )
       {
          case dqStateTitle:
-            dqTitleInputHandler_HandleInput();
+            dqMenu_HandleInputDefault( dqMenuTitle );
             break;
          case dqStateOverworld:
             dqOverworldInputHandler_HandleInput();

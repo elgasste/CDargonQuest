@@ -15,3 +15,4 @@ void dqBattle_Init();
 void dqBattle_Cleanup();
 void dqBattle_Generate();
 void dqBattle_SetState( dqBattleState state );
+void dqBattle_Attack();

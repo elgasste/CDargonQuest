@@ -22,3 +22,11 @@ void dqBattle_SetState( dqBattleState state )
    dqBattle->state = state;
    dqDialogRenderer_ResetScroll();
 }
+
+void dqBattle_Attack()
+{
+   if ( dqBattle->state == dqBattleStateSelectAction )
+   {
+      dqBattle_SetState( dqBattleStateResult );
+   }
+}
