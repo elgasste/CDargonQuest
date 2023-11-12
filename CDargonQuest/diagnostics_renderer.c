@@ -24,10 +24,11 @@ void dqDiagnosticsRenderer_Init()
    dqDiagnosticsRenderer->text = sfText_create();
    sfText_setFont( dqDiagnosticsRenderer->text, dqDiagnosticsRenderer->font );
    sfText_setCharacterSize( dqDiagnosticsRenderer->text, dqRenderConfig->diagnosticsFontSize );
+   sfText_setScale( dqDiagnosticsRenderer->text, dqRenderConfig->diagnosticsFontScale );
    sfText_setFillColor( dqDiagnosticsRenderer->text, dqRenderConfig->diagnosticsFontColor );
 
    dqDiagnosticsRenderer->lineSpacing = sfFont_getLineSpacing( dqDiagnosticsRenderer->font,
-                                                               sfText_getCharacterSize( dqDiagnosticsRenderer->text ) );
+                                                               sfText_getCharacterSize( dqDiagnosticsRenderer->text ) ) * dqRenderConfig->diagnosticsFontScale.x;
 
    dqDiagnosticsRenderer->currentFrameRateCache = 0;
    dqDiagnosticsRenderer->averageFrameRateCache = 0;
