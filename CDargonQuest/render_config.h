@@ -18,6 +18,7 @@ typedef struct dqRenderConfig_t
    sfBool showDiagnostics;
    const char* diagnosticsFontFilePath;
    unsigned int diagnosticsFontSize;
+   sfVector2f diagnosticsFontScale;
    sfColor diagnosticsFontColor;
    sfColor diagnosticsBackgroundColor;
    float diagnosticsWidth;

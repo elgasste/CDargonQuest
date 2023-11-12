@@ -19,12 +19,14 @@ void dqRenderConfig_Init()
 
    dqRenderConfig->showDiagnostics = sfFalse;
    dqRenderConfig->diagnosticsFontFilePath = "Resources/Fonts/Consolas.ttf";
-   dqRenderConfig->diagnosticsFontSize = 10;
+   dqRenderConfig->diagnosticsFontSize = 30;
+   dqRenderConfig->diagnosticsFontScale.x = 0.2f;
+   dqRenderConfig->diagnosticsFontScale.y = 0.2f;
    dqRenderConfig->diagnosticsFontColor = sfWhite;
    dqRenderConfig->diagnosticsBackgroundColor = sfBlue;
-   dqRenderConfig->diagnosticsWidth = 180;
-   dqRenderConfig->diagnosticsHeight = 96;
-   dqRenderConfig->diagnosticsPadding = 10;
+   dqRenderConfig->diagnosticsWidth = 108;
+   dqRenderConfig->diagnosticsHeight = 60;
+   dqRenderConfig->diagnosticsPadding = 8;
    dqRenderConfig->diagnosticsLineWidth = 40;
    dqRenderConfig->diagnosticsRefreshRate = 0.25f;
 
