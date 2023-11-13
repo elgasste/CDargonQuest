@@ -28,5 +28,4 @@
 #define STR_ERROR_LOG_FILE_OPEN           "could not open log file"
 #define STR_ERROR_LOG_FILE_WRITE          "could not write to log file"
 #define STR_ERROR_LOG_TIME                "could not write time stamp to log file"
-#define STR_ERROR_CLOCK_RESOLUTION        "could not set Windows timer resolution"
 #define STR_ERROR_EVENT_OVERFLOW          "game event queue has overflowed"
