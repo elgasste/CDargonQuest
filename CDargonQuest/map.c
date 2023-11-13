@@ -22,13 +22,18 @@ dqMapTile_t* dqMap_GetTileFromPosition( dqMap_t* map, sfVector2f* pos )
    return &( map->tiles[ ( row * map->columns ) + column ] );
 }
 
+dqMapTile_t* dqMap_GetCurrentTile()
+{
+   return dqMap_GetTileFromPosition( dqGameData_GetCurrentMap(), &( dqGameData->player->centerPosition ) );
+}
+
 void dqMap_CheckSwap()
 {
    dqMapTile_t* tile;
 
    if ( !dqGameConfig->noClipCheat )
    {
-      tile = dqMap_GetTileFromPosition( dqGameData_GetCurrentMap(), &( dqGameData->player->centerPosition ));
+      tile = dqMap_GetCurrentTile();
 
       if ( tile->isExit )
       {
@@ -42,7 +47,7 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
    unsigned int newColumn, newRow;
    dqEntity_t* player = dqGameData->player;
    dqMap_t* oldMap = dqGameData_GetCurrentMap();
-   dqMapTile_t* oldTile = dqMap_GetTileFromPosition( oldMap, &( player->centerPosition ) );
+   dqMapTile_t* oldTile = dqMap_GetCurrentTile();
    dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
    dqMapTile_t* newTile;
 
@@ -82,7 +87,7 @@ void dqMap_CheckEncounter()
    if ( !dqGameConfig->noClipCheat && !dqGameConfig->invisibleCheat )
    {
       map = dqGameData_GetCurrentMap();
-      tile = dqMap_GetTileFromPosition( map, &( dqGameData->player->centerPosition ));
+      tile = dqMap_GetCurrentTile();
 
       if ( tile != map->playerTileCache )
       {
