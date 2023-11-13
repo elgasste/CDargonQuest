@@ -1,5 +1,7 @@
 #include "battle.h"
 #include "menu.h"
+#include "map.h"
+#include "map_tile.h"
 #include "dialog_renderer.h"
 
 void dqBattle_Init()
@@ -16,7 +18,14 @@ void dqBattle_Cleanup()
 
 void dqBattle_Generate()
 {
+   static char logMessage[128];
+   dqMapTile_t* tile = dqMap_GetCurrentTile();
+
+   sprintf_s( logMessage, 128, "generating encounter: min tier %d, max tier %d", tile->minEnemyTier, tile->maxEnemyTier );
+   dqLog_Message( logMessage );
+
    // TODO: set up enemy groups based on the current map tile tiers
+
    dqMenuBattleAction->selectedOption = 0;
    dqBattle_SetState( dqBattleStateIntro );
 }

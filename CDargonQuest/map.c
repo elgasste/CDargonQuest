@@ -46,7 +46,6 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
 {
    unsigned int newColumn, newRow;
    dqEntity_t* player = dqGameData->player;
-   dqMap_t* oldMap = dqGameData_GetCurrentMap();
    dqMapTile_t* oldTile = dqMap_GetCurrentTile();
    dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
    dqMapTile_t* newTile;
