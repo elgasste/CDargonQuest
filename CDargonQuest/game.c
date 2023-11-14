@@ -315,6 +315,7 @@ static void dqGame_HandleBattleExit()
    if ( dqGame->state == dqStateBattle )
    {
       dqEventQueue_Flush();
+      dqBattle_Reset();
       dqTransitionRenderer_Reset();
       dqGame_SetState( dqStateBattleTransitionOut );
    }
