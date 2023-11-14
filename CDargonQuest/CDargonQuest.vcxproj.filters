@@ -266,5 +266,8 @@
     <ClInclude Include="enemy_template.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="battle_stats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
