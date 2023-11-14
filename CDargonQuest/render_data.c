@@ -1,7 +1,9 @@
 #include "render_data.h"
 #include "render_config.h"
+#include "game_data.h"
+#include "player.h"
 
-void dqRenderData_Init( dqEntity_t* player )
+void dqRenderData_Init( dqEntityOverworldState_t* playerOverworldState )
 {
    dqRenderData = (dqRenderData_t*)dqMalloc( sizeof( dqRenderData_t ) );
 
@@ -9,7 +11,7 @@ void dqRenderData_Init( dqEntity_t* player )
    dqRenderData->dialogTilesetTexture = sfTexture_createFromFile( dqRenderConfig->dialogTilesetTexturePath, NULL );
 
    dqRenderData->playerTexture = sfTexture_createFromFile( dqRenderConfig->playerTexturePath, NULL );
-   dqRenderData->playerSprite = dqEntitySprite_Create( player, dqRenderData->playerTexture, 16, 16, 2, 0.25f );
+   dqRenderData->playerSprite = dqEntitySprite_Create( playerOverworldState, dqRenderData->playerTexture, 16, 16, 2, 0.25f );
 }
 
 void dqRenderData_Cleanup()

@@ -138,6 +138,9 @@
     <ClCompile Include="menu_renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="player.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -206,7 +209,7 @@
     <ClInclude Include="map_loader.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
-    <ClInclude Include="entity.h">
+    <ClInclude Include="entity_overworld_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_config.h">
@@ -256,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="menu_renderer.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

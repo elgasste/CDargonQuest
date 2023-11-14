@@ -3,7 +3,8 @@
 #include "game_config.h"
 #include "game_data.h"
 #include "render_data.h"
-#include "entity.h"
+#include "player.h"
+#include "entity_overworld_state.h"
 #include "entity_sprite.h"
 #include "event_queue.h"
 #include "random.h"
@@ -24,7 +25,7 @@ dqMapTile_t* dqMap_GetTileFromPosition( dqMap_t* map, sfVector2f* pos )
 
 dqMapTile_t* dqMap_GetCurrentTile()
 {
-   return dqMap_GetTileFromPosition( dqGameData_GetCurrentMap(), &( dqGameData->player->centerPosition ) );
+   return dqMap_GetTileFromPosition( dqGameData_GetCurrentMap(), &( dqGameData->player->overworldState->centerPosition ) );
 }
 
 void dqMap_CheckSwap()
@@ -45,7 +46,7 @@ void dqMap_CheckSwap()
 void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
 {
    unsigned int newColumn, newRow;
-   dqEntity_t* player = dqGameData->player;
+   dqEntityOverworldState_t* playerState = dqGameData->player->overworldState;
    dqMapTile_t* oldTile = dqMap_GetCurrentTile();
    dqMap_t* newMap = &( dqGameData->maps[newMapIndex] );
    dqMapTile_t* newTile;
@@ -55,25 +56,25 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
    newColumn = newTileIndex % newMap->columns;
    newRow = newTileIndex / newMap->columns;
 
-   player->hitBoxPosition.x = newColumn * dqGameConfig->mapTileSize;
-   player->hitBoxPosition.y = newRow * dqGameConfig->mapTileSize;
+   playerState->hitBoxPosition.x = newColumn * dqGameConfig->mapTileSize;
+   playerState->hitBoxPosition.y = newRow * dqGameConfig->mapTileSize;
 
-   player->centerPosition.x = player->hitBoxPosition.x + ( player->hitBoxSize.x / 2 );
-   player->centerPosition.y = player->hitBoxPosition.y + ( player->hitBoxSize.y / 2 );
+   playerState->centerPosition.x = playerState->hitBoxPosition.x + ( playerState->hitBoxSize.x / 2 );
+   playerState->centerPosition.y = playerState->hitBoxPosition.y + ( playerState->hitBoxSize.y / 2 );
 
-   player->velocityX = 0;
-   player->velocityY = 0;
+   playerState->velocityX = 0;
+   playerState->velocityY = 0;
 
    if ( oldTile->hasEntranceDirection )
    {
-      player->direction = oldTile->entranceDirection;
+      playerState->direction = oldTile->entranceDirection;
    }
 
    // TODO: is there a better way to do this? the map shouldn't care about render data
    dqEntitySprite_Tick( dqRenderData->playerSprite );
 
    // don't check for encounters right away
-   newTile = dqMap_GetTileFromPosition( newMap, &( player->centerPosition ) );
+   newTile = dqMap_GetTileFromPosition( newMap, &( playerState->centerPosition ) );
    newMap->playerTileCache = newTile;
 }
 

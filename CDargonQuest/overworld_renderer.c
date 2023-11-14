@@ -3,7 +3,8 @@
 #include "render_data.h"
 #include "game_config.h"
 #include "game_data.h"
-#include "entity.h"
+#include "player.h"
+#include "entity_overworld_state.h"
 #include "map.h"
 #include "map_tile.h"
 #include "window.h"
@@ -117,7 +118,7 @@ void dqOverworldRenderer_RenderMap()
    }
    else
    {
-      viewOffset->x = dqGameData->player->centerPosition.x - ( dqRenderConfig->overworldViewSize.x / 2 );
+      viewOffset->x = dqGameData->player->overworldState->centerPosition.x - ( dqRenderConfig->overworldViewSize.x / 2 );
       sideOffset->x = 0;
 
       if ( viewOffset->x < 0 )
@@ -144,7 +145,7 @@ void dqOverworldRenderer_RenderMap()
    }
    else
    {
-      viewOffset->y = dqGameData->player->centerPosition.y - ( dqRenderConfig->overworldViewSize.y / 2 );
+      viewOffset->y = dqGameData->player->overworldState->centerPosition.y - ( dqRenderConfig->overworldViewSize.y / 2 );
       sideOffset->y = 0;
 
       if ( viewOffset->y < 0 )
@@ -215,12 +216,12 @@ void dqOverworldRenderer_RenderEntities()
    static sfVector2f position;
    dqEntitySprite_t* playerSprite = dqRenderData->playerSprite;
 
-   position.x = playerSprite->entity->hitBoxPosition.x
+   position.x = playerSprite->entityOverworldState->hitBoxPosition.x
       - playerSprite->hitBoxOffset.x
       - dqOverworldRenderer->viewOffset.x
       + dqOverworldRenderer->sideOffset.x
       + dqRenderConfig->overworldViewOffset.x;
-   position.y = playerSprite->entity->hitBoxPosition.y
+   position.y = playerSprite->entityOverworldState->hitBoxPosition.y
       - playerSprite->hitBoxOffset.y
       - dqOverworldRenderer->viewOffset.y
       + dqOverworldRenderer->sideOffset.y

@@ -3,7 +3,7 @@
 #include "common.h"
 #include "direction.h"
 
-typedef struct dqEntity_t
+typedef struct dqEntityOverworldState_t
 {
    sfVector2f hitBoxPosition;
    sfVector2f hitBoxSize;
@@ -14,4 +14,4 @@ typedef struct dqEntity_t
 
    dqDirection direction;
 }
-dqEntity_t;
+dqEntityOverworldState_t;

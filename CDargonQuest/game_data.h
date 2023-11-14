@@ -3,7 +3,7 @@
 #include "common.h"
 
 typedef struct dqMap_t dqMap_t;
-typedef struct dqEntity_t dqEntity_t;
+typedef struct dqPlayer_t dqPlayer_t;
 
 typedef struct dqGameData_t
 {
@@ -11,7 +11,7 @@ typedef struct dqGameData_t
    unsigned int mapCount;
    unsigned int currentMapIndex;
 
-   dqEntity_t* player;
+   dqPlayer_t* player;
    sfVector2u playerStartTileCoordinates;
 }
 dqGameData_t;

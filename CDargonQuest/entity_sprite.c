@@ -1,8 +1,9 @@
 #include "entity_sprite.h"
+#include "entity_overworld_state.h"
 #include "clock.h"
 #include "window.h"
 
-dqEntitySprite_t* dqEntitySprite_Create( dqEntity_t* entity,
+dqEntitySprite_t* dqEntitySprite_Create( dqEntityOverworldState_t* entityOverworldState,
                                          sfTexture* texture,
                                          int width,
                                          int height,
@@ -11,7 +12,7 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntity_t* entity,
 {
    dqEntitySprite_t* sprite = (dqEntitySprite_t*)dqMalloc( sizeof( dqEntitySprite_t ) );
 
-   sprite->entity = entity;
+   sprite->entityOverworldState = entityOverworldState;
 
    sprite->sprite = sfSprite_create();
 
@@ -19,8 +20,8 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntity_t* entity,
    sprite->textureRect.width = width;
    sprite->textureRect.height = height;
 
-   sprite->hitBoxOffset.x = ( sprite->textureRect.width - entity->hitBoxSize.x ) / 2;
-   sprite->hitBoxOffset.y = ( sprite->textureRect.height - entity->hitBoxSize.y ) / 2;
+   sprite->hitBoxOffset.x = ( sprite->textureRect.width - entityOverworldState->hitBoxSize.x ) / 2;
+   sprite->hitBoxOffset.y = ( sprite->textureRect.height - entityOverworldState->hitBoxSize.y ) / 2;
 
    sprite->currentFrame = 0;
    sprite->frameCount = frameCount;
@@ -40,7 +41,7 @@ void dqEntitySprite_Cleanup( dqEntitySprite_t* sprite )
 
 void dqEntitySprite_Tick( dqEntitySprite_t* sprite )
 {
-   if ( sprite->entity->velocityX != 0 || sprite->entity->velocityY != 0 )
+   if ( sprite->entityOverworldState->velocityX != 0 || sprite->entityOverworldState->velocityY != 0 )
    {
       sprite->elapsedFrameSeconds += dqClock->lastFrameSeconds;
    }
@@ -57,6 +58,6 @@ void dqEntitySprite_Tick( dqEntitySprite_t* sprite )
    }
 
    sprite->textureRect.left = sprite->currentFrame * sprite->textureRect.width;
-   sprite->textureRect.top = (int)sprite->entity->direction * sprite->textureRect.height;
+   sprite->textureRect.top = (int)sprite->entityOverworldState->direction * sprite->textureRect.height;
    sfSprite_setTextureRect( sprite->sprite, sprite->textureRect );
 }

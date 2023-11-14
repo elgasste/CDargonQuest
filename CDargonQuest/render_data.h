@@ -15,5 +15,5 @@ dqRenderData_t;
 
 dqRenderData_t* dqRenderData;
 
-void dqRenderData_Init( dqEntity_t* player );
+void dqRenderData_Init();
 void dqRenderData_Cleanup();

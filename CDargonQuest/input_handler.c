@@ -45,6 +45,7 @@ void dqInputHandler_HandleInput()
 
    dqInputHandler_CheckCheats();
 
+   // TODO: maybe add some kind of thing in here where pressing any key tries to skip blocking?
    if ( !dqRenderer->isBlockingInput )
    {
       switch ( dqGame->state )

@@ -10,7 +10,8 @@
 #include "clock.h"
 #include "renderer.h"
 #include "event_queue.h"
-#include "entity.h"
+#include "player.h"
+#include "entity_overworld_state.h"
 #include "physics.h"
 #include "map.h"
 #include "battle.h"
@@ -52,7 +53,7 @@ void dqGame_Init()
    dqRenderConfig_Init();
    dqGameData_Init();
    dqMenu_Init();
-   dqRenderData_Init( dqGameData->player );
+   dqRenderData_Init( dqGameData->player->overworldState );
    dqWindow_Init();
    dqRenderer_Init();
    dqClock_Init();
@@ -156,9 +157,9 @@ static void dqGame_Tick()
    if ( dqGame->state == dqStateOverworld )
    {
       // TODO: eventually do this for all entities on the map
-      dqPhysics_MoveEntity( dqGameData->player );
+      dqPhysics_MoveEntity( dqGameData->player->overworldState );
       dqEntitySprite_Tick( dqRenderData->playerSprite );
-      dqPhysics_DecelerateEntity( dqGameData->player );
+      dqPhysics_DecelerateEntity( dqGameData->player->overworldState );
 
       dqMap_CheckSwap();
       dqMap_CheckEncounter();
@@ -192,6 +193,7 @@ static void dqGame_HandleMovePlayer( dqEvent_t* e )
 {
    dqDirection direction;
    float velocityDelta;
+   dqEntityOverworldState_t* playerState = dqGameData->player->overworldState;
 
    if ( dqGame->state == dqStateOverworld )
    {
@@ -203,16 +205,16 @@ static void dqGame_HandleMovePlayer( dqEvent_t* e )
       switch ( direction )
       {
          case dqDirectionLeft:
-            dqGameData->player->velocityX = -velocityDelta;
+            playerState->velocityX = -velocityDelta;
             break;
          case dqDirectionUp:
-            dqGameData->player->velocityY = -velocityDelta;
+            playerState->velocityY = -velocityDelta;
             break;
          case dqDirectionRight:
-            dqGameData->player->velocityX = velocityDelta;
+            playerState->velocityX = velocityDelta;
             break;
          case dqDirectionDown:
-            dqGameData->player->velocityY = velocityDelta;
+            playerState->velocityY = velocityDelta;
             break;
       }
    }
@@ -221,6 +223,7 @@ static void dqGame_HandleMovePlayer( dqEvent_t* e )
 static void dqGame_HandlePointPlayer( dqEvent_t* e )
 {
    dqDirection direction;
+   dqEntityOverworldState_t* playerState = dqGameData->player->overworldState;
 
    if ( dqGame->state == dqStateOverworld )
    {
@@ -229,16 +232,16 @@ static void dqGame_HandlePointPlayer( dqEvent_t* e )
       switch ( direction )
       {
          case dqDirectionLeft:
-            dqGameData->player->direction = dqDirectionLeft;
+            playerState->direction = dqDirectionLeft;
             break;
          case dqDirectionUp:
-            dqGameData->player->direction = dqDirectionUp;
+            playerState->direction = dqDirectionUp;
             break;
          case dqDirectionRight:
-            dqGameData->player->direction = dqDirectionRight;
+            playerState->direction = dqDirectionRight;
             break;
          case dqDirectionDown:
-            dqGameData->player->direction = dqDirectionDown;
+            playerState->direction = dqDirectionDown;
             break;
       }
    }
