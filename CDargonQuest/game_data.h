@@ -4,6 +4,7 @@
 
 typedef struct dqMap_t dqMap_t;
 typedef struct dqPlayer_t dqPlayer_t;
+typedef struct dqEnemyTemplate_t dqEnemyTemplate_t;
 
 typedef struct dqGameData_t
 {
@@ -13,6 +14,10 @@ typedef struct dqGameData_t
 
    dqPlayer_t* player;
    sfVector2u playerStartTileCoordinates;
+
+   dqEnemyTemplate_t** enemyTemplates;
+   unsigned int enemyTierCount;
+   unsigned int enemyTemplateCount;
 }
 dqGameData_t;
 
