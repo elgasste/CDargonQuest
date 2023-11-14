@@ -7,5 +7,12 @@ void dqRandom_Init()
 
 unsigned int dqRandom_Percent()
 {
-   return (unsigned int)( rand() % 99 );
+   // from 0 to 100 percent
+   return (unsigned int)( rand() % 101 );
+}
+
+unsigned int dqRandom_UnsignedInt( unsigned int min, unsigned int max )
+{
+   // min and max inclusive
+   return ( (unsigned int)rand() % ( ( max + 1 ) - min ) ) + min;
 }
