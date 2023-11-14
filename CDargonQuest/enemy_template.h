@@ -4,7 +4,8 @@
 
 typedef struct dqEnemyTemplate_t
 {
-   char* name[32];
+   char* name[ENTITY_NAME_SIZE];
+
    unsigned int minHitPoints;
    unsigned int maxHitPoints;
 }
