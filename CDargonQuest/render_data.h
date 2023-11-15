@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_RENDER_DATA_H )
+#define DQ_RENDER_DATA_H
 
 #include "common.h"
 #include "entity_sprite.h"
@@ -15,5 +16,7 @@ dqRenderData_t;
 
 dqRenderData_t* dqRenderData;
 
-void dqRenderData_Init();
+void dqRenderData_Init( dqEntityOverworldState_t* playerOverworldState );
 void dqRenderData_Cleanup();
+
+#endif

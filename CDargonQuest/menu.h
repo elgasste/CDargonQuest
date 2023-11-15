@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_MENU_H )
+#define DQ_MENU_H
 
 #include "common.h"
 
@@ -25,3 +26,5 @@ void dqMenu_Cleanup();
 void dqMenu_ScrollDown( dqMenu_t* menu );
 void dqMenu_ScrollUp( dqMenu_t* menu );
 void dqMenu_HandleDefaultInput( dqMenu_t* menu );
+
+#endif

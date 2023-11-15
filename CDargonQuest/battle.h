@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_BATTLE_H )
+#define DQ_BATTLE_H
 
 #include "common.h"
 #include "battle_state.h"
@@ -25,3 +26,5 @@ void dqBattle_Generate();
 void dqBattle_SetState( dqBattleState state );
 void dqBattle_Attack();
 void dqBattle_Run();
+
+#endif

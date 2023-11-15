@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_ENTITY_SPRITE_H )
+#define DQ_ENTITY_SPRITE_H
 
 #include "common.h"
 
@@ -28,3 +29,5 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntityOverworldState_t* entityOverwor
                                          float frameTimeThreshold );
 void dqEntitySprite_Cleanup( dqEntitySprite_t* sprite );
 void dqEntitySprite_Tick( dqEntitySprite_t* sprite );
+
+#endif

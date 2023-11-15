@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_INPUT_STATE_H )
+#define DQ_INPUT_STATE_H
 
 #include "common.h"
 
@@ -23,3 +24,5 @@ sfBool dqInputState_WasKeyPressed( sfKeyCode keyCode );
 sfBool dqInputState_WasKeyReleased( sfKeyCode keyCode );
 sfBool dqInputState_IsKeyDown( sfKeyCode keyCode );
 sfBool dqInputState_IsAnyKeyDown();
+
+#endif

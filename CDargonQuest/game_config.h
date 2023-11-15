@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_GAME_CONFIG_H )
+#define DQ_GAME_CONFIG_H
 
 #include "common.h"
 
@@ -19,3 +20,5 @@ dqGameConfig_t* dqGameConfig;
 
 void dqGameConfig_Init();
 void dqGameConfig_Cleanup();
+
+#endif

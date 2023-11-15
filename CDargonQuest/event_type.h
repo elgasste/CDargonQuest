@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_EVENT_TYPE_H )
+#define DQ_EVENT_TYPE_H
 
 typedef enum
 {
@@ -20,3 +21,5 @@ typedef enum
    dqEventBattleExit
 }
 dqEventType_t;
+
+#endif

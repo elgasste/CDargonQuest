@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_INDEFINITE_ARTICLE_H )
+#define DQ_INDEFINITE_ARTICLE_H
 
 typedef enum
 {
@@ -6,3 +7,5 @@ typedef enum
    dqIndefiniteArticleAn
 }
 dqIndefiniteArticle_t;
+
+#endif

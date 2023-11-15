@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_OVERWORLD_RENDERER_H )
+#define DQ_OVERWORLD_RENDERER_H
 
 #include "common.h"
 
@@ -28,3 +29,5 @@ void dqOverworldRenderer_Init();
 void dqOverworldRenderer_Cleanup();
 void dqOverworldRenderer_RenderMap();
 void dqOverworldRenderer_RenderEntities();
+
+#endif

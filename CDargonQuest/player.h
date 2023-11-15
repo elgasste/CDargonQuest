@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_PLAYER_H )
+#define DQ_PLAYER_H
 
 #include "common.h"
 
@@ -14,3 +15,5 @@ dqPlayer_t;
 
 dqPlayer_t* dqPlayer_Create();
 void dqPlayer_Cleanup( dqPlayer_t* player );
+
+#endif

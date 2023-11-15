@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_RENDER_CONFIG_H )
+#define DQ_RENDER_CONFIG_H
 
 #include "common.h"
 
@@ -91,3 +92,5 @@ dqRenderConfig_t* dqRenderConfig;
 
 void dqRenderConfig_Init();
 void dqRenderConfig_Cleanup();
+
+#endif

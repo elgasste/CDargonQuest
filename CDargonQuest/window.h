@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_WINDOW_H )
+#define DQ_WINDOW_H
 
 #include "common.h"
 #include "entity_sprite.h"
@@ -21,3 +22,5 @@ void dqWindow_DrawRectangleShape( sfRectangleShape* rect );
 void dqWindow_DrawText( sfText* text );
 void dqWindow_DrawSprite( sfSprite* sprite );
 void dqWindow_DrawEntitySprite( dqEntitySprite_t* sprite );
+
+#endif

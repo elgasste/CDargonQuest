@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_COMMON_H )
+#define DQ_COMMON_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -24,3 +25,5 @@ size_t dqTotalMemoryFreed;
 void* dqMalloc( size_t size, sfBool track );
 void* dqCalloc( size_t count, size_t size, sfBool track );
 void dqFree( void* mem, size_t size, sfBool track );
+
+#endif

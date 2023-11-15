@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_STRINGS_H )
+#define DQ_STRINGS_H
 
 #define STR_ERROR_MESSAGE_PREFIX          "ERROR: "
 
@@ -35,3 +36,5 @@
 #define STR_ERROR_LOG_FILE_WRITE          "could not write to log file"
 #define STR_ERROR_LOG_TIME                "could not write time stamp to log file"
 #define STR_ERROR_EVENT_OVERFLOW          "game event queue has overflowed"
+
+#endif

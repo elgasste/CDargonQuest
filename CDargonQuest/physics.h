@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_PHYSICS_H )
+#define DQ_PHYSICS_H
 
 #include "common.h"
 
@@ -10,3 +11,5 @@ typedef struct dqEntityOverworldState_t dqEntityOverworldState_t;
 
 void dqPhysics_MoveEntity( dqEntityOverworldState_t* entityOverworldState );
 void dqPhysics_DecelerateEntity( dqEntityOverworldState_t* entityOverworldState );
+
+#endif

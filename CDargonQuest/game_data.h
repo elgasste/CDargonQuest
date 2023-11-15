@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_GAME_DATA_H )
+#define DQ_GAME_DATA_H
 
 #include "common.h"
 
@@ -26,3 +27,5 @@ dqGameData_t* dqGameData;
 void dqGameData_Init();
 void dqGameData_Cleanup();
 dqMap_t* dqGameData_GetCurrentMap();
+
+#endif

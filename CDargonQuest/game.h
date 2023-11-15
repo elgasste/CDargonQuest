@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_GAME_H )
+#define DQ_GAME_H
 
 #include "common.h"
 #include "state.h"
@@ -20,3 +21,5 @@ dqGame_t* dqGame;
 void dqGame_Init();
 void dqGame_Cleanup();
 void dqGame_Run();
+
+#endif

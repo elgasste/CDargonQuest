@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_EVENT_QUEUE_H )
+#define DQ_EVENT_QUEUE_H
 
 #include "common.h"
 #include "event.h"
@@ -19,3 +20,5 @@ sfBool dqEventQueue_IsEmpty();
 void dqEventQueue_Push( dqEventType_t type, int argCount, ... );
 dqEvent_t* dqEventQueue_GetNext();
 void dqEventQueue_Flush();
+
+#endif

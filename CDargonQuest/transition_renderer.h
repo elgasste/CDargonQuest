@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_TRANSITION_RENDERER_H )
+#define DQ_TRANSITION_RENDERER_H
 
 #include "common.h"
 
@@ -22,3 +23,5 @@ void dqTransitionRenderer_Init();
 void dqTransitionRenderer_Cleanup();
 void dqTransitionRenderer_Reset();
 void dqTransitionRenderer_Render( sfBool black );
+
+#endif

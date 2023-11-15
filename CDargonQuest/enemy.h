@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_ENEMY_H )
+#define DQ_ENEMY_H
 
 #include "common.h"
 #include "indefinite_article.h"
@@ -15,3 +16,5 @@ typedef struct dqEnemy_t
 dqEnemy_t;
 
 void dqEnemy_Cleanup( dqEnemy_t* enemy );
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_MAP_TILE_H )
+#define DQ_MAP_TILE_H
 
 #include "common.h"
 #include "direction.h"
@@ -17,3 +18,5 @@ typedef struct dqMapTile_t
    unsigned int maxEnemyTier;
 }
 dqMapTile_t;
+
+#endif

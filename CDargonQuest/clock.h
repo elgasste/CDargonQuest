@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_CLOCK_H )
+#define DQ_CLOCK_H
 
 #include "common.h"
 
@@ -30,3 +31,5 @@ void dqClock_Init();
 void dqClock_Cleanup();
 void dqClock_StartFrame();
 void dqClock_EndFrame();
+
+#endif
