@@ -61,24 +61,28 @@ static void dqGameData_TempLoadEnemyTemplates()
 
    // TODO: don't worry about the graphics for now, just generate some data to test with
    sprintf_s( dqGameData->enemyTemplates[0][0].name, ENTITY_NAME_SIZE, "slime" );
+   dqGameData->enemyTemplates[0][0].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[0][0].minHitPoints = 4;
    dqGameData->enemyTemplates[0][0].maxHitPoints = 6;
    dqGameData->enemyTemplates[0][0].attackPower = 2;
    dqGameData->enemyTemplates[0][0].defensePower = 2;
 
    sprintf_s( dqGameData->enemyTemplates[0][1].name, ENTITY_NAME_SIZE, "black raven" );
+   dqGameData->enemyTemplates[0][1].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[0][1].minHitPoints = 6;
    dqGameData->enemyTemplates[0][1].maxHitPoints = 9;
    dqGameData->enemyTemplates[0][1].attackPower = 3;
    dqGameData->enemyTemplates[0][1].defensePower = 3;
 
    sprintf_s( dqGameData->enemyTemplates[1][0].name, ENTITY_NAME_SIZE, "horned rabbit" );
+   dqGameData->enemyTemplates[1][0].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[1][0].minHitPoints = 8;
    dqGameData->enemyTemplates[1][0].maxHitPoints = 12;
    dqGameData->enemyTemplates[1][0].attackPower = 4;
    dqGameData->enemyTemplates[1][0].defensePower = 4;
 
    sprintf_s( dqGameData->enemyTemplates[1][1].name, ENTITY_NAME_SIZE, "giant anteater" );
+   dqGameData->enemyTemplates[1][1].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[1][1].minHitPoints = 10;
    dqGameData->enemyTemplates[1][1].maxHitPoints = 14;
    dqGameData->enemyTemplates[1][1].attackPower = 7;

@@ -2,6 +2,11 @@
 
 #define STR_ERROR_MESSAGE_PREFIX          "ERROR: "
 
+#define STR_INDEFINITE_ARTICLE_A_UPPER    "A"
+#define STR_INDEFINITE_ARTICLE_A_LOWER    "a"
+#define STR_INDEFINITE_ARTICLE_AN_UPPER   "An"
+#define STR_INDEFINITE_ARTICLE_AN_LOWER   "an"
+
 #define STR_DONE                          "done"
 #define STR_LOADING_THINGS                "Loading all the things..."
 #define STR_HAVE_FUN                      "Have fun in there!"
@@ -20,6 +25,7 @@
 #define STR_TITLE_MENU_START              "Start"
 #define STR_TITLE_MENU_QUIT               "Quit"
 
+#define STR_BATTLE_INTRO_FORMATTER        "%s %s approaches!"
 #define STR_BATTLE_MENU_ATTACK            "Attack"
 #define STR_BATTLE_MENU_RUN               "Run"
 

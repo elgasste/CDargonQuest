@@ -47,7 +47,7 @@ static void dqBattleRenderer_RenderIntroState( sfVector2f* textPos )
 {
    if ( !dqTransitionRenderer->fadingIn )
    {
-      dqDialogRenderer_ScrollText( textPos, "You've encountered some enemies or something!", dqRenderConfig->battleMessageDialogWidth - 2 );
+      dqDialogRenderer_ScrollText( textPos, dqBattle->introMessage, dqRenderConfig->battleMessageDialogWidth - 2 );
    }
 }
 

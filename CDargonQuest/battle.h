@@ -8,6 +8,8 @@ typedef struct dqEnemy_t dqEnemy_t;
 typedef struct dqBattle_t
 {
    dqBattleState state;
+
+   char introMessage[128];
    char resultMessage[128];
 
    dqEnemy_t* enemy;

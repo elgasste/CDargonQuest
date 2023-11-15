@@ -8,6 +8,7 @@
 #include "enemy_template.h"
 #include "enemy.h"
 #include "battle_stats.h"
+#include "string_util.h"
 
 static dqEnemy_t* dqBattle_GenerateEnemyFromTemplate( dqEnemyTemplate_t* template );
 
@@ -71,7 +72,9 @@ void dqBattle_Generate()
    enemyTemplate = &( dqGameData->enemyTemplates[tierIndex][enemyIndex] );
    dqBattle->enemy = dqBattle_GenerateEnemyFromTemplate( enemyTemplate );
 
-   // TODO: display which enemy we're about to fight in the dialog
+   sprintf_s( dqBattle->introMessage, 128, STR_BATTLE_INTRO_FORMATTER,
+              dqStringUtil_GetIndefiniteArticleText( dqBattle->enemy->indefiniteArticle, sfTrue ),
+              dqBattle->enemy->name );
 
    dqMenuBattleAction->selectedOption = 0;
    dqBattle_SetState( dqBattleStateIntro );
@@ -111,6 +114,8 @@ static dqEnemy_t* dqBattle_GenerateEnemyFromTemplate( dqEnemyTemplate_t* templat
    dqEnemy_t* enemy = (dqEnemy_t*)dqMalloc( sizeof( dqEnemy_t ), sfTrue );
    enemy->battleStats = (dqBattleStats_t*)dqMalloc( sizeof( dqBattleStats_t ), sfTrue );
 
+   sprintf_s( enemy->name, ENTITY_NAME_SIZE, template->name );
+   enemy->indefiniteArticle = template->indefiniteArticle;
    enemy->battleStats->hitPoints = dqRandom_UnsignedInt( template->minHitPoints, template->maxHitPoints );
    enemy->battleStats->attackPower = template->attackPower;
    enemy->battleStats->defensePower = template->defensePower;

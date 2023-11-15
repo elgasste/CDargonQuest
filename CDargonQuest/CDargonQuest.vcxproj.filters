@@ -46,6 +46,12 @@
     <Filter Include="Header Files\Enums">
       <UniqueIdentifier>{b05a2cd6-280f-4b94-a714-7c6b85cdb17f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{d6bc87bc-299f-45bb-9063-3155d4d0faa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{b3c49f1d-924a-4434-ba27-35ecbafd3db5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="win_main.c">
@@ -143,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="enemy.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="string_util.c">
+      <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +283,12 @@
     </ClInclude>
     <ClInclude Include="enemy.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="indefinite_article.h">
+      <Filter>Header Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="string_util.h">
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
