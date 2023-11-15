@@ -13,7 +13,7 @@ static void dqInputHandler_HandleCheat();
 
 void dqInputHandler_Init()
 {
-   dqInputHandler = (dqInputHandler_t*)dqMalloc( sizeof( dqInputHandler_t ) );
+   dqInputHandler = (dqInputHandler_t*)dqMalloc( sizeof( dqInputHandler_t ), sfTrue );
 
    dqInputHandler->cheatString[0] = '\0';
 
@@ -24,7 +24,7 @@ void dqInputHandler_Cleanup()
 {
    dqOverworldInputHandler_Cleanup();
 
-   dqFree( dqInputHandler );
+   dqFree( dqInputHandler, sizeof( dqInputHandler_t ), sfTrue );
 }
 
 void dqInputHandler_HandleInput()

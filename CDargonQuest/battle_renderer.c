@@ -12,12 +12,12 @@ static void dqBattleRenderer_RenderResultState( sfVector2f* textPos );
 
 void dqBattleRenderer_Init()
 {
-   dqBattleRenderer = (dqBattleRenderer_t*)dqMalloc( sizeof( dqBattleRenderer_t ) );
+   dqBattleRenderer = (dqBattleRenderer_t*)dqMalloc( sizeof( dqBattleRenderer_t ), sfTrue );
 }
 
 void dqBattleRenderer_Cleanup()
 {
-   dqFree( dqBattleRenderer );
+   dqFree( dqBattleRenderer, sizeof( dqBattleRenderer_t ), sfTrue );
 }
 
 void dqBattleRenderer_Render()

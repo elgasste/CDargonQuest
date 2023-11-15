@@ -16,9 +16,9 @@ void dqWindow_Init()
 
    sfFloatRect viewRect = { 0, 0, dqRenderConfig->screenWidth, dqRenderConfig->screenHeight };
 
-   dqWindow = (dqWindow_t*)dqMalloc( sizeof( dqWindow_t ) );
+   dqWindow = (dqWindow_t*)dqMalloc( sizeof( dqWindow_t ), sfTrue );
 
-   dqWindow->window = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, NULL );
+   dqWindow->window = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, 0 );
 
    dqWindow->view = sfView_createFromRect( viewRect );
    sfRenderWindow_setView( dqWindow->window, dqWindow->view );
@@ -37,7 +37,7 @@ void dqWindow_Cleanup()
    sfRenderWindow_destroy( dqWindow->window );
    sfView_destroy( dqWindow->view );
 
-   dqFree( dqWindow );
+   dqFree( dqWindow, sizeof( dqWindow_t ), sfTrue );
 }
 
 void dqWindow_HandleEvents()
@@ -77,20 +77,20 @@ void dqWindow_Display()
 
 void dqWindow_DrawRectangleShape( sfRectangleShape* rect )
 {
-   sfRenderWindow_drawRectangleShape( dqWindow->window, rect, NULL );
+   sfRenderWindow_drawRectangleShape( dqWindow->window, rect, 0 );
 }
 
 void dqWindow_DrawText( sfText* text )
 {
-   sfRenderWindow_drawText( dqWindow->window, text, NULL );
+   sfRenderWindow_drawText( dqWindow->window, text, 0 );
 }
 
 void dqWindow_DrawSprite( sfSprite* sprite )
 {
-   sfRenderWindow_drawSprite( dqWindow->window, sprite, NULL );
+   sfRenderWindow_drawSprite( dqWindow->window, sprite, 0 );
 }
 
 void dqWindow_DrawEntitySprite( dqEntitySprite_t* sprite )
 {
-   sfRenderWindow_drawSprite( dqWindow->window, sprite->sprite, NULL );
+   sfRenderWindow_drawSprite( dqWindow->window, sprite->sprite, 0 );
 }

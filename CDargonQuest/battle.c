@@ -13,20 +13,31 @@ static dqEnemy_t* dqBattle_GenerateEnemyFromTemplate( dqEnemyTemplate_t* templat
 
 void dqBattle_Init()
 {
-   dqBattle = (dqBattle_t*)dqMalloc( sizeof( dqBattle_t ) );
+   dqBattle = (dqBattle_t*)dqMalloc( sizeof( dqBattle_t ), sfTrue );
+
+   dqBattle->enemy = 0;
 
    dqBattle->resultMessage[0] = '\0';
 }
 
 void dqBattle_Cleanup()
 {
-   dqFree( dqBattle );
+   // I suppose this is possible if there's a way to quit the game during a battle
+   if ( dqBattle->enemy != 0 )
+   {
+      dqFree( dqBattle->enemy->battleStats, sizeof( dqBattleStats_t ), sfTrue );
+      dqFree( dqBattle->enemy, sizeof( dqEnemy_t ), sfTrue );
+   }
+
+   dqFree( dqBattle, sizeof( dqBattle_t ), sfTrue );
 }
 
 void dqBattle_Reset()
 {
-   dqFree( dqBattle->enemy->battleStats );
-   dqFree( dqBattle->enemy );
+   dqFree( dqBattle->enemy->battleStats, sizeof( dqBattleStats_t ), sfTrue );
+   dqFree( dqBattle->enemy, sizeof( dqEnemy_t ), sfTrue );
+
+   dqBattle->enemy = 0;
 }
 
 void dqBattle_Generate()
@@ -60,6 +71,8 @@ void dqBattle_Generate()
    enemyTemplate = &( dqGameData->enemyTemplates[tierIndex][enemyIndex] );
    dqBattle->enemy = dqBattle_GenerateEnemyFromTemplate( enemyTemplate );
 
+   // TODO: display which enemy we're about to fight in the dialog
+
    dqMenuBattleAction->selectedOption = 0;
    dqBattle_SetState( dqBattleStateIntro );
 }
@@ -72,6 +85,10 @@ void dqBattle_SetState( dqBattleState state )
 
 void dqBattle_Attack()
 {
+   // TODO: based on whose turn it is, actually attack. we'll need another state in
+   // here for "action". we'll also need some kind of min/max attack values for
+   // enemies, so we can generate a value.
+
    if ( dqBattle->state == dqBattleStateSelectAction )
    {
       sprintf_s( dqBattle->resultMessage, 128, "Your killing spree was a success!" );
@@ -81,6 +98,7 @@ void dqBattle_Attack()
 
 void dqBattle_Run()
 {
+   // TODO: later on the player's evasion rate (or whatever we call it) will be called into question
    if ( dqBattle->state == dqBattleStateSelectAction )
    {
       sprintf_s( dqBattle->resultMessage, 128, "Wow, so brave. At least you got away, I guess." );
@@ -90,8 +108,8 @@ void dqBattle_Run()
 
 static dqEnemy_t* dqBattle_GenerateEnemyFromTemplate( dqEnemyTemplate_t* template )
 {
-   dqEnemy_t* enemy = (dqEnemy_t*)dqMalloc( sizeof( dqEnemy_t ) );
-   enemy->battleStats = (dqBattleStats_t*)dqMalloc( sizeof( dqBattleStats_t ) );
+   dqEnemy_t* enemy = (dqEnemy_t*)dqMalloc( sizeof( dqEnemy_t ), sfTrue );
+   enemy->battleStats = (dqBattleStats_t*)dqMalloc( sizeof( dqBattleStats_t ), sfTrue );
 
    enemy->battleStats->hitPoints = dqRandom_UnsignedInt( template->minHitPoints, template->maxHitPoints );
    enemy->battleStats->attackPower = template->attackPower;

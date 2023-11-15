@@ -9,7 +9,7 @@ static void dqGameData_TempLoadEnemyTemplates();
 
 void dqGameData_Init()
 {
-   dqGameData = (dqGameData_t*)dqMalloc( sizeof( dqGameData_t ) );
+   dqGameData = (dqGameData_t*)dqMalloc( sizeof( dqGameData_t ), sfTrue );
 
    dqMapLoader_LoadMaps();
 
@@ -30,11 +30,11 @@ void dqGameData_Cleanup()
 
    for ( i = 0; i < dqGameData->enemyTierCount; i++ )
    {
-      dqFree( dqGameData->enemyTemplates[i] );
+      dqFree( dqGameData->enemyTemplates[i], sizeof( dqEnemyTemplate_t ) * (size_t)( dqGameData->enemyTemplateCount ), sfTrue);
    }
 
-   dqFree( dqGameData->enemyTemplates );
-   dqFree( dqGameData );
+   dqFree( dqGameData->enemyTemplates, sizeof( dqEnemyTemplate_t* ) * (size_t)( dqGameData->enemyTierCount ), sfTrue );
+   dqFree( dqGameData, sizeof( dqGameData_t ), sfTrue );
 }
 
 dqMap_t* dqGameData_GetCurrentMap()
@@ -49,12 +49,14 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTierCount = 2;
    dqGameData->enemyTemplateCount = 2;
    dqGameData->enemyTemplates = (dqEnemyTemplate_t**)dqMalloc( sizeof( dqEnemyTemplate_t* ) *
-                                                               (size_t)( dqGameData->enemyTierCount ) );
+                                                               (size_t)( dqGameData->enemyTierCount ),
+                                                               sfTrue );
 
    for ( i = 0; i < dqGameData->enemyTierCount; i++ )
    {
       dqGameData->enemyTemplates[i] = (dqEnemyTemplate_t*)dqMalloc( sizeof( dqEnemyTemplate_t ) *
-                                                                    (size_t)( dqGameData->enemyTemplateCount ) );
+                                                                    (size_t)( dqGameData->enemyTemplateCount ),
+                                                                    sfTrue );
    }
 
    // TODO: don't worry about the graphics for now, just generate some data to test with

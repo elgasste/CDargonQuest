@@ -2,19 +2,19 @@
 
 void dqInputState_Init()
 {
-   dqInputState = (dqInputState_t*)dqMalloc( sizeof( dqInputState_t ) );
+   dqInputState = (dqInputState_t*)dqMalloc( sizeof( dqInputState_t ), sfTrue );
 
-   dqInputState->keysPressed = (sfBool*)dqCalloc( sizeof( sfBool ), sfKeyCount );
-   dqInputState->keysReleased = (sfBool*)dqCalloc( sizeof( sfBool ), sfKeyCount );
+   dqInputState->keysPressed = (sfBool*)dqCalloc( sfKeyCount, sizeof( sfBool ), sfTrue );
+   dqInputState->keysReleased = (sfBool*)dqCalloc( sfKeyCount, sizeof( sfBool ), sfTrue );
    dqInputState->keyWasPressed = sfFalse;
    dqInputState->lastPressedKey = sfKeyCount;
 }
 
 void dqInputState_Cleanup()
 {
-   dqFree( dqInputState->keysPressed );
-   dqFree( dqInputState->keysReleased );
-   dqFree( dqInputState );
+   dqFree( dqInputState->keysPressed, sizeof( sfBool) * sfKeyCount, sfTrue );
+   dqFree( dqInputState->keysReleased, sizeof( sfBool ) * sfKeyCount, sfTrue );
+   dqFree( dqInputState, sizeof( dqInputState_t ), sfTrue );
 }
 
 void dqInputState_Reset()

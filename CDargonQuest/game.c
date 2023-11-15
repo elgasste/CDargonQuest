@@ -35,7 +35,13 @@ static void dqGame_HandleBattleExit();
 
 void dqGame_Init()
 {
-   dqGame = (dqGame_t*)dqMalloc( sizeof( dqGame_t ) );
+   dqTotalMemoryAllocated = 0;
+
+   dqLog_Init();
+
+   dqLog_Message( "loading game objects" );
+
+   dqGame = (dqGame_t*)dqMalloc( sizeof( dqGame_t ), sfTrue );
 
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
@@ -45,10 +51,6 @@ void dqGame_Init()
    dqGame->nextMapTileIndex = 0;
 
    dqGameConfig_Init();
-   dqLog_Init();
-
-   dqLog_Message( "loading game objects" );
-
    dqRandom_Init();
    dqRenderConfig_Init();
    dqGameData_Init();
@@ -65,6 +67,8 @@ void dqGame_Init()
 
 void dqGame_Cleanup()
 {
+   char memoryMessage[128];
+
    dqBattle_Cleanup();
    dqEventQueue_Cleanup();
    dqClock_Cleanup();
@@ -76,10 +80,16 @@ void dqGame_Cleanup()
    dqRenderConfig_Cleanup();
    dqGameConfig_Cleanup();
 
-   dqLog_Message( "game objects cleaned up" );
-   dqLog_Cleanup();
+   dqFree( dqGame, sizeof( dqGame_t ), sfTrue );
 
-   dqFree( dqGame );
+   dqLog_Message( "game objects cleaned up" );
+
+   sprintf_s( memoryMessage, 128, "total memory allocated: %llu", dqTotalMemoryAllocated );
+   dqLog_Message( memoryMessage );
+   sprintf_s( memoryMessage, 128, "total memory freed: %llu", dqTotalMemoryFreed );
+   dqLog_Message( memoryMessage );
+
+   dqLog_Cleanup();
 }
 
 void dqGame_Run()

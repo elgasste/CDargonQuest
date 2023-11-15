@@ -1,6 +1,6 @@
 #include "common.h"
 
-void* dqMalloc( size_t size )
+void* dqMalloc( size_t size, sfBool track )
 {
    void* mem = malloc( size );
 
@@ -10,10 +10,15 @@ void* dqMalloc( size_t size )
       exit( 1 );
    }
 
+   if ( track )
+   {
+      dqTotalMemoryAllocated += size;
+   }
+
    return mem;
 }
 
-void* dqCalloc( size_t count, size_t size )
+void* dqCalloc( size_t count, size_t size, sfBool track )
 {
    void* mem = calloc( count, size );
 
@@ -23,14 +28,23 @@ void* dqCalloc( size_t count, size_t size )
       exit( 1 );
    }
 
+   if ( track )
+   {
+      dqTotalMemoryAllocated += ( size * count );
+   }
+
    return mem;
 }
 
-void dqFree( void* mem )
+void dqFree( void* mem, size_t size, sfBool track )
 {
    if ( mem )
    {
       free( mem );
-      mem = NULL;
+
+      if ( track )
+      {
+         dqTotalMemoryFreed += size;
+      }
    }
 }

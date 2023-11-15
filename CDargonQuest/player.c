@@ -11,9 +11,9 @@ dqPlayer_t* dqPlayer_Create()
    dqMap_t* map;
    dqMapTile_t* tile;
 
-   dqPlayer_t* player = (dqPlayer_t*)dqMalloc( sizeof( dqPlayer_t ) );
-   player->overworldState = (dqEntityOverworldState_t*)dqMalloc( sizeof( dqEntityOverworldState_t ) );
-   player->battleStats = (dqBattleStats_t*)dqMalloc( sizeof( dqBattleStats_t ) );
+   dqPlayer_t* player = (dqPlayer_t*)dqMalloc( sizeof( dqPlayer_t ), sfTrue );
+   player->overworldState = (dqEntityOverworldState_t*)dqMalloc( sizeof( dqEntityOverworldState_t ), sfTrue );
+   player->battleStats = (dqBattleStats_t*)dqMalloc( sizeof( dqBattleStats_t ), sfTrue );
    dqGameData->player = player;
 
    // TODO: most of this will eventually be loaded from a file
@@ -40,7 +40,7 @@ dqPlayer_t* dqPlayer_Create()
 
 void dqPlayer_Cleanup( dqPlayer_t* player )
 {
-   dqFree( player->battleStats );
-   dqFree( player->overworldState );
-   dqFree( player );
+   dqFree( player->battleStats, sizeof( dqBattleStats_t ), sfTrue );
+   dqFree( player->overworldState, sizeof( dqEntityOverworldState_t ), sfTrue );
+   dqFree( player, sizeof( dqPlayer_t ), sfTrue );
 }

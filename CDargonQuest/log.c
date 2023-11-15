@@ -1,11 +1,10 @@
-#include "log.h"
-#include "game_config.h"
+#include "common.h"
 
 void dqLog_Init()
 {
-   dqLog = (dqLog_t*)dqMalloc( sizeof( dqLog_t ) );
+   dqLog = (dqLog_t*)dqMalloc( sizeof( dqLog_t ), sfFalse );
 
-   if ( fopen_s( &( dqLog->logFile ), dqGameConfig->logFileName, "w" ) )
+   if ( fopen_s( &( dqLog->logFile ), LOG_FILE_NAME, "w" ) )
    {
       dqError_ExitWithMessageNoLog( STR_ERROR_LOG_FILE_OPEN );
    }
@@ -15,12 +14,12 @@ void dqLog_Cleanup()
 {
    fclose( dqLog->logFile );
 
-   dqFree( dqLog );
+   dqFree( dqLog, sizeof( dqLog_t ), sfFalse );
 }
 
 void dqLog_Message( const char* message )
 {
-   time_t t = time( NULL );
+   time_t t = time( 0 );
    struct tm tm;
    if ( localtime_s( &tm, &t ) )
    {

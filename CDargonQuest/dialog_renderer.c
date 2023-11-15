@@ -9,7 +9,7 @@ static void dqDialogRenderer_DrawTextPortion( sfVector2f* pos, const char* text,
 
 void dqDialogRenderer_Init()
 {
-   dqDialogRenderer = (dqDialogRenderer_t*)dqMalloc( sizeof( dqDialogRenderer_t ) );
+   dqDialogRenderer = (dqDialogRenderer_t*)dqMalloc( sizeof( dqDialogRenderer_t ), sfTrue );
 
    dqDialogRenderer_ResetScroll();
 
@@ -27,7 +27,7 @@ void dqDialogRenderer_Cleanup()
 {
    sfSprite_destroy( dqDialogRenderer->sprite );
 
-   dqFree( dqDialogRenderer );
+   dqFree( dqDialogRenderer, sizeof( dqDialogRenderer_t ), sfTrue );
 }
 
 void dqDialogRenderer_ResetScroll()

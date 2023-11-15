@@ -2,7 +2,7 @@
 
 void dqRandom_Init()
 {
-   srand( (unsigned int)time( NULL ) );
+   srand( (unsigned int)time( 0 ) );
 }
 
 unsigned int dqRandom_Percent()

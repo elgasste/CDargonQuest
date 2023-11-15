@@ -6,25 +6,25 @@
 
 void dqMenu_Init()
 {
-   dqMenuTitle = (dqMenu_t*)dqMalloc( sizeof( dqMenu_t ) );
+   dqMenuTitle = (dqMenu_t*)dqMalloc( sizeof( dqMenu_t ), sfTrue );
    dqMenuTitle->optionsPos = dqRenderConfig->titleMenuOptionsPos;
    dqMenuTitle->optionsWidth = dqRenderConfig->titleMenuOptionsWidth;
    dqMenuTitle->caratOffsetX = dqRenderConfig->titleMenuCaratOffsetX;
    dqMenuTitle->optionCount = 2;
    dqMenuTitle->selectedOption = 0;
-   dqMenuTitle->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqMenuTitle->optionCount );
+   dqMenuTitle->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqMenuTitle->optionCount, sfTrue );
    dqMenuTitle->options[0].text = STR_TITLE_MENU_START;
    dqMenuTitle->options[0].eventType = dqEventStart;
    dqMenuTitle->options[1].text = STR_TITLE_MENU_QUIT;
    dqMenuTitle->options[1].eventType = dqEventQuit;
 
-   dqMenuBattleAction = (dqMenu_t*)dqMalloc( sizeof( dqMenu_t ) );
+   dqMenuBattleAction = (dqMenu_t*)dqMalloc( sizeof( dqMenu_t ), sfTrue );
    dqMenuBattleAction->optionsPos = dqRenderConfig->battleActionMenuOptionsPos;
    dqMenuBattleAction->optionsWidth = dqRenderConfig->battleActionMenuOptionsWidth;
    dqMenuBattleAction->caratOffsetX = dqRenderConfig->battleActionMenuCaratOffsetX;
    dqMenuBattleAction->optionCount = 2;
    dqMenuBattleAction->selectedOption = 0;
-   dqMenuBattleAction->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqMenuBattleAction->optionCount );
+   dqMenuBattleAction->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqMenuBattleAction->optionCount, sfTrue );
    dqMenuBattleAction->options[0].text = STR_BATTLE_MENU_ATTACK;
    dqMenuBattleAction->options[0].eventType = dqEventBattleAttack;
    dqMenuBattleAction->options[1].text = STR_BATTLE_MENU_RUN;
@@ -33,10 +33,10 @@ void dqMenu_Init()
 
 void dqMenu_Cleanup()
 {
-   dqFree( dqMenuBattleAction->options );
-   dqFree( dqMenuBattleAction );
-   dqFree( dqMenuTitle->options );
-   dqFree( dqMenuTitle );
+   dqFree( dqMenuBattleAction->options, sizeof( dqMenuOption_t ) * dqMenuBattleAction->optionCount, sfTrue );
+   dqFree( dqMenuBattleAction, sizeof( dqMenu_t ), sfTrue );
+   dqFree( dqMenuTitle->options, sizeof( dqMenuOption_t ) * dqMenuTitle->optionCount, sfTrue );
+   dqFree( dqMenuTitle, sizeof( dqMenu_t ), sfTrue );
 }
 
 void dqMenu_ScrollDown( dqMenu_t* menu )

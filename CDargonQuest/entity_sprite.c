@@ -10,7 +10,7 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntityOverworldState_t* entityOverwor
                                          unsigned int frameCount,
                                          float frameTimeThreshold )
 {
-   dqEntitySprite_t* sprite = (dqEntitySprite_t*)dqMalloc( sizeof( dqEntitySprite_t ) );
+   dqEntitySprite_t* sprite = (dqEntitySprite_t*)dqMalloc( sizeof( dqEntitySprite_t ), sfTrue );
 
    sprite->entityOverworldState = entityOverworldState;
 
@@ -36,7 +36,7 @@ void dqEntitySprite_Cleanup( dqEntitySprite_t* sprite )
 {
    sfSprite_destroy( sprite->sprite );
 
-   dqFree( sprite );
+   dqFree( sprite, sizeof( dqEntitySprite_t ), sfTrue );
 }
 
 void dqEntitySprite_Tick( dqEntitySprite_t* sprite )

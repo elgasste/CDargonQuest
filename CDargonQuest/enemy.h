@@ -11,5 +11,4 @@ typedef struct dqEnemy_t
 }
 dqEnemy_t;
 
-dqEnemy_t* dqEnemy_Generate();
 void dqEnemy_Cleanup( dqEnemy_t* enemy );

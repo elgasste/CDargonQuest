@@ -5,12 +5,12 @@
 
 void dqRenderData_Init( dqEntityOverworldState_t* playerOverworldState )
 {
-   dqRenderData = (dqRenderData_t*)dqMalloc( sizeof( dqRenderData_t ) );
+   dqRenderData = (dqRenderData_t*)dqMalloc( sizeof( dqRenderData_t ), sfTrue );
 
-   dqRenderData->overworldTilesetTexture = sfTexture_createFromFile( dqRenderConfig->overworldTilesetTexturePath, NULL );
-   dqRenderData->dialogTilesetTexture = sfTexture_createFromFile( dqRenderConfig->dialogTilesetTexturePath, NULL );
+   dqRenderData->overworldTilesetTexture = sfTexture_createFromFile( dqRenderConfig->overworldTilesetTexturePath, 0 );
+   dqRenderData->dialogTilesetTexture = sfTexture_createFromFile( dqRenderConfig->dialogTilesetTexturePath, 0 );
 
-   dqRenderData->playerTexture = sfTexture_createFromFile( dqRenderConfig->playerTexturePath, NULL );
+   dqRenderData->playerTexture = sfTexture_createFromFile( dqRenderConfig->playerTexturePath, 0 );
    dqRenderData->playerSprite = dqEntitySprite_Create( playerOverworldState, dqRenderData->playerTexture, 16, 16, 2, 0.25f );
 }
 
@@ -21,5 +21,5 @@ void dqRenderData_Cleanup()
 
    sfTexture_destroy( dqRenderData->overworldTilesetTexture );
 
-   dqFree( dqRenderData );
+   dqFree( dqRenderData, sizeof( dqRenderData_t ), sfTrue );
 }

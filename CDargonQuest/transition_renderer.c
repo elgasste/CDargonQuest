@@ -6,7 +6,7 @@
 
 void dqTransitionRenderer_Init()
 {
-   dqTransitionRenderer = (dqTransitionRenderer_t*)dqMalloc( sizeof( dqTransitionRenderer_t ) );
+   dqTransitionRenderer = (dqTransitionRenderer_t*)dqMalloc( sizeof( dqTransitionRenderer_t ), sfTrue );
 
    dqTransitionRenderer->fadeRect = sfRectangleShape_create();
    sfRectangleShape_setSize( dqTransitionRenderer->fadeRect, dqRenderConfig->overworldViewSize );
@@ -19,7 +19,7 @@ void dqTransitionRenderer_Cleanup()
 {
    sfRectangleShape_destroy( dqTransitionRenderer->fadeRect );
 
-   dqFree( dqTransitionRenderer );
+   dqFree( dqTransitionRenderer, sizeof( dqTransitionRenderer_t ), sfTrue );
 }
 
 void dqTransitionRenderer_Reset()
