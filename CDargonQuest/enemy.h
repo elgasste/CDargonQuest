@@ -15,6 +15,7 @@ typedef struct dqEnemy_t
 }
 dqEnemy_t;
 
+dqEnemy_t* dqEnemy_Generate( unsigned int tier, unsigned int index );
 void dqEnemy_Cleanup( dqEnemy_t* enemy );
 
 #endif

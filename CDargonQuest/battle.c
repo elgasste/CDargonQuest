@@ -5,19 +5,15 @@
 #include "map_tile.h"
 #include "dialog_renderer.h"
 #include "random.h"
-#include "enemy_template.h"
 #include "enemy.h"
 #include "battle_stats.h"
 #include "string_util.h"
-
-static dqEnemy_t* dqBattle_GenerateEnemyFromTemplate( dqEnemyTemplate_t* template );
 
 void dqBattle_Init()
 {
    dqBattle = (dqBattle_t*)dqMalloc( sizeof( dqBattle_t ), sfTrue );
 
    dqBattle->enemy = 0;
-
    dqBattle->resultMessage[0] = '\0';
 }
 
@@ -26,8 +22,7 @@ void dqBattle_Cleanup()
    // I suppose this is possible if there's a way to quit the game during a battle
    if ( dqBattle->enemy != 0 )
    {
-      dqFree( dqBattle->enemy->battleStats, sizeof( dqBattleStats_t ), sfTrue );
-      dqFree( dqBattle->enemy, sizeof( dqEnemy_t ), sfTrue );
+      dqEnemy_Cleanup( dqBattle->enemy );
    }
 
    dqFree( dqBattle, sizeof( dqBattle_t ), sfTrue );
@@ -43,9 +38,8 @@ void dqBattle_Reset()
 
 void dqBattle_Generate()
 {
-   unsigned int tierIndex, enemyIndex;
+   unsigned int tier, index;
    static char logMessage[128];
-   dqEnemyTemplate_t* enemyTemplate;
    dqMapTile_t* tile = dqMap_GetCurrentTile();
 
    sprintf_s( logMessage, 128, "generating encounter: min tier %d, max tier %d", tile->minEnemyTier, tile->maxEnemyTier );
@@ -59,18 +53,17 @@ void dqBattle_Generate()
    // - maybe try to do some kind of size system, so we don't accidentally generate
    //   more enemies than will fit on the screen
 
-   tierIndex = dqRandom_UnsignedInt( tile->minEnemyTier, tile->maxEnemyTier );
+   tier = dqRandom_UnsignedInt( tile->minEnemyTier, tile->maxEnemyTier );
    
    // TODO: this is probably okay for now, but eventually when we have all the
    // enemy templates we need, this should crash if it's out of range
-   if ( tierIndex >= dqGameData->enemyTierCount )
+   if ( tier >= dqGameData->enemyTierCount )
    {
-      tierIndex = dqGameData->enemyTierCount - 1;
+      tier = dqGameData->enemyTierCount - 1;
    }
 
-   enemyIndex = dqRandom_UnsignedInt( 0, dqGameData->enemyTemplateCount - 1 );
-   enemyTemplate = &( dqGameData->enemyTemplates[tierIndex][enemyIndex] );
-   dqBattle->enemy = dqBattle_GenerateEnemyFromTemplate( enemyTemplate );
+   index = dqRandom_UnsignedInt( 0, dqGameData->enemyTemplateCount - 1 );
+   dqBattle->enemy = dqEnemy_Generate( tier, index );
 
    sprintf_s( dqBattle->introMessage, 128, STR_BATTLE_INTRO_FORMATTER,
               dqStringUtil_GetIndefiniteArticleText( dqBattle->enemy->indefiniteArticle, sfTrue ),
@@ -107,18 +100,4 @@ void dqBattle_Run()
       sprintf_s( dqBattle->resultMessage, 128, "Wow, so brave. At least you got away, I guess." );
       dqBattle_SetState( dqBattleStateResult );
    }
-}
-
-static dqEnemy_t* dqBattle_GenerateEnemyFromTemplate( dqEnemyTemplate_t* template )
-{
-   dqEnemy_t* enemy = (dqEnemy_t*)dqMalloc( sizeof( dqEnemy_t ), sfTrue );
-   enemy->battleStats = (dqBattleStats_t*)dqMalloc( sizeof( dqBattleStats_t ), sfTrue );
-
-   sprintf_s( enemy->name, ENTITY_NAME_SIZE, template->name );
-   enemy->indefiniteArticle = template->indefiniteArticle;
-   enemy->battleStats->hitPoints = dqRandom_UnsignedInt( template->minHitPoints, template->maxHitPoints );
-   enemy->battleStats->attackPower = template->attackPower;
-   enemy->battleStats->defensePower = template->defensePower;
-
-   return enemy;
 }
