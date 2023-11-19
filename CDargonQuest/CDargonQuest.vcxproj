@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>C:\CSFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -150,7 +150,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>stdc11</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>C:\CSFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
