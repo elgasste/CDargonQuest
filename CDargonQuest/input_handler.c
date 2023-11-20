@@ -70,6 +70,7 @@ static void dqInputHandler_CheckCheats()
       "dqclip",
       "dqinvis",
       "dqtilestat",
+      "dqall",
       "dqclear"
    };
    static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );
@@ -150,6 +151,13 @@ static void dqInputHandler_HandleCheat()
       {
          dqLog_Message( "map tile stats cheat off" );
       }
+   }
+   else if ( !strcmp( cheat, "dqall" ) )
+   {
+      dqGameConfig->noClipCheat = sfTrue;
+      dqGameConfig->invisibleCheat = sfTrue;
+      dqGameConfig->tileStatCheat = sfTrue;
+      dqLog_Message( "turned on all cheats" );
    }
    else if ( !strcmp( cheat, "dqclear" ) )
    {
