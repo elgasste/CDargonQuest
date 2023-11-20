@@ -8,6 +8,7 @@
 #include "map.h"
 #include "map_tile.h"
 #include "window.h"
+#include "math_util.h"
 
 void dqOverworldRenderer_Init()
 {

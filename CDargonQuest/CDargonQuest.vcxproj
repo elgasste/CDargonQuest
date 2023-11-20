@@ -220,6 +220,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     <ClInclude Include="enemy_template.h" />
     <ClInclude Include="indefinite_article.h" />
     <ClInclude Include="log.h" />
+    <ClInclude Include="math_util.h" />
     <ClInclude Include="menu_renderer.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="random.h" />

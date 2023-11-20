@@ -8,10 +8,11 @@
 #include "entity_sprite.h"
 #include "event_queue.h"
 #include "random.h"
+#include "math_util.h"
 
 dqMapTile_t* dqMap_GetTileFromCoordinates( dqMap_t* map, unsigned int column, unsigned int row )
 {
-   unsigned int tileIndex = ( row * map->columns ) + column;
+   unsigned int tileIndex = dqMathUtil_IndexFromCoordinates( column, row, map->columns );
    return &( map->tiles[tileIndex] );
 }
 
@@ -20,7 +21,8 @@ dqMapTile_t* dqMap_GetTileFromPosition( dqMap_t* map, sfVector2f* pos )
    unsigned int column = (unsigned int)( pos->x / dqGameConfig->mapTileSize );
    unsigned int row = (unsigned int)( pos->y / dqGameConfig->mapTileSize );
 
-   return &( map->tiles[ ( row * map->columns ) + column ] );
+   unsigned int tileIndex = dqMathUtil_IndexFromCoordinates( column, row, map->columns );
+   return &( map->tiles[tileIndex] );
 }
 
 dqMapTile_t* dqMap_GetCurrentTile()
@@ -53,8 +55,7 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
 
    dqGameData->currentMapIndex = newMapIndex;
 
-   newColumn = newTileIndex % newMap->columns;
-   newRow = newTileIndex / newMap->columns;
+   dqMathUtil_CoordinatesFromIndex( newTileIndex, newMap->columns, &newColumn, &newRow );
 
    playerState->hitBoxPosition.x = newColumn * dqGameConfig->mapTileSize;
    playerState->hitBoxPosition.y = newRow * dqGameConfig->mapTileSize;
