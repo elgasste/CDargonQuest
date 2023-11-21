@@ -48,3 +48,15 @@ void dqFree( void* mem, size_t size, sfBool track )
       }
    }
 }
+
+sfTexture* dqTexture_CreateFromFile( const char* filePath )
+{
+   dqTotalSfmlObjectsCreated++;
+   return sfTexture_createFromFile( filePath, 0 );
+}
+
+void dqTexture_Destroy( sfTexture* texture )
+{
+   dqTotalSfmlObjectsDestroyed++;
+   sfTexture_destroy( texture );
+}

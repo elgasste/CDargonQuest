@@ -36,6 +36,9 @@ static void dqGame_HandleBattleExit();
 void dqGame_Init()
 {
    dqTotalMemoryAllocated = 0;
+   dqTotalMemoryFreed = 0;
+   dqTotalSfmlObjectsCreated = 0;
+   dqTotalSfmlObjectsDestroyed = 0;
 
    dqLog_Init();
 
@@ -87,6 +90,10 @@ void dqGame_Cleanup()
    sprintf_s( memoryMessage, 128, "total memory allocated: %llu", dqTotalMemoryAllocated );
    dqLog_Message( memoryMessage );
    sprintf_s( memoryMessage, 128, "total memory freed: %llu", dqTotalMemoryFreed );
+   dqLog_Message( memoryMessage );
+   sprintf_s( memoryMessage, 128, "total SFML objects created: %d", dqTotalSfmlObjectsCreated );
+   dqLog_Message( memoryMessage );
+   sprintf_s( memoryMessage, 128, "total SFML objects destroyed: %d", dqTotalSfmlObjectsDestroyed );
    dqLog_Message( memoryMessage );
 
    dqLog_Cleanup();
