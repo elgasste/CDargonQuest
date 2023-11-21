@@ -215,9 +215,15 @@ static void dqGame_HandleMovePlayer( dqEvent_t* e )
    if ( dqGame->state == dqStateOverworld )
    {
       direction = e->args.argList[0];
-      velocityDelta = e->args.argList[1]
-         ? dqGameConfig->playerVelocityDiagonal
-         : dqGameConfig->playerVelocityStraight;
+
+      if ( dqGameConfig->fastCheat )
+      {
+         velocityDelta = e->args.argList[1] ? dqGameConfig->playerVelocityDiagonalFast : dqGameConfig->playerVelocityStraightFast;
+      }
+      else
+      {
+         velocityDelta = e->args.argList[1] ? dqGameConfig->playerVelocityDiagonal : dqGameConfig->playerVelocityStraight;
+      }
 
       switch ( direction )
       {
