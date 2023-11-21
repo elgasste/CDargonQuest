@@ -1,7 +1,5 @@
 #include "battle.h"
 #include "game_data.h"
-#include "render_config.h"
-#include "render_data.h"
 #include "menu.h"
 #include "map.h"
 #include "map_tile.h"
@@ -10,7 +8,6 @@
 #include "enemy.h"
 #include "battle_stats.h"
 #include "string_util.h"
-#include "battle_renderer.h"
 
 void dqBattle_Init()
 {
@@ -44,7 +41,6 @@ void dqBattle_Generate()
    unsigned int tier, index;
    static char logMessage[128];
    dqMapTile_t* tile = dqMap_GetCurrentTile();
-   sfIntRect enemyTextureRect;
 
    sprintf_s( logMessage, 128, "generating encounter: min tier %d, max tier %d", tile->minEnemyTier, tile->maxEnemyTier );
    dqLog_Message( logMessage );
@@ -67,14 +63,6 @@ void dqBattle_Generate()
 
    index = dqRandom_UnsignedInt( 0, dqGameData->enemyTemplateCount - 1 );
    dqBattle->enemy = dqEnemy_Generate( tier, index );
-
-   // TODO: it feels weird to have this in here
-   sfSprite_setTexture( dqBattleRenderer->enemySprite, dqRenderData->enemyTextures[dqBattle->enemy->spriteSize], sfFalse );
-   enemyTextureRect.left = dqBattle->enemy->spriteIndex * dqRenderConfig->enemySpriteWidths[dqBattle->enemy->spriteSize];
-   enemyTextureRect.top = dqRenderConfig->enemySpriteHeight * tier;
-   enemyTextureRect.width = dqRenderConfig->enemySpriteWidths[dqBattle->enemy->spriteSize];
-   enemyTextureRect.height = dqRenderConfig->enemySpriteHeight;
-   sfSprite_setTextureRect( dqBattleRenderer->enemySprite, enemyTextureRect );
 
    sprintf_s( dqBattle->introMessage, 128, STR_BATTLE_INTRO_FORMATTER,
               dqStringUtil_GetIndefiniteArticleText( dqBattle->enemy->indefiniteArticle, sfTrue ),

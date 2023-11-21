@@ -17,14 +17,10 @@ static void dqBattleRenderer_DrawEnemy();
 void dqBattleRenderer_Init()
 {
    dqBattleRenderer = (dqBattleRenderer_t*)dqMalloc( sizeof( dqBattleRenderer_t ), sfTrue );
-
-   dqBattleRenderer->enemySprite = sfSprite_create();
 }
 
 void dqBattleRenderer_Cleanup()
 {
-   sfSprite_destroy( dqBattleRenderer->enemySprite );
-
    dqFree( dqBattleRenderer, sizeof( dqBattleRenderer_t ), sfTrue );
 }
 
@@ -80,7 +76,7 @@ static void dqBattleRenderer_DrawEnemy()
    {
       enemySpritePos.x = ( dqRenderConfig->screenWidth / 2 ) - ( (float)( dqRenderConfig->enemySpriteWidths[dqBattle->enemy->spriteSize] ) / 2 );
       enemySpritePos.y = dqRenderConfig->enemyAreaPosY;
-      sfSprite_setPosition( dqBattleRenderer->enemySprite, enemySpritePos );
-      dqWindow_DrawSprite( dqBattleRenderer->enemySprite );
+      sfSprite_setPosition( dqBattle->enemy->sprite, enemySpritePos );
+      dqWindow_DrawSprite( dqBattle->enemy->sprite );
    }
 }

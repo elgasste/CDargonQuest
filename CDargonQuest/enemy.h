@@ -12,7 +12,7 @@ typedef struct dqEnemy_t
    dqIndefiniteArticle_t indefiniteArticle;
 
    unsigned int spriteSize;
-   unsigned int spriteIndex;
+   sfSprite* sprite;
 
    dqBattleStats_t* battleStats;
 }

@@ -5,7 +5,7 @@
 
 typedef struct
 {
-   sfSprite* enemySprite;
+   int garbo;
 }
 dqBattleRenderer_t;
 
