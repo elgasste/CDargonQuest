@@ -33,10 +33,12 @@ sfTexture* dqTexture_CreateFromFile( const char* filePath );
 sfSprite* dqSprite_Create();
 sfFont* dqFont_CreateFromFile( const char* filePath );
 sfText* dqText_Create();
+sfRectangleShape* dqRectangleShape_Create();
 
 void dqTexture_Destroy( sfTexture* texture );
 void dqSprite_Destroy( sfSprite* sprite );
 void dqFont_Destroy( sfFont* font );
 void dqText_Destroy( sfText* text );
+void dqRectangleShape_Destroy( sfRectangleShape* rect );
 
 #endif

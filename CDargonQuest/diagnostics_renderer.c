@@ -12,7 +12,7 @@ void dqDiagnosticsRenderer_Init()
 
    dqDiagnosticsRenderer->textLine = (char*)dqCalloc( dqRenderConfig->diagnosticsLineWidth, sizeof( char ), sfTrue );
 
-   dqDiagnosticsRenderer->background = sfRectangleShape_create();
+   dqDiagnosticsRenderer->background = dqRectangleShape_Create();
    sfRectangleShape_setSize( dqDiagnosticsRenderer->background, backgroundSize );
    sfRectangleShape_setPosition( dqDiagnosticsRenderer->background, backgroundPosition );
    sfRectangleShape_setFillColor( dqDiagnosticsRenderer->background, dqRenderConfig->diagnosticsBackgroundColor );
@@ -39,7 +39,7 @@ void dqDiagnosticsRenderer_Cleanup()
 {
    dqText_Destroy( dqDiagnosticsRenderer->text );
    dqFont_Destroy( dqDiagnosticsRenderer->font );
-   sfRectangleShape_destroy( dqDiagnosticsRenderer->background );
+   dqRectangleShape_Destroy( dqDiagnosticsRenderer->background );
 
    dqFree( dqDiagnosticsRenderer->textLine, sizeof( char ) * dqRenderConfig->diagnosticsLineWidth, sfTrue );
    dqFree( dqDiagnosticsRenderer, sizeof( dqDiagnosticsRenderer_t ), sfTrue );

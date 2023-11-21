@@ -41,7 +41,7 @@ void dqOverworldRenderer_Init()
 
    for ( i = 0; i < 4; i++ )
    {
-      dqOverworldRenderer->occlusions[i] = sfRectangleShape_create();
+      dqOverworldRenderer->occlusions[i] = dqRectangleShape_Create();
       sfRectangleShape_setFillColor( dqOverworldRenderer->occlusions[i], dqRenderConfig->windowClearColor );
    }
 
@@ -57,9 +57,9 @@ void dqOverworldRenderer_Init()
    sfRectangleShape_setSize( dqOverworldRenderer->occlusions[3], occlusionSize3 );
    sfRectangleShape_setPosition( dqOverworldRenderer->occlusions[3], occlusionPos3 );
 
-   dqOverworldRenderer->passableRect = sfRectangleShape_create();
-   dqOverworldRenderer->impassableRect = sfRectangleShape_create();
-   dqOverworldRenderer->mapSwapRect = sfRectangleShape_create();
+   dqOverworldRenderer->passableRect = dqRectangleShape_Create();
+   dqOverworldRenderer->impassableRect = dqRectangleShape_Create();
+   dqOverworldRenderer->mapSwapRect = dqRectangleShape_Create();
 
    sfRectangleShape_setSize( dqOverworldRenderer->passableRect, tileSize );
    sfRectangleShape_setSize( dqOverworldRenderer->impassableRect, tileSize );
@@ -85,13 +85,13 @@ void dqOverworldRenderer_Cleanup()
    dqText_Destroy( dqOverworldRenderer->cheatText );
    dqFont_Destroy( dqOverworldRenderer->cheatFont );
 
-   sfRectangleShape_destroy( dqOverworldRenderer->passableRect );
-   sfRectangleShape_destroy( dqOverworldRenderer->impassableRect );
-   sfRectangleShape_destroy( dqOverworldRenderer->mapSwapRect );
+   dqRectangleShape_Destroy( dqOverworldRenderer->passableRect );
+   dqRectangleShape_Destroy( dqOverworldRenderer->impassableRect );
+   dqRectangleShape_Destroy( dqOverworldRenderer->mapSwapRect );
 
    for ( i = 0; i < 4; i++ )
    {
-      sfRectangleShape_destroy( dqOverworldRenderer->occlusions[i] );
+      dqRectangleShape_Destroy( dqOverworldRenderer->occlusions[i] );
    }
 
    dqSprite_Destroy( dqOverworldRenderer->tileSprite );

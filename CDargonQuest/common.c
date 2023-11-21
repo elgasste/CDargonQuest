@@ -73,6 +73,12 @@ sfText* dqText_Create()
    return sfText_create();
 }
 
+sfRectangleShape* dqRectangleShape_Create()
+{
+   dqTotalSfmlObjectsCreated++;
+   return sfRectangleShape_create();
+}
+
 void dqTexture_Destroy( sfTexture* texture )
 {
    dqTotalSfmlObjectsDestroyed++;
@@ -95,4 +101,10 @@ void dqText_Destroy( sfText* text )
 {
    dqTotalSfmlObjectsDestroyed++;
    sfText_destroy( text );
+}
+
+void dqRectangleShape_Destroy( sfRectangleShape* rect )
+{
+   dqTotalSfmlObjectsDestroyed++;
+   sfRectangleShape_destroy( rect );
 }
