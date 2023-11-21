@@ -9,6 +9,9 @@ typedef struct dqEnemyTemplate_t
    char name[ENTITY_NAME_SIZE];
    dqIndefiniteArticle_t indefiniteArticle;
 
+   unsigned int spriteSize;
+   unsigned int spriteIndex;
+
    unsigned int minHitPoints;
    unsigned int maxHitPoints;
 

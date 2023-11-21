@@ -76,6 +76,13 @@ void dqRenderConfig_Init()
    dqRenderConfig->enemyTextureSize3Path = "Resources/Sprites/enemy_size_3.png";
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 
+   dqRenderConfig->enemySpriteHeight = 64;
+   dqRenderConfig->enemySpriteWidths[0] = 16;
+   dqRenderConfig->enemySpriteWidths[1] = 24;
+   dqRenderConfig->enemySpriteWidths[2] = 32;
+   dqRenderConfig->enemySpriteWidths[3] = 40;
+   dqRenderConfig->enemyAreaPosY = 100;
+
    dqRenderConfig->overworldFadeOutSeconds = 0.3f;
    dqRenderConfig->overworldStayFadedSeconds = 0.2f;
    dqRenderConfig->overworldFadeInSeconds = 0.3f;

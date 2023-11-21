@@ -12,6 +12,8 @@ dqEnemy_t* dqEnemy_Generate( unsigned int tier, unsigned int index )
 
    sprintf_s( enemy->name, ENTITY_NAME_SIZE, template->name );
    enemy->indefiniteArticle = template->indefiniteArticle;
+   enemy->spriteSize = template->spriteSize;
+   enemy->spriteIndex = template->spriteIndex;
    enemy->battleStats->hitPoints = dqRandom_UnsignedInt( template->minHitPoints, template->maxHitPoints );
    enemy->battleStats->attackPower = template->attackPower;
    enemy->battleStats->defensePower = template->defensePower;

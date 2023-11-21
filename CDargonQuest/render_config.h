@@ -65,6 +65,10 @@ typedef struct dqRenderConfig_t
    const char* enemyTextureSize3Path;
    const char* playerTexturePath;
 
+   unsigned int enemySpriteHeight;
+   unsigned int enemySpriteWidths[4];
+   float enemyAreaPosY;
+
    float overworldFadeOutSeconds;
    float overworldStayFadedSeconds;
    float overworldFadeInSeconds;
