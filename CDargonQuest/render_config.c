@@ -4,7 +4,7 @@ void dqRenderConfig_Init()
 {
    int i;
 
-   dqRenderConfig = (dqRenderConfig_t*)dqMalloc( sizeof( dqRenderConfig_t ) );
+   dqRenderConfig = (dqRenderConfig_t*)dqMalloc( sizeof( dqRenderConfig_t ), sfTrue );
 
    dqRenderConfig->minFrameRate = 30;
    dqRenderConfig->maxFrameRate = 120;
@@ -70,7 +70,18 @@ void dqRenderConfig_Init()
 
    dqRenderConfig->dialogScrollCharSeconds = 0.01f;
 
+   dqRenderConfig->enemyTextureSize0Path = "Resources/Sprites/enemy_size_0.png";
+   dqRenderConfig->enemyTextureSize1Path = "Resources/Sprites/enemy_size_1.png";
+   dqRenderConfig->enemyTextureSize2Path = "Resources/Sprites/enemy_size_2.png";
+   dqRenderConfig->enemyTextureSize3Path = "Resources/Sprites/enemy_size_3.png";
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
+
+   dqRenderConfig->enemySpriteHeight = 64;
+   dqRenderConfig->enemySpriteWidths[0] = 16;
+   dqRenderConfig->enemySpriteWidths[1] = 24;
+   dqRenderConfig->enemySpriteWidths[2] = 32;
+   dqRenderConfig->enemySpriteWidths[3] = 40;
+   dqRenderConfig->enemyAreaPosY = 100;
 
    dqRenderConfig->overworldFadeOutSeconds = 0.3f;
    dqRenderConfig->overworldStayFadedSeconds = 0.2f;
@@ -106,5 +117,5 @@ void dqRenderConfig_Init()
 
 void dqRenderConfig_Cleanup()
 {
-   dqFree( dqRenderConfig );
+   dqFree( dqRenderConfig, sizeof( dqRenderConfig_t ), sfTrue );
 }

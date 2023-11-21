@@ -1,80 +1,81 @@
 #include "physics.h"
-#include "entity.h"
 #include "clock.h"
 #include "game_config.h"
 #include "game_data.h"
 #include "map.h"
 #include "map_tile.h"
+#include "entity_overworld_state.h"
+#include "player.h"
 
-static void dqPhysics_ClipHorizontal( dqEntity_t* entity,
+static void dqPhysics_ClipHorizontal( dqEntityOverworldState_t* entityOverworldState,
                                       unsigned int prevLeftColumn, unsigned int prevRightColumn );
-static void dqPhysics_ClipVertical( dqEntity_t* entity,
+static void dqPhysics_ClipVertical( dqEntityOverworldState_t* entityOverworldState,
                                     unsigned int prevTopRow, unsigned int prevBottomRow );
 
-void dqPhysics_MoveEntity( dqEntity_t* entity )
+void dqPhysics_MoveEntity( dqEntityOverworldState_t* entityOverworldState )
 {
    unsigned int leftColumn, rightColumn, topRow, bottomRow;
-   sfBool clip = entity != dqGameData->player || !dqGameConfig->noClipCheat;
+   sfBool clip = entityOverworldState != dqGameData->player->overworldState || !dqGameConfig->noClipCheat;
 
-   if ( entity->velocityX != 0 )
+   if ( entityOverworldState->velocityX != 0 )
    {
-      leftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
-      rightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
+      leftColumn = (unsigned int)( entityOverworldState->hitBoxPosition.x / dqGameConfig->mapTileSize );
+      rightColumn = (unsigned int)( ( entityOverworldState->hitBoxPosition.x + entityOverworldState->hitBoxSize.x ) / dqGameConfig->mapTileSize );
 
-      entity->hitBoxPosition.x += entity->velocityX * dqClock->lastFrameSeconds;
-      entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
+      entityOverworldState->hitBoxPosition.x += entityOverworldState->velocityX * dqClock->lastFrameSeconds;
+      entityOverworldState->centerPosition.x = entityOverworldState->hitBoxPosition.x + ( entityOverworldState->hitBoxSize.x / 2 );
 
       if ( clip )
       {
-         dqPhysics_ClipHorizontal( entity, leftColumn, rightColumn );
+         dqPhysics_ClipHorizontal( entityOverworldState, leftColumn, rightColumn );
       }
    }
 
-   if ( entity->velocityY != 0 )
+   if ( entityOverworldState->velocityY != 0 )
    {
-      topRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
-      bottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
+      topRow = (unsigned int)( entityOverworldState->hitBoxPosition.y / dqGameConfig->mapTileSize );
+      bottomRow = (unsigned int)( ( entityOverworldState->hitBoxPosition.y + entityOverworldState->hitBoxSize.y ) / dqGameConfig->mapTileSize );
 
-      entity->hitBoxPosition.y += ( entity->velocityY * dqClock->lastFrameSeconds );
-      entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+      entityOverworldState->hitBoxPosition.y += ( entityOverworldState->velocityY * dqClock->lastFrameSeconds );
+      entityOverworldState->centerPosition.y = entityOverworldState->hitBoxPosition.y + ( entityOverworldState->hitBoxSize.y / 2 );
 
       if ( clip )
       {
-         dqPhysics_ClipVertical( entity, topRow, bottomRow );
+         dqPhysics_ClipVertical( entityOverworldState, topRow, bottomRow );
       }
    }
 }
 
-void dqPhysics_DecelerateEntity( dqEntity_t* entity )
+void dqPhysics_DecelerateEntity( dqEntityOverworldState_t* entityOverworldState )
 {
    // TODO: maybe have deceleration rates?
-   entity->velocityX = 0;
-   entity->velocityY = 0;
+   entityOverworldState->velocityX = 0;
+   entityOverworldState->velocityY = 0;
 }
 
-static void dqPhysics_ClipHorizontal( dqEntity_t* entity,
+static void dqPhysics_ClipHorizontal( dqEntityOverworldState_t* entityOverworldState,
                                       unsigned int prevLeftColumn, unsigned int prevRightColumn )
 {
    unsigned int newLeftColumn, newRightColumn, i;
-   unsigned int topRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
-   unsigned int bottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
+   unsigned int topRow = (unsigned int)( entityOverworldState->hitBoxPosition.y / dqGameConfig->mapTileSize );
+   unsigned int bottomRow = (unsigned int)( ( entityOverworldState->hitBoxPosition.y + entityOverworldState->hitBoxSize.y ) / dqGameConfig->mapTileSize );
    dqMap_t* map = dqGameData_GetCurrentMap();
    dqMapTile_t* tile;
 
-   if ( entity->hitBoxPosition.x < 0 )
+   if ( entityOverworldState->hitBoxPosition.x < 0 )
    {
-      entity->hitBoxPosition.x = 0;
-      entity->centerPosition.x = entity->hitBoxSize.x / 2;
+      entityOverworldState->hitBoxPosition.x = 0;
+      entityOverworldState->centerPosition.x = entityOverworldState->hitBoxSize.x / 2;
    }
-   else if ( entity->hitBoxPosition.x + entity->hitBoxSize.x >= map->size.x )
+   else if ( entityOverworldState->hitBoxPosition.x + entityOverworldState->hitBoxSize.x >= map->size.x )
    {
-      entity->hitBoxPosition.x = map->size.x - entity->hitBoxSize.x - COLLISION_ADJUSTMENT;
-      entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
+      entityOverworldState->hitBoxPosition.x = map->size.x - entityOverworldState->hitBoxSize.x - COLLISION_ADJUSTMENT;
+      entityOverworldState->centerPosition.x = entityOverworldState->hitBoxPosition.x + ( entityOverworldState->hitBoxSize.x / 2 );
    }
    else
    {
-      newLeftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
-      newRightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
+      newLeftColumn = (unsigned int)( entityOverworldState->hitBoxPosition.x / dqGameConfig->mapTileSize );
+      newRightColumn = (unsigned int)( ( entityOverworldState->hitBoxPosition.x + entityOverworldState->hitBoxSize.x ) / dqGameConfig->mapTileSize );
 
       if ( newLeftColumn < prevLeftColumn )
       {
@@ -84,8 +85,8 @@ static void dqPhysics_ClipHorizontal( dqEntity_t* entity,
 
             if ( !tile->isPassable )
             {
-               entity->hitBoxPosition.x = prevLeftColumn * dqGameConfig->mapTileSize;
-               entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
+               entityOverworldState->hitBoxPosition.x = prevLeftColumn * dqGameConfig->mapTileSize;
+               entityOverworldState->centerPosition.x = entityOverworldState->hitBoxPosition.x + ( entityOverworldState->hitBoxSize.x / 2 );
                break;
             }
          }
@@ -98,8 +99,8 @@ static void dqPhysics_ClipHorizontal( dqEntity_t* entity,
 
             if ( !tile->isPassable )
             {
-               entity->hitBoxPosition.x = ( newRightColumn * dqGameConfig->mapTileSize ) - entity->hitBoxSize.x - COLLISION_ADJUSTMENT;
-               entity->centerPosition.x = entity->hitBoxPosition.x + ( entity->hitBoxSize.x / 2 );
+               entityOverworldState->hitBoxPosition.x = ( newRightColumn * dqGameConfig->mapTileSize ) - entityOverworldState->hitBoxSize.x - COLLISION_ADJUSTMENT;
+               entityOverworldState->centerPosition.x = entityOverworldState->hitBoxPosition.x + ( entityOverworldState->hitBoxSize.x / 2 );
                break;
             }
          }
@@ -107,29 +108,29 @@ static void dqPhysics_ClipHorizontal( dqEntity_t* entity,
    }
 }
 
-static void dqPhysics_ClipVertical( dqEntity_t* entity,
+static void dqPhysics_ClipVertical( dqEntityOverworldState_t* entityOverworldState,
                                     unsigned int prevTopRow, unsigned int prevBottomRow )
 {
    unsigned int newTopRow, newBottomRow, i;
-   unsigned int leftColumn = (unsigned int)( entity->hitBoxPosition.x / dqGameConfig->mapTileSize );
-   unsigned int rightColumn = (unsigned int)( ( entity->hitBoxPosition.x + entity->hitBoxSize.x ) / dqGameConfig->mapTileSize );
+   unsigned int leftColumn = (unsigned int)( entityOverworldState->hitBoxPosition.x / dqGameConfig->mapTileSize );
+   unsigned int rightColumn = (unsigned int)( ( entityOverworldState->hitBoxPosition.x + entityOverworldState->hitBoxSize.x ) / dqGameConfig->mapTileSize );
    dqMap_t* map = dqGameData_GetCurrentMap();
    dqMapTile_t* tile;
 
-   if ( entity->hitBoxPosition.y < 0 )
+   if ( entityOverworldState->hitBoxPosition.y < 0 )
    {
-      entity->hitBoxPosition.y = 0;
-      entity->centerPosition.y = entity->hitBoxSize.y / 2;
+      entityOverworldState->hitBoxPosition.y = 0;
+      entityOverworldState->centerPosition.y = entityOverworldState->hitBoxSize.y / 2;
    }
-   else if ( entity->hitBoxPosition.y + entity->hitBoxSize.y >= map->size.y )
+   else if ( entityOverworldState->hitBoxPosition.y + entityOverworldState->hitBoxSize.y >= map->size.y )
    {
-      entity->hitBoxPosition.y = map->size.y - entity->hitBoxSize.y - COLLISION_ADJUSTMENT;
-      entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+      entityOverworldState->hitBoxPosition.y = map->size.y - entityOverworldState->hitBoxSize.y - COLLISION_ADJUSTMENT;
+      entityOverworldState->centerPosition.y = entityOverworldState->hitBoxPosition.y + ( entityOverworldState->hitBoxSize.y / 2 );
    }
    else
    {
-      newTopRow = (unsigned int)( entity->hitBoxPosition.y / dqGameConfig->mapTileSize );
-      newBottomRow = (unsigned int)( ( entity->hitBoxPosition.y + entity->hitBoxSize.y ) / dqGameConfig->mapTileSize );
+      newTopRow = (unsigned int)( entityOverworldState->hitBoxPosition.y / dqGameConfig->mapTileSize );
+      newBottomRow = (unsigned int)( ( entityOverworldState->hitBoxPosition.y + entityOverworldState->hitBoxSize.y ) / dqGameConfig->mapTileSize );
 
       if ( newTopRow < prevTopRow )
       {
@@ -139,8 +140,8 @@ static void dqPhysics_ClipVertical( dqEntity_t* entity,
 
             if ( !tile->isPassable )
             {
-               entity->hitBoxPosition.y = prevTopRow * dqGameConfig->mapTileSize;
-               entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+               entityOverworldState->hitBoxPosition.y = prevTopRow * dqGameConfig->mapTileSize;
+               entityOverworldState->centerPosition.y = entityOverworldState->hitBoxPosition.y + ( entityOverworldState->hitBoxSize.y / 2 );
                break;
             }
          }
@@ -153,8 +154,8 @@ static void dqPhysics_ClipVertical( dqEntity_t* entity,
 
             if ( !tile->isPassable )
             {
-               entity->hitBoxPosition.y = ( newBottomRow * dqGameConfig->mapTileSize ) - entity->hitBoxSize.y - COLLISION_ADJUSTMENT;
-               entity->centerPosition.y = entity->hitBoxPosition.y + ( entity->hitBoxSize.y / 2 );
+               entityOverworldState->hitBoxPosition.y = ( newBottomRow * dqGameConfig->mapTileSize ) - entityOverworldState->hitBoxSize.y - COLLISION_ADJUSTMENT;
+               entityOverworldState->centerPosition.y = entityOverworldState->hitBoxPosition.y + ( entityOverworldState->hitBoxSize.y / 2 );
                break;
             }
          }

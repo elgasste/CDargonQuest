@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_RENDERER_H )
+#define DQ_RENDERER_H
 
 #include "common.h"
 
@@ -15,3 +16,5 @@ void dqRenderer_Cleanup();
 void dqRenderer_Render();
 void dqRenderer_BlockInput();
 void dqRenderer_UnblockInput();
+
+#endif

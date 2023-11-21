@@ -9,7 +9,7 @@ static void dqDialogRenderer_DrawTextPortion( sfVector2f* pos, const char* text,
 
 void dqDialogRenderer_Init()
 {
-   dqDialogRenderer = (dqDialogRenderer_t*)dqMalloc( sizeof( dqDialogRenderer_t ) );
+   dqDialogRenderer = (dqDialogRenderer_t*)dqMalloc( sizeof( dqDialogRenderer_t ), sfTrue );
 
    dqDialogRenderer_ResetScroll();
 
@@ -18,16 +18,16 @@ void dqDialogRenderer_Init()
    dqDialogRenderer->textureRect.width = dqRenderConfig->dialogSpriteSize;
    dqDialogRenderer->textureRect.height = dqRenderConfig->dialogSpriteSize;
 
-   dqDialogRenderer->sprite = sfSprite_create();
+   dqDialogRenderer->sprite = dqSprite_Create();
    sfSprite_setTexture( dqDialogRenderer->sprite, dqRenderData->dialogTilesetTexture, sfFalse );
    sfSprite_setTextureRect( dqDialogRenderer->sprite, dqDialogRenderer->textureRect );
 }
 
 void dqDialogRenderer_Cleanup()
 {
-   sfSprite_destroy( dqDialogRenderer->sprite );
+   dqSprite_Destroy( dqDialogRenderer->sprite );
 
-   dqFree( dqDialogRenderer );
+   dqFree( dqDialogRenderer, sizeof( dqDialogRenderer_t ), sfTrue );
 }
 
 void dqDialogRenderer_ResetScroll()

@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_RENDER_CONFIG_H )
+#define DQ_RENDER_CONFIG_H
 
 #include "common.h"
 
@@ -58,7 +59,15 @@ typedef struct dqRenderConfig_t
 
    float dialogScrollCharSeconds;
 
+   const char* enemyTextureSize0Path;
+   const char* enemyTextureSize1Path;
+   const char* enemyTextureSize2Path;
+   const char* enemyTextureSize3Path;
    const char* playerTexturePath;
+
+   unsigned int enemySpriteHeight;
+   unsigned int enemySpriteWidths[4];
+   float enemyAreaPosY;
 
    float overworldFadeOutSeconds;
    float overworldStayFadedSeconds;
@@ -91,3 +100,5 @@ dqRenderConfig_t* dqRenderConfig;
 
 void dqRenderConfig_Init();
 void dqRenderConfig_Cleanup();
+
+#endif

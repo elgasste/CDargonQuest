@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_MENU_RENDERER_H )
+#define DQ_MENU_RENDERER_H
 
 #include "common.h"
 
@@ -18,3 +19,5 @@ dqMenuRenderer_t* dqMenuRenderer;
 void dqMenuRenderer_Init();
 void dqMenuRenderer_Cleanup();
 void dqMenuRenderer_Render();
+
+#endif

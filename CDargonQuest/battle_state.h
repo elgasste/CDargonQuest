@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_BATTLE_STATE_H )
+#define DQ_BATTLE_STATE_H
 
 typedef enum
 {
@@ -7,3 +8,5 @@ typedef enum
    dqBattleStateResult
 }
 dqBattleState;
+
+#endif

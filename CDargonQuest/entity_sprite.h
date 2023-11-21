@@ -1,11 +1,13 @@
-#pragma once
+#if !defined( DQ_ENTITY_SPRITE_H )
+#define DQ_ENTITY_SPRITE_H
 
 #include "common.h"
-#include "entity.h"
 
-typedef struct
+typedef struct dqEntityOverworldState_t dqEntityOverworldState_t;
+
+typedef struct dqEntitySprite_t
 {
-   dqEntity_t* entity;
+   dqEntityOverworldState_t* entityOverworldState;
 
    sfSprite* sprite;
    sfIntRect textureRect;
@@ -19,7 +21,7 @@ typedef struct
 }
 dqEntitySprite_t;
 
-dqEntitySprite_t* dqEntitySprite_Create( dqEntity_t* entity,
+dqEntitySprite_t* dqEntitySprite_Create( dqEntityOverworldState_t* entityOverworldState,
                                          sfTexture* texture,
                                          int width,
                                          int height,
@@ -27,3 +29,5 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntity_t* entity,
                                          float frameTimeThreshold );
 void dqEntitySprite_Cleanup( dqEntitySprite_t* sprite );
 void dqEntitySprite_Tick( dqEntitySprite_t* sprite );
+
+#endif

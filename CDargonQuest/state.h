@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_STATE_H )
+#define DQ_STATE_H
 
 typedef enum
 {
@@ -12,3 +13,5 @@ typedef enum
    dqStateClosing
 }
 dqState_t;
+
+#endif

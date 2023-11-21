@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_PHYSICS_H )
+#define DQ_PHYSICS_H
 
 #include "common.h"
 
@@ -6,7 +7,9 @@
 // hit box doesn't accidentally end up in the wrong tile
 #define COLLISION_ADJUSTMENT 0.001f;
 
-typedef struct dqEntity_t dqEntity_t;
+typedef struct dqEntityOverworldState_t dqEntityOverworldState_t;
 
-void dqPhysics_MoveEntity( dqEntity_t* entity );
-void dqPhysics_DecelerateEntity( dqEntity_t* entity );
+void dqPhysics_MoveEntity( dqEntityOverworldState_t* entityOverworldState );
+void dqPhysics_DecelerateEntity( dqEntityOverworldState_t* entityOverworldState );
+
+#endif

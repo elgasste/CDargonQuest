@@ -10,14 +10,14 @@ static void dqOverworldInputHandler_PointPlayer( dqDirection direction,
 
 void dqOverworldInputHandler_Init()
 {
-   dqOverworldInputHandler = (dqOverworldInputHandler_t*)dqMalloc( sizeof( dqOverworldInputHandler_t ) );
+   dqOverworldInputHandler = (dqOverworldInputHandler_t*)dqMalloc( sizeof( dqOverworldInputHandler_t ), sfTrue );
 
    dqOverworldInputHandler->useDirectionCache = sfFalse;
 }
 
 void dqOverworldInputHandler_Cleanup()
 {
-   dqFree( dqOverworldInputHandler );
+   dqFree( dqOverworldInputHandler, sizeof( dqOverworldInputHandler_t ), sfTrue );
 }
 
 void dqOverworldInputHandler_HandleInput()

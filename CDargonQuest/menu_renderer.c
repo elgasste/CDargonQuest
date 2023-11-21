@@ -7,12 +7,12 @@
 
 void dqMenuRenderer_Init()
 {
-   dqMenuRenderer = (dqMenuRenderer_t*)dqMalloc( sizeof( dqMenuRenderer_t ) );
+   dqMenuRenderer = (dqMenuRenderer_t*)dqMalloc( sizeof( dqMenuRenderer_t ), sfTrue );
 }
 
 void dqMenuRenderer_Cleanup()
 {
-   dqFree( dqMenuRenderer );
+   dqFree( dqMenuRenderer, sizeof( dqMenuRenderer_t ), sfTrue );
 }
 
 void dqMenuRenderer_Render( dqMenu_t* menu )

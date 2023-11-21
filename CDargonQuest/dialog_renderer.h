@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_DIALOG_RENDERER_H )
+#define DQ_DIALOG_RENDERER_H
 
 #include "common.h"
 
@@ -22,3 +23,5 @@ void dqDialogRenderer_ResetScroll();
 void dqDialogRenderer_DrawBorder( sfVector2f* pos, unsigned int width, unsigned int height );
 void dqDialogRenderer_DrawText( sfVector2f* pos, const char* text, unsigned int width );
 void dqDialogRenderer_ScrollText( sfVector2f* pos, const char* text, unsigned int width );
+
+#endif

@@ -1,23 +1,27 @@
 #include "battle_renderer.h"
 #include "render_config.h"
+#include "render_data.h"
 #include "dialog_renderer.h"
 #include "transition_renderer.h"
 #include "menu_renderer.h"
 #include "battle.h"
+#include "enemy.h"
 #include "menu.h"
+#include "window.h"
 
 static void dqBattleRenderer_RenderIntroState( sfVector2f* textPos );
 static void dqBattleRenderer_RenderSelectActionState();
 static void dqBattleRenderer_RenderResultState( sfVector2f* textPos );
+static void dqBattleRenderer_DrawEnemy();
 
 void dqBattleRenderer_Init()
 {
-   dqBattleRenderer = (dqBattleRenderer_t*)dqMalloc( sizeof( dqBattleRenderer_t ) );
+   dqBattleRenderer = (dqBattleRenderer_t*)dqMalloc( sizeof( dqBattleRenderer_t ), sfTrue );
 }
 
 void dqBattleRenderer_Cleanup()
 {
-   dqFree( dqBattleRenderer );
+   dqFree( dqBattleRenderer, sizeof( dqBattleRenderer_t ), sfTrue );
 }
 
 void dqBattleRenderer_Render()
@@ -47,16 +51,32 @@ static void dqBattleRenderer_RenderIntroState( sfVector2f* textPos )
 {
    if ( !dqTransitionRenderer->fadingIn )
    {
-      dqDialogRenderer_ScrollText( textPos, "You've encountered some enemies or something!", dqRenderConfig->battleMessageDialogWidth - 2 );
+      dqBattleRenderer_DrawEnemy();
+      dqDialogRenderer_ScrollText( textPos, dqBattle->introMessage, dqRenderConfig->battleMessageDialogWidth - 2 );
    }
 }
 
 static void dqBattleRenderer_RenderSelectActionState()
 {
+   dqBattleRenderer_DrawEnemy();
    dqMenuRenderer_Render( dqMenuBattleAction );
 }
 
 static void dqBattleRenderer_RenderResultState( sfVector2f* textPos )
 {
+   dqBattleRenderer_DrawEnemy();
    dqDialogRenderer_ScrollText( textPos, dqBattle->resultMessage, dqRenderConfig->battleMessageDialogWidth - 2 );
+}
+
+static void dqBattleRenderer_DrawEnemy()
+{
+   static sfVector2f enemySpritePos;
+
+   if ( dqBattle->enemy )
+   {
+      enemySpritePos.x = ( dqRenderConfig->screenWidth / 2 ) - ( (float)( dqRenderConfig->enemySpriteWidths[dqBattle->enemy->spriteSize] ) / 2 );
+      enemySpritePos.y = dqRenderConfig->enemyAreaPosY;
+      sfSprite_setPosition( dqBattle->enemy->sprite, enemySpritePos );
+      dqWindow_DrawSprite( dqBattle->enemy->sprite );
+   }
 }

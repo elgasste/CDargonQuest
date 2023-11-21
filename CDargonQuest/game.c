@@ -10,7 +10,8 @@
 #include "clock.h"
 #include "renderer.h"
 #include "event_queue.h"
-#include "entity.h"
+#include "player.h"
+#include "entity_overworld_state.h"
 #include "physics.h"
 #include "map.h"
 #include "battle.h"
@@ -34,7 +35,16 @@ static void dqGame_HandleBattleExit();
 
 void dqGame_Init()
 {
-   dqGame = (dqGame_t*)dqMalloc( sizeof( dqGame_t ) );
+   dqTotalMemoryAllocated = 0;
+   dqTotalMemoryFreed = 0;
+   dqTotalSfmlObjectsCreated = 0;
+   dqTotalSfmlObjectsDestroyed = 0;
+
+   dqLog_Init();
+
+   dqLog_Message( "loading game objects" );
+
+   dqGame = (dqGame_t*)dqMalloc( sizeof( dqGame_t ), sfTrue );
 
    dqGame->isRunning = sfFalse;
    dqGame->state = dqStateInit;
@@ -44,15 +54,11 @@ void dqGame_Init()
    dqGame->nextMapTileIndex = 0;
 
    dqGameConfig_Init();
-   dqLog_Init();
-
-   dqLog_Message( "loading game objects" );
-
    dqRandom_Init();
    dqRenderConfig_Init();
-   dqGameData_Init();
    dqMenu_Init();
-   dqRenderData_Init( dqGameData->player );
+   dqRenderData_Init();
+   dqGameData_Init();
    dqWindow_Init();
    dqRenderer_Init();
    dqClock_Init();
@@ -64,21 +70,33 @@ void dqGame_Init()
 
 void dqGame_Cleanup()
 {
+   char memoryMessage[128];
+
    dqBattle_Cleanup();
    dqEventQueue_Cleanup();
    dqClock_Cleanup();
    dqRenderer_Cleanup();
-   dqWindow_Cleanup();
    dqMenu_Cleanup();
-   dqRenderData_Cleanup();
+   dqWindow_Cleanup();
    dqGameData_Cleanup();
+   dqRenderData_Cleanup();
    dqRenderConfig_Cleanup();
    dqGameConfig_Cleanup();
 
-   dqLog_Message( "game objects cleaned up" );
-   dqLog_Cleanup();
+   dqFree( dqGame, sizeof( dqGame_t ), sfTrue );
 
-   dqFree( dqGame );
+   dqLog_Message( "game objects cleaned up" );
+
+   sprintf_s( memoryMessage, 128, "total memory allocated: %llu", dqTotalMemoryAllocated );
+   dqLog_Message( memoryMessage );
+   sprintf_s( memoryMessage, 128, "total memory freed: %llu", dqTotalMemoryFreed );
+   dqLog_Message( memoryMessage );
+   sprintf_s( memoryMessage, 128, "total SFML objects created: %d", dqTotalSfmlObjectsCreated );
+   dqLog_Message( memoryMessage );
+   sprintf_s( memoryMessage, 128, "total SFML objects destroyed: %d", dqTotalSfmlObjectsDestroyed );
+   dqLog_Message( memoryMessage );
+
+   dqLog_Cleanup();
 }
 
 void dqGame_Run()
@@ -156,9 +174,9 @@ static void dqGame_Tick()
    if ( dqGame->state == dqStateOverworld )
    {
       // TODO: eventually do this for all entities on the map
-      dqPhysics_MoveEntity( dqGameData->player );
-      dqEntitySprite_Tick( dqRenderData->playerSprite );
-      dqPhysics_DecelerateEntity( dqGameData->player );
+      dqPhysics_MoveEntity( dqGameData->player->overworldState );
+      dqEntitySprite_Tick( dqGameData->player->entitySprite );
+      dqPhysics_DecelerateEntity( dqGameData->player->overworldState );
 
       dqMap_CheckSwap();
       dqMap_CheckEncounter();
@@ -192,6 +210,7 @@ static void dqGame_HandleMovePlayer( dqEvent_t* e )
 {
    dqDirection direction;
    float velocityDelta;
+   dqEntityOverworldState_t* playerState = dqGameData->player->overworldState;
 
    if ( dqGame->state == dqStateOverworld )
    {
@@ -203,16 +222,16 @@ static void dqGame_HandleMovePlayer( dqEvent_t* e )
       switch ( direction )
       {
          case dqDirectionLeft:
-            dqGameData->player->velocityX = -velocityDelta;
+            playerState->velocityX = -velocityDelta;
             break;
          case dqDirectionUp:
-            dqGameData->player->velocityY = -velocityDelta;
+            playerState->velocityY = -velocityDelta;
             break;
          case dqDirectionRight:
-            dqGameData->player->velocityX = velocityDelta;
+            playerState->velocityX = velocityDelta;
             break;
          case dqDirectionDown:
-            dqGameData->player->velocityY = velocityDelta;
+            playerState->velocityY = velocityDelta;
             break;
       }
    }
@@ -221,6 +240,7 @@ static void dqGame_HandleMovePlayer( dqEvent_t* e )
 static void dqGame_HandlePointPlayer( dqEvent_t* e )
 {
    dqDirection direction;
+   dqEntityOverworldState_t* playerState = dqGameData->player->overworldState;
 
    if ( dqGame->state == dqStateOverworld )
    {
@@ -229,16 +249,16 @@ static void dqGame_HandlePointPlayer( dqEvent_t* e )
       switch ( direction )
       {
          case dqDirectionLeft:
-            dqGameData->player->direction = dqDirectionLeft;
+            playerState->direction = dqDirectionLeft;
             break;
          case dqDirectionUp:
-            dqGameData->player->direction = dqDirectionUp;
+            playerState->direction = dqDirectionUp;
             break;
          case dqDirectionRight:
-            dqGameData->player->direction = dqDirectionRight;
+            playerState->direction = dqDirectionRight;
             break;
          case dqDirectionDown:
-            dqGameData->player->direction = dqDirectionDown;
+            playerState->direction = dqDirectionDown;
             break;
       }
    }
@@ -312,6 +332,7 @@ static void dqGame_HandleBattleExit()
    if ( dqGame->state == dqStateBattle )
    {
       dqEventQueue_Flush();
+      dqBattle_Reset();
       dqTransitionRenderer_Reset();
       dqGame_SetState( dqStateBattleTransitionOut );
    }

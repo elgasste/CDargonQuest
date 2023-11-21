@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_EVENT_H )
+#define DQ_EVENT_H
 
 #include "common.h"
 #include "event_type.h"
@@ -10,3 +11,5 @@ typedef struct dqEvent_t
    dqEventArgs_t args;
 }
 dqEvent_t;
+
+#endif

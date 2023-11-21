@@ -1,4 +1,5 @@
-#pragma once
+#if !defined( DQ_DIAGNOSTICS_RENDERER_H )
+#define DQ_DIAGNOSTICS_RENDERER_H
 
 #include "common.h"
 
@@ -21,3 +22,5 @@ dqDiagnosticsRenderer_t* dqDiagnosticsRenderer;
 void dqDiagnosticsRenderer_Init();
 void dqDiagnosticsRenderer_Cleanup();
 void dqDiagnosticsRenderer_Render();
+
+#endif

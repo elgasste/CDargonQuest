@@ -2,9 +2,7 @@
 
 void dqGameConfig_Init()
 {
-   dqGameConfig = (dqGameConfig_t*)dqMalloc( sizeof( dqGameConfig_t ) );
-
-   dqGameConfig->logFileName = "log.txt";
+   dqGameConfig = (dqGameConfig_t*)dqMalloc( sizeof( dqGameConfig_t ), sfTrue );
 
    dqGameConfig->mapTileSize = 16;
 
@@ -18,5 +16,5 @@ void dqGameConfig_Init()
 
 void dqGameConfig_Cleanup()
 {
-   dqFree( dqGameConfig );
+   dqFree( dqGameConfig, sizeof( dqGameConfig_t ), sfTrue );
 }

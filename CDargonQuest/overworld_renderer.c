@@ -3,10 +3,12 @@
 #include "render_data.h"
 #include "game_config.h"
 #include "game_data.h"
-#include "entity.h"
+#include "player.h"
+#include "entity_overworld_state.h"
 #include "map.h"
 #include "map_tile.h"
 #include "window.h"
+#include "math_util.h"
 
 void dqOverworldRenderer_Init()
 {
@@ -30,16 +32,16 @@ void dqOverworldRenderer_Init()
 
    sfVector2f tileSize = { dqGameConfig->mapTileSize, dqGameConfig->mapTileSize };
 
-   dqOverworldRenderer = (dqOverworldRenderer_t*)dqMalloc( sizeof( dqOverworldRenderer_t ) );
+   dqOverworldRenderer = (dqOverworldRenderer_t*)dqMalloc( sizeof( dqOverworldRenderer_t ), sfTrue );
 
-   dqOverworldRenderer->tileSprite = sfSprite_create();
+   dqOverworldRenderer->tileSprite = dqSprite_Create();
    sfSprite_setTexture( dqOverworldRenderer->tileSprite, dqRenderData->overworldTilesetTexture, sfFalse );
    dqOverworldRenderer->tileTextureRect.width = (int)dqGameConfig->mapTileSize;
    dqOverworldRenderer->tileTextureRect.height = (int)dqGameConfig->mapTileSize;
 
    for ( i = 0; i < 4; i++ )
    {
-      dqOverworldRenderer->occlusions[i] = sfRectangleShape_create();
+      dqOverworldRenderer->occlusions[i] = dqRectangleShape_Create();
       sfRectangleShape_setFillColor( dqOverworldRenderer->occlusions[i], dqRenderConfig->windowClearColor );
    }
 
@@ -55,9 +57,9 @@ void dqOverworldRenderer_Init()
    sfRectangleShape_setSize( dqOverworldRenderer->occlusions[3], occlusionSize3 );
    sfRectangleShape_setPosition( dqOverworldRenderer->occlusions[3], occlusionPos3 );
 
-   dqOverworldRenderer->passableRect = sfRectangleShape_create();
-   dqOverworldRenderer->impassableRect = sfRectangleShape_create();
-   dqOverworldRenderer->mapSwapRect = sfRectangleShape_create();
+   dqOverworldRenderer->passableRect = dqRectangleShape_Create();
+   dqOverworldRenderer->impassableRect = dqRectangleShape_Create();
+   dqOverworldRenderer->mapSwapRect = dqRectangleShape_Create();
 
    sfRectangleShape_setSize( dqOverworldRenderer->passableRect, tileSize );
    sfRectangleShape_setSize( dqOverworldRenderer->impassableRect, tileSize );
@@ -67,8 +69,8 @@ void dqOverworldRenderer_Init()
    sfRectangleShape_setFillColor( dqOverworldRenderer->impassableRect, dqRenderConfig->impassableOverlayColor );
    sfRectangleShape_setFillColor( dqOverworldRenderer->mapSwapRect, dqRenderConfig->mapSwapOverlayColor );
 
-   dqOverworldRenderer->cheatFont = sfFont_createFromFile( dqRenderConfig->cheatFontFilePath );
-   dqOverworldRenderer->cheatText = sfText_create();
+   dqOverworldRenderer->cheatFont = dqFont_CreateFromFile( dqRenderConfig->cheatFontFilePath );
+   dqOverworldRenderer->cheatText = dqText_Create();
    sfText_setFont( dqOverworldRenderer->cheatText, dqOverworldRenderer->cheatFont );
    sfText_setCharacterSize( dqOverworldRenderer->cheatText, dqRenderConfig->cheatFontSize );
    sfText_setScale( dqOverworldRenderer->cheatText, dqRenderConfig->cheatFontScale );
@@ -80,21 +82,21 @@ void dqOverworldRenderer_Cleanup()
 {
    int i;
 
-   sfText_destroy( dqOverworldRenderer->cheatText );
-   sfFont_destroy( dqOverworldRenderer->cheatFont );
+   dqText_Destroy( dqOverworldRenderer->cheatText );
+   dqFont_Destroy( dqOverworldRenderer->cheatFont );
 
-   sfRectangleShape_destroy( dqOverworldRenderer->passableRect );
-   sfRectangleShape_destroy( dqOverworldRenderer->impassableRect );
-   sfRectangleShape_destroy( dqOverworldRenderer->mapSwapRect );
+   dqRectangleShape_Destroy( dqOverworldRenderer->passableRect );
+   dqRectangleShape_Destroy( dqOverworldRenderer->impassableRect );
+   dqRectangleShape_Destroy( dqOverworldRenderer->mapSwapRect );
 
    for ( i = 0; i < 4; i++ )
    {
-      sfRectangleShape_destroy( dqOverworldRenderer->occlusions[i] );
+      dqRectangleShape_Destroy( dqOverworldRenderer->occlusions[i] );
    }
 
-   sfSprite_destroy( dqOverworldRenderer->tileSprite );
+   dqSprite_Destroy( dqOverworldRenderer->tileSprite );
 
-   dqFree( dqOverworldRenderer );
+   dqFree( dqOverworldRenderer, sizeof( dqOverworldRenderer_t ), sfTrue );
 }
 
 void dqOverworldRenderer_RenderMap()
@@ -117,7 +119,7 @@ void dqOverworldRenderer_RenderMap()
    }
    else
    {
-      viewOffset->x = dqGameData->player->centerPosition.x - ( dqRenderConfig->overworldViewSize.x / 2 );
+      viewOffset->x = dqGameData->player->overworldState->centerPosition.x - ( dqRenderConfig->overworldViewSize.x / 2 );
       sideOffset->x = 0;
 
       if ( viewOffset->x < 0 )
@@ -144,7 +146,7 @@ void dqOverworldRenderer_RenderMap()
    }
    else
    {
-      viewOffset->y = dqGameData->player->centerPosition.y - ( dqRenderConfig->overworldViewSize.y / 2 );
+      viewOffset->y = dqGameData->player->overworldState->centerPosition.y - ( dqRenderConfig->overworldViewSize.y / 2 );
       sideOffset->y = 0;
 
       if ( viewOffset->y < 0 )
@@ -213,19 +215,19 @@ void dqOverworldRenderer_RenderMap()
 void dqOverworldRenderer_RenderEntities()
 {
    static sfVector2f position;
-   dqEntitySprite_t* playerSprite = dqRenderData->playerSprite;
+   dqEntitySprite_t* playerSprite = dqGameData->player->entitySprite;
 
-   position.x = playerSprite->entity->hitBoxPosition.x
+   position.x = playerSprite->entityOverworldState->hitBoxPosition.x
       - playerSprite->hitBoxOffset.x
       - dqOverworldRenderer->viewOffset.x
       + dqOverworldRenderer->sideOffset.x
       + dqRenderConfig->overworldViewOffset.x;
-   position.y = playerSprite->entity->hitBoxPosition.y
+   position.y = playerSprite->entityOverworldState->hitBoxPosition.y
       - playerSprite->hitBoxOffset.y
       - dqOverworldRenderer->viewOffset.y
       + dqOverworldRenderer->sideOffset.y
       + dqRenderConfig->overworldViewOffset.y;
 
    sfSprite_setPosition( playerSprite->sprite, position );
-   dqWindow_DrawEntitySprite( dqRenderData->playerSprite );
+   dqWindow_DrawEntitySprite( playerSprite );
 }
