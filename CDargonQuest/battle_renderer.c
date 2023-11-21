@@ -58,6 +58,8 @@ static void dqBattleRenderer_RenderIntroState( sfVector2f* textPos )
 
 static void dqBattleRenderer_RenderSelectActionState()
 {
+   dqDialogRenderer_DrawBorder( &( dqRenderConfig->battleStatsDialogPos ), dqRenderConfig->battleStatsDialogWidth, dqRenderConfig->battleStatsDialogHeight );
+
    dqBattleRenderer_DrawEnemy();
    dqMenuRenderer_Render( dqMenuBattleAction );
 }
