@@ -70,6 +70,10 @@ void dqRenderConfig_Init()
 
    dqRenderConfig->dialogScrollCharSeconds = 0.01f;
 
+   dqRenderConfig->enemyTextureSize0Path = "Resources/Sprites/enemy_size_0.png";
+   dqRenderConfig->enemyTextureSize1Path = "Resources/Sprites/enemy_size_1.png";
+   dqRenderConfig->enemyTextureSize2Path = "Resources/Sprites/enemy_size_2.png";
+   dqRenderConfig->enemyTextureSize3Path = "Resources/Sprites/enemy_size_3.png";
    dqRenderConfig->playerTexturePath = "Resources/Sprites/player.png";
 
    dqRenderConfig->overworldFadeOutSeconds = 0.3f;

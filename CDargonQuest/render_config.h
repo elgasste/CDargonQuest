@@ -59,6 +59,10 @@ typedef struct dqRenderConfig_t
 
    float dialogScrollCharSeconds;
 
+   const char* enemyTextureSize0Path;
+   const char* enemyTextureSize1Path;
+   const char* enemyTextureSize2Path;
+   const char* enemyTextureSize3Path;
    const char* playerTexturePath;
 
    float overworldFadeOutSeconds;

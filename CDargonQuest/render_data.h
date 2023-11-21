@@ -9,6 +9,8 @@ typedef struct
    sfTexture* overworldTilesetTexture;
    sfTexture* dialogTilesetTexture;
 
+   sfTexture** enemyTextures;
+
    sfTexture* playerTexture;
    dqEntitySprite_t* playerSprite;
 }
