@@ -3,6 +3,8 @@
 #include "battle_stats.h"
 #include "game_config.h"
 #include "game_data.h"
+#include "render_data.h"
+#include "entity_sprite.h"
 #include "map.h"
 #include "map_tile.h"
 
@@ -31,6 +33,10 @@ dqPlayer_t* dqPlayer_Create()
    player->battleStats->attackPower = 10;
    player->battleStats->defensePower = 10;
 
+   // TODO: these values should probably go in render config
+   // MUFFINS: render data hasn't been set up yet?
+   player->entitySprite = dqEntitySprite_Create( player->overworldState, dqRenderData->playerTexture, 16, 16, 2, 0.25f );
+
    map = dqGameData_GetCurrentMap();
    tile = dqMap_GetTileFromPosition( map, &( player->overworldState->centerPosition ) );
    map->playerTileCache = tile;
@@ -40,6 +46,8 @@ dqPlayer_t* dqPlayer_Create()
 
 void dqPlayer_Cleanup( dqPlayer_t* player )
 {
+   dqEntitySprite_Cleanup( player->entitySprite );
+
    dqFree( player->battleStats, sizeof( dqBattleStats_t ), sfTrue );
    dqFree( player->overworldState, sizeof( dqEntityOverworldState_t ), sfTrue );
    dqFree( player, sizeof( dqPlayer_t ), sfTrue );

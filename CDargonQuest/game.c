@@ -53,9 +53,9 @@ void dqGame_Init()
    dqGameConfig_Init();
    dqRandom_Init();
    dqRenderConfig_Init();
-   dqGameData_Init();
    dqMenu_Init();
-   dqRenderData_Init( dqGameData->player->overworldState );
+   dqRenderData_Init();
+   dqGameData_Init();
    dqWindow_Init();
    dqRenderer_Init();
    dqClock_Init();
@@ -73,10 +73,10 @@ void dqGame_Cleanup()
    dqEventQueue_Cleanup();
    dqClock_Cleanup();
    dqRenderer_Cleanup();
-   dqWindow_Cleanup();
    dqMenu_Cleanup();
-   dqRenderData_Cleanup();
+   dqWindow_Cleanup();
    dqGameData_Cleanup();
+   dqRenderData_Cleanup();
    dqRenderConfig_Cleanup();
    dqGameConfig_Cleanup();
 
@@ -168,7 +168,7 @@ static void dqGame_Tick()
    {
       // TODO: eventually do this for all entities on the map
       dqPhysics_MoveEntity( dqGameData->player->overworldState );
-      dqEntitySprite_Tick( dqRenderData->playerSprite );
+      dqEntitySprite_Tick( dqGameData->player->entitySprite );
       dqPhysics_DecelerateEntity( dqGameData->player->overworldState );
 
       dqMap_CheckSwap();

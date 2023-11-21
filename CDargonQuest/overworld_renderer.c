@@ -215,7 +215,7 @@ void dqOverworldRenderer_RenderMap()
 void dqOverworldRenderer_RenderEntities()
 {
    static sfVector2f position;
-   dqEntitySprite_t* playerSprite = dqRenderData->playerSprite;
+   dqEntitySprite_t* playerSprite = dqGameData->player->entitySprite;
 
    position.x = playerSprite->entityOverworldState->hitBoxPosition.x
       - playerSprite->hitBoxOffset.x
@@ -229,5 +229,5 @@ void dqOverworldRenderer_RenderEntities()
       + dqRenderConfig->overworldViewOffset.y;
 
    sfSprite_setPosition( playerSprite->sprite, position );
-   dqWindow_DrawEntitySprite( dqRenderData->playerSprite );
+   dqWindow_DrawEntitySprite( playerSprite );
 }

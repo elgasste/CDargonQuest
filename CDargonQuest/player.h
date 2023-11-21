@@ -5,11 +5,13 @@
 
 typedef struct dqEntityOverworldState_t dqEntityOverworldState_t;
 typedef struct dqBattleStats_t dqBattleStats_t;
+typedef struct dqEntitySprite_t dqEntitySprite_t;
 
 typedef struct dqPlayer_t
 {
    dqEntityOverworldState_t* overworldState;
    dqBattleStats_t* battleStats;
+   dqEntitySprite_t* entitySprite;
 }
 dqPlayer_t;
 

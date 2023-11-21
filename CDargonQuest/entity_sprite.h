@@ -5,7 +5,7 @@
 
 typedef struct dqEntityOverworldState_t dqEntityOverworldState_t;
 
-typedef struct
+typedef struct dqEntitySprite_t
 {
    dqEntityOverworldState_t* entityOverworldState;
 

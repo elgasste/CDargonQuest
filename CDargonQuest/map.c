@@ -2,7 +2,6 @@
 #include "map_tile.h"
 #include "game_config.h"
 #include "game_data.h"
-#include "render_data.h"
 #include "player.h"
 #include "entity_overworld_state.h"
 #include "entity_sprite.h"
@@ -71,8 +70,7 @@ void dqMap_Swap( unsigned int newMapIndex, unsigned int newTileIndex )
       playerState->direction = oldTile->entranceDirection;
    }
 
-   // TODO: is there a better way to do this? the map shouldn't care about render data
-   dqEntitySprite_Tick( dqRenderData->playerSprite );
+   dqEntitySprite_Tick( dqGameData->player->entitySprite );
 
    // don't check for encounters right away
    newTile = dqMap_GetTileFromPosition( newMap, &( playerState->centerPosition ) );
