@@ -11,6 +11,7 @@
 #include "strings.h"
 #include "error.h"
 #include "log.h"
+#include "mem_util.h"
 
 #define LOG_FILE_NAME      "log.txt"
 
@@ -25,10 +26,6 @@ size_t dqTotalMemoryFreed;
 
 unsigned int dqTotalSfmlObjectsCreated;
 unsigned int dqTotalSfmlObjectsDestroyed;
-
-void* dqMalloc( size_t size, sfBool track );
-void* dqCalloc( size_t count, size_t size, sfBool track );
-void dqFree( void* mem, size_t size, sfBool track );
 
 sfTexture* dqTexture_CreateFromFile( const char* filePath );
 sfSprite* dqSprite_Create();
