@@ -18,9 +18,9 @@ void dqWindow_Init()
 
    dqWindow = (dqWindow_t*)dqMalloc( sizeof( dqWindow_t ), sfTrue );
 
-   dqWindow->window = sfRenderWindow_create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle, 0 );
+   dqWindow->window = dqRenderWindow_Create( videoMode, STR_WINDOW_TITLE, dqRenderConfig->windowStyle );
 
-   dqWindow->view = sfView_createFromRect( viewRect );
+   dqWindow->view = dqView_CreateFromRect( &viewRect );
    sfRenderWindow_setView( dqWindow->window, dqWindow->view );
 
    sfRenderWindow_setKeyRepeatEnabled( dqWindow->window, sfFalse );
@@ -34,8 +34,8 @@ void dqWindow_Cleanup()
    dqInputHandler_Cleanup();
    dqInputState_Cleanup();
    sfRenderWindow_close( dqWindow->window );
-   sfRenderWindow_destroy( dqWindow->window );
-   sfView_destroy( dqWindow->view );
+   dqRenderWindow_Destroy( dqWindow->window );
+   dqView_Destroy( dqWindow->view );
 
    dqFree( dqWindow, sizeof( dqWindow_t ), sfTrue );
 }

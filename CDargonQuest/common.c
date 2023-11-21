@@ -79,6 +79,18 @@ sfRectangleShape* dqRectangleShape_Create()
    return sfRectangleShape_create();
 }
 
+sfView* dqView_CreateFromRect( sfFloatRect* rect )
+{
+   dqTotalSfmlObjectsCreated++;
+   return sfView_createFromRect( *rect );
+}
+
+sfRenderWindow* dqRenderWindow_Create( sfVideoMode mode, const char* title, sfUint32 style )
+{
+   dqTotalSfmlObjectsCreated++;
+   return sfRenderWindow_create( mode, title, style, 0 );
+}
+
 void dqTexture_Destroy( sfTexture* texture )
 {
    dqTotalSfmlObjectsDestroyed++;
@@ -107,4 +119,16 @@ void dqRectangleShape_Destroy( sfRectangleShape* rect )
 {
    dqTotalSfmlObjectsDestroyed++;
    sfRectangleShape_destroy( rect );
+}
+
+void dqView_Destroy( sfView* view )
+{
+   dqTotalSfmlObjectsDestroyed++;
+   sfView_destroy( view );
+}
+
+void dqRenderWindow_Destroy( sfRenderWindow* window )
+{
+   dqTotalSfmlObjectsDestroyed++;
+   sfRenderWindow_destroy( window );
 }
