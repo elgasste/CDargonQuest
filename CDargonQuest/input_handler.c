@@ -7,6 +7,7 @@
 #include "game.h"
 #include "menu.h"
 #include "renderer.h"
+#include "event_queue.h"
 
 static void dqInputHandler_CheckCheats();
 static void dqInputHandler_HandleCheat();
@@ -71,7 +72,8 @@ static void dqInputHandler_CheckCheats()
       "dqinvis",
       "dqtilestat",
       "dqall",
-      "dqclear"
+      "dqclear",
+      "dqfight"
    };
    static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );
 
@@ -165,6 +167,10 @@ static void dqInputHandler_HandleCheat()
       dqGameConfig->invisibleCheat = sfFalse;
       dqGameConfig->tileStatCheat = sfFalse;
       dqLog_Message( "cleared all cheats" );
+   }
+   else if ( !strcmp( cheat, "dqfight" ) )
+   {
+      dqEventQueue_Push( dqEventEncounter, 0 );
    }
 
    dqInputHandler->cheatString[0] = '\0';
