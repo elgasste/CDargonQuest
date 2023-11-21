@@ -9,6 +9,7 @@ typedef struct dqEntitySprite_t dqEntitySprite_t;
 
 typedef struct dqPlayer_t
 {
+   char name[PLAYER_NAME_SIZE];
    dqEntityOverworldState_t* overworldState;
    dqBattleStats_t* battleStats;
    dqEntitySprite_t* entitySprite;

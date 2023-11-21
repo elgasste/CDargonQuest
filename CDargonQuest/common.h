@@ -17,6 +17,7 @@
 #define MAX_EVENTS         100
 #define MAX_EVENT_ARGS     4
 
+#define PLAYER_NAME_SIZE   9
 #define ENTITY_NAME_SIZE   32
 
 size_t dqTotalMemoryAllocated;
