@@ -55,7 +55,7 @@ void dqRenderConfig_Init()
    dqRenderConfig->titleMenuCaratOffsetX = -2;
 
    dqRenderConfig->battleActionMenuOptionsPos.x = dqRenderConfig->battleMessageDialogPos.x + ( dqRenderConfig->dialogSpriteSize * 2 );
-   dqRenderConfig->battleActionMenuOptionsPos.y = dqRenderConfig->battleMessageDialogPos.y + dqRenderConfig->dialogSpriteSize;
+   dqRenderConfig->battleActionMenuOptionsPos.y = dqRenderConfig->battleMessageDialogPos.y + ( dqRenderConfig->dialogSpriteSize * 2 );
    dqRenderConfig->battleActionMenuOptionsWidth = 6;
    dqRenderConfig->battleActionMenuCaratOffsetX = -1;
 

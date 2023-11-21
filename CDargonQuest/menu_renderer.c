@@ -43,12 +43,12 @@ void dqMenuRenderer_Render( dqMenu_t* menu )
       if ( dqMenuRenderer->showCarat && dqMenuRenderer->selectedOptionCache == i )
       {
          textPos.x = menu->optionsPos.x + ( menu->caratOffsetX * (int)( dqRenderConfig->dialogSpriteSize ) );
-         textPos.y = menu->optionsPos.y + (float)( i * dqRenderConfig->dialogSpriteSize );
+         textPos.y = menu->optionsPos.y + (float)( i * ( dqRenderConfig->dialogSpriteSize * 2 ) );
          dqDialogRenderer_DrawText( &textPos, dqRenderConfig->menuCaratText, 1 );
       }
 
       textPos.x = menu->optionsPos.x;
-      textPos.y = menu->optionsPos.y + (float)( i * dqRenderConfig->dialogSpriteSize );
+      textPos.y = menu->optionsPos.y + (float)( i * ( dqRenderConfig->dialogSpriteSize * 2 ) );
       dqDialogRenderer_DrawText( &textPos, menu->options[i].text, menu->optionsWidth );
    }
 }

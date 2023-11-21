@@ -18,6 +18,6 @@ dqMenuRenderer_t* dqMenuRenderer;
 
 void dqMenuRenderer_Init();
 void dqMenuRenderer_Cleanup();
-void dqMenuRenderer_Render();
+void dqMenuRenderer_Render( dqMenu_t* menu );
 
 #endif
