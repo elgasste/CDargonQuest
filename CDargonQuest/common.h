@@ -22,6 +22,8 @@
 #define PLAYER_NAME_SIZE   9
 #define ENTITY_NAME_SIZE   32
 
+#define TOGGLE_BOOL( x ) x = x ? sfFalse : sfTrue;
+
 size_t dqTotalMemoryAllocated;
 size_t dqTotalMemoryFreed;
 

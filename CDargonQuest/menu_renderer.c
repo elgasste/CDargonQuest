@@ -33,7 +33,7 @@ void dqMenuRenderer_Render( dqMenu_t* menu )
 
       while ( dqMenuRenderer->caratElapsedSeconds >= dqRenderConfig->menuCaratBlinkRate )
       {
-         dqMenuRenderer->showCarat = dqMenuRenderer->showCarat ? sfFalse : sfTrue;
+         TOGGLE_BOOL( dqMenuRenderer->showCarat );
          dqMenuRenderer->caratElapsedSeconds -= dqRenderConfig->menuCaratBlinkRate;
       }
    }
