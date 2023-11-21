@@ -7,6 +7,7 @@
 #include "overworld_renderer.h"
 #include "battle_renderer.h"
 #include "transition_renderer.h"
+#include "title_renderer.h"
 #include "game.h"
 #include "menu.h"
 
@@ -22,10 +23,12 @@ void dqRenderer_Init()
    dqOverworldRenderer_Init();
    dqBattleRenderer_Init();
    dqTransitionRenderer_Init();
+   dqTitleRenderer_Init();
 }
 
 void dqRenderer_Cleanup()
 {
+   dqTitleRenderer_Cleanup();
    dqTransitionRenderer_Cleanup();
    dqBattleRenderer_Cleanup();
    dqOverworldRenderer_Cleanup();
@@ -43,7 +46,7 @@ void dqRenderer_Render()
    switch ( dqGame->state )
    {
       case dqStateTitle:
-         dqMenuRenderer_Render( dqMenuTitle );
+         dqTitleRenderer_Render();
          break;
       case dqStateOverworld:
          dqOverworldRenderer_RenderMap();

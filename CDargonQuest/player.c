@@ -35,7 +35,6 @@ dqPlayer_t* dqPlayer_Create()
    player->battleStats->defensePower = 10;
 
    // TODO: these values should probably go in render config
-   // MUFFINS: render data hasn't been set up yet?
    player->entitySprite = dqEntitySprite_Create( player->overworldState, dqRenderData->playerTexture, 16, 16, 2, 0.25f );
 
    map = dqGameData_GetCurrentMap();

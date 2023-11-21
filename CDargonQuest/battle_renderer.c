@@ -17,16 +17,25 @@ static void dqBattleRenderer_DrawEnemy();
 void dqBattleRenderer_Init()
 {
    dqBattleRenderer = (dqBattleRenderer_t*)dqMalloc( sizeof( dqBattleRenderer_t ), sfTrue );
+
+   dqBattleRenderer->backdropRect = dqRectangleShape_Create();
+   sfRectangleShape_setPosition( dqBattleRenderer->backdropRect, dqRenderConfig->overworldViewOffset );
+   sfRectangleShape_setSize( dqBattleRenderer->backdropRect, dqRenderConfig->overworldViewSize );
+   sfRectangleShape_setFillColor( dqBattleRenderer->backdropRect, dqRenderConfig->battleBackdropColor );
 }
 
 void dqBattleRenderer_Cleanup()
 {
+   dqRectangleShape_Destroy( dqBattleRenderer->backdropRect );
+
    dqFree( dqBattleRenderer, sizeof( dqBattleRenderer_t ), sfTrue );
 }
 
 void dqBattleRenderer_Render()
 {
    static sfVector2f messageTextPos;
+
+   dqWindow_DrawRectangleShape( dqBattleRenderer->backdropRect );
 
    messageTextPos.x = dqRenderConfig->battleMessageDialogPos.x + dqRenderConfig->dialogSpriteSize;
    messageTextPos.y = dqRenderConfig->battleMessageDialogPos.y + dqRenderConfig->dialogSpriteSize;

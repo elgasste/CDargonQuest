@@ -5,7 +5,7 @@
 
 typedef struct
 {
-   int garbo;
+   sfRectangleShape* backdropRect;
 }
 dqBattleRenderer_t;
 

@@ -44,9 +44,11 @@ typedef struct dqRenderConfig_t
    sfVector2f overworldViewSize;
    sfVector2f overworldViewOffset;
 
+   sfColor titleBackdropColor;
    sfColor passableOverlayColor;
    sfColor impassableOverlayColor;
    sfColor mapSwapOverlayColor;
+   sfColor battleBackdropColor;
 
    const char* overworldTilesetTexturePath;
    const char* dialogTilesetTexturePath;

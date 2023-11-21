@@ -15,7 +15,7 @@ void dqRenderConfig_Init()
    dqRenderConfig->screenHeight = 320;
    dqRenderConfig->windowBPP = 32;
    dqRenderConfig->windowStyle = sfTitlebar | sfClose;
-   dqRenderConfig->windowClearColor = sfBlack;
+   dqRenderConfig->windowClearColor = sfColor_fromRGB( 32, 32, 32 );
 
    dqRenderConfig->showDiagnostics = sfFalse;
    dqRenderConfig->diagnosticsFontFilePath = "Resources/Fonts/Consolas.ttf";
@@ -40,11 +40,11 @@ void dqRenderConfig_Init()
    dqRenderConfig->battleMessageDialogPos.x = dqRenderConfig->overworldViewOffset.x + (float)( dqRenderConfig->dialogSpriteSize );
    dqRenderConfig->battleMessageDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 8 ) - dqRenderConfig->overworldViewOffset.y;
    dqRenderConfig->battleMessageDialogWidth = 54;
-   dqRenderConfig->battleMessageDialogHeight = 12;
+   dqRenderConfig->battleMessageDialogHeight = 11;
    dqRenderConfig->battleStatsDialogPos.x = dqRenderConfig->overworldViewOffset.x + (float)( dqRenderConfig->dialogSpriteSize );
    dqRenderConfig->battleStatsDialogPos.y = dqRenderConfig->overworldViewOffset.y + (float)( dqRenderConfig->dialogSpriteSize );
    dqRenderConfig->battleStatsDialogWidth = 54;
-   dqRenderConfig->battleStatsDialogHeight = 9;
+   dqRenderConfig->battleStatsDialogHeight = 10;
 
    dqRenderConfig->menuCaratText = ">";
    dqRenderConfig->menuCaratBlinkRate = 0.3f;
@@ -59,9 +59,11 @@ void dqRenderConfig_Init()
    dqRenderConfig->battleActionMenuOptionsWidth = 6;
    dqRenderConfig->battleActionMenuCaratOffsetX = -1;
 
+   dqRenderConfig->titleBackdropColor = sfBlack;
    dqRenderConfig->passableOverlayColor = sfColor_fromRGBA( 0, 255, 0, 128 );
    dqRenderConfig->impassableOverlayColor = sfColor_fromRGBA( 255, 0, 0, 128 );
    dqRenderConfig->mapSwapOverlayColor = sfColor_fromRGBA( 0, 0, 255, 128 );
+   dqRenderConfig->battleBackdropColor = sfBlack;
 
    dqRenderConfig->overworldTilesetTexturePath = "Resources/Tilesets/overworld.png";
    dqRenderConfig->dialogTilesetTexturePath = "Resources/Tilesets/text.png";
@@ -85,7 +87,7 @@ void dqRenderConfig_Init()
    dqRenderConfig->enemySpriteWidths[1] = 24;
    dqRenderConfig->enemySpriteWidths[2] = 32;
    dqRenderConfig->enemySpriteWidths[3] = 40;
-   dqRenderConfig->enemyAreaPosY = 100;
+   dqRenderConfig->enemyAreaPosY = 108;
 
    dqRenderConfig->overworldFadeOutSeconds = 0.3f;
    dqRenderConfig->overworldStayFadedSeconds = 0.2f;
