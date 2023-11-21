@@ -30,9 +30,7 @@ void dqBattle_Cleanup()
 
 void dqBattle_Reset()
 {
-   dqFree( dqBattle->enemy->battleStats, sizeof( dqBattleStats_t ), sfTrue );
-   dqFree( dqBattle->enemy, sizeof( dqEnemy_t ), sfTrue );
-
+   dqEnemy_Cleanup( dqBattle->enemy );
    dqBattle->enemy = 0;
 }
 

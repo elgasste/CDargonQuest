@@ -34,7 +34,7 @@ void dqOverworldRenderer_Init()
 
    dqOverworldRenderer = (dqOverworldRenderer_t*)dqMalloc( sizeof( dqOverworldRenderer_t ), sfTrue );
 
-   dqOverworldRenderer->tileSprite = sfSprite_create();
+   dqOverworldRenderer->tileSprite = dqSprite_Create();
    sfSprite_setTexture( dqOverworldRenderer->tileSprite, dqRenderData->overworldTilesetTexture, sfFalse );
    dqOverworldRenderer->tileTextureRect.width = (int)dqGameConfig->mapTileSize;
    dqOverworldRenderer->tileTextureRect.height = (int)dqGameConfig->mapTileSize;
@@ -94,7 +94,7 @@ void dqOverworldRenderer_Cleanup()
       sfRectangleShape_destroy( dqOverworldRenderer->occlusions[i] );
    }
 
-   sfSprite_destroy( dqOverworldRenderer->tileSprite );
+   dqSprite_Destroy( dqOverworldRenderer->tileSprite );
 
    dqFree( dqOverworldRenderer, sizeof( dqOverworldRenderer_t ), sfTrue );
 }

@@ -14,7 +14,7 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntityOverworldState_t* entityOverwor
 
    sprite->entityOverworldState = entityOverworldState;
 
-   sprite->sprite = sfSprite_create();
+   sprite->sprite = dqSprite_Create();
 
    sfSprite_setTexture( sprite->sprite, texture, sfFalse );
    sprite->textureRect.width = width;
@@ -34,7 +34,7 @@ dqEntitySprite_t* dqEntitySprite_Create( dqEntityOverworldState_t* entityOverwor
 
 void dqEntitySprite_Cleanup( dqEntitySprite_t* sprite )
 {
-   sfSprite_destroy( sprite->sprite );
+   dqSprite_Destroy( sprite->sprite );
 
    dqFree( sprite, sizeof( dqEntitySprite_t ), sfTrue );
 }

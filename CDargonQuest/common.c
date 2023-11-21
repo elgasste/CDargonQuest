@@ -55,8 +55,20 @@ sfTexture* dqTexture_CreateFromFile( const char* filePath )
    return sfTexture_createFromFile( filePath, 0 );
 }
 
+sfSprite* dqSprite_Create()
+{
+   dqTotalSfmlObjectsCreated++;
+   return sfSprite_create();
+}
+
 void dqTexture_Destroy( sfTexture* texture )
 {
    dqTotalSfmlObjectsDestroyed++;
    sfTexture_destroy( texture );
+}
+
+void dqSprite_Destroy( sfSprite* sprite )
+{
+   dqTotalSfmlObjectsDestroyed++;
+   sfSprite_destroy( sprite );
 }

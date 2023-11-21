@@ -20,7 +20,7 @@ dqEnemy_t* dqEnemy_Generate( unsigned int tier, unsigned int index )
    enemy->battleStats->attackPower = template->attackPower;
    enemy->battleStats->defensePower = template->defensePower;
 
-   enemy->sprite = sfSprite_create();
+   enemy->sprite = dqSprite_Create();
    sfSprite_setTexture( enemy->sprite, dqRenderData->enemyTextures[enemy->spriteSize], sfFalse );
    textureRect.left = template->spriteIndex * dqRenderConfig->enemySpriteWidths[enemy->spriteSize];
    textureRect.top = dqRenderConfig->enemySpriteHeight * tier;
@@ -33,7 +33,7 @@ dqEnemy_t* dqEnemy_Generate( unsigned int tier, unsigned int index )
 
 void dqEnemy_Cleanup( dqEnemy_t* enemy )
 {
-   sfSprite_destroy( enemy->sprite );
+   dqSprite_Destroy( enemy->sprite );
 
    dqFree( enemy->battleStats, sizeof( dqBattleStats_t ), sfTrue );
    dqFree( enemy, sizeof( dqEnemy_t ), sfTrue );
