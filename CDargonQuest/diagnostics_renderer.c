@@ -17,11 +17,11 @@ void dqDiagnosticsRenderer_Init()
    sfRectangleShape_setPosition( dqDiagnosticsRenderer->background, backgroundPosition );
    sfRectangleShape_setFillColor( dqDiagnosticsRenderer->background, dqRenderConfig->diagnosticsBackgroundColor );
 
-   dqDiagnosticsRenderer->font = sfFont_createFromFile( dqRenderConfig->diagnosticsFontFilePath );
+   dqDiagnosticsRenderer->font = dqFont_CreateFromFile( dqRenderConfig->diagnosticsFontFilePath );
 
    dqDiagnosticsRenderer->textPosition.x = dqRenderConfig->screenWidth - dqRenderConfig->diagnosticsWidth + dqRenderConfig->diagnosticsPadding;
 
-   dqDiagnosticsRenderer->text = sfText_create();
+   dqDiagnosticsRenderer->text = dqText_Create();
    sfText_setFont( dqDiagnosticsRenderer->text, dqDiagnosticsRenderer->font );
    sfText_setCharacterSize( dqDiagnosticsRenderer->text, dqRenderConfig->diagnosticsFontSize );
    sfText_setScale( dqDiagnosticsRenderer->text, dqRenderConfig->diagnosticsFontScale );
@@ -37,8 +37,8 @@ void dqDiagnosticsRenderer_Init()
 
 void dqDiagnosticsRenderer_Cleanup()
 {
-   sfText_destroy( dqDiagnosticsRenderer->text );
-   sfFont_destroy( dqDiagnosticsRenderer->font );
+   dqText_Destroy( dqDiagnosticsRenderer->text );
+   dqFont_Destroy( dqDiagnosticsRenderer->font );
    sfRectangleShape_destroy( dqDiagnosticsRenderer->background );
 
    dqFree( dqDiagnosticsRenderer->textLine, sizeof( char ) * dqRenderConfig->diagnosticsLineWidth, sfTrue );

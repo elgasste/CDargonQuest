@@ -69,8 +69,8 @@ void dqOverworldRenderer_Init()
    sfRectangleShape_setFillColor( dqOverworldRenderer->impassableRect, dqRenderConfig->impassableOverlayColor );
    sfRectangleShape_setFillColor( dqOverworldRenderer->mapSwapRect, dqRenderConfig->mapSwapOverlayColor );
 
-   dqOverworldRenderer->cheatFont = sfFont_createFromFile( dqRenderConfig->cheatFontFilePath );
-   dqOverworldRenderer->cheatText = sfText_create();
+   dqOverworldRenderer->cheatFont = dqFont_CreateFromFile( dqRenderConfig->cheatFontFilePath );
+   dqOverworldRenderer->cheatText = dqText_Create();
    sfText_setFont( dqOverworldRenderer->cheatText, dqOverworldRenderer->cheatFont );
    sfText_setCharacterSize( dqOverworldRenderer->cheatText, dqRenderConfig->cheatFontSize );
    sfText_setScale( dqOverworldRenderer->cheatText, dqRenderConfig->cheatFontScale );
@@ -82,8 +82,8 @@ void dqOverworldRenderer_Cleanup()
 {
    int i;
 
-   sfText_destroy( dqOverworldRenderer->cheatText );
-   sfFont_destroy( dqOverworldRenderer->cheatFont );
+   dqText_Destroy( dqOverworldRenderer->cheatText );
+   dqFont_Destroy( dqOverworldRenderer->cheatFont );
 
    sfRectangleShape_destroy( dqOverworldRenderer->passableRect );
    sfRectangleShape_destroy( dqOverworldRenderer->impassableRect );
