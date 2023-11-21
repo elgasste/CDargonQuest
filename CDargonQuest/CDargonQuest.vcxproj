@@ -178,7 +178,6 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     <ClCompile Include="battle.c" />
     <ClCompile Include="battle_input_handler.c" />
     <ClCompile Include="battle_renderer.c" />
-    <ClCompile Include="common.c" />
     <ClCompile Include="dialog_renderer.c" />
     <ClCompile Include="enemy.c" />
     <ClCompile Include="log.c" />
@@ -186,6 +185,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     <ClCompile Include="menu_renderer.c" />
     <ClCompile Include="player.c" />
     <ClCompile Include="random.c" />
+    <ClCompile Include="sfml_util.c" />
     <ClCompile Include="string_util.c" />
     <ClCompile Include="transition_renderer.c" />
     <ClCompile Include="physics.c" />
@@ -226,6 +226,7 @@ xcopy "$(SolutionDir)CDargonQuest\Resources\Design\Maps\*_max_enemy_tiers.txt" "
     <ClInclude Include="menu_renderer.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="random.h" />
+    <ClInclude Include="sfml_util.h" />
     <ClInclude Include="string_util.h" />
     <ClInclude Include="transition_renderer.h" />
     <ClInclude Include="physics.h" />

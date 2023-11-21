@@ -126,9 +126,6 @@
     <ClCompile Include="battle_renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="common.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dialog_renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
@@ -154,6 +151,9 @@
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="mem_util.c">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml_util.c">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -297,6 +297,9 @@
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="mem_util.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="sfml_util.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
