@@ -17,6 +17,9 @@ typedef enum
    dqEventEncounter,
 
    dqEventBattleAttack,
+   dqEventBattleSpell,
+   dqEventBattleItem,
+   dqEventBattleGuard,
    dqEventBattleRun,
    dqEventBattleExit
 }

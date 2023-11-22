@@ -37,18 +37,18 @@ void dqRenderConfig_Init()
    dqRenderConfig->overworldViewOffset.x = 16;
    dqRenderConfig->overworldViewOffset.y = 16;
 
-   dqRenderConfig->battleMessageDialogPos.x = dqRenderConfig->overworldViewOffset.x + (float)( dqRenderConfig->dialogSpriteSize );
-   dqRenderConfig->battleMessageDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 8 ) - dqRenderConfig->overworldViewOffset.y;
-   dqRenderConfig->battleMessageDialogWidth = 54;
-   dqRenderConfig->battleMessageDialogHeight = 11;
-   dqRenderConfig->battleActionMenuDialogPos.x = dqRenderConfig->overworldViewOffset.x + (float)( dqRenderConfig->dialogSpriteSize );;
-   dqRenderConfig->battleActionMenuDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 8 ) - dqRenderConfig->overworldViewOffset.y;
-   dqRenderConfig->battleActionMenuDialogWidth = 12;
-   dqRenderConfig->battleActionMenuDialogHeight = 11;
    dqRenderConfig->battleStatsDialogPos.x = dqRenderConfig->overworldViewOffset.x + (float)( dqRenderConfig->dialogSpriteSize );
    dqRenderConfig->battleStatsDialogPos.y = dqRenderConfig->overworldViewOffset.y + (float)( dqRenderConfig->dialogSpriteSize );
-   dqRenderConfig->battleStatsDialogWidth = 54;
-   dqRenderConfig->battleStatsDialogHeight = 10;
+   dqRenderConfig->battleStatsDialogWidth = 10;
+   dqRenderConfig->battleStatsDialogHeight = 9;
+   dqRenderConfig->battleMessageDialogPos.x = dqRenderConfig->overworldViewOffset.x + (float)( dqRenderConfig->dialogSpriteSize );
+   dqRenderConfig->battleMessageDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 10 ) - dqRenderConfig->overworldViewOffset.y;
+   dqRenderConfig->battleMessageDialogWidth = 54;
+   dqRenderConfig->battleMessageDialogHeight = 13;
+   dqRenderConfig->battleActionMenuDialogPos.x = dqRenderConfig->overworldViewOffset.x + (float)( dqRenderConfig->dialogSpriteSize );;
+   dqRenderConfig->battleActionMenuDialogPos.y = dqRenderConfig->overworldViewSize.y - ( dqRenderConfig->dialogSpriteSize * 10 ) - dqRenderConfig->overworldViewOffset.y;
+   dqRenderConfig->battleActionMenuDialogWidth = 10;
+   dqRenderConfig->battleActionMenuDialogHeight = 13;
 
    dqRenderConfig->menuCaratText = ">";
    dqRenderConfig->menuCaratBlinkRate = 0.3f;
@@ -91,7 +91,7 @@ void dqRenderConfig_Init()
    dqRenderConfig->enemySpriteWidths[1] = 24;
    dqRenderConfig->enemySpriteWidths[2] = 32;
    dqRenderConfig->enemySpriteWidths[3] = 40;
-   dqRenderConfig->enemyAreaPosY = 108;
+   dqRenderConfig->enemyAreaPosY = 96;
 
    dqRenderConfig->overworldFadeOutSeconds = 0.3f;
    dqRenderConfig->overworldStayFadedSeconds = 0.2f;

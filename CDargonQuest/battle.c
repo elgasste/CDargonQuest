@@ -89,6 +89,39 @@ void dqBattle_Attack()
    }
 }
 
+void dqBattle_CastSpell()
+{
+   // TODO: implement spells and magic points
+
+   if ( dqBattle->state == dqBattleStateSelectAction )
+   {
+      sprintf_s( dqBattle->resultMessage, 128, "You cast 'ava duh ken doll bra', and the enemy has laughed itself to death." );
+      dqBattle_SetState( dqBattleStateResult );
+   }
+}
+
+void dqBattle_UseItem()
+{
+   // TODO: implement inventory system
+
+   if ( dqBattle->state == dqBattleStateSelectAction )
+   {
+      sprintf_s( dqBattle->resultMessage, 128, "You found a coin in your pocket, and bribed your foe to walk away." );
+      dqBattle_SetState( dqBattleStateResult );
+   }
+}
+
+void dqBattle_Guard()
+{
+   // TODO: this might be a good place to start implementing battle actions and text scrolling
+
+   if ( dqBattle->state == dqBattleStateSelectAction )
+   {
+      sprintf_s( dqBattle->resultMessage, 128, "You hid behind your shield so well that your foe forgot you were there, and wandered off." );
+      dqBattle_SetState( dqBattleStateResult );
+   }
+}
+
 void dqBattle_Run()
 {
    // TODO: later on the player's evasion rate (or whatever we call it) will be called into question

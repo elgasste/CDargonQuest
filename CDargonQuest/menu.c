@@ -22,13 +22,19 @@ void dqMenu_Init()
    dqMenuBattleAction->optionsPos = dqRenderConfig->battleActionMenuOptionsPos;
    dqMenuBattleAction->optionsWidth = dqRenderConfig->battleActionMenuOptionsWidth;
    dqMenuBattleAction->caratOffsetX = dqRenderConfig->battleActionMenuCaratOffsetX;
-   dqMenuBattleAction->optionCount = 2;
+   dqMenuBattleAction->optionCount = 5;
    dqMenuBattleAction->selectedOption = 0;
    dqMenuBattleAction->options = (dqMenuOption_t*)dqMalloc( sizeof( dqMenuOption_t ) * dqMenuBattleAction->optionCount, sfTrue );
    dqMenuBattleAction->options[0].text = STR_BATTLE_MENU_ATTACK;
    dqMenuBattleAction->options[0].eventType = dqEventBattleAttack;
-   dqMenuBattleAction->options[1].text = STR_BATTLE_MENU_RUN;
-   dqMenuBattleAction->options[1].eventType = dqEventBattleRun;
+   dqMenuBattleAction->options[1].text = STR_BATTLE_MENU_SPELL;
+   dqMenuBattleAction->options[1].eventType = dqEventBattleSpell;
+   dqMenuBattleAction->options[2].text = STR_BATTLE_MENU_ITEM;
+   dqMenuBattleAction->options[2].eventType = dqEventBattleItem;
+   dqMenuBattleAction->options[3].text = STR_BATTLE_MENU_GUARD;
+   dqMenuBattleAction->options[3].eventType = dqEventBattleGuard;
+   dqMenuBattleAction->options[4].text = STR_BATTLE_MENU_RUN;
+   dqMenuBattleAction->options[4].eventType = dqEventBattleRun;
 }
 
 void dqMenu_Cleanup()
