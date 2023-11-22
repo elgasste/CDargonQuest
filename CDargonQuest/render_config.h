@@ -84,6 +84,9 @@ typedef struct dqRenderConfig_t
    sfVector2f battleMessageDialogPos;
    unsigned int battleMessageDialogWidth;
    unsigned int battleMessageDialogHeight;
+   sfVector2f battleActionMenuDialogPos;
+   unsigned int battleActionMenuDialogWidth;
+   unsigned int battleActionMenuDialogHeight;
    sfVector2f battleStatsDialogPos;
    unsigned int battleStatsDialogWidth;
    unsigned int battleStatsDialogHeight;

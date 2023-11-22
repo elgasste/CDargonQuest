@@ -6,6 +6,7 @@
 typedef struct
 {
    sfRectangleShape* backdropRect;
+   sfVector2f messageTextPos;
 }
 dqBattleRenderer_t;
 

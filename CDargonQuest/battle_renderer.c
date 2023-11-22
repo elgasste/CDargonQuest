@@ -12,10 +12,12 @@
 #include "menu.h"
 #include "window.h"
 
-static void dqBattleRenderer_RenderIntroState( sfVector2f* textPos );
+static void dqBattleRenderer_RenderIntroState();
 static void dqBattleRenderer_RenderSelectActionState();
-static void dqBattleRenderer_RenderResultState( sfVector2f* textPos );
+static void dqBattleRenderer_RenderResultState();
 static void dqBattleRenderer_DrawEnemy();
+static void dqBattleRenderer_DrawMessageBorder();
+static void dqBattleRenderer_DrawActionMenuBorder();
 
 void dqBattleRenderer_Init()
 {
@@ -25,6 +27,9 @@ void dqBattleRenderer_Init()
    sfRectangleShape_setPosition( dqBattleRenderer->backdropRect, dqRenderConfig->overworldViewOffset );
    sfRectangleShape_setSize( dqBattleRenderer->backdropRect, dqRenderConfig->overworldViewSize );
    sfRectangleShape_setFillColor( dqBattleRenderer->backdropRect, dqRenderConfig->battleBackdropColor );
+
+   dqBattleRenderer->messageTextPos.x = dqRenderConfig->battleMessageDialogPos.x + dqRenderConfig->dialogSpriteSize;
+   dqBattleRenderer->messageTextPos.y = dqRenderConfig->battleMessageDialogPos.y + dqRenderConfig->dialogSpriteSize;
 }
 
 void dqBattleRenderer_Cleanup()
@@ -36,35 +41,31 @@ void dqBattleRenderer_Cleanup()
 
 void dqBattleRenderer_Render()
 {
-   static sfVector2f messageTextPos;
-
    dqWindow_DrawRectangleShape( dqBattleRenderer->backdropRect );
-
-   messageTextPos.x = dqRenderConfig->battleMessageDialogPos.x + dqRenderConfig->dialogSpriteSize;
-   messageTextPos.y = dqRenderConfig->battleMessageDialogPos.y + dqRenderConfig->dialogSpriteSize;
-
-   dqDialogRenderer_DrawBorder( &( dqRenderConfig->battleMessageDialogPos ), dqRenderConfig->battleMessageDialogWidth, dqRenderConfig->battleMessageDialogHeight );
 
    switch ( dqBattle->state )
    {
       case dqBattleStateIntro:
-         dqBattleRenderer_RenderIntroState( &messageTextPos );
+         dqBattleRenderer_RenderIntroState();
          break;
       case dqBattleStateSelectAction:
          dqBattleRenderer_RenderSelectActionState();
          break;
       case dqBattleStateResult:
-         dqBattleRenderer_RenderResultState( &messageTextPos );
+         dqBattleRenderer_RenderResultState();
          break;
    }
 }
 
-static void dqBattleRenderer_RenderIntroState( sfVector2f* messageTextPos )
+static void dqBattleRenderer_RenderIntroState()
 {
    if ( !dqTransitionRenderer->fadingIn )
    {
+      dqBattleRenderer_DrawMessageBorder();
       dqBattleRenderer_DrawEnemy();
-      dqDialogRenderer_ScrollText( messageTextPos, dqBattle->introMessage, dqRenderConfig->battleMessageDialogWidth - 2 );
+      dqDialogRenderer_ScrollText( &( dqBattleRenderer->messageTextPos ),
+                                   dqBattle->introMessage,
+                                   dqRenderConfig->battleMessageDialogWidth - 2 );
    }
 }
 
@@ -74,7 +75,9 @@ static void dqBattleRenderer_RenderSelectActionState()
    static char statStr[16];
    dqPlayer_t* player = dqGameData->player;
 
-   dqDialogRenderer_DrawBorder( &( dqRenderConfig->battleStatsDialogPos ), dqRenderConfig->battleStatsDialogWidth, dqRenderConfig->battleStatsDialogHeight );
+   dqDialogRenderer_DrawBorder( &( dqRenderConfig->battleStatsDialogPos ),
+                                dqRenderConfig->battleStatsDialogWidth,
+                                dqRenderConfig->battleStatsDialogHeight );
 
    statsTextPos.x = dqRenderConfig->battleStatsDialogPos.x + dqRenderConfig->dialogSpriteSize;
    statsTextPos.y = dqRenderConfig->battleStatsDialogPos.y + dqRenderConfig->dialogSpriteSize;
@@ -86,13 +89,18 @@ static void dqBattleRenderer_RenderSelectActionState()
    dqDialogRenderer_DrawText( &statsTextPos, statStr, PLAYER_NAME_LENGTH - 1 );
 
    dqBattleRenderer_DrawEnemy();
+
+   dqBattleRenderer_DrawActionMenuBorder();
    dqMenuRenderer_Render( dqMenuBattleAction );
 }
 
-static void dqBattleRenderer_RenderResultState( sfVector2f* messageTextPos )
+static void dqBattleRenderer_RenderResultState()
 {
    dqBattleRenderer_DrawEnemy();
-   dqDialogRenderer_ScrollText( messageTextPos, dqBattle->resultMessage, dqRenderConfig->battleMessageDialogWidth - 2 );
+   dqBattleRenderer_DrawMessageBorder();
+   dqDialogRenderer_ScrollText( &( dqBattleRenderer->messageTextPos ),
+                                dqBattle->resultMessage,
+                                dqRenderConfig->battleMessageDialogWidth - 2 );
 }
 
 static void dqBattleRenderer_DrawEnemy()
@@ -106,4 +114,18 @@ static void dqBattleRenderer_DrawEnemy()
       sfSprite_setPosition( dqBattle->enemy->sprite, enemySpritePos );
       dqWindow_DrawSprite( dqBattle->enemy->sprite );
    }
+}
+
+static void dqBattleRenderer_DrawMessageBorder()
+{
+   dqDialogRenderer_DrawBorder( &( dqRenderConfig->battleMessageDialogPos ),
+                                dqRenderConfig->battleMessageDialogWidth,
+                                dqRenderConfig->battleMessageDialogHeight );
+}
+
+static void dqBattleRenderer_DrawActionMenuBorder()
+{
+   dqDialogRenderer_DrawBorder( &( dqRenderConfig->battleActionMenuDialogPos ),
+                                dqRenderConfig->battleActionMenuDialogWidth,
+                                dqRenderConfig->battleActionMenuDialogHeight );
 }
