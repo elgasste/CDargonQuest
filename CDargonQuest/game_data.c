@@ -60,7 +60,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    }
 
    // tier 0
-   sprintf_s( dqGameData->enemyTemplates[0][0].name, ENTITY_NAME_SIZE, "slime" );
+   sprintf_s( dqGameData->enemyTemplates[0][0].name, ENTITY_NAME_LENGTH, "slime" );
    dqGameData->enemyTemplates[0][0].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[0][0].spriteSize = 0;
    dqGameData->enemyTemplates[0][0].spriteIndex = 0;
@@ -69,7 +69,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[0][0].attackPower = 2;
    dqGameData->enemyTemplates[0][0].defensePower = 2;
 
-   sprintf_s( dqGameData->enemyTemplates[0][1].name, ENTITY_NAME_SIZE, "black raven" );
+   sprintf_s( dqGameData->enemyTemplates[0][1].name, ENTITY_NAME_LENGTH, "black raven" );
    dqGameData->enemyTemplates[0][1].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[0][1].spriteSize = 2;
    dqGameData->enemyTemplates[0][1].spriteIndex = 0;
@@ -79,7 +79,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[0][1].defensePower = 3;
 
    // tier 1
-   sprintf_s( dqGameData->enemyTemplates[1][0].name, ENTITY_NAME_SIZE, "horned rabbit" );
+   sprintf_s( dqGameData->enemyTemplates[1][0].name, ENTITY_NAME_LENGTH, "horned rabbit" );
    dqGameData->enemyTemplates[1][0].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[1][0].spriteSize = 3;
    dqGameData->enemyTemplates[1][0].spriteIndex = 0;
@@ -88,7 +88,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[1][0].attackPower = 4;
    dqGameData->enemyTemplates[1][0].defensePower = 4;
 
-   sprintf_s( dqGameData->enemyTemplates[1][1].name, ENTITY_NAME_SIZE, "giant anteater" );
+   sprintf_s( dqGameData->enemyTemplates[1][1].name, ENTITY_NAME_LENGTH, "giant anteater" );
    dqGameData->enemyTemplates[1][1].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[1][1].spriteSize = 3;
    dqGameData->enemyTemplates[1][1].spriteIndex = 1;
@@ -98,7 +98,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[1][1].defensePower = 3;
 
    // tier 2
-   sprintf_s( dqGameData->enemyTemplates[2][0].name, ENTITY_NAME_SIZE, "babble" );
+   sprintf_s( dqGameData->enemyTemplates[2][0].name, ENTITY_NAME_LENGTH, "babble" );
    dqGameData->enemyTemplates[2][0].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[2][0].spriteSize = 1;
    dqGameData->enemyTemplates[2][0].spriteIndex = 0;
@@ -107,7 +107,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[2][0].attackPower = 8;
    dqGameData->enemyTemplates[2][0].defensePower = 5;
 
-   sprintf_s( dqGameData->enemyTemplates[2][1].name, ENTITY_NAME_SIZE, "froggore" );
+   sprintf_s( dqGameData->enemyTemplates[2][1].name, ENTITY_NAME_LENGTH, "froggore" );
    dqGameData->enemyTemplates[2][1].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[2][1].spriteSize = 3;
    dqGameData->enemyTemplates[2][1].spriteIndex = 0;
@@ -117,7 +117,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[2][1].defensePower = 5;
 
    // TODO: figure out how to have different numbers of enemies per tier
-   /*sprintf_s( dqGameData->enemyTemplates[2][2].name, ENTITY_NAME_SIZE, "scorpion wasp" );
+   /*sprintf_s( dqGameData->enemyTemplates[2][2].name, ENTITY_NAME_LENGTH, "scorpion wasp" );
    dqGameData->enemyTemplates[2][2].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[2][2].spriteSize = 2;
    dqGameData->enemyTemplates[2][2].spriteIndex = 0;
@@ -127,7 +127,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[2][2].defensePower = 5;*/
 
    // tier 3
-   sprintf_s( dqGameData->enemyTemplates[3][0].name, ENTITY_NAME_SIZE, "healer" );
+   sprintf_s( dqGameData->enemyTemplates[3][0].name, ENTITY_NAME_LENGTH, "healer" );
    dqGameData->enemyTemplates[3][0].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[3][0].spriteSize = 0;
    dqGameData->enemyTemplates[3][0].spriteIndex = 0;
@@ -136,7 +136,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[3][0].attackPower = 6;
    dqGameData->enemyTemplates[3][0].defensePower = 6;
 
-   sprintf_s( dqGameData->enemyTemplates[3][1].name, ENTITY_NAME_SIZE, "masked moth" );
+   sprintf_s( dqGameData->enemyTemplates[3][1].name, ENTITY_NAME_LENGTH, "masked moth" );
    dqGameData->enemyTemplates[3][1].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[3][1].spriteSize = 2;
    dqGameData->enemyTemplates[3][1].spriteIndex = 0;
@@ -146,7 +146,7 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[3][1].defensePower = 5;
 
    // TODO: see above
-   /*sprintf_s( dqGameData->enemyTemplates[3][2].name, ENTITY_NAME_SIZE, "magician" );
+   /*sprintf_s( dqGameData->enemyTemplates[3][2].name, ENTITY_NAME_LENGTH, "magician" );
    dqGameData->enemyTemplates[3][2].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[3][2].spriteSize = 4;
    dqGameData->enemyTemplates[3][2].spriteIndex = 0;

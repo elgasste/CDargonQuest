@@ -8,7 +8,7 @@ typedef struct dqBattleStats_t dqBattleStats_t;
 
 typedef struct dqEnemy_t
 {
-   char name[ENTITY_NAME_SIZE];
+   char name[ENTITY_NAME_LENGTH];
    dqIndefiniteArticle_t indefiniteArticle;
 
    unsigned int spriteSize;

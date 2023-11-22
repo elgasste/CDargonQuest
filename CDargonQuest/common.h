@@ -19,8 +19,8 @@
 #define MAX_EVENTS         100
 #define MAX_EVENT_ARGS     4
 
-#define PLAYER_NAME_SIZE   9
-#define ENTITY_NAME_SIZE   32
+#define PLAYER_NAME_LENGTH 9
+#define ENTITY_NAME_LENGTH 32
 
 #define TOGGLE_BOOL( x ) x = x ? sfFalse : sfTrue;
 

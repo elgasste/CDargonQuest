@@ -13,7 +13,7 @@ dqEnemy_t* dqEnemy_Generate( unsigned int tier, unsigned int index )
    dqEnemy_t* enemy = (dqEnemy_t*)dqMalloc( sizeof( dqEnemy_t ), sfTrue );
    enemy->battleStats = (dqBattleStats_t*)dqMalloc( sizeof( dqBattleStats_t ), sfTrue );
 
-   sprintf_s( enemy->name, ENTITY_NAME_SIZE, template->name );
+   sprintf_s( enemy->name, ENTITY_NAME_LENGTH, template->name );
    enemy->indefiniteArticle = template->indefiniteArticle;
    enemy->spriteSize = template->spriteSize;
    enemy->battleStats->hitPoints = dqRandom_UnsignedInt( template->minHitPoints, template->maxHitPoints );

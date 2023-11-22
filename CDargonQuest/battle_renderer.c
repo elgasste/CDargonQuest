@@ -1,11 +1,14 @@
 #include "battle_renderer.h"
 #include "render_config.h"
 #include "render_data.h"
+#include "game_data.h"
 #include "dialog_renderer.h"
 #include "transition_renderer.h"
 #include "menu_renderer.h"
 #include "battle.h"
 #include "enemy.h"
+#include "player.h"
+#include "battle_stats.h"
 #include "menu.h"
 #include "window.h"
 
@@ -67,7 +70,20 @@ static void dqBattleRenderer_RenderIntroState( sfVector2f* messageTextPos )
 
 static void dqBattleRenderer_RenderSelectActionState()
 {
+   static sfVector2f statsTextPos;
+   static char statStr[16];
+   dqPlayer_t* player = dqGameData->player;
+
    dqDialogRenderer_DrawBorder( &( dqRenderConfig->battleStatsDialogPos ), dqRenderConfig->battleStatsDialogWidth, dqRenderConfig->battleStatsDialogHeight );
+
+   statsTextPos.x = dqRenderConfig->battleStatsDialogPos.x + dqRenderConfig->dialogSpriteSize;
+   statsTextPos.y = dqRenderConfig->battleStatsDialogPos.y + dqRenderConfig->dialogSpriteSize;
+   dqDialogRenderer_DrawText( &statsTextPos, player->name, PLAYER_NAME_LENGTH - 1 );
+
+   sprintf_s( statStr, 16, "HP: %u", player->battleStats->hitPoints );
+   statsTextPos.x += dqRenderConfig->dialogSpriteSize;
+   statsTextPos.y += dqRenderConfig->dialogSpriteSize * 2;
+   dqDialogRenderer_DrawText( &statsTextPos, statStr, PLAYER_NAME_LENGTH - 1 );
 
    dqBattleRenderer_DrawEnemy();
    dqMenuRenderer_Render( dqMenuBattleAction );

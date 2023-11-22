@@ -19,7 +19,7 @@ dqPlayer_t* dqPlayer_Create()
    dqGameData->player = player;
 
    // TODO: most of this will eventually be loaded from a file
-   sprintf_s( player->name, PLAYER_NAME_SIZE, "Debugger" );
+   sprintf_s( player->name, PLAYER_NAME_LENGTH, "Debugger" );
    player->overworldState->hitBoxSize.x = 14;
    player->overworldState->hitBoxSize.y = 14;
    player->overworldState->hitBoxPosition.x = dqGameData->playerStartTileCoordinates.x * dqGameConfig->mapTileSize;
