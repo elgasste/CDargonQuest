@@ -18,7 +18,7 @@ typedef struct dqGameData_t
 
    dqEnemyTemplate_t** enemyTemplates;
    unsigned int enemyTierCount;
-   unsigned int enemyTemplateCount;
+   unsigned int* enemyTierTemplateCounts;
 }
 dqGameData_t;
 

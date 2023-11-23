@@ -59,7 +59,7 @@ void dqBattle_Generate()
       tier = dqGameData->enemyTierCount - 1;
    }
 
-   index = dqRandom_UnsignedInt( 0, dqGameData->enemyTemplateCount - 1 );
+   index = dqRandom_UnsignedInt( 0, dqGameData->enemyTierTemplateCounts[tier] - 1);
    dqBattle->enemy = dqEnemy_Generate( tier, index );
 
    sprintf_s( dqBattle->introMessage, 128, STR_BATTLE_INTRO_FORMATTER,

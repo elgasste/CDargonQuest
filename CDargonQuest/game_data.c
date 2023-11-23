@@ -30,10 +30,11 @@ void dqGameData_Cleanup()
 
    for ( i = 0; i < dqGameData->enemyTierCount; i++ )
    {
-      dqFree( dqGameData->enemyTemplates[i], sizeof( dqEnemyTemplate_t ) * (size_t)( dqGameData->enemyTemplateCount ), sfTrue);
+      dqFree( dqGameData->enemyTemplates[i], sizeof( dqEnemyTemplate_t ) * (size_t)( dqGameData->enemyTierTemplateCounts[i] ), sfTrue);
    }
 
    dqFree( dqGameData->enemyTemplates, sizeof( dqEnemyTemplate_t* ) * (size_t)( dqGameData->enemyTierCount ), sfTrue );
+   dqFree( dqGameData->enemyTierTemplateCounts, sizeof( unsigned int ) * dqGameData->enemyTierCount, sfTrue );
    dqFree( dqGameData, sizeof( dqGameData_t ), sfTrue );
 }
 
@@ -47,15 +48,20 @@ static void dqGameData_TempLoadEnemyTemplates()
    unsigned int i;
 
    dqGameData->enemyTierCount = 4;
-   dqGameData->enemyTemplateCount = 2;
+   dqGameData->enemyTierTemplateCounts = (unsigned int*)dqMalloc( sizeof( unsigned int ) * dqGameData->enemyTierCount, sfTrue );
    dqGameData->enemyTemplates = (dqEnemyTemplate_t**)dqMalloc( sizeof( dqEnemyTemplate_t* ) *
                                                                (size_t)( dqGameData->enemyTierCount ),
                                                                sfTrue );
 
+   dqGameData->enemyTierTemplateCounts[0] = 2;
+   dqGameData->enemyTierTemplateCounts[1] = 2;
+   dqGameData->enemyTierTemplateCounts[2] = 3;
+   dqGameData->enemyTierTemplateCounts[3] = 3;
+
    for ( i = 0; i < dqGameData->enemyTierCount; i++ )
    {
       dqGameData->enemyTemplates[i] = (dqEnemyTemplate_t*)dqMalloc( sizeof( dqEnemyTemplate_t ) *
-                                                                    (size_t)( dqGameData->enemyTemplateCount ),
+                                                                    (size_t)( dqGameData->enemyTierTemplateCounts[i] ),
                                                                     sfTrue );
    }
 
@@ -116,15 +122,14 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[2][1].attackPower = 6;
    dqGameData->enemyTemplates[2][1].defensePower = 5;
 
-   // TODO: figure out how to have different numbers of enemies per tier
-   /*sprintf_s( dqGameData->enemyTemplates[2][2].name, ENTITY_NAME_LENGTH, "scorpion wasp" );
+   sprintf_s( dqGameData->enemyTemplates[2][2].name, ENTITY_NAME_LENGTH, "scorpion wasp" );
    dqGameData->enemyTemplates[2][2].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[2][2].spriteSize = 2;
    dqGameData->enemyTemplates[2][2].spriteIndex = 0;
    dqGameData->enemyTemplates[2][2].minHitPoints = 10;
    dqGameData->enemyTemplates[2][2].maxHitPoints = 14;
    dqGameData->enemyTemplates[2][2].attackPower = 6;
-   dqGameData->enemyTemplates[2][2].defensePower = 5;*/
+   dqGameData->enemyTemplates[2][2].defensePower = 5;
 
    // tier 3
    sprintf_s( dqGameData->enemyTemplates[3][0].name, ENTITY_NAME_LENGTH, "healer" );
@@ -145,13 +150,12 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[3][1].attackPower = 7;
    dqGameData->enemyTemplates[3][1].defensePower = 5;
 
-   // TODO: see above
-   /*sprintf_s( dqGameData->enemyTemplates[3][2].name, ENTITY_NAME_LENGTH, "magician" );
+   sprintf_s( dqGameData->enemyTemplates[3][2].name, ENTITY_NAME_LENGTH, "magician" );
    dqGameData->enemyTemplates[3][2].indefiniteArticle = dqIndefiniteArticleA;
    dqGameData->enemyTemplates[3][2].spriteSize = 4;
    dqGameData->enemyTemplates[3][2].spriteIndex = 0;
    dqGameData->enemyTemplates[3][2].minHitPoints = 15;
    dqGameData->enemyTemplates[3][2].maxHitPoints = 20;
    dqGameData->enemyTemplates[3][2].attackPower = 7;
-   dqGameData->enemyTemplates[3][2].defensePower = 7;*/
+   dqGameData->enemyTemplates[3][2].defensePower = 7;
 }
