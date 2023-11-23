@@ -51,14 +51,6 @@ void dqBattle_Generate()
    // - use the enemy's sprite size to determine whether we can fit more on the screen
 
    tier = dqRandom_UnsignedInt( tile->minEnemyTier, tile->maxEnemyTier );
-   
-   // TODO: this is probably okay for now, but eventually when we have all the
-   // enemy templates we need, this should crash if it's out of range
-   if ( tier >= dqGameData->enemyTierCount )
-   {
-      tier = dqGameData->enemyTierCount - 1;
-   }
-
    index = dqRandom_UnsignedInt( 0, dqGameData->enemyTierTemplateCounts[tier] - 1);
    dqBattle->enemy = dqEnemy_Generate( tier, index );
 
