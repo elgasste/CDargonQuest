@@ -31,6 +31,7 @@ dqPlayer_t* dqPlayer_Create()
    player->overworldState->direction = dqDirectionDown;
 
    player->battleStats->hitPoints = 50;
+   player->battleStats->magicPoints = 12;
    player->battleStats->attackPower = 10;
    player->battleStats->defensePower = 10;
 

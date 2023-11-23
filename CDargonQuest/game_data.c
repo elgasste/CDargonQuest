@@ -72,6 +72,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[0][0].spriteIndex = 0;
    dqGameData->enemyTemplates[0][0].minHitPoints = 4;
    dqGameData->enemyTemplates[0][0].maxHitPoints = 6;
+   dqGameData->enemyTemplates[0][0].minMagicPoints = 0;
+   dqGameData->enemyTemplates[0][0].maxMagicPoints = 0;
    dqGameData->enemyTemplates[0][0].attackPower = 2;
    dqGameData->enemyTemplates[0][0].defensePower = 2;
 
@@ -81,6 +83,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[0][1].spriteIndex = 0;
    dqGameData->enemyTemplates[0][1].minHitPoints = 6;
    dqGameData->enemyTemplates[0][1].maxHitPoints = 9;
+   dqGameData->enemyTemplates[0][1].minMagicPoints = 0;
+   dqGameData->enemyTemplates[0][1].maxMagicPoints = 0;
    dqGameData->enemyTemplates[0][1].attackPower = 3;
    dqGameData->enemyTemplates[0][1].defensePower = 3;
 
@@ -91,6 +95,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[1][0].spriteIndex = 0;
    dqGameData->enemyTemplates[1][0].minHitPoints = 8;
    dqGameData->enemyTemplates[1][0].maxHitPoints = 12;
+   dqGameData->enemyTemplates[1][0].minMagicPoints = 0;
+   dqGameData->enemyTemplates[1][0].maxMagicPoints = 0;
    dqGameData->enemyTemplates[1][0].attackPower = 4;
    dqGameData->enemyTemplates[1][0].defensePower = 4;
 
@@ -100,6 +106,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[1][1].spriteIndex = 1;
    dqGameData->enemyTemplates[1][1].minHitPoints = 10;
    dqGameData->enemyTemplates[1][1].maxHitPoints = 14;
+   dqGameData->enemyTemplates[1][1].minMagicPoints = 0;
+   dqGameData->enemyTemplates[1][1].maxMagicPoints = 0;
    dqGameData->enemyTemplates[1][1].attackPower = 7;
    dqGameData->enemyTemplates[1][1].defensePower = 3;
 
@@ -110,6 +118,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[2][0].spriteIndex = 0;
    dqGameData->enemyTemplates[2][0].minHitPoints = 10;
    dqGameData->enemyTemplates[2][0].maxHitPoints = 14;
+   dqGameData->enemyTemplates[2][0].minMagicPoints = 0;
+   dqGameData->enemyTemplates[2][0].maxMagicPoints = 0;
    dqGameData->enemyTemplates[2][0].attackPower = 8;
    dqGameData->enemyTemplates[2][0].defensePower = 5;
 
@@ -119,6 +129,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[2][1].spriteIndex = 0;
    dqGameData->enemyTemplates[2][1].minHitPoints = 10;
    dqGameData->enemyTemplates[2][1].maxHitPoints = 12;
+   dqGameData->enemyTemplates[2][1].minMagicPoints = 0;
+   dqGameData->enemyTemplates[2][1].maxMagicPoints = 0;
    dqGameData->enemyTemplates[2][1].attackPower = 6;
    dqGameData->enemyTemplates[2][1].defensePower = 5;
 
@@ -138,6 +150,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[3][0].spriteIndex = 0;
    dqGameData->enemyTemplates[3][0].minHitPoints = 25;
    dqGameData->enemyTemplates[3][0].maxHitPoints = 32;
+   dqGameData->enemyTemplates[3][0].minMagicPoints = 500;
+   dqGameData->enemyTemplates[3][0].maxMagicPoints = 500;
    dqGameData->enemyTemplates[3][0].attackPower = 6;
    dqGameData->enemyTemplates[3][0].defensePower = 6;
 
@@ -147,6 +161,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[3][1].spriteIndex = 0;
    dqGameData->enemyTemplates[3][1].minHitPoints = 12;
    dqGameData->enemyTemplates[3][1].maxHitPoints = 15;
+   dqGameData->enemyTemplates[3][1].minMagicPoints = 20;
+   dqGameData->enemyTemplates[3][1].maxMagicPoints = 24;
    dqGameData->enemyTemplates[3][1].attackPower = 7;
    dqGameData->enemyTemplates[3][1].defensePower = 5;
 
@@ -156,6 +172,8 @@ static void dqGameData_TempLoadEnemyTemplates()
    dqGameData->enemyTemplates[3][2].spriteIndex = 0;
    dqGameData->enemyTemplates[3][2].minHitPoints = 15;
    dqGameData->enemyTemplates[3][2].maxHitPoints = 20;
+   dqGameData->enemyTemplates[3][2].minMagicPoints = 200;
+   dqGameData->enemyTemplates[3][2].maxMagicPoints = 210;
    dqGameData->enemyTemplates[3][2].attackPower = 7;
    dqGameData->enemyTemplates[3][2].defensePower = 7;
 }

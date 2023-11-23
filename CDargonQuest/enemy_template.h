@@ -15,6 +15,9 @@ typedef struct dqEnemyTemplate_t
    unsigned int minHitPoints;
    unsigned int maxHitPoints;
 
+   unsigned int minMagicPoints;
+   unsigned int maxMagicPoints;
+
    unsigned int attackPower;
    unsigned int defensePower;
 }

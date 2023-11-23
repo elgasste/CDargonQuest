@@ -86,7 +86,11 @@ static void dqBattleRenderer_RenderSelectActionState()
    sprintf_s( statStr, 16, "HP: %u", player->battleStats->hitPoints );
    statsTextPos.x += dqRenderConfig->dialogSpriteSize;
    statsTextPos.y += dqRenderConfig->dialogSpriteSize * 2;
-   dqDialogRenderer_DrawText( &statsTextPos, statStr, PLAYER_NAME_LENGTH - 1 );
+   dqDialogRenderer_DrawText( &statsTextPos, statStr, 15 );
+
+   sprintf_s( statStr, 16, "MP: %u", player->battleStats->magicPoints );
+   statsTextPos.y += dqRenderConfig->dialogSpriteSize;
+   dqDialogRenderer_DrawText( &statsTextPos, statStr, 15 );
 
    dqBattleRenderer_DrawEnemy();
 
