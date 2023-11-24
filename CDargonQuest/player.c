@@ -19,6 +19,7 @@ dqPlayer_t* dqPlayer_Create()
    dqGameData->player = player;
 
    // TODO: most of this will eventually be loaded from a file
+   sprintf_s( player->name, PLAYER_NAME_LENGTH, "DebugMan" );
    player->overworldState->hitBoxSize.x = 14;
    player->overworldState->hitBoxSize.y = 14;
    player->overworldState->hitBoxPosition.x = dqGameData->playerStartTileCoordinates.x * dqGameConfig->mapTileSize;
@@ -30,11 +31,11 @@ dqPlayer_t* dqPlayer_Create()
    player->overworldState->direction = dqDirectionDown;
 
    player->battleStats->hitPoints = 50;
+   player->battleStats->magicPoints = 12;
    player->battleStats->attackPower = 10;
    player->battleStats->defensePower = 10;
 
    // TODO: these values should probably go in render config
-   // MUFFINS: render data hasn't been set up yet?
    player->entitySprite = dqEntitySprite_Create( player->overworldState, dqRenderData->playerTexture, 16, 16, 2, 0.25f );
 
    map = dqGameData_GetCurrentMap();

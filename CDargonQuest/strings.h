@@ -27,8 +27,11 @@
 #define STR_TITLE_MENU_QUIT               "Quit"
 
 #define STR_BATTLE_INTRO_FORMATTER        "%s %s approaches!"
-#define STR_BATTLE_MENU_ATTACK            "Attack"
-#define STR_BATTLE_MENU_RUN               "Run"
+#define STR_BATTLE_MENU_ATTACK            "ATTACK"
+#define STR_BATTLE_MENU_SPELL             "SPELL"
+#define STR_BATTLE_MENU_ITEM              "ITEM"
+#define STR_BATTLE_MENU_GUARD             "GUARD"
+#define STR_BATTLE_MENU_RUN               "RUN"
 
 #define STR_ERROR_THREAD_PRIORITY         "could not set thread priority"
 #define STR_ERROR_MALLOC                  "could not allocate memory for game object"

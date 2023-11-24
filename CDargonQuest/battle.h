@@ -25,6 +25,9 @@ void dqBattle_Reset();
 void dqBattle_Generate();
 void dqBattle_SetState( dqBattleState state );
 void dqBattle_Attack();
+void dqBattle_CastSpell();
+void dqBattle_UseItem();
+void dqBattle_Guard();
 void dqBattle_Run();
 
 #endif

@@ -44,9 +44,11 @@ typedef struct dqRenderConfig_t
    sfVector2f overworldViewSize;
    sfVector2f overworldViewOffset;
 
+   sfColor titleBackdropColor;
    sfColor passableOverlayColor;
    sfColor impassableOverlayColor;
    sfColor mapSwapOverlayColor;
+   sfColor battleBackdropColor;
 
    const char* overworldTilesetTexturePath;
    const char* dialogTilesetTexturePath;
@@ -79,9 +81,15 @@ typedef struct dqRenderConfig_t
    float cheatLetterSpacing;
    sfColor cheatFontColor;
 
+   sfVector2f battleStatsDialogPos;
+   unsigned int battleStatsDialogWidth;
+   unsigned int battleStatsDialogHeight;
    sfVector2f battleMessageDialogPos;
    unsigned int battleMessageDialogWidth;
    unsigned int battleMessageDialogHeight;
+   sfVector2f battleActionMenuDialogPos;
+   unsigned int battleActionMenuDialogWidth;
+   unsigned int battleActionMenuDialogHeight;
 
    unsigned int textMap[128];
 

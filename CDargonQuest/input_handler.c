@@ -7,6 +7,7 @@
 #include "game.h"
 #include "menu.h"
 #include "renderer.h"
+#include "event_queue.h"
 
 static void dqInputHandler_CheckCheats();
 static void dqInputHandler_HandleCheat();
@@ -31,7 +32,7 @@ void dqInputHandler_HandleInput()
 {
    if ( dqInputState_WasKeyPressed( sfKeyF8 ) )
    {
-      dqRenderConfig->showDiagnostics = dqRenderConfig->showDiagnostics ? sfFalse : sfTrue;
+      TOGGLE_BOOL( dqRenderConfig->showDiagnostics );
 
       if ( dqRenderConfig->showDiagnostics )
       {
@@ -70,8 +71,10 @@ static void dqInputHandler_CheckCheats()
       "dqclip",
       "dqinvis",
       "dqtilestat",
+      "dqfast",
       "dqall",
-      "dqclear"
+      "dqclear",
+      "dqfight"
    };
    static int cheatCount = (int)( sizeof( cheats ) / sizeof( const char* ) );
 
@@ -115,7 +118,7 @@ static void dqInputHandler_HandleCheat()
 
    if ( !strcmp( cheat, "dqclip" ) )
    {
-      dqGameConfig->noClipCheat = dqGameConfig->noClipCheat ? sfFalse : sfTrue;
+      TOGGLE_BOOL( dqGameConfig->noClipCheat );
 
       if ( dqGameConfig->noClipCheat )
       {
@@ -128,7 +131,7 @@ static void dqInputHandler_HandleCheat()
    }
    else if ( !strcmp( cheat, "dqinvis" ) )
    {
-      dqGameConfig->invisibleCheat = dqGameConfig->invisibleCheat ? sfFalse : sfTrue;
+      TOGGLE_BOOL( dqGameConfig->invisibleCheat );
 
       if ( dqGameConfig->invisibleCheat )
       {
@@ -141,7 +144,7 @@ static void dqInputHandler_HandleCheat()
    }
    else if ( !strcmp( cheat, "dqtilestat" ) )
    {
-      dqGameConfig->tileStatCheat = dqGameConfig->tileStatCheat ? sfFalse : sfTrue;
+      TOGGLE_BOOL( dqGameConfig->tileStatCheat );
 
       if ( dqGameConfig->tileStatCheat )
       {
@@ -152,11 +155,25 @@ static void dqInputHandler_HandleCheat()
          dqLog_Message( "map tile stats cheat off" );
       }
    }
+   else if ( !strcmp( cheat, "dqfast" ) )
+   {
+      TOGGLE_BOOL( dqGameConfig->fastCheat );
+
+      if ( dqGameConfig->fastCheat )
+      {
+         dqLog_Message( "fast movement cheat on" );
+      }
+      else
+      {
+         dqLog_Message( "fast movement cheat off" );
+      }
+   }
    else if ( !strcmp( cheat, "dqall" ) )
    {
       dqGameConfig->noClipCheat = sfTrue;
       dqGameConfig->invisibleCheat = sfTrue;
       dqGameConfig->tileStatCheat = sfTrue;
+      dqGameConfig->fastCheat = sfTrue;
       dqLog_Message( "turned on all cheats" );
    }
    else if ( !strcmp( cheat, "dqclear" ) )
@@ -164,7 +181,12 @@ static void dqInputHandler_HandleCheat()
       dqGameConfig->noClipCheat = sfFalse;
       dqGameConfig->invisibleCheat = sfFalse;
       dqGameConfig->tileStatCheat = sfFalse;
-      dqLog_Message( "cleared all cheats" );
+      dqGameConfig->fastCheat = sfFalse;
+      dqLog_Message( "turned off all cheats" );
+   }
+   else if ( !strcmp( cheat, "dqfight" ) )
+   {
+      dqEventQueue_Push( dqEventEncounter, 0 );
    }
 
    dqInputHandler->cheatString[0] = '\0';

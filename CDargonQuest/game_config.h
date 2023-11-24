@@ -9,10 +9,13 @@ typedef struct dqGameConfig_t
 
    float playerVelocityStraight;
    float playerVelocityDiagonal;
+   float playerVelocityStraightFast;
+   float playerVelocityDiagonalFast;
 
    sfBool noClipCheat;
    sfBool invisibleCheat;
    sfBool tileStatCheat;
+   sfBool fastCheat;
 }
 dqGameConfig_t;
 

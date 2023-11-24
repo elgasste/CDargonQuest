@@ -5,7 +5,8 @@
 
 typedef struct
 {
-   int garbo;
+   sfRectangleShape* backdropRect;
+   sfVector2f messageTextPos;
 }
 dqBattleRenderer_t;
 

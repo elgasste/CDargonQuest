@@ -126,9 +126,6 @@
     <ClCompile Include="battle_renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="common.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dialog_renderer.c">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
@@ -152,6 +149,15 @@
     </ClCompile>
     <ClCompile Include="log.c">
       <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="mem_util.c">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="sfml_util.c">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="title_renderer.c">
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +298,15 @@
     </ClInclude>
     <ClInclude Include="math_util.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="mem_util.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="sfml_util.h">
+      <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="title_renderer.h">
+      <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

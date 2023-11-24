@@ -30,6 +30,9 @@ static void dqGame_HandleFadedOut();
 static void dqGame_HandleFadedIn();
 static void dqGame_HandleEncounter();
 static void dqGame_HandleBattleAttack();
+static void dqGame_HandleBattleSpell();
+static void dqGame_HandleBattleItem();
+static void dqGame_HandleBattleGuard();
 static void dqGame_HandleBattleRun();
 static void dqGame_HandleBattleExit();
 
@@ -159,6 +162,15 @@ static void dqGame_HandleEvents()
          case dqEventBattleAttack:
             dqGame_HandleBattleAttack();
             break;
+         case dqEventBattleSpell:
+            dqGame_HandleBattleSpell();
+            break;
+         case dqEventBattleItem:
+            dqGame_HandleBattleItem();
+            break;
+         case dqEventBattleGuard:
+            dqGame_HandleBattleGuard();
+            break;
          case dqEventBattleRun:
             dqGame_HandleBattleRun();
             break;
@@ -215,9 +227,15 @@ static void dqGame_HandleMovePlayer( dqEvent_t* e )
    if ( dqGame->state == dqStateOverworld )
    {
       direction = e->args.argList[0];
-      velocityDelta = e->args.argList[1]
-         ? dqGameConfig->playerVelocityDiagonal
-         : dqGameConfig->playerVelocityStraight;
+
+      if ( dqGameConfig->fastCheat )
+      {
+         velocityDelta = e->args.argList[1] ? dqGameConfig->playerVelocityDiagonalFast : dqGameConfig->playerVelocityStraightFast;
+      }
+      else
+      {
+         velocityDelta = e->args.argList[1] ? dqGameConfig->playerVelocityDiagonal : dqGameConfig->playerVelocityStraight;
+      }
 
       switch ( direction )
       {
@@ -316,6 +334,30 @@ static void dqGame_HandleBattleAttack()
    if ( dqGame->state == dqStateBattle )
    {
       dqBattle_Attack();
+   }
+}
+
+static void dqGame_HandleBattleSpell()
+{
+   if ( dqGame->state == dqStateBattle )
+   {
+      dqBattle_CastSpell();
+   }
+}
+
+static void dqGame_HandleBattleItem()
+{
+   if ( dqGame->state == dqStateBattle )
+   {
+      dqBattle_UseItem();
+   }
+}
+
+static void dqGame_HandleBattleGuard()
+{
+   if ( dqGame->state == dqStateBattle )
+   {
+      dqBattle_Guard();
    }
 }
 

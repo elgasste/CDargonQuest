@@ -51,15 +51,7 @@ void dqBattle_Generate()
    // - use the enemy's sprite size to determine whether we can fit more on the screen
 
    tier = dqRandom_UnsignedInt( tile->minEnemyTier, tile->maxEnemyTier );
-   
-   // TODO: this is probably okay for now, but eventually when we have all the
-   // enemy templates we need, this should crash if it's out of range
-   if ( tier >= dqGameData->enemyTierCount )
-   {
-      tier = dqGameData->enemyTierCount - 1;
-   }
-
-   index = dqRandom_UnsignedInt( 0, dqGameData->enemyTemplateCount - 1 );
+   index = dqRandom_UnsignedInt( 0, dqGameData->enemyTierTemplateCounts[tier] - 1);
    dqBattle->enemy = dqEnemy_Generate( tier, index );
 
    sprintf_s( dqBattle->introMessage, 128, STR_BATTLE_INTRO_FORMATTER,
@@ -85,6 +77,39 @@ void dqBattle_Attack()
    if ( dqBattle->state == dqBattleStateSelectAction )
    {
       sprintf_s( dqBattle->resultMessage, 128, "Your killing spree was a success!" );
+      dqBattle_SetState( dqBattleStateResult );
+   }
+}
+
+void dqBattle_CastSpell()
+{
+   // TODO: implement spells and magic points
+
+   if ( dqBattle->state == dqBattleStateSelectAction )
+   {
+      sprintf_s( dqBattle->resultMessage, 128, "You cast 'ava duh ken doll bra', and the enemy has laughed itself to death." );
+      dqBattle_SetState( dqBattleStateResult );
+   }
+}
+
+void dqBattle_UseItem()
+{
+   // TODO: implement inventory system
+
+   if ( dqBattle->state == dqBattleStateSelectAction )
+   {
+      sprintf_s( dqBattle->resultMessage, 128, "You found a coin in your pocket, and bribed your foe to walk away." );
+      dqBattle_SetState( dqBattleStateResult );
+   }
+}
+
+void dqBattle_Guard()
+{
+   // TODO: this might be a good place to start implementing battle actions and text scrolling
+
+   if ( dqBattle->state == dqBattleStateSelectAction )
+   {
+      sprintf_s( dqBattle->resultMessage, 128, "You hid behind your shield so well that your foe forgot you were there, and wandered off." );
       dqBattle_SetState( dqBattleStateResult );
    }
 }

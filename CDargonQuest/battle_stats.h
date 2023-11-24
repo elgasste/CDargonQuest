@@ -6,6 +6,7 @@
 typedef struct dqBattleStats_t
 {
    unsigned int hitPoints;
+   unsigned int magicPoints;
    unsigned int attackPower;
    unsigned int defensePower;
 }
