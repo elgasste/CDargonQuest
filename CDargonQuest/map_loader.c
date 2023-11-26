@@ -22,12 +22,16 @@ void dqMapLoader_LoadMaps()
    dqGameData->mapCount = 2;
    dqGameData->maps = (dqMap_t*)dqMalloc( sizeof( dqMap_t ) * dqGameData->mapCount, sfTrue );
 
+   // overworld
    dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ), 51, 43,
                             "Resources\\Design\\Maps\\0_tiles.txt",
                             "Resources\\Design\\Maps\\0_passable.txt",
                             "Resources\\Design\\Maps\\0_encounter_rates.txt",
                             "Resources\\Design\\Maps\\0_min_enemy_tiers.txt",
                             "Resources\\Design\\Maps\\0_max_enemy_tiers.txt" );
+   dqGameData->maps[0].wrap = sfTrue;
+
+   // Aliahan
    dqMapLoader_LoadTempMap( &( dqGameData->maps[1] ), 33, 40,
                             "Resources\\Design\\Maps\\1_tiles.txt",
                             "Resources\\Design\\Maps\\1_passable.txt",
@@ -127,6 +131,7 @@ static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigne
    map->size.y = map->rows * dqGameConfig->mapTileSize;
    map->tileCount = map->columns * map->rows;
    map->tiles = (dqMapTile_t*)dqMalloc( sizeof( dqMapTile_t ) * map->tileCount, sfTrue );
+   map->wrap = sfFalse;
 
    if ( fopen_s( &tileFile, tilesPath, "r" ) )
    {

@@ -12,6 +12,7 @@ typedef struct dqMap_t
    unsigned int columns;
    unsigned int rows;
    sfVector2f size;
+   sfBool wrap;
 
    dqMapTile_t* playerTileCache;
 }
