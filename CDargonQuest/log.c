@@ -17,6 +17,14 @@ void dqLog_Cleanup()
    dqFree( dqLog, sizeof( dqLog_t ), sfFalse );
 }
 
+void dqLog_NewLine()
+{
+   if ( fprintf( dqLog->logFile, "\n" ) < 0 )
+   {
+      dqError_ExitWithMessageNoLog( STR_ERROR_LOG_FILE_WRITE );
+   }
+}
+
 void dqLog_Message( const char* message )
 {
    time_t t = time( 0 );

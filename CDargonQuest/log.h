@@ -13,6 +13,7 @@ dqLog_t* dqLog;
 
 void dqLog_Init();
 void dqLog_Cleanup();
+void dqLog_NewLine();
 void dqLog_Message( const char* message );
 void dqLog_Error( const char* message );
 
