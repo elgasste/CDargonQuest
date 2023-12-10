@@ -73,6 +73,7 @@ static void dqInputHandler_CheckCheats()
       "dqtilestat",
       "dqfast",
       "dqall",
+      "dqtrav",
       "dqclear",
       "dqfight"
    };
@@ -175,6 +176,13 @@ static void dqInputHandler_HandleCheat()
       dqGameConfig->tileStatCheat = sfTrue;
       dqGameConfig->fastCheat = sfTrue;
       dqLog_Message( "turned on all cheats" );
+   }
+   else if ( !strcmp( cheat, "dqtrav" ) )
+   {
+      dqGameConfig->noClipCheat = sfTrue;
+      dqGameConfig->invisibleCheat = sfTrue;
+      dqGameConfig->fastCheat = sfTrue;
+      dqLog_Message( "easy traveling cheat on" );
    }
    else if ( !strcmp( cheat, "dqclear" ) )
    {
