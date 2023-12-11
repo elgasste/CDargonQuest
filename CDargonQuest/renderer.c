@@ -50,11 +50,9 @@ void dqRenderer_Render()
          break;
       case dqStateOverworld:
          dqOverworldRenderer_RenderMap();
-         dqOverworldRenderer_RenderEntities();
          break;
       case dqStateOverworldTransition:
          dqOverworldRenderer_RenderMap();
-         dqOverworldRenderer_RenderEntities();
          dqTransitionRenderer_Render( sfTrue ); // black
          break;
       case dqStateBattleTransitionIn:
@@ -65,7 +63,6 @@ void dqRenderer_Render()
          else
          {
             dqOverworldRenderer_RenderMap();
-            dqOverworldRenderer_RenderEntities();
          }
          dqTransitionRenderer_Render( sfFalse ); // white
          break;
@@ -77,7 +74,6 @@ void dqRenderer_Render()
          else
          {
             dqOverworldRenderer_RenderMap();
-            dqOverworldRenderer_RenderEntities();
          }
          dqTransitionRenderer_Render( sfTrue ); // black
          break;
