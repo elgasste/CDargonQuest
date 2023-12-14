@@ -90,13 +90,19 @@ void dqGame_Cleanup()
 
    dqLog_Message( "game objects cleaned up" );
 
+   dqLog_NewLine();
    sprintf_s( memoryMessage, 128, "total memory allocated: %llu", dqTotalMemoryAllocated );
    dqLog_Message( memoryMessage );
    sprintf_s( memoryMessage, 128, "total memory freed: %llu", dqTotalMemoryFreed );
    dqLog_Message( memoryMessage );
+   sprintf_s( memoryMessage, 128, "discrepancy: %llu", dqTotalMemoryAllocated - dqTotalMemoryFreed );
+   dqLog_Message( memoryMessage );
+   dqLog_NewLine();
    sprintf_s( memoryMessage, 128, "total SFML objects created: %d", dqTotalSfmlObjectsCreated );
    dqLog_Message( memoryMessage );
    sprintf_s( memoryMessage, 128, "total SFML objects destroyed: %d", dqTotalSfmlObjectsDestroyed );
+   dqLog_Message( memoryMessage );
+   sprintf_s( memoryMessage, 128, "discrepancy: %d", dqTotalSfmlObjectsCreated - dqTotalSfmlObjectsDestroyed );
    dqLog_Message( memoryMessage );
 
    dqLog_Cleanup();

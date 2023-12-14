@@ -2,6 +2,7 @@
 
 void dqRandom_Init()
 {
+   // TODO: try to use SFML's randomizer functions?
    srand( (unsigned int)time( 0 ) );
 }
 
