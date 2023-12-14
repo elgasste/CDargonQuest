@@ -6,6 +6,7 @@
 #include "map_tile.h"
 #include "render_config.h"
 #include "game_config.h"
+#include "math_util.h"
 
 static void dqMapLoader_LoadTempMap( dqMap_t* map, unsigned int columns, unsigned int rows,
                                      const char* tilesPath, const char* passablePath, const char* encounterPath,
@@ -23,7 +24,7 @@ void dqMapLoader_LoadMaps()
    dqGameData->maps = (dqMap_t*)dqMalloc( sizeof( dqMap_t ) * dqGameData->mapCount, sfTrue );
 
    // overworld
-   dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ), 51, 43,
+   dqMapLoader_LoadTempMap( &( dqGameData->maps[0] ), 75, 53,
                             "Resources\\Design\\Maps\\0_tiles.txt",
                             "Resources\\Design\\Maps\\0_passable.txt",
                             "Resources\\Design\\Maps\\0_encounter_rates.txt",
@@ -40,31 +41,31 @@ void dqMapLoader_LoadMaps()
                             "Resources\\Design\\Maps\\1_max_enemy_tiers.txt");
 
    // overworld Aliahan entrance
-   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 29, 32 );
+   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 41, 37 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 1;
-   testExitTile->entranceTileIndex = ( 24 * 33 ) + 1; // col 1, row 24
+   testExitTile->entranceTileIndex = dqMathUtil_IndexFromCoordinates( 1, 24, 33 );
    testExitTile->hasEntranceDirection = sfTrue;
    testExitTile->entranceDirection = dqDirectionRight;
 
-   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 30, 32 );
+   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 42, 37 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 1;
-   testExitTile->entranceTileIndex = ( 24 * 33 ) + 1; // col 1, row 24
+   testExitTile->entranceTileIndex = dqMathUtil_IndexFromCoordinates( 1, 24, 33 );
    testExitTile->hasEntranceDirection = sfTrue;
    testExitTile->entranceDirection = dqDirectionRight;
 
-   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 29, 33 );
+   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 41, 38 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 1;
-   testExitTile->entranceTileIndex = ( 24 * 33 ) + 1; // col 1, row 24
+   testExitTile->entranceTileIndex = dqMathUtil_IndexFromCoordinates( 1, 24, 33 );
    testExitTile->hasEntranceDirection = sfTrue;
    testExitTile->entranceDirection = dqDirectionRight;
 
-   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 30, 33 );
+   testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[0] ), 42, 38 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 1;
-   testExitTile->entranceTileIndex = ( 24 * 33 ) + 1; // col 1, row 24
+   testExitTile->entranceTileIndex = dqMathUtil_IndexFromCoordinates( 1, 24, 33 );
    testExitTile->hasEntranceDirection = sfTrue;
    testExitTile->entranceDirection = dqDirectionRight;
 
@@ -72,14 +73,14 @@ void dqMapLoader_LoadMaps()
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[1] ), 0, 24 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 0;
-   testExitTile->entranceTileIndex = ( 34 * 51 ) + 29; // col 29, row 33
+   testExitTile->entranceTileIndex = dqMathUtil_IndexFromCoordinates( 41, 39, 75 );
    testExitTile->hasEntranceDirection = sfTrue;
    testExitTile->entranceDirection = dqDirectionDown;
 
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[1] ), 0, 25 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 0;
-   testExitTile->entranceTileIndex = ( 34 * 51 ) + 29; // col 29, row 33
+   testExitTile->entranceTileIndex = dqMathUtil_IndexFromCoordinates( 41, 39, 75 );
    testExitTile->hasEntranceDirection = sfTrue;
    testExitTile->entranceDirection = dqDirectionDown;
 
@@ -87,14 +88,14 @@ void dqMapLoader_LoadMaps()
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[1] ), 25, 39 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 0;
-   testExitTile->entranceTileIndex = ( 34 * 51 ) + 29; // col 29, row 33
+   testExitTile->entranceTileIndex = dqMathUtil_IndexFromCoordinates( 41, 39, 75 );
    testExitTile->hasEntranceDirection = sfTrue;
    testExitTile->entranceDirection = dqDirectionDown;
 
    testExitTile = dqMap_GetTileFromCoordinates( &( dqGameData->maps[1] ), 26, 39 );
    testExitTile->isExit = sfTrue;
    testExitTile->exitMapIndex = 0;
-   testExitTile->entranceTileIndex = ( 34 * 51 ) + 29; // col 29, row 33
+   testExitTile->entranceTileIndex = dqMathUtil_IndexFromCoordinates( 41, 39, 75 );
    testExitTile->hasEntranceDirection = sfTrue;
    testExitTile->entranceDirection = dqDirectionDown;
 

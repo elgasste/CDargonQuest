@@ -14,8 +14,8 @@ void dqGameData_Init()
    dqMapLoader_LoadMaps();
 
    // TODO: this should come from a data file eventually
-   dqGameData->playerStartTileCoordinates.x = 28;
-   dqGameData->playerStartTileCoordinates.y = 35;
+   dqGameData->playerStartTileCoordinates.x = 40;
+   dqGameData->playerStartTileCoordinates.y = 40;
    dqGameData->player = dqPlayer_Create();
 
    dqGameData_TempLoadEnemyTemplates();
