@@ -440,20 +440,20 @@ static void dqOverworldRenderer_RenderMapSection( dqMap_t* map, sfVector2f* tile
 
 static void dqOverworldRenderer_RenderEntities( sfVector2f* viewOffset, sfVector2f* padding )
 {
-   static sfVector2f position;
+   static sfVector2f screenPosition;
    dqEntitySprite_t* playerSprite = dqGameData->player->entitySprite;
 
-   position.x = playerSprite->entityOverworldState->hitBoxPosition.x
+   screenPosition.x = playerSprite->entityOverworldState->hitBoxPosition.x
       - playerSprite->hitBoxOffset.x
       - viewOffset->x
       + padding->x
       + dqRenderConfig->overworldViewOffset.x;
-   position.y = playerSprite->entityOverworldState->hitBoxPosition.y
+   screenPosition.y = playerSprite->entityOverworldState->hitBoxPosition.y
       - playerSprite->hitBoxOffset.y
       - viewOffset->y
       + padding->y
       + dqRenderConfig->overworldViewOffset.y;
 
-   sfSprite_setPosition( playerSprite->sprite, position );
+   sfSprite_setPosition( playerSprite->sprite, screenPosition );
    dqWindow_DrawEntitySprite( playerSprite );
 }
